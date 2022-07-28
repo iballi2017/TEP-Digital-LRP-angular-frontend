@@ -1,0 +1,44 @@
+<!-- <p>literacy-test-side-navigation works!</p> -->
+<nav>
+    <!-- Levels Navigation -->
+    <!-- <?php include "../components/levels-navigation.php"; ?> -->
+    <div id="levels-navigation">
+        <div class="main-wrapper">
+            <div class="title text-center mb-4">Level</div>
+            <ul id="navigation-items">
+                
+                <li>
+                    <a [routerLink]="['/literacy/levels/lettering']" routerLinkActive="router-link-active" >
+                        LETTER
+                    </a>
+                </li>
+                <!-- <li class="active">
+                    <a href="#">
+                        LETTER 1
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        LETTER 2
+                    </a>
+                </li> -->
+                <li>
+                    <a [routerLink]="['/literacy/levels/word']" routerLinkActive="router-link-active" >
+                        WORD
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/literacy/levels/paragraph']" routerLinkActive="router-link-active" >
+                        PARAGRAPH
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/literacy/levels/story']" routerLinkActive="router-link-active" >
+                        STORY
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--  -->
+</nav>

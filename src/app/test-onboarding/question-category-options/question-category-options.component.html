@@ -1,0 +1,96 @@
+<!-- <p>question-category-options works!</p> -->
+
+<div id="question-type-options-page">
+    <div class="page-wrapper school-bg py-5 pb-3">
+        <div class="inner container-fluid">
+            <!--  -->
+            <div id="toolbar">
+                <ul class="inner-wrapper list-style-none pl-0 mb-0">
+                    <li>
+                        <ul id="social-handles" class="list-style-none pl-0 mb-0">
+                            <li>
+                                <a href="#">
+                                    <img src="../assets/images/foundation_social-facebook.png" alt="" class="img-fluid">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="../assets/images/foundation_social-twitter.png" alt="" class="img-fluid">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="../assets/images/foundation_social-instagram.png" alt="" class="img-fluid">
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h1 class="text-uppercase">Tep Digital LRP</h1>
+                    </li>
+                    <li class="account-link">
+                        <div id="user-account-avatar">
+                            <div class="image-wrapper mx-auto">
+                                <img src="../assets/images/material-symbols_account-box.svg" alt="" class="img-fluid">
+                            </div>
+                            <p class=" mx-auto">ACCOUNT</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="content">
+                <div class="content-wrapper">
+                    <div class="content-label">
+                        <h2>CHOOSE THE TYPE OF QUESTION</h2>
+                    </div>
+                    <!-- <form #QuestionCategoryForm="ngForm">
+                        <ul class="type-option list-style-none pl-0 mb-0">
+                            <li>
+                                <input type="radio" name="questionCategory" id="Literacy" name="questionCategory" value="Literacy" ngModel #QuestionCategory="ngModel" (change)="onSubmit(QuestionCategoryForm)">
+                                <label for="Literacy" class="card">
+                                <img src="../assets/images/literacy-featured-image.png" class="card-img-top" alt="literacy featured image">
+                                <div class="card-body text-center">
+                                    <p class="card-text">Literacy</p>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                                <input type="radio" name="questionCategory" id="Numeracy" name="questionCategory" value="Numeracy"  ngModel #QuestionCategory="ngModel" (change)="onSubmit(QuestionCategoryForm)">
+                                <label for="Numeracy" class="card">
+                                <img src="../assets/images/numeracy-featured-image.png" class="card-img-top" alt="numeracy featured image">
+                                <div class="card-body text-center">
+                                    <p class="card-text">Numeracy</p>
+                                </div>
+                            </label>
+                            </li>
+                        </ul>
+                    </form> -->
+
+                    <form [formGroup]="QuestionCategoryForm">
+                        <ul class="type-option list-style-none pl-0 mb-0">
+                            <li>
+                                <input hidden type="radio" id="Literacy" value="Literacy" formControlName="QuestionCategory" (change)="onSubmit(QuestionCategoryForm)">
+                                <label for="Literacy" class="card">
+                                <img src="../assets/images/literacy-featured-image.png" class="card-img-top" alt="literacy featured image">
+                                <div class="card-body text-center">
+                                    <p class="card-text">Literacy</p>
+                                </div>
+                            </label>
+                            </li>
+                            <li>
+                                <input hidden type="radio" id="Numeracy" value="Numeracy" formControlName="QuestionCategory" (change)="onSubmit(QuestionCategoryForm)">
+                                <label for="Numeracy" class="card">
+                                <img src="../assets/images/numeracy-featured-image.png" class="card-img-top" alt="numeracy featured image">
+                                <div class="card-body text-center">
+                                    <p class="card-text">Numeracy</p>
+                                </div>
+                            </label>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

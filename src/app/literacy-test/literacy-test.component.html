@@ -1,0 +1,28 @@
+<!-- <p>literacy-test works!</p> -->
+
+<div id="level-and-stage-selection-page">
+    <div class="page-wrapper school-bg py-5 pb-3">
+        <div class="inner container-fluid">
+            <!--  -->
+            <app-breadcrumb-topbar [title]="title" [menuList]="menuList"></app-breadcrumb-topbar>
+            <!-- <app-breadcrumb-topbar [title]="title"></app-breadcrumb-topbar> -->
+
+            <div class="row">
+                <div class="col-12 col-lg-2">
+                    <!-- Side Navigation -->
+                    <app-literacy-test-side-navigation></app-literacy-test-side-navigation>
+                </div>
+                <div class="col-12 col-lg-10">
+                    <main>
+                        <!-- <div class="row">
+                            <div class="col-12"> -->
+                        <h2>CHOOSE STAGE</h2>
+                        <router-outlet></router-outlet>
+                        <!-- </div>
+                        </div> -->
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

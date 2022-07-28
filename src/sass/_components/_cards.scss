@@ -1,0 +1,27 @@
+.form-card {
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 2em 1.5em;
+
+    .title {
+        display: inline-block;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 17px;
+        line-height: 23px;
+        color: #1e1e1e;
+        margin-bottom: 2em;
+        &::after {
+            content: "";
+            display: block;
+            background-color: #6CD33B;
+            height: 2px;
+            margin-top: 10px;
+        }
+    }
+
+    .form-group{
+        margin-bottom: 2.5em;
+    }
+}

@@ -1,0 +1,34 @@
+@use "../_abstracts/colors";
+@use "../_partials/mixins";
+.list-style-none {
+    > li {
+        list-style: none;
+    }
+}
+.school-bg {
+    // background-image: url(../assets/images/TEP-school-bg.jpg);
+    background-image: url(../../assets/images/TEP-school-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.classroom-bg {
+    background-image: url(../../assets/images/classroom.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.list-style-none {
+    > li {
+        list-style: none;
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
