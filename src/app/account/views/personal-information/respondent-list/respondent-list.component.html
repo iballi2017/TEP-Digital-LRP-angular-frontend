@@ -1,0 +1,45 @@
+<!-- <p>respondent-list works!</p> -->
+
+<div class="text-center" *ngIf="(isLoading$ | async)">
+    <app-pure-css-loader></app-pure-css-loader>
+</div>
+<ng-template #noItem>
+    <div class="alert alert-info text-center">No respondent</div>
+</ng-template>
+<!-- {{(occupantsList$.length | async)}} -->
+<!-- {{list | json}}
+<hr>
+{{list?.length | json}} -->
+<div *ngIf="!(isLoading$ | async)">
+    <div class="table-responsive" *ngIf="list?.length; else noItem">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">S/N</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">AGE</th>
+                    <th scope="col">GENDER</th>
+                    <th scope="col">STATE</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of (occupantsList$ | async); let i = index">
+                    <th scope="row">
+                        {{i + 1}}
+                    </th>
+                    <td>{{item?.occ_name}}</td>
+                    <td>{{item?.occ_age}}</td>
+                    <td>{{item?.occ_gender}}</td>
+                    <td>{{item?.occ_state}}</td>
+                    <td class="text-right">
+                        <div class="actions-btn">
+                            <button class="btn btn-sm edit-btn primary-btn text-bold">Edit</button>
+                            <button class="btn btn-sm delete-btn danger-btn" (click)="onRemove(item)">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

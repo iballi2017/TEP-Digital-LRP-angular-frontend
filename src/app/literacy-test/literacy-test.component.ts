@@ -7,12 +7,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LiteracyTestComponent implements OnInit {
   title = 'LITERACY';
+  literacyTestSideNavTitle = 'Level';
   menuList = [
     {
       title: 'LITERACY',
+    },
+  ];
+  navItemList: navItem[] = [
+    {
+      name: 'Letter',
+      url: '/literacy/levels/lettering',
+    },
+    {
+      name: 'Word',
+      url: '/literacy/levels/word',
+    },
+    {
+      name: 'Paragraph',
+      url: '/literacy/levels/paragraph',
+    },
+    {
+      name: 'Story',
+      url: '/literacy/levels/story',
     }
   ];
   constructor() {}
 
   ngOnInit(): void {}
+}
+export interface navItem {
+  name: string;
+  url: string;
 }

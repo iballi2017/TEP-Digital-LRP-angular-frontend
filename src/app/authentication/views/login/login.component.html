@@ -9,10 +9,10 @@
                 <div class="form-card mb-4">
                     <div class="text-center">
                         <h5 class="text-uppercase title">Login</h5>
-                        <div>
-                            <!-- <div>{{isLoading | async}}</div> -->
+                        <!-- <div>
+                            <div>{{isLoading | async}}</div>
                             <small class="text-info" *ngIf="(isLoading | async)">Loading...</small>
-                        </div>
+                        </div> -->
                         <ng-container>
                             <small class="text-danger text-center" *ngIf="(error | async)">{{error | async}}</small>
                         </ng-container>
@@ -37,7 +37,10 @@
                             <label for="Password" class="form-label text-uppercase">Password</label>
                             <input type="password" id="Password" class="form-control" formControlName="Password">
                         </div>
-                        <button class="btn primary-btn btn-block text-uppercase form-btn" [disabled]="LoginUserForm.invalid">Enter</button>
+                        <button class="btn primary-btn btn-block text-uppercase form-btn" [disabled]="LoginUserForm.invalid || (isLoading | async)">
+                            <span *ngIf="!(isLoading | async)">{{submitBtnLabel}}</span>
+                            <span *ngIf="(isLoading | async)">Sending...</span>
+                        </button>
                     </form>
                 </div>
 

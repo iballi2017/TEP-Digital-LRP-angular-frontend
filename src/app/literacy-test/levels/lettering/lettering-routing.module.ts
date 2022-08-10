@@ -21,33 +21,52 @@ const routes: Routes = [
         path: '',
         component: FirstScreenComponent,
       },
-      // {
-      //   path: 'lettering-splash',
-      //   component: LetteringSplashComponent,
-      // },
       {
         path: 'first-screen',
         component: FirstScreenComponent,
       },
-      {
-        path: 'second-screen',
-        component: SecondScreenComponent,
-      },
-      {
-        path: 'third-screen',
-        component: ThirdScreenComponent,
-      },
-      {
-        path: 'fourth-screen',
-        component: FourthScreenComponent,
-      },
-      {
-        path: 'fifth-screen',
-        component: FifthScreenComponent,
-      },
+      // {
+      //   path: 'second-screen',
+      //   component: SecondScreenComponent,
+      // },
+      // {
+      //   path: 'third-screen',
+      //   component: ThirdScreenComponent,
+      // },
+      // {
+      //   path: 'fourth-screen',
+      //   component: FourthScreenComponent,
+      // },
+      // {
+      //   path: 'fifth-screen',
+      //   component: FifthScreenComponent,
+      // },
       {
         path: 'sixth-screen',
         component: SixthScreenComponent,
+      },
+
+      {
+        path: 'lettering-splash',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-one/lettering-splash/lettering-splash.module'
+          ).then((m) => m.LetteringSplashModule),
+      },
+      {
+        path: 'spelling-vowel-letters',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-one/spelling-vowel-letters/spelling-vowel-letters.module'
+          ).then((m) => m.SpellingVowelLettersModule),
+      },
+
+      {
+        path: 'lettering-splash-screen-two',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-one/lettering-splash-two/lettering-splash-two.module'
+          ).then((m) => m.LetteringSplashTwoModule),
       },
     ],
   },

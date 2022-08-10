@@ -6,7 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lettering-splash.component.scss']
 })
 export class LetteringSplashComponent implements OnInit {
-
+  menuList = [
+    {
+      title: 'LITERACY',
+    },
+    {
+      title: 'LETTERING',
+    },
+    {
+      title: 'STAGE 1',
+    }
+  ];
   constructor() { }
 
   ngOnInit(): void {

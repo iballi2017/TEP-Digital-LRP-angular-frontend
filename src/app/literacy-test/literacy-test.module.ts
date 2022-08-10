@@ -19,7 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     WordComponent,
     ParagraphComponent,
     StoryComponent,
-    LiteracyTestSideNavigationComponent,
+    LiteracyTestSideNavigationComponent
   ],
   imports: [
     CommonModule,

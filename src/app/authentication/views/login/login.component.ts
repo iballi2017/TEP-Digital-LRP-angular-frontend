@@ -1,6 +1,7 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { IAppState } from 'src/redux/store';
 import {
@@ -15,13 +16,15 @@ import {
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  submitBtnLabel:string = 'Enter';
   LoginUserForm!: FormGroup;
   @select((s) => s.LoginUser.isLoading) isLoading: any;
   @select((s) => s.LoginUser.error) error: any;
   constructor(
     private _fb: FormBuilder,
     private _authSvc: AuthenticationService,
-    private ngRedux: NgRedux<IAppState>
+    private ngRedux: NgRedux<IAppState>,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,16 +49,14 @@ export class LoginComponent implements OnInit {
       this._authSvc.LoginUser(Payload).subscribe({
         next: (response: any) => {
           console.log('response: ', response);
-          setTimeout(() => {
-            this.ngRedux.dispatch({
-              type: ADD_LOGINUSER_SUCCESS,
-              payload: response,
-            });
-          }, 6000);
-          // this.ngRedux.dispatch({
-          //   type: ADD_LOGINUSER_SUCCESS,
-          //   payload: response,
-          // });
+          if(response){
+            // setTimeout(() => {
+              this.ngRedux.dispatch({
+                type: ADD_LOGINUSER_SUCCESS,
+                payload: response,
+              });
+            // }, 6000);
+          }
         },
         error: (err: any) => {
           console.warn('Error: ', err);

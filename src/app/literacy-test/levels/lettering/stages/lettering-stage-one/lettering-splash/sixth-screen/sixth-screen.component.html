@@ -6,13 +6,6 @@
                 <img src="../../../../../../../../assets/images/splash-screens-characters/stage-1/stage-1-splash-screen-6.svg" alt="" class="img-fluid">
             </div>
         </div>
-        <div class="controls">
-            <div class="nav-left text-white">
-                <button class="btn previous-btn" [routerLink]="['/literacy/stage-1/fifth-screen']"></button>
-            </div>
-            <div class="nav-right text-white">
-                <button class="btn next-btn" [routerLink]="['/literacy/stage-1/first-screen']"></button>
-            </div>
-        </div>
+        <app-arrow-controls [leftLink]="leftLink" [rightLink]="rightLink"></app-arrow-controls>
     </div>
 </div>

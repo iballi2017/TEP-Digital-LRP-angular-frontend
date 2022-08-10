@@ -22,12 +22,12 @@ import { FourthScreenComponent } from './stages/lettering-stage-one/lettering-sp
     LetteringStageThreeComponent,
     LetteringStageFourComponent,
     // 
-    FirstScreenComponent,
-    SecondScreenComponent,
-    ThirdScreenComponent,
-    FourthScreenComponent,
-    FifthScreenComponent,
-    SixthScreenComponent
+    // FirstScreenComponent,
+    // SecondScreenComponent,
+    // ThirdScreenComponent,
+    // FourthScreenComponent,
+    // FifthScreenComponent,
+    // SixthScreenComponent
   ],
   imports: [CommonModule, LetteringRoutingModule, SharedModule],
 })

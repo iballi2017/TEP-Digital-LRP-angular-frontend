@@ -16,10 +16,12 @@ import {
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  submitBtnLabel: string = 'Register';
   RegisterUserForm!: FormGroup;
   @select((s) => s.RegisterUser.isLoading) isLoading: any;
   @select((s) => s.RegisterUser.RegisteredUser?.message) RegisteredUser: any;
   @select((s) => s.RegisterUser.error) error: any;
+  isRegistered!: boolean;
   constructor(
     private _fb: FormBuilder,
     private _authSvc: AuthenticationService,
@@ -68,6 +70,8 @@ export class RegisterComponent implements OnInit {
                 type: ADD_REGISTER_USER_SUCCESS,
                 payload: response,
               });
+              this.isRegistered = true;
+              console.log('this.isRegistered: ', this.isRegistered);
               this.RegisterUserForm.reset();
             }, 6000);
             // this.ngRedux.dispatch({

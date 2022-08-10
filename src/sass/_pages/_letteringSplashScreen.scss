@@ -1,13 +1,19 @@
 @use "../_partials/mixins";
 
 .content-wrapper {
-.controls{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-    @include mixins.minmq(768px){
+    .controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    @include mixins.minmq(768px) {
         position: relative;
+        // .content-wrapper {
+        // height: 64vh;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        // }
         .nav-left,
         .nav-right {
             position: absolute;
@@ -21,7 +27,6 @@
         }
     }
 }
-
 
 .image-wrapper {
     max-width: 650px;

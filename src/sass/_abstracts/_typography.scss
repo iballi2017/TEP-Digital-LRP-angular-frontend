@@ -2,12 +2,12 @@
 @use "../_partials/mixins";
 // @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 // @import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto&display=swap");
 
 /* TYPOGRAPHY */
 
 $bodyFontFamily: "Open Sans", sans-serif;
-$titleFontFamily: 'Montserrat Subrayada', sans-serif;
+$titleFontFamily: "Montserrat Subrayada", sans-serif;
 .text-uppercase {
     text-transform: uppercase;
 }
@@ -32,4 +32,8 @@ $titleFontFamily: 'Montserrat Subrayada', sans-serif;
         text-decoration: none;
         color: colors.$primaryColorDark;
     }
+}
+
+.text-bold {
+    font-weight: 700 !important;
 }

@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fourth-screen.component.scss']
 })
 export class FourthScreenComponent implements OnInit {
+  leftLink = '/literacy/stage-1/lettering-splash/third-screen';
+  rightLink = '/literacy/stage-1/lettering-splash/fifth-screen';
 
   constructor() { }
 

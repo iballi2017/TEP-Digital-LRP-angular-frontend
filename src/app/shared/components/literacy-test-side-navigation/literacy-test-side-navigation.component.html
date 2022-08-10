@@ -1,0 +1,23 @@
+<!-- <p>literacy-test-side-navigation works!</p> -->
+<nav>
+    <!-- Levels Navigation -->
+    <!-- <?php include "../components/levels-navigation.php"; ?> -->
+    <div id="levels-navigation">
+        <div class="main-wrapper">
+            <div class="title text-center mb-4">{{title}}</div>
+            <ul id="navigation-items">
+                <li *ngFor="let item of navItemList">
+                    <a [routerLink]="[item?.url]" routerLinkActive="router-link-active">
+                        {{item?.name}}
+                    </a>
+                </li>
+                <li *ngIf="logout">
+                    <a class="cursor-pointer" (click)="logoutUser()">
+                      Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--  -->
+</nav>

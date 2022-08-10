@@ -15,12 +15,19 @@
     min-height: 100vh;
 }
 
-.classroom-bg {
-    background-image: url(../../assets/images/classroom.jpg);
+.classroom-bg,
+.blackboard-bg {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
+}
+.classroom-bg {
+    background-image: url(../../assets/images/classroom.jpg);
+}
+
+.blackboard-bg {
+    background-image: url(../../assets/images/blackboard.jpg);
 }
 
 .list-style-none {

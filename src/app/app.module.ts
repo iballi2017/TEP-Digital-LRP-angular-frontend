@@ -20,9 +20,16 @@ import { TestOnboardingComponent } from './test-onboarding/test-onboarding.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumeracyTestComponent } from './numeracy-test/numeracy-test.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
+import { TokenInterceptor } from './helpers/token.interceptor';
+import { AuthGuard } from './services/guards/auth.guard';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, TestOnboardingComponent, NumeracyTestComponent],
+  declarations: [
+    AppComponent,
+    LandingPageComponent,
+    TestOnboardingComponent,
+    NumeracyTestComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,10 +39,13 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
     NgReduxModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
