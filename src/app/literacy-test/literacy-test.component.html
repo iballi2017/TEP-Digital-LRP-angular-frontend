@@ -8,12 +8,21 @@
             <!-- <app-breadcrumb-topbar [title]="title"></app-breadcrumb-topbar> -->
 
             <div class="row">
-                <div class="col-12 col-lg-2">
+                <div class="col-12 col-xl-2">
                     <!-- Side Navigation -->
-                    <app-literacy-test-side-navigation [title]="literacyTestSideNavTitle" [navItemList]="navItemList"></app-literacy-test-side-navigation>
+                    <div class="d-none d-xl-block">
+                        <app-literacy-test-side-navigation [title]="literacyTestSideNavTitle"
+                            [navItemList]="navItemList">
+                        </app-literacy-test-side-navigation>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-10">
+                <div class="col-12 col-xl-10">
                     <main>
+                        <div class="d-xl-none">
+                            <button id="side-menu-toggler" class="btn" (click)="onOpenMenu()">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                        </div>
                         <!-- <div class="row">
                             <div class="col-12"> -->
                         <h2>CHOOSE STAGE</h2>

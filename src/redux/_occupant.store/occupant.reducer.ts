@@ -6,6 +6,9 @@ import {
   FETCH_OCCUPANTS_LIST,
   FETCH_OCCUPANTS_LIST_ERROR,
   FETCH_OCCUPANTS_LIST_SUCCESS,
+  FETCH_SINGLE_OCCUPANT,
+  FETCH_SINGLE_OCCUPANT_ERROR,
+  FETCH_SINGLE_OCCUPANT_SUCCESS,
   REMOVE_OCCUPANT,
   REMOVE_OCCUPANT_ERROR,
   REMOVE_OCCUPANT_SUCCESS,
@@ -28,6 +31,25 @@ const FetchOccupantsListSuccess = (state: LRP_OccupantState, action: any) => {
   });
 };
 const FetchOccupantsListFailure = (state: LRP_OccupantState, action: any) => {
+  return tassign(state, {
+    error: action.payload,
+    isLoading: false,
+  });
+};
+
+// FETCH SingleOccupant
+const FetchSingleOccupant = (state: LRP_OccupantState, action: any) => {
+  return tassign(state, {
+    isLoading: true,
+  });
+};
+const FetchSingleOccupantSuccess = (state: LRP_OccupantState, action: any) => {
+  return tassign(state, {
+    singleOccupant: action?.payload[0],
+    isLoading: false,
+  });
+};
+const FetchSingleOccupantFailure = (state: LRP_OccupantState, action: any) => {
   return tassign(state, {
     error: action.payload,
     isLoading: false,
@@ -105,9 +127,16 @@ export function OccupantReducer(
       return FetchOccupantsList(state, action);
     case FETCH_OCCUPANTS_LIST_SUCCESS:
       return FetchOccupantsListSuccess(state, action);
-
     case FETCH_OCCUPANTS_LIST_ERROR:
       return FetchOccupantsListFailure(state, action);
+
+    // FETCH_SINGLE_OCCUPANT
+    case FETCH_SINGLE_OCCUPANT:
+      return FetchSingleOccupant(state, action);
+    case FETCH_SINGLE_OCCUPANT_SUCCESS:
+      return FetchSingleOccupantSuccess(state, action);
+      case FETCH_SINGLE_OCCUPANT_ERROR:
+      return FetchSingleOccupantFailure(state, action);
 
     // ADD_OCCUPANT
     case ADD_OCCUPANT:
@@ -130,18 +159,6 @@ export function OccupantReducer(
       return tassign(state, {
         isLoading: true,
       });
-
-    // case REMOVE_OCCUPANT_SUCCESS:
-    //   return tassign(state, {
-    //     occupantsList: action.payload,
-    //     isLoading: false,
-    //   });
-    // case REMOVE_OCCUPANT_ERROR:
-    //   return tassign(state, {
-    //     error: action.payload,
-    //     isLoading: false,
-    //   });
-    //
 
     case REMOVE_OCCUPANT_SUCCESS:
       return tassign(state, {

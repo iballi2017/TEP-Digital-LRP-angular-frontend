@@ -7,6 +7,8 @@ import { ArrowControlsComponent } from './components/arrow-controls/arrow-contro
 import { SharedRoutingModule } from './shared.routing.module';
 import { LiteracyTestSideNavigationComponent } from './components/literacy-test-side-navigation/literacy-test-side-navigation.component';
 import { PureCssLoaderComponent } from './components/pure-css-loader/pure-css-loader.component';
+import { BooleanAlertDialogComponent } from './components/boolean-alert-dialog/boolean-alert-dialog.component';
+import { MobileNavigationDialogComponent } from './components/mobile-navigation-dialog/mobile-navigation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -14,15 +16,22 @@ import { PureCssLoaderComponent } from './components/pure-css-loader/pure-css-lo
     SpeechSynthesisUtteranceComponent,
     ArrowControlsComponent,
     LiteracyTestSideNavigationComponent,
-    PureCssLoaderComponent
+    PureCssLoaderComponent,
+    BooleanAlertDialogComponent,
+    MobileNavigationDialogComponent
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedRoutingModule,
+  ],
   exports: [
     BreadcrumbTopbarComponent,
     SpeechSynthesisUtteranceComponent,
     ArrowControlsComponent,
     LiteracyTestSideNavigationComponent,
-    PureCssLoaderComponent
+    PureCssLoaderComponent,
   ],
 })
 export class SharedModule {}

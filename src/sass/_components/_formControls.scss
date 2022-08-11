@@ -3,6 +3,7 @@
 input[type="text"],
 input[type="password"],
 input[type="number"],
+input[type="search"],
 select.form-control {
     &.form-control {
         // border-radius: 0;
@@ -19,24 +20,30 @@ select.form-control {
         }
     }
 }
+input[type="search"] {
+    &.form-control {
+        background: unset;
+        border-radius: 0;
+    }
+}
 
-.custom-drop{
+.custom-drop {
     // display: flex;
     // align-items: center;
     position: relative;
-&::after{
-    content: "";
-    display: block;
-    height: 15px;
-    width: 15px;
-    background-image: url(../../assets/images/icons/caret-down-green-icon.svg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: absolute;
-    right: .5em;
-    bottom: .9em;
-}
+    &::after {
+        content: "";
+        display: block;
+        height: 15px;
+        width: 15px;
+        background-image: url(../../assets/images/icons/caret-down-green-icon.svg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        right: 0.5em;
+        bottom: 0.9em;
+    }
 }
 
 select {

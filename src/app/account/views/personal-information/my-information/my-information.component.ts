@@ -1,7 +1,8 @@
 import { select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { IdentityService } from 'src/app/services/identity.service';
 import { OccupantService } from 'src/app/services/occupant.service';
@@ -12,9 +13,10 @@ import { AddRespondentComponent } from '../add-respondent/add-respondent.compone
   templateUrl: './my-information.component.html',
   styleUrls: ['./my-information.component.scss'],
 })
-export class MyInformationComponent implements OnInit {
+export class MyInformationComponent implements OnInit, OnDestroy {
   @select((s) => s.userDetails.userDetails) userDetails$: any;
   userData: any;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _identitySvc: IdentityService,
@@ -29,9 +31,10 @@ export class MyInformationComponent implements OnInit {
     this.getOccupantList();
 
     
-    this.userDetails$.subscribe((e: any) => {
+    let subscription = this.userDetails$.subscribe((e: any) => {
       this.userData = e;
     });
+    this.Subscriptions.push(subscription);
   }
 
   getUserData() {
@@ -60,9 +63,10 @@ export class MyInformationComponent implements OnInit {
       data: {},
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    let subscription =   dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+    this.Subscriptions.push(subscription);
   }
 
   onEditPersonalDetails(userData: any) {
@@ -70,5 +74,13 @@ export class MyInformationComponent implements OnInit {
     this._router.navigate([
       `/account/update-personal-details/${userData?.usr_id}`,
     ]);
+  }
+  ngOnDestroy(): void {
+    console.log('destroyed!!!', this.Subscriptions);
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
+    });
   }
 }

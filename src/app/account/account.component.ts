@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+// import { LiteracyTestSideNavigationComponent } from '../literacy-test/components/literacy-test-side-navigation/literacy-test-side-navigation.component';
+import { LiteracyTestSideNavigationComponent } from '../shared/components/literacy-test-side-navigation/literacy-test-side-navigation.component';
+import { MobileNavigationDialogComponent } from '../shared/components/mobile-navigation-dialog/mobile-navigation-dialog.component';
 
 @Component({
   selector: 'app-account',
@@ -31,9 +35,29 @@ export class AccountComponent implements OnInit {
     {
       name: 'Contact Us',
       url: '/account/contact-us',
-    }
+    },
   ];
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  onOpenMenu() {
+    const dialogRef = this.dialog.open(MobileNavigationDialogComponent, {
+      width: '100%',
+      data: {
+        navData: {
+          title: this.literacyTestSideNavTitle,
+          navItemList: this.navItemList,
+          logout: this.logout,
+        },
+      },
+    });
+    // const dialogRef = this.dialog.open(LiteracyTestSideNavigationComponent, {
+    //   width: '100%',
+    // });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }

@@ -1,7 +1,8 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UpdateUserModel } from 'src/app/models/types/user';
 import { IdentityService } from 'src/app/services/identity.service';
 import { IAppState } from 'src/redux/store';
@@ -16,24 +17,26 @@ import {
   templateUrl: './update-personal-details.component.html',
   styleUrls: ['./update-personal-details.component.scss'],
 })
-export class UpdatePersonalDetailsComponent implements OnInit {
+export class UpdatePersonalDetailsComponent implements OnInit, OnDestroy {
   @select((s) => s.userDetails.userDetails) userDetails$: any;
   @select((s) => s.userDetails.isLoading) isLoading: any;
   userData: any;
   submitBtnLabel: string = 'Save';
   UpdatePersonalDetailsForm!: FormGroup;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _identitySvc: IdentityService,
     private _fb: FormBuilder,
     private _route: ActivatedRoute,
-    private ngRedux: NgRedux<IAppState>
+    private ngRedux: NgRedux<IAppState>,
+    private _router:Router
   ) {}
 
   ngOnInit(): void {
     this.buildForm();
     // this.onGetParams();
-    this.isLoading.subscribe((l: boolean) => {
+    let subscription =   this.isLoading.subscribe((l: boolean) => {
       if (l) {
         this.submitBtnLabel = 'Saving...';
       } else {
@@ -45,6 +48,7 @@ export class UpdatePersonalDetailsComponent implements OnInit {
       this.userData = e;
       this.getUserData(e);
     });
+    this.Subscriptions.push(subscription);
   }
 
   // onGetParams() {
@@ -92,7 +96,7 @@ export class UpdatePersonalDetailsComponent implements OnInit {
       usr_fullname: this.UpdatePersonalDetailsForm.value.FullName,
       usr_gender: this.UpdatePersonalDetailsForm.value.Gender,
     };
-    this._identitySvc.UpdateUserDetails(Payload).subscribe({
+    let subscription =   this._identitySvc.UpdateUserDetails(Payload).subscribe({
       next: (response: any) => {
         if (response) {
           console.log('response: ', response);
@@ -103,6 +107,8 @@ export class UpdatePersonalDetailsComponent implements OnInit {
               data: Payload,
             },
           });
+          this._router.navigate(['/account']);
+
         }
       },
       error: (err: any) => {
@@ -115,9 +121,20 @@ export class UpdatePersonalDetailsComponent implements OnInit {
         }
       },
     });
+    this.Subscriptions.push(subscription);
   }
 
   back() {
     history.back();
+  }
+
+  
+  ngOnDestroy(): void {
+    console.log('destroyed!!!', this.Subscriptions);
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
+    });
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MobileNavigationDialogComponent } from '../shared/components/mobile-navigation-dialog/mobile-navigation-dialog.component';
 
 @Component({
   selector: 'app-literacy-test',
@@ -31,9 +33,29 @@ export class LiteracyTestComponent implements OnInit {
       url: '/literacy/levels/story',
     }
   ];
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  
+  onOpenMenu() {
+    const dialogRef = this.dialog.open(MobileNavigationDialogComponent, {
+      width: '100%',
+      data: {
+        navData: {
+          title: this.literacyTestSideNavTitle,
+          navItemList: this.navItemList,
+        },
+      },
+    });
+    // const dialogRef = this.dialog.open(LiteracyTestSideNavigationComponent, {
+    //   width: '100%',
+    // });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
 export interface navItem {
   name: string;

@@ -8,6 +8,7 @@ import { PersonalInformationComponent } from './views/personal-information/perso
 import { RespondentDetailsComponent } from './views/personal-information/respondent-details/respondent-details.component';
 import { UpdatePasswordComponent } from './views/personal-information/update-password/update-password.component';
 import { UpdatePersonalDetailsComponent } from './views/personal-information/update-personal-details/update-personal-details.component';
+import { ReportListComponent } from './views/reports/report-list/report-list.component';
 import { ReportsComponent } from './views/reports/reports.component';
 
 const routes: Routes = [
@@ -29,7 +30,14 @@ const routes: Routes = [
         path: 'respondent-details/:respondentId',
         component: RespondentDetailsComponent,
       },
-      { path: 'reports', component: ReportsComponent },
+      {
+        path: 'reports',
+        component: ReportsComponent,
+        children: [
+          { path: '', component: ReportListComponent },
+          { path: 'report-list', component: ReportListComponent },
+        ],
+      },
       { path: 'about-the-app', component: AboutTheAppComponent },
       { path: 'contact-us', component: ContactUsComponent },
     ],

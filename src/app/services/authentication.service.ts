@@ -49,12 +49,12 @@ export class AuthenticationService {
         const userData = {
           accessToken: token,
           expiration: decoded.exp,
-          user_created_at: decoded.usr_created_at,
-          user_email: decoded.usr_email,
-          user_fullname: decoded.usr_fullname,
-          user_gender: decoded.usr_gender,
-          user_id: decoded.usr_id,
-          user_party: decoded.usr_party,
+          usr_created_at: decoded.usr_created_at,
+          usr_email: decoded.usr_email,
+          usr_fullname: decoded.usr_fullname,
+          usr_gender: decoded.usr_gender,
+          usr_id: decoded.usr_id,
+          usr_party: decoded.usr_party,
         };
         this.setUserData(userData);
         //

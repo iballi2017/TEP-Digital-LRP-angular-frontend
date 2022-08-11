@@ -1,7 +1,8 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { LocationService } from 'src/app/services/location.service';
 import { OccupantService } from 'src/app/services/occupant.service';
 import { IAppState } from 'src/redux/store';
@@ -16,11 +17,14 @@ import {
   templateUrl: './add-respondent.component.html',
   styleUrls: ['./add-respondent.component.scss'],
 })
-export class AddRespondentComponent implements OnInit {
+export class AddRespondentComponent implements OnInit, OnDestroy {
   @select((s) => s.occupantsList.isLoading) isLoading$:any;
   submitBtnLabel = "Add Respondent";
   nigerianStateList!: string[];
+  num: number = 3;
+  agesList: number[] = [];
   AddRespondentForm!: FormGroup;
+  Subscriptions: Subscription[] = [];
   constructor(
     private _locationSvc: LocationService,
     private _fb: FormBuilder,
@@ -32,7 +36,18 @@ export class AddRespondentComponent implements OnInit {
   ngOnInit(): void {
     this.onGetNigerianStates();
     this.buildForm();
+    let x: number = this.num;
+    this.createNumberArray(x);
   }
+
+  
+  createNumberArray(d: number) {
+    while (d < 9) {
+      this.agesList.push(d);
+      d++;
+    }
+  }
+
 
   buildForm() {
     this.AddRespondentForm = this._fb.group({
@@ -58,7 +73,7 @@ export class AddRespondentComponent implements OnInit {
     console.log('Payload: ', Payload);
 
     this.ngRedux.dispatch({ type: ADD_OCCUPANT });
-    this._occupantSvc.AddOccupant(Payload).subscribe({
+    let subscription =   this._occupantSvc.AddOccupant(Payload).subscribe({
       next: (response: any) => {
         if (response) {
           console.log('response: ', response);
@@ -75,9 +90,20 @@ export class AddRespondentComponent implements OnInit {
         this.ngRedux.dispatch({ type: ADD_OCCUPANT_ERROR, payload: err });
       },
     });
+    this.Subscriptions.push(subscription);
   }
 
   closeDialog() {
     this.dialogRef.close('Form closed!');
+  }
+
+
+  ngOnDestroy(): void {
+    console.log('destroyed!!!', this.Subscriptions);
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
+    });
   }
 }

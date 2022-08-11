@@ -34,7 +34,8 @@
                     <td>{{item?.occ_state}}</td>
                     <td class="text-right">
                         <div class="actions-btn">
-                            <button class="btn btn-sm edit-btn primary-btn text-bold">Edit</button>
+                            <!--  -->
+                            <button class="btn btn-sm edit-btn primary-btn text-bold" (click)="onViewRespondentDetails(item)">Edit</button>
                             <button class="btn btn-sm delete-btn danger-btn" (click)="onRemove(item)">Delete</button>
                         </div>
                     </td>

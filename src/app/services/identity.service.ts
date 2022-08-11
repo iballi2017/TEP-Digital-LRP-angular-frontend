@@ -39,7 +39,7 @@ export class IdentityService {
     let storedData = this.getLoggedInUserData();
     console.log('  userData: ', userData);
     this.ngRedux.dispatch({ type: FETCH_USER_DETAILS });
-    this._http.get(`${this.FetchUserByIdrUrl}/${storedData.user_id}`).subscribe({
+    this._http.get(`${this.FetchUserByIdrUrl}/${storedData.usr_id}`).subscribe({
       next: (response: any) => {
         if (response) {
           console.log('response: ', response);
