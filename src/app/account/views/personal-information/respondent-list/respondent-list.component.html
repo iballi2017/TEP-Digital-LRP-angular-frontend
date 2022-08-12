@@ -35,8 +35,20 @@
                     <td class="text-right">
                         <div class="actions-btn">
                             <!--  -->
-                            <button class="btn btn-sm edit-btn primary-btn text-bold" (click)="onViewRespondentDetails(item)">Edit</button>
-                            <button class="btn btn-sm delete-btn danger-btn" (click)="onRemove(item)">Delete</button>
+                            <div class="d-none d-lg-block">
+                                <button class="btn btn-sm edit-btn primary-btn text-bold"
+                                    (click)="onViewRespondentDetails(item)">Edit</button>
+                                <button class="btn btn-sm delete-btn danger-btn"
+                                    (click)="onRemove(item)">Delete</button>
+                            </div>
+                            <div class="d-block d-lg-none d-flex">
+                                <button class="btn btn-sm px-1 text-bold text-link"
+                                    (click)="onViewRespondentDetails(item)">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="btn btn-sm px-1 text-bold text-danger" (click)="onRemove(item)">
+                                    <i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
                     </td>
                 </tr>
