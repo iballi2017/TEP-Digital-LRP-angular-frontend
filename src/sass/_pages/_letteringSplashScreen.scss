@@ -28,12 +28,14 @@
     }
 }
 
-.image-wrapper {
-    // max-width: 650px;
-    // padding-top: 3em;
-    position: relative;
-    top: 0;
-    margin: 0 auto;
+#splash-screen {
+    .image-wrapper {
+        max-width: 650px;
+        padding-top: 3em;
+        position: relative;
+        top: 0;
+        margin: 0 auto;
+    }
 }
 
 .next-btn,
