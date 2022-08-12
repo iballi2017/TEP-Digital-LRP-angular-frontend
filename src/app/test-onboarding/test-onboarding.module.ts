@@ -4,13 +4,15 @@ import { QuestionCategoryOptionsComponent } from './question-category-options/qu
 import { TestOnboardingRoutingModule } from './test-onboarding-routing.module';
 import { NumberOfUsersInputDialogComponent } from './components/number-of-users-input-dialog/number-of-users-input-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TestRespondentSelectionComponent } from './components/test-respondent-selection/test-respondent-selection.component';
 
 
 
 @NgModule({
   declarations: [
     QuestionCategoryOptionsComponent,
-    NumberOfUsersInputDialogComponent
+    NumberOfUsersInputDialogComponent,
+    TestRespondentSelectionComponent
   ],
   imports: [
     CommonModule,

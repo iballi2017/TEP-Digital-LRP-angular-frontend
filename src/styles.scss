@@ -52,7 +52,10 @@ body {
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 
+
+// CUSTOM STYLE CORRECTIONS
 .mat-dialog-container {
   box-shadow: unset !important;
   background: unset !important;
+  padding: 0 !important;
 }
