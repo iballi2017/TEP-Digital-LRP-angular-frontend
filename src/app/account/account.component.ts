@@ -21,6 +21,10 @@ export class AccountComponent implements OnInit {
   // navItemList: navItem[] = [
   navItemList: any[] = [
     {
+      name: 'Home',
+      url: '/home',
+    },
+    {
       name: 'My Information',
       url: '/account/personal-information',
     },
