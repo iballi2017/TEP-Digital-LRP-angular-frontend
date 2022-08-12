@@ -9,6 +9,7 @@ import { LiteracyTestSideNavigationComponent } from './components/literacy-test-
 import { PureCssLoaderComponent } from './components/pure-css-loader/pure-css-loader.component';
 import { BooleanAlertDialogComponent } from './components/boolean-alert-dialog/boolean-alert-dialog.component';
 import { MobileNavigationDialogComponent } from './components/mobile-navigation-dialog/mobile-navigation-dialog.component';
+import { TableColumnActionButtonsComponent } from './components/table-column-action-buttons/table-column-action-buttons.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MobileNavigationDialogComponent } from './components/mobile-navigation-
     LiteracyTestSideNavigationComponent,
     PureCssLoaderComponent,
     BooleanAlertDialogComponent,
-    MobileNavigationDialogComponent
+    MobileNavigationDialogComponent,
+    TableColumnActionButtonsComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { MobileNavigationDialogComponent } from './components/mobile-navigation-
     ArrowControlsComponent,
     LiteracyTestSideNavigationComponent,
     PureCssLoaderComponent,
+    TableColumnActionButtonsComponent
   ],
 })
 export class SharedModule {}

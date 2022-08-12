@@ -33,23 +33,9 @@
                     <td>{{item?.occ_gender}}</td>
                     <td>{{item?.occ_state}}</td>
                     <td class="text-right">
-                        <div class="actions-btn">
-                            <!--  -->
-                            <div class="d-none d-lg-block">
-                                <button class="btn btn-sm edit-btn primary-btn text-bold"
-                                    (click)="onViewRespondentDetails(item)">Edit</button>
-                                <button class="btn btn-sm delete-btn danger-btn"
-                                    (click)="onRemove(item)">Delete</button>
-                            </div>
-                            <div class="d-block d-lg-none d-flex">
-                                <button class="btn btn-sm px-1 text-bold text-link"
-                                    (click)="onViewRespondentDetails(item)">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                                <button class="btn btn-sm px-1 text-bold text-danger" (click)="onRemove(item)">
-                                    <i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
+                        <app-table-column-action-buttons (remove)="onRemove(item)"
+                            (edit)="onViewRespondentDetails(item)" [item]="item"></app-table-column-action-buttons>
+                        <!--  -->
                     </td>
                 </tr>
             </tbody>

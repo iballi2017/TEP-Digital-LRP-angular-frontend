@@ -1,0 +1,15 @@
+<!-- <p>table-column-action-buttons works!</p> -->
+
+<div class="actions-btn">
+    <div class="d-none d-lg-block">
+        <button class="btn btn-sm edit-btn primary-btn text-bold" (click)="onEdit()">Edit</button>
+        <button class="btn btn-sm delete-btn danger-btn" (click)="onRemove()">Delete</button>
+    </div>
+    <div class="d-block d-lg-none d-flex">
+        <button class="btn btn-sm px-1 text-bold primary-text">
+            <i class="fas fa-pen" (click)="onEdit()"></i>
+        </button>
+        <button class="btn btn-sm px-1 text-bold danger-text" (click)="onRemove()">
+            <i class="fas fa-trash"></i></button>
+    </div>
+</div>
