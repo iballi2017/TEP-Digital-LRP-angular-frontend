@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { NumberOfUsersInputDialogComponent } from '../components/number-of-users-input-dialog/number-of-users-input-dialog.component';
+import { TestRespondentSelectionComponent } from '../components/test-respondent-selection/test-respondent-selection.component';
 
 @Component({
   selector: 'app-question-category-options',
@@ -23,7 +24,17 @@ export class QuestionCategoryOptionsComponent implements OnInit {
   }
 
   openNumberOfUsersInputDialog(QuestionCategory: string) {
-    const dialogRef = this.dialog.open(NumberOfUsersInputDialogComponent, {
+    // const dialogRef = this.dialog.open(NumberOfUsersInputDialogComponent, {
+    //   width: '100%',
+    //   // maxWidth: '500px',
+    //   data: {
+    //     QuestionCategory: QuestionCategory,
+    //   },
+    // });
+    
+    const dialogRef = this.dialog.open(TestRespondentSelectionComponent, {
+      // width: '100%',
+      // maxWidth: '500px',
       data: {
         QuestionCategory: QuestionCategory,
       },

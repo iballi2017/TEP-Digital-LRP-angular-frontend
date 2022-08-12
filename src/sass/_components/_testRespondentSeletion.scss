@@ -1,6 +1,6 @@
 @use "../../sass/_partials/mixins";
 
-#candidate-selection-count-page {
+#test-respondent-selection-dialog {
     .card {
         width: 100%;
         // max-width: 300px;
@@ -102,7 +102,7 @@
     
     @include mixins.minmq(768px) {
         .card {
-            max-width: 300px;
+            max-width: 668px;
             margin: 5em auto;
             border: none;
             border-radius: 10px;
