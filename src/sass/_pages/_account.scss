@@ -1,4 +1,5 @@
 @use "../_abstracts/colors";
+@use "../../sass/_partials/mixins";
 #account-page {
     .title-wrapper {
         background: #1e2b19;
@@ -76,4 +77,11 @@
 
         }
     }
+
+        @include mixins.maxmq(768px) {
+            .title-wrapper,.body-wrapper {
+                padding: 0.8em .8em;
+            }
+    }
+
 }
