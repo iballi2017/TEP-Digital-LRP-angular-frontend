@@ -7,7 +7,7 @@
             <div>Back</div>
         </div>
         <ul id="pages" class="list-style-none pl-0 mb-0" [ngClass]="{'pd-left': menuList?.length > 1}">
-            <li class="page" *ngFor="let item of menuList">{{item?.title}} {{menuList?.length}} {{menuList?.length > 1}}</li>
+            <li class="page" *ngFor="let item of menuList">{{item?.title}}</li>
         </ul>
         <!-- <div id="title-bar">
             <h1>{{title}}</h1>
