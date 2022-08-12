@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./breadcrumb-topbar.component.scss'],
 })
 export class BreadcrumbTopbarComponent implements OnInit {
-  @Input() menuList: any[] = [];
+  @Input() menuList: any;
 
   constructor() {}
 

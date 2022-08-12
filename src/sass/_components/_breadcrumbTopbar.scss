@@ -5,9 +5,9 @@
         --width: 34px;
         display: flex;
         justify-content: space-between;
-        @include mixins.maxmq(768px){
+        @include mixins.maxmq(768px) {
             flex-wrap: wrap;
-        };
+        }
     }
     .back-btn-wrapper {
         margin-right: 20px;
@@ -30,17 +30,18 @@
         border-radius: 7px;
         transform: matrix(1, 0, 0, -1, 0, 0);
         // padding: 0.8em 1.2em;
-        width: 75px;
-        height: 64px;
+        width: 59px;
+        height: 52px;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-bottom: 0.3em;
         &::before {
             // content: url(../assets/images/icons/left-arrow-white-icon.svg);
             content: "";
             display: block;
-            width: 30px;
-            height: 30px;
+            width: 16px;
+            height: 16px;
             background-image: url(../../assets/images/icons/left-arrow-white-icon.svg);
             background-size: contain;
             background-repeat: no-repeat;
@@ -54,27 +55,45 @@
             text-align: center;
             text-transform: capitalize;
             color: #ffffff;
+            display: none;
         }
     }
-    #back-btn,
-    #title-bar {
-        height: 66px;
+
+    @include mixins.minmq(768px) {
+        #back-btn,
+        #title-bar {
+            height: 66px;
+        }
+        #back-btn {
+            flex-wrap: wrap;
+            width: 75px;
+            margin-bottom: 0;
+            &::before {
+                width: 30px;
+                height: 30px;
+            }
+            + div {
+                display: block;
+            }
+        }
     }
 
     #pages {
-        --pagesWidth:  calc(100% - var(--width));
-        width: var(--pagesWidth);
+        --pagesWidth: calc(100% - var(--width));
+        width: 100%;
         background-color: red;
-        height: 64px;
+        height: 45px;
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        @include mixins.minmq(768px){
-            .page{
+        @include mixins.minmq(768px) {
+            width: var(--pagesWidth);
+            height: 64px;
+            .page {
                 display: none;
             }
-        };
+        }
         .page {
             background: #ffffff;
             border: 1px solid #000000;
@@ -82,7 +101,7 @@
             margin-left: -30px;
             width: 100%;
             height: 100%;
-            font-family: 'Open Sans';
+            font-family: "Open Sans";
             font-style: normal;
             font-weight: 700;
             font-size: 20px;
@@ -90,25 +109,31 @@
             display: flex;
             align-items: center;
             text-align: center;
-            text-transform: capitalize;            
-            color: #AEAEAE;
-            padding-left: 35px;
-            &:first-child{
+            text-transform: capitalize;
+            color: #aeaeae;
+            // padding-left: 35px;
+            &:first-child {
                 margin-left: 0;
             }
 
-            &:last-child{
+            &:last-child {
                 background: #009cf3;
-                    font-family: "Open Sans";
-                    font-style: normal;
-                    font-weight: 800;
-                    font-size: 20px;
-                    line-height: 27px;
-                    text-transform: capitalize;
-                    color: #ffffff;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                font-family: "Open Sans";
+                font-style: normal;
+                font-weight: 800;
+                font-size: 20px;
+                line-height: 27px;
+                text-transform: capitalize;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        &.pd-left {
+            .page {
+                padding-left: 35px;
             }
         }
     }
@@ -124,11 +149,20 @@
             font-family: "Open Sans";
             font-style: normal;
             font-weight: 800;
-            font-size: 20px;
-            line-height: 27px;
+            // font-size: 20px;
+            // line-height: 27px;
+            font-size: 1.5rem;
             text-transform: capitalize;
             color: #ffffff;
             margin: 0;
+        }
+
+        @include mixins.minmq(768px) {
+            h1 {
+                // font-size: 20px;
+                // line-height: 27px;
+            }
+    
         }
     }
 }
