@@ -10,6 +10,7 @@ import {
   INITIAL_REGISTERUSER_STATE,
   LRP_RegisterUserState,
 } from './_register-user-store/register-user.store';
+import { INITIAL_REPORT_STATE, LRP_ReportState } from './_report.store/report.store';
 import {
   INITIAL_USER_DETAILS_STATE,
   LRP_UserDetailsState,
@@ -20,6 +21,7 @@ export interface IAppState {
   RegisterUser: LRP_RegisterUserState;
   occupantsList: LRP_OccupantState;
   userDetails: LRP_UserDetailsState;
+  reportsList: LRP_ReportState;
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -27,4 +29,5 @@ export const INITIAL_STATE: IAppState = {
   RegisterUser: INITIAL_REGISTERUSER_STATE,
   occupantsList: INITIAL_OCCUPANT_STATE,
   userDetails: INITIAL_USER_DETAILS_STATE,
+  reportsList: INITIAL_REPORT_STATE
 };

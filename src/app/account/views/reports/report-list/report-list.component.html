@@ -1,5 +1,5 @@
 <!-- <p>report-list works!</p> -->
-<div id="account-page">
+<div id="account-page" class="details-card-2">
     <div class="title-wrapper">
         <h2 class="title text-uppercase">Report</h2>
     </div>
@@ -44,42 +44,52 @@
                 </div>
             </div>
             <div class="item-card-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">S/N</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">AGE</th>
-                                <th scope="col">GENDER</th>
-                                <th scope="col">PROGRAM</th>
-                                <th scope="col">OVERALL SCORE</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of reportList; let i = index">
-                                <th scope="row">
-                                    {{i + 1}}
-                                </th>
-                                <td>
-                                    <div class="name">Aderibigbe Adi.....</div>
-                                    <div class="status">
-                                        <label>Status:</label>
-                                        <div class="value">Incomplete</div>
-                                    </div>
-                                </td>
-                                <td>5</td>
-                                <td>Male</td>
-                                <td>Literacy</td>
-                                <td>4.2</td>
-                                <td class="text-right">
-                                    <div class="actions-btn">
-                                        <!--  -->
-                                        <button class="btn btn-sm edit-btn primary-btn text-bold">View</button>
-                                        <button class="btn btn-sm delete-btn danger-btn">Delete</button>
+                <div class="text-center" *ngIf="(isLoading$ | async)">
+                    <app-pure-css-loader></app-pure-css-loader>
+                </div>
+                <ng-template #noItem>
+                    <div class="alert alert-info text-center">No respondent</div>
+                </ng-template>
+                <div *ngIf="!(isLoading$ | async)">
+                    <div class="table-responsive" *ngIf="reports?.length; else noItem">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">S/N</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">AGE</th>
+                                    <th scope="col">GENDER</th>
+                                    <th scope="col">PROGRAM</th>
+                                    <th scope="col">OVERALL SCORE</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of reportsList$ | async; let i = index">
+                                    <th scope="row">
+                                        {{i + 1}}
+                                    </th>
+                                    <td>
+                                        <div class="name">{{item?.fullname}}</div>
+                                        <div class="status">
+                                            <label>Status:</label>
+                                            <div class="value">{{item?.status}}</div>
+                                        </div>
+                                    </td>
+                                    <td>{{item?.age}}</td>
+                                    <td>{{item?.gender}}</td>
+                                    <td>{{item?.program}}</td>
+                                    <td>{{item?.overallScore}}</td>
+                                    <td class="text-right">
+                                        <div class="actions-btn">
+                                            <!-- <app-table-column-action-buttons (remove)="onRemoveReport(item)"
+                                                (edit)="onViewRespondentDetails(item)" [item]="item"></app-table-column-action-buttons> -->
+                                            <app-table-column-action-buttons (remove)="onRemoveReport(item?.id)" [itemRemove]="item?.id"></app-table-column-action-buttons>
+                                            <!--  -->
+                                            <button class="btn btn-sm edit-btn primary-btn text-bold" (click)="onViewReport(item)">View</button>
+                                            <button class="btn btn-sm delete-btn danger-btn" (click)="onRemoveReport(item?.id)">Delete</button>
 
-<!-- 
+                                            <!-- 
                                         <div class="d-none d-lg-block">
                                             <button class="btn btn-sm edit-btn primary-btn text-bold"
                                                 (click)="onViewRespondentDetails(item)">Edit</button>
@@ -95,11 +105,12 @@
                                                 (click)="onRemove(item)">
                                                 <i class="fas fa-trash"></i></button>
                                         </div> -->
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

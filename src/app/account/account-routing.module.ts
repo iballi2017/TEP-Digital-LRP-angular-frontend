@@ -8,6 +8,7 @@ import { PersonalInformationComponent } from './views/personal-information/perso
 import { RespondentDetailsComponent } from './views/personal-information/respondent-details/respondent-details.component';
 import { UpdatePasswordComponent } from './views/personal-information/update-password/update-password.component';
 import { UpdatePersonalDetailsComponent } from './views/personal-information/update-personal-details/update-personal-details.component';
+import { ReportDetailsComponent } from './views/reports/report-details/report-details.component';
 import { ReportListComponent } from './views/reports/report-list/report-list.component';
 import { ReportsComponent } from './views/reports/reports.component';
 
@@ -36,6 +37,7 @@ const routes: Routes = [
         children: [
           { path: '', component: ReportListComponent },
           { path: 'report-list', component: ReportListComponent },
+          { path: ':reportId', component: ReportDetailsComponent },
         ],
       },
       { path: 'about-the-app', component: AboutTheAppComponent },

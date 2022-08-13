@@ -1,0 +1,146 @@
+<!-- <p>report-details works!</p> -->
+
+
+
+<div id="report-details-page">
+    <div class="details-card-1">
+        <div class="title-wrapper">
+            <div class="d-flex align-items-center">
+                <button class="btn back-btn pl-0" (click)="back()"></button>
+                <h2 class="title">{{title}}</h2>
+            </div>
+        </div>
+
+
+        <div class="body-wrapper">
+            <div class="item-card">
+                <div class="item-card-header">
+                    <h3 class="heading">CHILDS INFORMATION</h3>
+                </div>
+                <div class="item-card-body">
+                    <!-- <ul class="row list-style-none mb-0 pl-0" id="respondent-details">
+                        <li class="col-12 col-md-6 order-md-1">
+                            <div class="_key">FULL NAME:</div>
+                            <div class="_value">{{respondentInformation?.fullname}}</div>
+                        </li>
+                        <li class="col-12 col-md-6 order-md-3">
+                            <div class="_key">Age:</div>
+                            <div class="_value">{{respondentInformation?.fullname}}</div>
+                        </li>
+                        <li class="col-12 col-md-6 order-md-3">
+                            <div class="_key">GENDER:</div>
+                            <div class="_value">{{respondentInformation?.fullname}}</div>
+                        </li>
+                        <li class="col-12 col-md-6 order-md-2">
+                            <div class="_key">STATE:</div>
+                            <div class="_value email">{{respondentInformation?.fullname}}</div>
+                        </li>
+                    </ul> -->
+
+                    <ul class="list-style-none mb-0 pl-0" id="respondent-details">
+                        <li class="item">
+                            <div class="_key">FULL NAME:</div>
+                            <div class="_value">{{respondentInformation?.fullname}}</div>
+                        </li>
+                        <li class="item">
+                            <div class="_key">Age:</div>
+                            <div class="_value">5</div>
+                        </li>
+                        <li class="item">
+                            <div class="_key">GENDER:</div>
+                            <div class="_value">Male</div>
+                        </li>
+                        <li class="item">
+                            <div class="_key">STATE:</div>
+                            <div class="_value">Adamawa</div>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- <div class="item-card-footer"> -->
+                <!--    <button class="btn text-uppercase primary-btn" (click)="onEditPersonalDetails(userData)">Edit</button>-->
+                <!-- </div> -->
+            </div>
+
+            <!--  -->
+
+            <div class="item-card">
+                <div class="item-card-header">
+                    <h3 class="heading">LESSON REVIEW</h3>
+                </div>
+                <div class="item-card-body">
+
+                    <ul class="list-style-none mb-0 pl-0" id="respondent-details">
+                        <li class="item">
+                            <div class="_key">PROGRAM:</div>
+                            <div class="_value">LITERACY</div>
+                        </li>
+                        <li class="item">
+                            <div class="_key">STATUS:</div>
+                            <div class="_value">INCOMPLETE</div>
+                        </li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+
+                </div>
+                <!-- <div class="item-card-footer"> -->
+                <!--    <button class="btn text-uppercase primary-btn" (click)="onEditPersonalDetails(userData)">Edit</button>-->
+                <!-- </div> -->
+
+                <div class="item-card px-0">
+                    <table class="table table-borderless">
+                        <thead class="item-card-header px-1">
+                            <tr>
+                                <th scope="col">LEVEL</th>
+                                <th scope="col">SCORE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">LETTER 1</th>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">LETTER 2</th>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">WORD</th>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">PARAGRAPH</th>
+                                <td>4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="overall-score">
+                    <div class="score-label">
+                        Overall Score
+                    </div>
+                    <div class="score-value">
+                        7.5
+                    </div>
+                </div>
+            </div>
+            <div class="actions-btn">
+                <div class="d-none d-lg-block">
+                    <button class="btn edit-btn primary-btn text-bold text-uppercase">Continue</button>
+                    <button class="btn delete-btn danger-btn text-uppercase">Delete Report</button>
+                </div>
+                <div class="d-block d-lg-none d-flex">
+                    <button class="btn btn-sm px-1 text-bold primary-text">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                    <button class="btn btn-sm px-1 text-bold danger-text">
+                        <i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

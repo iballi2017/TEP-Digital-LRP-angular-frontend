@@ -17,6 +17,7 @@ import { AddRespondentComponent } from './views/personal-information/add-respond
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PersonalDetailsComponent } from './views/personal-information/personal-details/personal-details.component';
 import { ReportListComponent } from './views/reports/report-list/report-list.component';
+import { ReportDetailsComponent } from './views/reports/report-details/report-details.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ReportListComponent } from './views/reports/report-list/report-list.com
     RespondentListComponent,
     AddRespondentComponent,
     PersonalDetailsComponent,
-    ReportListComponent
+    ReportListComponent,
+    ReportDetailsComponent
   ],
   imports: [
     CommonModule,

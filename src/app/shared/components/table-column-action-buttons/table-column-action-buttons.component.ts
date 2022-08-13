@@ -6,17 +6,27 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./table-column-action-buttons.component.scss'],
 })
 export class TableColumnActionButtonsComponent implements OnInit {
-  @Input() item: any;
+  @Input() itemRemove: any;
+  @Input() itemEdit: any;
   @Output() remove = new EventEmitter();
   @Output() edit = new EventEmitter();
+  removeContent = null;
+  editContent = null;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.removeContent = this.itemRemove;
+    this.editContent = this.itemEdit;
+    console.log('data: ', {
+      itemRemove: this.itemRemove,
+      itemEdit: this.itemEdit,
+    });
+  }
 
   onRemove() {
-    this.remove.emit(this.item);
+    this.remove.emit(this.itemRemove);
   }
   onEdit() {
-    this.edit.emit(this.item);
+    this.edit.emit(this.itemEdit);
   }
 }
