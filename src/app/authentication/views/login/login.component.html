@@ -15,8 +15,8 @@
                         <small class="text-info" *ngIf="(isLoading | async)">Loading...</small>
                     </div> -->
                     <ng-container>
-                        <div>
-                            <small class="alert alert-danger text-center" *ngIf="(error | async)">{{error | async}}</small>
+                        <div class="alert alert-danger text-center" *ngIf="(error$ | async)">
+                            <small>{{error$ | async}}</small>
                         </div>
                     </ng-container>
                     <form [formGroup]="LoginUserForm" (ngSubmit)="onSubmit()" novalidate>

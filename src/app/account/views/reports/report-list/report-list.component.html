@@ -48,7 +48,7 @@
                     <app-pure-css-loader></app-pure-css-loader>
                 </div>
                 <ng-template #noItem>
-                    <div class="alert alert-info text-center">No respondent</div>
+                    <div class="alert alert-info text-center">No report</div>
                 </ng-template>
                 <div *ngIf="!(isLoading$ | async)">
                     <div class="table-responsive" *ngIf="reports?.length; else noItem">

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   submitBtnLabel:string = 'Enter';
   LoginUserForm!: FormGroup;
   @select((s) => s.LoginUser.isLoading) isLoading: any;
-  @select((s) => s.LoginUser.error) error: any;
+  @select((s) => s.LoginUser.error) error$: any;
   constructor(
     private _fb: FormBuilder,
     private _authSvc: AuthenticationService,
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
           console.warn('Error: ', err);
           this.ngRedux.dispatch({
             type: ADD_LOGINUSER_FAILURE,
-            payload: err?.error?.msg,
+            payload: err?.error?.message,
           });
         },
       });

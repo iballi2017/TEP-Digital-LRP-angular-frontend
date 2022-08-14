@@ -39,22 +39,26 @@ export class IdentityService {
     let storedData = this.getLoggedInUserData();
     console.log('  userData: ', userData);
     this.ngRedux.dispatch({ type: FETCH_USER_DETAILS });
-    this._http.get(`${this.FetchUserByIdrUrl}/${storedData.usr_id}`).subscribe({
-      next: (response: any) => {
-        if (response) {
-          console.log('response: ', response);
-          userData = response?.data;
-          this.ngRedux.dispatch({
-            type: FETCH_USER_DETAILS_SUCCESS,
-            payload: userData,
-          });
-          // return userData;
-        }
-      },
-      error: (err: any) => {
-        console.warn('Error: ', err);
-      },
-    });
+    if (storedData) {
+      this._http
+        .get(`${this.FetchUserByIdrUrl}/${storedData?.usr_id}`)
+        .subscribe({
+          next: (response: any) => {
+            if (response) {
+              console.log('response: ', response);
+              userData = response?.data;
+              this.ngRedux.dispatch({
+                type: FETCH_USER_DETAILS_SUCCESS,
+                payload: userData,
+              });
+              // return userData;
+            }
+          },
+          error: (err: any) => {
+            console.warn('Error: ', err);
+          },
+        });
+    }
 
     // this.ngRedux.dispatch({ type: FETCH_USER_DETAILS });
     // let loggedInUser = this._identitySvc.getLoggedInUserData();
