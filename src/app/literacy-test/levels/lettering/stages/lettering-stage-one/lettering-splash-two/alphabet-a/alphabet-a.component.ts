@@ -9,6 +9,7 @@ export class AlphabetAComponent implements OnInit {
   statement = "Let Us Start With The Letter 'a'. It is Pronounced As 'a'";
   leftLink = '/literacy/stage-1/spelling-vowel-letters/u-vowel';
   rightLink = '/literacy/stage-1/lettering-splash-screen-two/say-alphabet-a';
+  srcFile = '../../../../../../../../assets/audio/literacy_stage-1_lettering-splash-screen-two.mp3';
   
 
   constructor() {}

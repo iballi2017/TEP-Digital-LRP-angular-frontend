@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PronounceAntComponent implements OnInit {
   statement = "'a' as in 'ant'";
   leftLink = '/literacy/stage-1/lettering-splash-screen-two/say-alphabet-a';
-  rightLink = '/literacy/stage-1/lettering-splash-screen-two/pronounce-ant';
+  rightLink = '';
   srcFile = '../../../../../../../../assets/audio/literacy_stage-1_lettering-splash-screen-two_pronounce-ant.mp3';
 
   constructor() { }

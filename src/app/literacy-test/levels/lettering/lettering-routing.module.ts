@@ -60,6 +60,13 @@ const routes: Routes = [
             './stages/lettering-stage-one/spelling-vowel-letters/spelling-vowel-letters.module'
           ).then((m) => m.SpellingVowelLettersModule),
       },
+      {
+        path: 'pronunciation',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-one/pronunciation/pronunciation.module'
+          ).then((m) => m.PronunciationModule),
+      },
 
       {
         path: 'lettering-splash-screen-two',

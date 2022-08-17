@@ -10,7 +10,7 @@ import { UVowelComponent } from './slides/u-vowel/u-vowel.component';
 import { TopProgressBarComponent } from './components/top-progress-bar/top-progress-bar.component';
 import { SpellingVowelLettersComponent } from './spelling-vowel-letters.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MarkControlComponent } from './components/mark-control/mark-control.component';
+// import { MarkControlComponent } from './components/mark-control/mark-control.component';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { MarkControlComponent } from './components/mark-control/mark-control.com
     UVowelComponent,
     TopProgressBarComponent,
     SpellingVowelLettersComponent,
-    MarkControlComponent
+    // MarkControlComponent
   ],
   imports: [
     CommonModule,

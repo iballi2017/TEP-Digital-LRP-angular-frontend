@@ -21,7 +21,8 @@
                 <img src="../../../../../../../../assets/images/splash-screens-characters/stage-1/stage-1-splash-screen-2.svg" alt="" class="img-fluid">
             </div>
             <!-- app-speech-synthesis-utterance -->
-            <app-speech-synthesis-utterance [statement]="statement"></app-speech-synthesis-utterance>
+            <!-- <app-speech-synthesis-utterance [statement]="statement"></app-speech-synthesis-utterance> -->
+            <app-voice-audio-player [audioFile]="srcFile"></app-voice-audio-player>
         </div>
         <app-arrow-controls [leftLink]="leftLink" [rightLink]="rightLink"></app-arrow-controls>
     </div>

@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class SayAlphabetAComponent implements OnInit {
   statement = "Say After Me 'a'";
   leftLink = '/literacy/stage-1/lettering-splash-screen-two';
-  rightLink = '/literacy/stage-1/lettering-splash-screen-two/pronounce-ant';
+  // rightLink = '/literacy/stage-1/lettering-splash-screen-two/pronounce-ant';
+  rightLink = '/literacy/stage-1/pronunciation';
+  
+  srcFile = '../../../../../../../../assets/audio/literacy_stage-1_lettering-splash-screen-two_say-alphabet-a.mp3';
   constructor() { }
 
   ngOnInit(): void {

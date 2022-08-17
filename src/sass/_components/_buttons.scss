@@ -114,8 +114,22 @@
     }
 }
 
-
-#side-menu-toggler{
-    color: #FFFFFF;
+#side-menu-toggler {
+    color: #ffffff;
     font-size: 1.3rem;
+}
+
+#replay-voice-btn {
+    display: flex;
+    align-items: center;
+    &::before {
+        content: "";
+        display: block;
+        height: 70px;
+        width: 70px;
+        background-image: url(../../assets/images/icons/replay-icon.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 }

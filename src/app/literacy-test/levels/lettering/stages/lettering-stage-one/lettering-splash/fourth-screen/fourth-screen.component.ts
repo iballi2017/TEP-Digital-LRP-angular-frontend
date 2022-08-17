@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class FourthScreenComponent implements OnInit {
   leftLink = '/literacy/stage-1/lettering-splash/third-screen';
   rightLink = '/literacy/stage-1/lettering-splash/fifth-screen';
+  srcFile = '../../../../../../../../assets/audio/literacy_stage-1_lettering-splash_fourth-screen.mp3';
 
   constructor() { }
 

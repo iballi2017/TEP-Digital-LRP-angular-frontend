@@ -10,6 +10,8 @@ import { PureCssLoaderComponent } from './components/pure-css-loader/pure-css-lo
 import { BooleanAlertDialogComponent } from './components/boolean-alert-dialog/boolean-alert-dialog.component';
 import { MobileNavigationDialogComponent } from './components/mobile-navigation-dialog/mobile-navigation-dialog.component';
 import { TableColumnActionButtonsComponent } from './components/table-column-action-buttons/table-column-action-buttons.component';
+import { VoiceAudioPlayerComponent } from './components/voice-audio-player/voice-audio-player.component';
+import { MarkControlComponent } from './components/mark-control/mark-control.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { TableColumnActionButtonsComponent } from './components/table-column-act
     PureCssLoaderComponent,
     BooleanAlertDialogComponent,
     MobileNavigationDialogComponent,
-    TableColumnActionButtonsComponent
+    TableColumnActionButtonsComponent,
+    VoiceAudioPlayerComponent,
+    MarkControlComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +38,9 @@ import { TableColumnActionButtonsComponent } from './components/table-column-act
     ArrowControlsComponent,
     LiteracyTestSideNavigationComponent,
     PureCssLoaderComponent,
-    TableColumnActionButtonsComponent
+    TableColumnActionButtonsComponent,
+    VoiceAudioPlayerComponent,
+    MarkControlComponent
   ],
 })
 export class SharedModule {}

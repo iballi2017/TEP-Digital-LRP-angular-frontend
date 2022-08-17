@@ -1,14 +1,15 @@
 <!-- <p>pronounce-ant works!</p> -->
 
-<div class="container-fluid">
+<div class="container-fluid" id="splash-screen">
     <div class="content-wrapper">
-        <div class="featured-model">
+        <div class="featured-model" style="min-height: 100vh">
             <div class="image-wrapper">
                 <img src="../../../../../../../../assets/images/splash-screens-characters/lettering-splash-screen-two/stage-1-lettering-splash-two-alphabet-a-screen-3.png" alt="" class="img-fluid">
             </div>
             <!-- app-speech-synthesis-utterance -->
-            <app-speech-synthesis-utterance [statement]="statement"></app-speech-synthesis-utterance>
+            <!-- <app-speech-synthesis-utterance [statement]="statement"></app-speech-synthesis-utterance> -->
             <!--  -->
+            <app-voice-audio-player [audioFile]="srcFile"></app-voice-audio-player>
         </div>
         <app-arrow-controls [leftLink]="leftLink" [rightLink]="rightLink"></app-arrow-controls>
     </div>
