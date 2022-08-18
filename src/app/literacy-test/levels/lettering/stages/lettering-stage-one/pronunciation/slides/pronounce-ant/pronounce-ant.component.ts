@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameResult } from 'src/app/models/classes/game-result';
 
 @Component({
   selector: 'app-pronounce-ant',
@@ -8,12 +9,29 @@ import { Component, OnInit } from '@angular/core';
 export class PronounceAntComponent implements OnInit {
   statement = "'a' as in 'ant'";
   leftLink = '/literacy/stage-1/lettering-splash-screen-two/say-alphabet-a';
-  rightLink = '';
-  srcFile = '../../../../../../../../assets/audio/literacy_stage-1_lettering-splash-screen-two_pronounce-ant.mp3';
+  rightLink = '/literacy/stage-1/lettering-splash-screen-two/alphabet-e';
+  srcFile = '../../../../../../../../assets/audio/alphabet-a/literacy_stage-1_lettering-splash-screen-two_pronounce-ant.mp3';
+  correctAnswer = {
+    q6: 1,
+  };
+  wrongAnswer = {
+    q6: 0,
+  };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  onCorrect($event: any) {
+    console.log('event: ', $event);
+    this.onSubmitAnswer($event);
+  }
+  onWrong($event: any) {
+    console.log('event: ', $event);
+    this.onSubmitAnswer($event);
+  }
+
+  onSubmitAnswer(response: any) {
+    new GameResult(response).save();
   }
 
 }

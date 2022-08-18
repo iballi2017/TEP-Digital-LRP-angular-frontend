@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { IAppState } from 'src/redux/store';
 import {
   FETCH_USER_DETAILS,
+  FETCH_USER_DETAILS_ERROR,
   FETCH_USER_DETAILS_SUCCESS,
 } from 'src/redux/_userDetails.store/user-details.actions';
 import { baseUrl } from '../config/api';
@@ -56,6 +57,13 @@ export class IdentityService {
           },
           error: (err: any) => {
             console.warn('Error: ', err);
+            this.ngRedux.dispatch({
+              type: FETCH_USER_DETAILS_ERROR,
+              payload: err?.error,
+            });
+            if (err?.error?.status == '0') {
+              this._router.navigate(['/auth']);
+            }
           },
         });
     }

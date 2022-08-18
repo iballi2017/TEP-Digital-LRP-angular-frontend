@@ -1,3 +1,4 @@
+import { INITIAL_GAME_STATE, JID_GameState } from './_game.store/game.store';
 import {
   INITIAL_LOGINUSER_STATE,
   LRP_LoginUserState,
@@ -10,7 +11,10 @@ import {
   INITIAL_REGISTERUSER_STATE,
   LRP_RegisterUserState,
 } from './_register-user-store/register-user.store';
-import { INITIAL_REPORT_STATE, LRP_ReportState } from './_report.store/report.store';
+import {
+  INITIAL_REPORT_STATE,
+  LRP_ReportState,
+} from './_report.store/report.store';
 import {
   INITIAL_USER_DETAILS_STATE,
   LRP_UserDetailsState,
@@ -22,6 +26,7 @@ export interface IAppState {
   occupantsList: LRP_OccupantState;
   userDetails: LRP_UserDetailsState;
   reportsList: LRP_ReportState;
+  game: JID_GameState;
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -29,5 +34,6 @@ export const INITIAL_STATE: IAppState = {
   RegisterUser: INITIAL_REGISTERUSER_STATE,
   occupantsList: INITIAL_OCCUPANT_STATE,
   userDetails: INITIAL_USER_DETAILS_STATE,
-  reportsList: INITIAL_REPORT_STATE
+  reportsList: INITIAL_REPORT_STATE,
+  game: INITIAL_GAME_STATE,
 };

@@ -1,9 +1,22 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AddRespondentComponent } from 'src/app/account/views/personal-information/add-respondent/add-respondent.component';
+import {
+  GameSessionData,
+  GameType,
+  StartGame,
+} from 'src/app/models/types/game';
+import { GameService } from 'src/app/services/game.service';
 import { OccupantService } from 'src/app/services/occupant.service';
+import { IAppState } from 'src/redux/store';
+import {
+  ADD_GAME_SESSION,
+  ADD_GAME_SESSION_SUCCESS,
+  FETCH_GAME_SESSION_ERROR,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-test-respondent-selection',
@@ -18,7 +31,10 @@ export class TestRespondentSelectionComponent implements OnInit {
     public dialogRef: MatDialogRef<TestRespondentSelectionComponent>,
     public dialog: MatDialog,
     private _occupantSvc: OccupantService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _gameSvc: GameService,
+    private ngRedux: NgRedux<IAppState>,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,21 +47,51 @@ export class TestRespondentSelectionComponent implements OnInit {
 
   buildForm() {
     this.RespondentSelectionForm = this._fb.group({
-      Respondent: ['', [Validators.required]],
+      RespondentId: ['', [Validators.required]],
     });
   }
   onSubmit() {
+    this.ngRedux.dispatch({ type: ADD_GAME_SESSION });
     console.log(
       'RespondentSelectionForm: ',
       this.RespondentSelectionForm.value
     );
-    const data = JSON.parse(this.RespondentSelectionForm.value.Respondent);
-    console.log('data: ', data);
+    const Payload: StartGame = {
+      occ_id: this.RespondentSelectionForm.value.RespondentId,
+      game_type: GameType.Literacy,
+    };
+    console.log('Payload: ', Payload);
+    this._gameSvc.StartGame(Payload).subscribe({
+      next: (response: any) => {
+        if (response) {
+          console.log('response: ', response);
+          this.ngRedux.dispatch({
+            type: ADD_GAME_SESSION_SUCCESS,
+            payload: response,
+          });
+          this._router.navigate([
+            '/literacy/levels/lettering',
+          ]);
+          this.closeDialog();
+        }
+      },
+      error: (err: any) => {
+        if (err) {
+          console.warn('Error: ', err);
+          this.ngRedux.dispatch({
+            type: FETCH_GAME_SESSION_ERROR,
+            payload: err,
+          });
+        }
+      },
+    });
+    // const data = JSON.parse(this.RespondentSelectionForm.value.Respondent);
+    // console.log('data: ', data);
 
-    if (this.RespondentSelectionForm.valid) {
-      const data = JSON.parse(this.RespondentSelectionForm.value.Respondent);
-      console.log('data: ', data);
-    }
+    // if (this.RespondentSelectionForm.valid) {
+    //   const data = JSON.parse(this.RespondentSelectionForm.value.Respondent);
+    //   console.log('data: ', data);
+    // }
   }
   closeDialog() {
     this.dialogRef.close('dialod closed!');
@@ -55,7 +101,7 @@ export class TestRespondentSelectionComponent implements OnInit {
     this.dialogRef.close('dialod closed!');
     const dialogRef = this.dialog.open(AddRespondentComponent, {
       width: '100%',
-      maxWidth: '500px'
+      maxWidth: '500px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {

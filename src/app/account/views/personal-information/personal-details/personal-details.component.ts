@@ -23,15 +23,22 @@ export class PersonalDetailsComponent
   constructor() {}
 
   ngOnInit(): void {
-    let subscription = this.userDetails$.subscribe((e: any) => {
-      this.userData = e;
-    });
-    this.Subscriptions.push(subscription);
+    // let subscription = this.userDetails$.subscribe((e: any) => {
+    //   if (e) {
+    //     this.userData = e[0];
+    //     console.log('this.userData: ', this.userData);
+    //   }
+    // });
+    // this.Subscriptions.push(subscription);
   }
 
   ngAfterContentInit(): void {
     let subscription = this.userDetails$.subscribe((e: any) => {
-      this.userData = e;
+      if (e) {
+        this.userData = e[0];
+
+        console.log('this.userData: ', this.userData);
+      }
     });
     this.Subscriptions.push(subscription);
   }

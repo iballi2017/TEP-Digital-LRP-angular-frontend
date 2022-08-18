@@ -10,14 +10,17 @@
             </div>
             <div class="card-body">
                 <div class="select-drop-wrapper">
-                    <select name="Respondent" id="Respondent" class="form-control" formControlName="Respondent">
+                    <select name="RespondentId" id="RespondentId" class="form-control" formControlName="RespondentId">
                         <option value="" selected="selected">Select respondent</option>
-                        <option value="{{item | json}}" *ngFor="let item of (occupantsList$ | async)">
+                        <!-- <option value="{{item | json}}" *ngFor="let item of (occupantsList$ | async)">
+                            {{item?.occ_name}}</option> -->
+                        <option value="{{item?.occ_id}}" *ngFor="let item of (occupantsList$ | async)">
                             {{item?.occ_name}}</option>
                     </select>
                 </div>
                 <div class="text-center pt-3">
-                    <button type="button" class="btn primary-bordered-btn" (click)="openAddNewRespondentDialog()">Add New</button>
+                    <button type="button" class="btn primary-bordered-btn" (click)="openAddNewRespondentDialog()">Add
+                        New</button>
                 </div>
             </div>
             <div class="card-footer">

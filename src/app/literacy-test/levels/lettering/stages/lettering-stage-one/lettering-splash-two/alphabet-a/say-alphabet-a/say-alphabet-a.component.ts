@@ -11,7 +11,7 @@ export class SayAlphabetAComponent implements OnInit {
   // rightLink = '/literacy/stage-1/lettering-splash-screen-two/pronounce-ant';
   rightLink = '/literacy/stage-1/pronunciation';
   
-  srcFile = '../../../../../../../../assets/audio/literacy_stage-1_lettering-splash-screen-two_say-alphabet-a.mp3';
+  srcFile = '../../../../../../../../../assets/audio/alphabet-a/literacy_stage-1_lettering-splash-screen-two_say-alphabet-a.mp3';
   constructor() { }
 
   ngOnInit(): void {

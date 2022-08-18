@@ -58,13 +58,13 @@ const FetchSingleReportFailure = (state: LRP_ReportState, action: any) => {
 
 // ADD OCCUPANT
 
-const AddOccupant = (state: LRP_ReportState, action: any) => {
+const AddReport = (state: LRP_ReportState, action: any) => {
   return tassign(state, {
     isLoading: true,
   });
 };
 
-const AddOccupantSuccess = (state: LRP_ReportState, action: any) => {
+const AddReportSuccess = (state: LRP_ReportState, action: any) => {
   console.log('action*****: ', action);
   var newReport = {
     id: state.reportsList?.length + 1,
@@ -80,7 +80,7 @@ const AddOccupantSuccess = (state: LRP_ReportState, action: any) => {
   });
 };
 
-const AddOccupantFailure = (state: LRP_ReportState, action: any) => {
+const AddReportFailure = (state: LRP_ReportState, action: any) => {
   return tassign(state, {
     error: action.error,
     isLoading: false,
@@ -140,11 +140,11 @@ export function ReportReducer(
 
     // ADD_REPORT
     case ADD_REPORT:
-      return AddOccupant(state, action);
+      return AddReport(state, action);
     case ADD_REPORT_SUCCESS:
-      return AddOccupantSuccess(state, action);
+      return AddReportSuccess(state, action);
     case ADD_REPORT_ERROR:
-      return AddOccupantFailure(state, action);
+      return AddReportFailure(state, action);
 
     // UPDATE_REPORT
     case UPDATE_REPORT:

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { GameReducer } from './_game.store/game.reducer';
 import { LoginUserReducer } from './_login-user-store/login-user.reducer';
 import { OccupantReducer } from './_occupant.store/occupant.reducer';
 import { RegisterUserReducer } from './_register-user-store/register-user.reducer';
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   occupantsList: OccupantReducer,
   userDetails: UserDetailsReducer,
   reportsList: ReportReducer,
+  game: GameReducer,
 });

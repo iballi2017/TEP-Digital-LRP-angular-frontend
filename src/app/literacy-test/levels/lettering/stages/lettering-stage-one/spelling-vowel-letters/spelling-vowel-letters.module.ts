@@ -10,6 +10,7 @@ import { UVowelComponent } from './slides/u-vowel/u-vowel.component';
 import { TopProgressBarComponent } from './components/top-progress-bar/top-progress-bar.component';
 import { SpellingVowelLettersComponent } from './spelling-vowel-letters.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
 // import { MarkControlComponent } from './components/mark-control/mark-control.component';
 
 
@@ -27,7 +28,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     SpellingVowelLettersRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class SpellingVowelLettersModule { }
