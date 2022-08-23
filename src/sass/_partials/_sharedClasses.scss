@@ -16,7 +16,9 @@
 }
 
 .classroom-bg,
-.blackboard-bg {
+.blackboard-bg,
+.star-pattern-bg,
+.bubble-pattern-bg {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -28,6 +30,13 @@
 
 .blackboard-bg {
     background-image: url(../../assets/images/blackboard.jpg);
+}
+.star-pattern-bg {
+    background-image: url(../../assets/images/SPLASH-screen-for-stage-complete.png);
+}
+
+.bubble-pattern-bg{
+    background-image: url(../../assets/images/SPLASH-screen-for-stage-loading.png);
 }
 
 .list-style-none {

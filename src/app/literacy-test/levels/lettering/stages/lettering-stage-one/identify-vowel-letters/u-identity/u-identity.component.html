@@ -1,0 +1,19 @@
+<!-- <p>u-identity works!</p> -->
+<div id="identify-vowel-letters-page">
+    <div class="container-fluid" id="splash-screen">
+        <div class="content-wrapper">
+            <div class="featured-model">
+                <div class="image-wrapper">
+                    <img src="../../../../../../../../assets/images/splash-screens-characters/lettering-splash-screen-two/identify-vowel-letters/literacy_stage-1_identify-vowel-letters_identify-alphabet-u.png"
+                        alt="" class="img-fluid">
+                </div>
+                <!-- app-speech-synthesis-utterance -->
+                <!-- <app-speech-synthesis-utterance [statement]="statement"></app-speech-synthesis-utterance> -->
+                <!--  -->
+                <app-voice-audio-player [audioFile]="srcFile"></app-voice-audio-player>
+            </div>
+            <app-mark-control (correctAnswer)="onCorrect(correctAnswer, true)" (wrongAnswer)="onWrong(wrongAnswer, false)"></app-mark-control>
+            <app-arrow-controls [leftLink]="leftLink" [rightLink]="rightLink" [isCorrect]="isCorrect"></app-arrow-controls>
+        </div>
+    </div>
+</div>

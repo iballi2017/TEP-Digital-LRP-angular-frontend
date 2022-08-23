@@ -7,28 +7,30 @@ import { GameResult } from 'src/app/models/classes/game-result';
   styleUrls: ['./o-vowel.component.scss']
 })
 export class OVowelComponent implements OnInit {
-  leftLink = '/literacy/stage-1/spelling-vowel-letters/i-vowel';
-  rightLink = '/literacy/stage-1/spelling-vowel-letters/u-vowel';
+  leftLink = '/literacy/lettering/stage-1/spelling-vowel-letters/i-vowel';
+  rightLink = '/literacy/lettering/stage-1/spelling-vowel-letters/u-vowel';
   correctAnswer = {
-    q4: 1,
+    q4: '1',
   };
   wrongAnswer = {
-    q4: 0,
+    q4: '0',
   };
+  isCorrect = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  onCorrect($event: any, isCorrect: boolean) {
+    console.log('event: ', $event);
+    console.log('isCorrect: ', isCorrect);
+    this.onSubmitAnswer($event);
+    this.isCorrect = isCorrect;
   }
-  onCorrect($event: any) {
+  onWrong($event: any, isCorrect: boolean) {
     console.log('event: ', $event);
     this.onSubmitAnswer($event);
+    this.isCorrect = isCorrect;
   }
-  onWrong($event: any) {
-    console.log('event: ', $event);
-    this.onSubmitAnswer($event);
-  }
-
   onSubmitAnswer(response: any) {
     new GameResult(response).save();
   }

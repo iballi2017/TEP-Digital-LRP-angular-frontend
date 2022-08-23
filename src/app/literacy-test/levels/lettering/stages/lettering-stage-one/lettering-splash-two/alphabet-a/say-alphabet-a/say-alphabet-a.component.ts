@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SayAlphabetAComponent implements OnInit {
   statement = "Say After Me 'a'";
-  leftLink = '/literacy/stage-1/lettering-splash-screen-two';
-  // rightLink = '/literacy/stage-1/lettering-splash-screen-two/pronounce-ant';
-  rightLink = '/literacy/stage-1/pronunciation';
+  leftLink = '/literacy/lettering/stage-1/lettering-splash-screen-two';
+  // rightLink = '/literacy/lettering/stage-1/lettering-splash-screen-two/pronounce-ant';
+  rightLink = '/literacy/lettering/stage-1/pronunciation';
   
   srcFile = '../../../../../../../../../assets/audio/alphabet-a/literacy_stage-1_lettering-splash-screen-two_say-alphabet-a.mp3';
   constructor() { }

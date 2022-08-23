@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameResult } from 'src/app/models/classes/game-result';
 import { GameSessionData } from 'src/app/models/types/game';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-a-vowel',
@@ -8,25 +9,29 @@ import { GameSessionData } from 'src/app/models/types/game';
   styleUrls: ['./a-vowel.component.scss'],
 })
 export class AVowelComponent implements OnInit {
-  leftLink = '/literacy/stage-1/lettering-splash/sixth-screen';
-  rightLink = '/literacy/stage-1/spelling-vowel-letters/e-vowel';
+  leftLink = '/literacy/lettering/stage-1/lettering-splash/sixth-screen';
+  rightLink = '/literacy/lettering/stage-1/spelling-vowel-letters/e-vowel';
   correctAnswer = {
-    q1: 1,
+    q1: '1',
   };
   wrongAnswer = {
-    q1: 0,
+    q1: '0',
   };
-  constructor() {}
+  isCorrect = false;
+  constructor(private _gameSvc: GameService) {}
 
   ngOnInit(): void {}
 
-  onCorrect($event: any) {
+  onCorrect($event: any, isCorrect:boolean) {
     console.log('event: ', $event);
+    console.log('isCorrect: ', isCorrect);
     this.onSubmitAnswer($event);
+    this.isCorrect = isCorrect;
   }
-  onWrong($event: any) {
+  onWrong($event: any, isCorrect:boolean) {
     console.log('event: ', $event);
     this.onSubmitAnswer($event);
+    this.isCorrect = isCorrect;
   }
 
   onSubmitAnswer(response: any) {

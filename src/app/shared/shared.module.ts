@@ -12,6 +12,11 @@ import { MobileNavigationDialogComponent } from './components/mobile-navigation-
 import { TableColumnActionButtonsComponent } from './components/table-column-action-buttons/table-column-action-buttons.component';
 import { VoiceAudioPlayerComponent } from './components/voice-audio-player/voice-audio-player.component';
 import { MarkControlComponent } from './components/mark-control/mark-control.component';
+import { StageCompletionComponent } from './views/stage-completion/stage-completion.component';
+import { ButtonComponent } from './components/button/button.component';
+import { LevelLoaderComponent } from './views/level-loader/level-loader.component';
+import { NgMaterialModule } from '../ng-material/ng-material.module';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +29,18 @@ import { MarkControlComponent } from './components/mark-control/mark-control.com
     MobileNavigationDialogComponent,
     TableColumnActionButtonsComponent,
     VoiceAudioPlayerComponent,
-    MarkControlComponent
+    MarkControlComponent,
+    StageCompletionComponent,
+    ButtonComponent,
+    LevelLoaderComponent,
+    SnackbarComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     SharedRoutingModule,
+    NgMaterialModule
   ],
   exports: [
     BreadcrumbTopbarComponent,
@@ -40,7 +50,10 @@ import { MarkControlComponent } from './components/mark-control/mark-control.com
     PureCssLoaderComponent,
     TableColumnActionButtonsComponent,
     VoiceAudioPlayerComponent,
-    MarkControlComponent
+    MarkControlComponent,
+    StageCompletionComponent,
+    ButtonComponent,
+    LevelLoaderComponent
   ],
 })
 export class SharedModule {}

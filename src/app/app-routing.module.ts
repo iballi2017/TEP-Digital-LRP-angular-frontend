@@ -41,6 +41,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./account/account.module').then((m) => m.AccountModule),
   },
+  {
+    path: 'shared',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./shared/shared.module').then((s) => s.SharedModule),
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

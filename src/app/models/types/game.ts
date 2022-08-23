@@ -11,5 +11,10 @@ export enum GameType {
 
 export enum GameSessionData {
   name = 'sessionData',
-  result = 'result'
+  result = 'stage-result',
+}
+
+export interface GameStageResult {
+  session_id: string;
+  result: any;
 }

@@ -1,2 +1,15 @@
 <!-- <p>practice works!</p> -->
-<router-outlet></router-outlet>
+<!-- nav -->
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/practice/speech-synthesis']" routerLinkActive="router-link-active">Speech
+            Synthesis</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/practice/progress-bar']" routerLinkActive="router-link-active">Progress
+            bar</a>
+    </li>
+</ul>
+<div class="container-fluid">
+    <router-outlet></router-outlet>
+</div>

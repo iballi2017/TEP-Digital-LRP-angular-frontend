@@ -14,6 +14,7 @@ import { LetteringSplashModule } from './stages/lettering-stage-one/lettering-sp
 import { SixthScreenComponent } from './stages/lettering-stage-one/lettering-splash/sixth-screen/sixth-screen.component';
 import { FifthScreenComponent } from './stages/lettering-stage-one/lettering-splash/fifth-screen/fifth-screen.component';
 import { FourthScreenComponent } from './stages/lettering-stage-one/lettering-splash/fourth-screen/fourth-screen.component';
+import { LetteringStageCompletionComponent } from './lettering-stage-completion/lettering-stage-completion.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FourthScreenComponent } from './stages/lettering-stage-one/lettering-sp
     LetteringStageTwoComponent,
     LetteringStageThreeComponent,
     LetteringStageFourComponent,
+    LetteringStageCompletionComponent,
     // 
     // FirstScreenComponent,
     // SecondScreenComponent,
