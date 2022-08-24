@@ -1,6 +1,6 @@
 import { select } from '@angular-redux/store';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { GameSessionData, GameStageResult } from 'src/app/models/types/game';
 import { GameService } from 'src/app/services/game.service';
@@ -124,9 +124,13 @@ export class StageCompletionComponent implements OnInit {
     });
   }
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   openSnackBar(data: any) {
     this._snackBar.openFromComponent(SnackbarComponent, {
       duration: this.durationInSeconds * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
       data: data,
     });
   }
