@@ -9,8 +9,8 @@
             </div>
             <div class="btn-wrapper">
                 <app-button [btnTitle]="btnTitle" [btnClasses]="btnClasses"
-                    (onContinue)="onContinueToNextStage(gameLevel)"></app-button>
-                <app-button [btnTitle]="btnTitle2" [btnClasses]="btnClasses2" (onEndAssessment)="onEndAssessment(gameLevel)"></app-button>
+                    (onClickEvent)="onContinueToNextStage(gameLevel)"></app-button>
+                <app-button [btnTitle]="btnTitle2" [btnClasses]="btnClasses2" (onClickEvent)="onEndAssessment(gameLevel)"></app-button>
             </div>
         </div>
     </div>

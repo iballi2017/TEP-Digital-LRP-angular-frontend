@@ -18,6 +18,19 @@ export class MyInformationComponent implements OnInit, OnDestroy {
   userData: any;
   Subscriptions: Subscription[] = [];
 
+  editBtnType = 'button';
+  editBtnLabel = 'Edit';
+  editBtnClasses = 'btn text-uppercase primary-btn';
+  editPasswordBtnType = 'button';
+  editPasswordBtnLabel = 'EDIT PASSWORD';
+  editPasswordBtnClasses = 'btn text-uppercase primary-btn';
+  addNewOccupantBtnLabel="Add New";
+  addNewOccupantBtnType = "button";
+  addNewOccupantBtnClasses="btn primary-bordered-btn test-strong text-uppercase d-none d-lg-block";
+  addNewOccupantBtnLabelSmall="";
+  addNewOccupantBtnTypeSmall= "button";
+  addNewOccupantBtnClassesSmall="btn primary-bordered-btn test-strong text-uppercase d-block d-lg-none"
+
   constructor(
     private _identitySvc: IdentityService,
     private _authSvc: AuthenticationService,
@@ -30,7 +43,6 @@ export class MyInformationComponent implements OnInit, OnDestroy {
     this.getUserData();
     this.getOccupantList();
 
-    
     let subscription = this.userDetails$.subscribe((e: any) => {
       this.userData = e;
     });
@@ -63,7 +75,7 @@ export class MyInformationComponent implements OnInit, OnDestroy {
       data: {},
     });
 
-    let subscription =   dialogRef.afterClosed().subscribe((result) => {
+    let subscription = dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
     this.Subscriptions.push(subscription);

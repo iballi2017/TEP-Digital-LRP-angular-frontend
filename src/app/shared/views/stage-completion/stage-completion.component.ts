@@ -73,6 +73,9 @@ export class StageCompletionComponent implements OnInit {
 
   onContinueToNextStage($event: any) {
     console.log('$event: ', $event);
+    if (!this.gameSessionId || !this.gameResult) {
+      this._router.navigate(['/']);
+    }
     const GameStageResult: GameStageResult = {
       session_id: this.gameSessionId,
       result: this.gameResult,
@@ -87,6 +90,9 @@ export class StageCompletionComponent implements OnInit {
 
   onEndAssessment($event: any) {
     console.log('$event: ', $event);
+    if (!this.gameSessionId || !this.gameResult) {
+      this._router.navigate(['/']);
+    }
     const GameStageResult: GameStageResult = {
       session_id: this.gameSessionId,
       result: this.gameResult,

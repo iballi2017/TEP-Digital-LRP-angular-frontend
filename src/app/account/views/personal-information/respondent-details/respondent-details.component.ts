@@ -1,11 +1,13 @@
 import { select } from '@angular-redux/store';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Occupant } from 'src/app/models/types/occupant';
 import { LocationService } from 'src/app/services/location.service';
 import { OccupantService } from 'src/app/services/occupant.service';
+import { BooleanAlertDialogComponent } from 'src/app/shared/components/boolean-alert-dialog/boolean-alert-dialog.component';
 
 @Component({
   selector: 'app-respondent-details',
@@ -23,12 +25,19 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
   nigerianStateList: any;
   respondentId: any;
   Subscriptions: Subscription[] = [];
+  btnTitle="Button";
+  SaveBtnType ="submit";
+  deleteBtnType = "Button";
+  deleteBtnLabel = "Delete"
+  SaveBtnClasses = "btn primary-btn text-uppercase form-btn mr-2";
+  DeleteBtnClasses = "btn btn-sm delete-btn danger-btn form-btn";
   constructor(
     private _fb: FormBuilder,
     private _locationSvc: LocationService,
     private _route: ActivatedRoute,
     private _occupantSvc: OccupantService,
-    private _router: Router
+    private _router: Router,    
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -134,7 +143,26 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
     this.Subscriptions.push(subscription);
   }
 
-  onRemove(respondentId: string) {
+
+  
+  onRemove(item: any) {
+    this.openDialog(item);
+  }
+  openDialog(item: any) {
+    console.log("item: ", item)
+    const dialogRef = this.dialog.open(BooleanAlertDialogComponent, {
+      width: '100%',
+      maxWidth: '500px',
+    });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(`Dialog result: ${result}`);
+      if (result) {
+        this.onDeleteOccupant(item);
+      }
+    });
+  }
+
+  onDeleteOccupant(respondentId: string) {
     const Payload = {
       occ_id: respondentId,
     };

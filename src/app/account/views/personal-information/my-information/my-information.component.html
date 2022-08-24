@@ -33,8 +33,11 @@
             </ul> -->
                 </div>
                 <div class="item-card-footer">
-                    <button class="btn text-uppercase primary-btn"
-                        (click)="onEditPersonalDetails(userData)">Edit</button>
+                    <!-- <button class="btn text-uppercase primary-btn"
+                        (click)="onEditPersonalDetails(userData)">Edit</button> -->
+                    <!--  -->
+                    <app-button [btnTitle]="editBtnLabel" [btnType]="editBtnType" [btnClasses]="editBtnClasses"
+                        (onClickEvent)="onEditPersonalDetails(userData)"></app-button>
                 </div>
             </div>
 
@@ -45,8 +48,10 @@
                     <h3 class="heading">SECURITY</h3>
                 </div>
                 <div class="item-card-footer">
-                    <button class="btn text-uppercase primary-btn" [routerLink]="['/account/update-password']">EDIT
-                        PASSWORD</button>
+                    <!-- <button class="btn text-uppercase primary-btn" [routerLink]="['/account/update-password']">EDIT
+                        PASSWORD</button> -->
+                    <app-button [btnTitle]="editPasswordBtnLabel" [btnType]="editPasswordBtnType"
+                        [btnClasses]="editPasswordBtnClasses" [routerLink]="['/account/update-password']"></app-button>
                 </div>
             </div>
 
@@ -55,12 +60,20 @@
             <div class="item-card">
                 <div class="item-card-header d-flex align-items-center justify-content-between flex-wrap">
                     <h3 class="heading">LIST OF OCCUPANT</h3>
-                    <button class="btn primary-bordered-btn test-strong text-uppercase d-none d-lg-block"
-                        (click)="openRespondentListDialog()">Add New</button>
+                    <!-- <button class="btn primary-bordered-btn test-strong text-uppercase d-none d-lg-block"
+                        (click)="openRespondentListDialog()">Add New</button> -->
+                    <app-button [btnTitle]="addNewOccupantBtnLabel" [btnType]="addNewOccupantBtnType"
+                        [btnClasses]="addNewOccupantBtnClasses" (onClickEvent)="openRespondentListDialog()">
+                    </app-button>
+                    
                     <button class="btn primary-bordered-btn test-strong text-uppercase d-block d-lg-none"
                         (click)="openRespondentListDialog()">
                         <i class="fas fa-plus"></i>
                     </button>
+                    <!-- <app-button [btnTitle]="addNewOccupantBtnLabelSmall" [btnType]="addNewOccupantBtnTypeSmall"
+                        [btnClasses]="addNewOccupantBtnClassesSmall" (onClickEvent)="openRespondentListDialog()">
+                        <i class="fas fa-plus"></i>
+                    </app-button> -->
                 </div>
                 <div class="item-card-body">
                     <app-respondent-list></app-respondent-list>
