@@ -6,13 +6,19 @@ import { SecondScreenConsonantSplashComponent } from './second-screen-consonant-
 import { FirstScreenConsonantSplashComponent } from './first-screen-consonant-splash/first-screen-consonant-splash.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ConsonantsLetteringSplashComponent } from './consonants-lettering-splash.component';
+import { ThirdScreenConsonantSplashComponent } from './third-screen-consonant-splash/third-screen-consonant-splash.component';
+import { FourthScreenConsonantSplashComponent } from './fourth-screen-consonant-splash/fourth-screen-consonant-splash.component';
+import { FifthScreenConsonantSplashComponent } from './fifth-screen-consonant-splash/fifth-screen-consonant-splash.component';
 
 
 @NgModule({
   declarations: [
     ConsonantsLetteringSplashComponent,
     SecondScreenConsonantSplashComponent,
-    FirstScreenConsonantSplashComponent
+    FirstScreenConsonantSplashComponent,
+    ThirdScreenConsonantSplashComponent,
+    FourthScreenConsonantSplashComponent,
+    FifthScreenConsonantSplashComponent
   ],
   imports: [
     CommonModule,

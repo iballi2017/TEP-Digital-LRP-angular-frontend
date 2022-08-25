@@ -21,7 +21,7 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
   @select((s) => s.occupantsList.isLoading) isLoading$:any;
   submitBtnLabel = "Add Respondent";
   nigerianStateList!: string[];
-  num: number = 3;
+  num: number = 7;
   agesList: number[] = [];
   AddRespondentForm!: FormGroup;
   Subscriptions: Subscription[] = [];
@@ -42,7 +42,7 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
 
   
   createNumberArray(d: number) {
-    while (d < 9) {
+    while (d < 12) {
       this.agesList.push(d);
       d++;
     }

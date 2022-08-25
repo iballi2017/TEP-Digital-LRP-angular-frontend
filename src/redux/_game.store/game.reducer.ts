@@ -28,11 +28,11 @@ const AddGameSessionSuccess = (state: JID_GameState, action: any) => {
   // var newGameSession = { id: action.todo.id, title: action.todo.title };
   console.log('newGameSession*****: ', newGameSession);
   let sessionData = JSON.stringify(newGameSession);
-  localStorage.setItem(GameSessionData.name, sessionData);
+  // localStorage.setItem(GameSessionData.name, sessionData);
   sessionStorage.setItem(GameSessionData.name, sessionData);
   const gameResult = {}
   let result = JSON.stringify(gameResult);
-  localStorage.setItem(GameSessionData.result, result);
+  // localStorage.setItem(GameSessionData.result, result);
   sessionStorage.setItem(GameSessionData.result, result);
 
   return tassign(state, {

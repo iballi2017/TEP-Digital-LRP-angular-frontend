@@ -40,6 +40,9 @@ export class TestRespondentSelectionComponent implements OnInit {
   ngOnInit(): void {
     this.getOccupantList();
     this.buildForm();
+
+    let isGame = this._gameSvc.IsGame();
+    console.log('IsGame: ', isGame);
   }
   getOccupantList() {
     this._occupantSvc.LoadOccupants();
@@ -69,9 +72,7 @@ export class TestRespondentSelectionComponent implements OnInit {
             type: ADD_GAME_SESSION_SUCCESS,
             payload: response,
           });
-          this._router.navigate([
-            '/literacy/levels/lettering',
-          ]);
+          this._router.navigate(['/literacy/levels/lettering']);
           this.closeDialog();
         }
       },

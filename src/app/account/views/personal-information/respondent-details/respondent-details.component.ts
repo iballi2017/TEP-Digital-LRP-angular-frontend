@@ -18,7 +18,7 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
   @select((s) => s.occupantsList.singleOccupant) singleOccupant: any;
   UpdateRespondentDetailsForm!: FormGroup;
   title = 'RESPONDENT DETAILS';
-  num: number = 3;
+  num: number = 7;
   // agesList = [this.num];
   agesList: number[] = [];
   submitBtnLabel = 'Save';
@@ -77,7 +77,7 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
   }
 
   createNumberArray(d: number) {
-    while (d < 9) {
+    while (d < 12) {
       this.agesList.push(d);
       d++;
     }

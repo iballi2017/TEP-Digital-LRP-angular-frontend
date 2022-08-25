@@ -1,0 +1,49 @@
+.bg-classroom{
+    background-image: url(../../assets/images/classroom.jpg);
+    background-size: container;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#ui-template-sample-one{
+    .inner{
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 100vh;
+        max-height: 730px;
+        overflow: hidden;
+        position: relative;
+        .template-content{
+            height: 100%;
+            transform: translate(0, 190px);
+            // background-color: lightblue;
+            text-align: center;
+        }
+        .character-image{
+            // width: 936px;
+            // height: 936px;
+            display: inline-block;
+            max-width: 40rem;
+        }
+
+        #replay-voice-btn{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
+    .controls{
+        .nav-right, .nav-left{
+            position: absolute;
+            bottom: 46.5%;
+        }
+        .nav-right{
+            right: 0;
+        }
+        .nav-left{
+            left: 0;
+        }
+    }
+}

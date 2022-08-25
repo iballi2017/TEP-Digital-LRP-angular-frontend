@@ -6,9 +6,10 @@ import { PracticeComponent } from './practice.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpeechSynthesisUtteranceComponent } from './speech-synthesis-utterance/speech-synthesis-utterance.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 
 @NgModule({
-  declarations: [PracticeComponent, SpeechSynthesisUtteranceComponent, ProgressBarComponent],
+  declarations: [PracticeComponent, SpeechSynthesisUtteranceComponent, ProgressBarComponent, MainNavigationComponent],
   imports: [
     CommonModule,
     PracticeRoutingModule,

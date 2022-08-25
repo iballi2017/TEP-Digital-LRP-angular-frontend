@@ -80,9 +80,11 @@ export class GameService {
     return levels;
   }
 
-  // GetGameStageResult(){
-  //   let sessionData = sessionStorage.getItem(GameSessionData.name);
-  // }
+  IsGame() {
+    let sessionData: any = sessionStorage.getItem(GameSessionData.name);
+    let stageResultBook: any = sessionStorage.getItem(GameSessionData.result);
+    return sessionData && stageResultBook ? true : false;
+  }
 
   SubmitGameStageResult(_GameStageResult: GameStageResult) {
     return this._http.post(`${this.SubmitGameStage_1_Url}`, _GameStageResult);
