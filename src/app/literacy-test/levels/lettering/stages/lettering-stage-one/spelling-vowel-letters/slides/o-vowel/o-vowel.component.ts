@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GameResult } from 'src/app/models/classes/game-result';
 
 @Component({
@@ -6,7 +6,7 @@ import { GameResult } from 'src/app/models/classes/game-result';
   templateUrl: './o-vowel.component.html',
   styleUrls: ['./o-vowel.component.scss']
 })
-export class OVowelComponent implements OnInit {
+export class OVowelComponent implements OnInit, OnDestroy {
   leftLink = '/literacy/lettering/stage-1/spelling-vowel-letters/i-vowel';
   rightLink = '/literacy/lettering/stage-1/spelling-vowel-letters/u-vowel';
   correctAnswer = {
@@ -16,6 +16,7 @@ export class OVowelComponent implements OnInit {
     q4: '0',
   };
   isCorrect = false;
+  srcFile = '';
 
   constructor() {}
 
@@ -33,6 +34,9 @@ export class OVowelComponent implements OnInit {
   }
   onSubmitAnswer(response: any) {
     new GameResult(response).save();
+  }
+  ngOnDestroy(): void {
+    this.srcFile = '';
   }
 
 }

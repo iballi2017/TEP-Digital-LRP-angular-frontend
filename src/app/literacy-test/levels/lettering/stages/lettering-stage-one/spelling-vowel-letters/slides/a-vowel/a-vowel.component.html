@@ -5,7 +5,7 @@
 </div> -->
 
 
-
+<!-- 
 <div class="container-fluid">
     <div class="content-wrapper">
         <div class="content">
@@ -14,4 +14,12 @@
         </div>
         <app-arrow-controls [leftLink]="leftLink" [rightLink]="rightLink" [isCorrect]="isCorrect"></app-arrow-controls>
     </div>
+</div> -->
+
+
+<div class="template-content">
+    <h1>a</h1>
 </div>
+<app-voice-audio-player [audioFile]="srcFile"></app-voice-audio-player>
+<app-arrow-controls [leftLink]="leftLink" [rightLink]="rightLink" [isCorrect]="isCorrect"></app-arrow-controls>
+<app-mark-control (correctAnswer)="onCorrect(correctAnswer, true)" (wrongAnswer)="onWrong(wrongAnswer, false)"></app-mark-control>

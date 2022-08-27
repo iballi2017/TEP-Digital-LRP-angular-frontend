@@ -4,14 +4,14 @@
 remove: {{itemRemove}} -->
 <div class="actions-btn">
     <div class="d-none d-lg-block">
-        <button class="btn btn-sm edit-btn primary-btn text-bold" (click)="onEdit()" *ngIf="itemEdit">Edit</button>
-        <button class="btn btn-sm delete-btn danger-btn" (click)="onRemove()" *ngIf="itemRemove">Delete</button>
+        <button class="btn btn-sm edit-btn primary-btn text-bold" (click)="onEdit()" *ngIf="edit">{{successTitle}}</button>
+        <button class="btn btn-sm delete-btn danger-btn" (click)="onRemove()" *ngIf="remove">Delete</button>
     </div>
     <div class="d-block d-lg-none d-flex">
-        <button class="btn btn-sm px-1 text-bold primary-text" (click)="onEdit()" *ngIf="itemEdit">
+        <button class="btn btn-sm px-1 text-bold primary-text" (click)="onEdit()" *ngIf="edit">
             <i class="fas fa-pen"></i>
         </button>
-        <button class="btn btn-sm px-1 text-bold danger-text" (click)="onRemove()" *ngIf="itemRemove">
+        <button class="btn btn-sm px-1 text-bold danger-text" (click)="onRemove()" *ngIf="remove">
             <i class="fas fa-trash"></i></button>
     </div>
 </div>

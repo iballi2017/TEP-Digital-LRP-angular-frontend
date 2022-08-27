@@ -1,16 +1,22 @@
 <!-- <p>say-alphabet-o works!</p> -->
-<div class="container-fluid" id="splash-screen">
+<!-- <div class="container-fluid" id="splash-screen">
     <div class="content-wrapper">
         <div class="featured-model">
             <div class="image-wrapper">
                 <img src="../../../../../../../../assets/images/splash-screens-characters/lettering-splash-screen-two/alphabet-o-screens/stage-1-lettering-splash-two-alphabet-o-screen-3.png" alt="" class="img-fluid">
             </div>
-            <!-- app-speech-synthesis-utterance -->
-            <!-- <app-speech-synthesis-utterance [statement]="statement"></app-speech-synthesis-utterance> -->
-            <!--  -->
             <app-voice-audio-player [audioFile]="srcFile"></app-voice-audio-player>
         </div>
         <app-arrow-controls [leftLink]="leftLink" [rightLink]="rightLink" [isCorrect]="true"></app-arrow-controls>
     </div>
-</div>
+</div> -->
 
+
+
+<div class="template-content">
+    <div class="character-image">
+        <img src="../../../../../../../../assets/images/splash-screens-characters/lettering-splash-screen-two/alphabet-o-screens/stage-1-lettering-splash-two-alphabet-o-screen-3.png" alt="" class="img-fluid">
+    </div>
+</div>
+<app-voice-audio-player [audioFile]="srcFile"></app-voice-audio-player>
+<app-arrow-controls [leftLink]="leftLink" [rightLink]="rightLink" [isCorrect]="true"></app-arrow-controls>

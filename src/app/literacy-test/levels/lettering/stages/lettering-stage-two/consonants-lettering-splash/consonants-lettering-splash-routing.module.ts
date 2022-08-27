@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConsonantsLetteringSplashComponent } from './consonants-lettering-splash.component';
+import { FifthScreenConsonantSplashComponent } from './fifth-screen-consonant-splash/fifth-screen-consonant-splash.component';
 import { FirstScreenConsonantSplashComponent } from './first-screen-consonant-splash/first-screen-consonant-splash.component';
 import { FourthScreenConsonantSplashComponent } from './fourth-screen-consonant-splash/fourth-screen-consonant-splash.component';
 import { SecondScreenConsonantSplashComponent } from './second-screen-consonant-splash/second-screen-consonant-splash.component';
@@ -33,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'fifth-screen',
-        component: FirstScreenConsonantSplashComponent,
+        component: FifthScreenConsonantSplashComponent,
       },
     ],
   },

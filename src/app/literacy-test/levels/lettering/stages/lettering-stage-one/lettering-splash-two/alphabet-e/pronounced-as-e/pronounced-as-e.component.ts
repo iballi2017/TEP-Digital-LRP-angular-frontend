@@ -9,7 +9,7 @@ export class PronouncedAsEComponent implements OnInit {
   statement = "It is pronounced as 'e'";
   leftLink = '/literacy/lettering/stage-1/lettering-splash-screen-two/alphabet-e';
   // rightLink = '/literacy/lettering/stage-1/lettering-splash-screen-two/pronounce-ant';
-  rightLink = '/literacy/lettering/stage-1/lettering-splash-screen-two/say-alphabet-e';
+  rightLink = '/literacy/lettering/stage-1/pronunciation/pronounce-egg';
 
   srcFile = '';
   // '../../../../../../../../../assets/audio/alphabet-e/literacy_stage-1_lettering-splash-screen-two_say-alphabet-e.mp3';

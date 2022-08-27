@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class AlphabetEComponent implements OnInit {
   statement = "Another vowel letter is the letter 'e";
   leftLink = '/literacy/lettering/stage-1/pronunciation';
-  rightLink = '/literacy/lettering/stage-1/lettering-splash-screen-two/pronounced-e';
+  // rightLink = '/literacy/lettering/stage-1/lettering-splash-screen-two/pronounced-e';
+  rightLink = '/literacy/lettering/stage-1/lettering-splash-screen-two/say-alphabet-e';
   srcFile = '../../../../../../../../assets/audio/alphabet-e/literacy_stage-1_lettering-splash-screen-two_alphabet-e.mp3';
 
   constructor() { }

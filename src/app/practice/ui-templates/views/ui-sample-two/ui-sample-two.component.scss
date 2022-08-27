@@ -1,13 +1,13 @@
 @use "../../../../../sass/_partials/mixins";
 
 .bg-classroom {
-    background-image: url(../../assets/images/blackboard.jpg);
+    background-image: url(../../assets_/images/blackboard.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-#ui-template-sample-one {
+#ui-template-sample-two {
     .inner {
         width: 100%;
         max-width: 1440px;
@@ -18,9 +18,14 @@
         position: relative;
         .template-content {
             height: 100%;
-            transform: translate(0, 190px);
-            // background-color: lightblue;
+            // transform: translate(0, 190px);
+            background-color: rgb(173, 216, 230, .4);
             text-align: center;
+            padding-top: 5em;
+            // 
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
             h1 {
                 // font-family: "Open Sans";
                 // font-style: normal;
@@ -48,7 +53,8 @@
         .nav-right,
         .nav-left {
             position: absolute;
-            bottom: 46.5%;
+            // bottom: 46.5%;
+            bottom: 40%;
         }
         .nav-right {
             right: 0;

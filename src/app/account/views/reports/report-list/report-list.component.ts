@@ -2,6 +2,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SessionId } from 'src/app/models/types/game-report';
 import { ReportService } from 'src/app/services/report.service';
 import { IAppState } from 'src/redux/store';
 import {
@@ -23,6 +24,7 @@ export class ReportListComponent implements OnInit {
   filterDropdownList = [FilterDropdown?.first, FilterDropdown?.second];
   Subscriptions: Subscription[] = [];
   reports: any;
+  successBtnTitle="View";
   constructor(
     private _reportSvc: ReportService,
     private ngRedux: NgRedux<IAppState>,
@@ -31,6 +33,20 @@ export class ReportListComponent implements OnInit {
 
   ngOnInit(): void {
     this.onGetReportList();
+    this._reportSvc.LoadUserGameResult();
+    // let subscription = this._reportSvc.LoadUserGameResult().subscribe({
+    //   next: (response: any) => {
+    //     if (response) {
+    //       console.log('xxxxx: ', response);
+    //     }
+    //   },
+    //   error: (err: any) => {
+    //     if (err) {
+    //       console.warn('Error: ', err);
+    //     }
+    //   },
+    // });
+    // this.Subscriptions.push(subscription);
   }
 
   onGetReportList() {
@@ -52,23 +68,27 @@ export class ReportListComponent implements OnInit {
 
     this._reportSvc.LoadReports();
   }
-
-
-  onViewReport(item: any) {
-    let x = JSON.stringify(item)
+  // /account/reports/report/:reportId
+  onViewReportDetails(item: any) {
+    // let x = JSON.stringify(item);
     // this._router.navigate([`account/reports/${item?.id}`]);
-    this._router.navigate([`account/reports/${x}`]);
+    // this._router.navigate([`account/reports/${x}`]);
+    this._router.navigate([`account/reports/details/${item}`]);
   }
 
-  onRemoveReport(reportId: string) {
+  onRemoveReport(sessionId: string) {
     this.ngRedux.dispatch({ type: REMOVE_REPORT });
-    this._reportSvc.RemoveReport(reportId).subscribe({
+    const _sessionId:SessionId = {
+      session_id: sessionId
+    }
+    console.log("_sessionId: ", _sessionId)
+    this._reportSvc.RemoveReport(_sessionId).subscribe({
       next: (response: any) => {
         console.log('response: ', response);
         this.ngRedux.dispatch({
           type: REMOVE_REPORT_SUCCESS,
           payload: {
-            id: reportId,
+            sessionId: sessionId,
           },
         });
       },
@@ -80,6 +100,10 @@ export class ReportListComponent implements OnInit {
         });
       },
     });
+  }
+
+  onEditReport(){
+
   }
 
   ngOnDestroy(): void {

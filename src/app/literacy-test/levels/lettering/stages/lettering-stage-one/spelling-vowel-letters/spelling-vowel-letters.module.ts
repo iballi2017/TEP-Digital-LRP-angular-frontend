@@ -7,7 +7,6 @@ import { EVowelComponent } from './slides/e-vowel/e-vowel.component';
 import { IVowelComponent } from './slides/i-vowel/i-vowel.component';
 import { OVowelComponent } from './slides/o-vowel/o-vowel.component';
 import { UVowelComponent } from './slides/u-vowel/u-vowel.component';
-import { TopProgressBarComponent } from './components/top-progress-bar/top-progress-bar.component';
 import { SpellingVowelLettersComponent } from './spelling-vowel-letters.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +20,6 @@ import { FormsModule } from '@angular/forms';
     IVowelComponent,
     OVowelComponent,
     UVowelComponent,
-    TopProgressBarComponent,
     SpellingVowelLettersComponent,
     // MarkControlComponent
   ],

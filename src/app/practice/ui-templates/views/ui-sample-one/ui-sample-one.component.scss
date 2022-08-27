@@ -1,6 +1,6 @@
 .bg-classroom{
-    background-image: url(../../assets/images/classroom.jpg);
-    background-size: container;
+    background-image: url(../../assets_/images/classroom.jpg);
+    // background-size: container;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -16,7 +16,8 @@
         position: relative;
         .template-content{
             height: 100%;
-            transform: translate(0, 190px);
+            // transform: translate(0, 190px);
+            transform: translate(0, 70px);
             // background-color: lightblue;
             text-align: center;
         }
@@ -24,7 +25,7 @@
             // width: 936px;
             // height: 936px;
             display: inline-block;
-            max-width: 40rem;
+            max-width: 38.5rem;
         }
 
         #replay-voice-btn{
@@ -37,7 +38,8 @@
     .controls{
         .nav-right, .nav-left{
             position: absolute;
-            bottom: 46.5%;
+            // bottom: 46.5%;
+            bottom: 40%;
         }
         .nav-right{
             right: 0;

@@ -3,6 +3,9 @@ import {
   ADD_REPORT,
   ADD_REPORT_ERROR,
   ADD_REPORT_SUCCESS,
+  FETCH_GAME_RESULT_DETAILS,
+  FETCH_GAME_RESULT_DETAILS_ERROR,
+  FETCH_GAME_RESULT_DETAILS_SUCCESS,
   FETCH_REPORTS_LIST,
   FETCH_REPORTS_LIST_ERROR,
   FETCH_REPORTS_LIST_SUCCESS,
@@ -50,6 +53,25 @@ const FetchSingleReportSuccess = (state: LRP_ReportState, action: any) => {
   });
 };
 const FetchSingleReportFailure = (state: LRP_ReportState, action: any) => {
+  return tassign(state, {
+    error: action.payload,
+    isLoading: false,
+  });
+};
+
+// FETCH GameResultDetails
+const FetchGameResultDetails = (state: LRP_ReportState, action: any) => {
+  return tassign(state, {
+    isLoading: true,
+  });
+};
+const FetchGameResultDetailsSuccess = (state: LRP_ReportState, action: any) => {
+  return tassign(state, {
+    gameResultDetails: action?.payload,
+    isLoading: false,
+  });
+};
+const FetchGameResultDetailsFailure = (state: LRP_ReportState, action: any) => {
   return tassign(state, {
     error: action.payload,
     isLoading: false,
@@ -138,6 +160,14 @@ export function ReportReducer(
     case FETCH_SINGLE_REPORT_ERROR:
       return FetchSingleReportFailure(state, action);
 
+    // FETCH_GAME_RESULT_DETAILS
+    case FETCH_GAME_RESULT_DETAILS:
+      return FetchGameResultDetails(state, action);
+    case FETCH_GAME_RESULT_DETAILS_SUCCESS:
+      return FetchGameResultDetailsSuccess(state, action);
+    case FETCH_GAME_RESULT_DETAILS_ERROR:
+      return FetchGameResultDetailsFailure(state, action);
+
     // ADD_REPORT
     case ADD_REPORT:
       return AddReport(state, action);
@@ -156,16 +186,16 @@ export function ReportReducer(
 
     // REMOVE_REPORT
     case REMOVE_REPORT:
-      console.log("action: ", action);
+      console.log('action: ', action);
       return tassign(state, {
         isLoading: true,
       });
 
     case REMOVE_REPORT_SUCCESS:
-      console.log("action: ", action);
+      console.log('action: ', action);
       return tassign(state, {
         reportsList: state.reportsList.filter(
-          (t: any) => t.id !== action.payload?.id
+          (t: any) => t.sessionId !== action.payload?.sessionId
         ),
         isLoading: false,
       });
