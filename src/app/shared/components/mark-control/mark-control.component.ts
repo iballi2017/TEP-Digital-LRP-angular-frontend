@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mark-control',
@@ -9,7 +10,7 @@ export class MarkControlComponent implements OnInit {
   @Output('correctAnswer') correctAnswer = new EventEmitter();
   @Output('wrongAnswer') wrongAnswer = new EventEmitter();
 
-  constructor() {}
+  constructor(private _router: Router) {}
 
   ngOnInit(): void {}
 
@@ -19,5 +20,6 @@ export class MarkControlComponent implements OnInit {
 
   myWrongAnswer() {
     this.wrongAnswer.emit('');
+    this._router.navigate(['/literacy/stage-completion']);
   }
 }

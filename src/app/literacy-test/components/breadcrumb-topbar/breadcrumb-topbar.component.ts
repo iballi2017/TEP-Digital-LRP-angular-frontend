@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb-topbar',
@@ -8,11 +9,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BreadcrumbTopbarComponent implements OnInit {
   @Input() menuList: any;
 
-  constructor() {}
+  constructor(private _router: Router) {}
 
   ngOnInit(): void {}
 
   back() {
     history.back();
+  }
+
+  closePage() {
+    this._router.navigate(['/test-onboarding']);
   }
 }

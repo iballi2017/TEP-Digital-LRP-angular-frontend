@@ -22,7 +22,7 @@
                     <form [formGroup]="LoginUserForm" (ngSubmit)="onSubmit()" novalidate>
                         <div class="form-group">
                             <label for="Email" class="form-label text-uppercase">User Id / Email Address</label>
-                            <input type="text" id="Email" class="form-control" formControlName="Email" required
+                            <input type="email" id="Email" class="form-control" formControlName="Email" required
                                 [ngClass]="{'is-invalid': LoginUserForm.get('Email')?.touched && LoginUserForm.get('Email')?.invalid}">
                             <span class="invalid-feedback">
                                 <small class="form-text text-danger"

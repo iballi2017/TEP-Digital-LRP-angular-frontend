@@ -26,6 +26,7 @@ import {
 export class TestRespondentSelectionComponent implements OnInit {
   title = 'SELECT NAME OF THE CHILD TAKING THE TEST';
   @select((s) => s.occupantsList.occupantsList) occupantsList$: any;
+  @select((s) => s.game.isLoading) gameIsLoading$: any;
   RespondentSelectionForm!: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<TestRespondentSelectionComponent>,

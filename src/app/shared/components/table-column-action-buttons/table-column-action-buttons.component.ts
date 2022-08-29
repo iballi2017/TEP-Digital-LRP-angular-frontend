@@ -8,13 +8,19 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class TableColumnActionButtonsComponent implements OnInit {
   @Output() remove = new EventEmitter();
   @Output() edit = new EventEmitter();
-  @Input() successBtnTitle!: string;
+  @Input() primaryBtnTitle!: string;
+  @Input() dangerBtnTitle!: string;
+  @Input() primaryBtnClasses!: string;
+  @Input() dangerBtnClasses!: string;
+  @Input() primaryBtnStyle!: any;
+  @Input() dangerBtnStyle!: any;
   successTitle = 'Edit';
+  
   constructor() {}
 
   ngOnInit(): void {
-    if (this.successBtnTitle) {
-      this.successTitle = this.successBtnTitle;
+    if (this.primaryBtnTitle) {
+      this.successTitle = this.primaryBtnTitle;
     }
   }
 

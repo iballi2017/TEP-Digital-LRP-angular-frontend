@@ -99,42 +99,44 @@
                 <!-- </div> -->
 
                 <div class="item-card px-0">
-                    <table class="table table-borderless">
-                        <thead class="item-card-header px-1">
-                            <tr>
-                                <th scope="col">LEVEL</th>
-                                <th scope="col" colspan="4">SCORES</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"></th>
-                                <td>Stage 1</td>
-                                <td>Stage 2</td>
-                                <td>Stage 3</td>
-                                <!-- <td>Stage 4</td> -->
-                            </tr>
-                            <tr>
-                                <th scope="row">LETTERING</th>
-                                <td>{{reportDetails?.letter_stage_1}}</td>
-                                <td>{{reportDetails?.letter_stage_2}}</td>
-                                <td>{{reportDetails?.letter_stage_3}}</td>
-                                <!-- <td>{{reportDetails?.letter_stage_4}}</td> -->
-                            </tr>
-                            <tr>
-                                <th scope="row">WORD</th>
-                                <td>{{reportDetails?.word_stage_1}}</td>
-                                <td>{{reportDetails?.word_stage_2}}</td>
-                                <td>{{reportDetails?.word_stage_3}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">PARAGRAPH</th>
-                                <td>{{reportDetails?.paragraph_stage_1}}</td>
-                                <td>{{reportDetails?.paragraph_stage_2}}</td>
-                                <td>{{reportDetails?.paragraph_stage_3}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead class="item-card-header px-1">
+                                <tr>
+                                    <th scope="col">LEVEL</th>
+                                    <th scope="col" colspan="4">SCORES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>Stage 1</td>
+                                    <td>Stage 2</td>
+                                    <td>Stage 3</td>
+                                    <!-- <td>Stage 4</td> -->
+                                </tr>
+                                <tr>
+                                    <th scope="row">LETTERING</th>
+                                    <td>{{reportDetails?.letter_stage_1}}</td>
+                                    <td>{{reportDetails?.letter_stage_2}}</td>
+                                    <td>{{reportDetails?.letter_stage_3}}</td>
+                                    <!-- <td>{{reportDetails?.letter_stage_4}}</td> -->
+                                </tr>
+                                <tr>
+                                    <th scope="row">WORD</th>
+                                    <td>{{reportDetails?.word_stage_1}}</td>
+                                    <td>{{reportDetails?.word_stage_2}}</td>
+                                    <td>{{reportDetails?.word_stage_3}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">PARAGRAPH</th>
+                                    <td>{{reportDetails?.paragraph_stage_1}}</td>
+                                    <td>{{reportDetails?.paragraph_stage_2}}</td>
+                                    <td>{{reportDetails?.paragraph_stage_3}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div id="overall-score">
@@ -151,8 +153,12 @@
                     </div>
                 </div>
             </div>
-            <div class="actions-btn">
-                <div class="d-none d-lg-block">
+            <div class="actions-btn-wrapper">
+                <app-table-column-action-buttons (remove)="onRemoveReport(reportDetails?.session_id)"
+                    (edit)="onViewReportDetails(reportDetails?.sessionId)" [primaryBtnTitle]="primaryBtnTitle"
+                    [primaryBtnClasses]="primaryBtnClasses" [dangerBtnClasses]="dangerBtnClasses" [dangerBtnTitle]="dangerBtnTitle" [primaryBtnStyle]="primaryBtnStyle" [dangerBtnStyle]="dangerBtnStyle">
+                </app-table-column-action-buttons>
+                <!-- <div class="d-none d-lg-block">
                     <button class="btn edit-btn primary-btn text-bold text-uppercase">Continue</button>
                     <button class="btn delete-btn danger-btn text-uppercase">Delete Report</button>
                 </div>
@@ -162,7 +168,7 @@
                     </button>
                     <button class="btn btn-sm px-1 text-bold danger-text">
                         <i class="fas fa-trash"></i></button>
-                </div>
+                </div> -->
             </div>
         </div>
 

@@ -10,10 +10,15 @@ export class ButtonComponent implements OnInit {
   @Input() btnClasses!: any;
   @Input() btnTitle!: any;
   @Input() btnType!: any;
+  @Input() disabled!: any;
   @Output() onClickEvent = new EventEmitter();
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.disabled) {
+      console.log(this.disabled)
+    }
+  }
 
   onClickBtn() {
     this.onClickEvent.emit();

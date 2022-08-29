@@ -4,8 +4,8 @@
 remove: {{itemRemove}} -->
 <div class="actions-btn">
     <div class="d-none d-lg-block">
-        <button class="btn btn-sm edit-btn primary-btn text-bold" (click)="onEdit()" *ngIf="edit">{{successTitle}}</button>
-        <button class="btn btn-sm delete-btn danger-btn" (click)="onRemove()" *ngIf="remove">Delete</button>
+        <button class="btn edit-btn primary-btn text-bold" [ngClass]="primaryBtnClasses" (click)="onEdit()" *ngIf="edit" [ngStyle]="primaryBtnStyle">{{primaryBtnTitle}}</button>
+        <button class="btn delete-btn danger-btn" [ngClass]="dangerBtnClasses" (click)="onRemove()" *ngIf="remove" [ngStyle]="dangerBtnStyle">{{dangerBtnTitle}}</button>
     </div>
     <div class="d-block d-lg-none d-flex">
         <button class="btn btn-sm px-1 text-bold primary-text" (click)="onEdit()" *ngIf="edit">

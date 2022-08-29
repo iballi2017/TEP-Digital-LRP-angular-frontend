@@ -10,6 +10,7 @@
         max-height: 730px;
         overflow: hidden;
         position: relative;
+        padding-bottom: 1em;
         .template-content {
             height: 100%;
             // transform: translate(0, 190px);
@@ -48,6 +49,8 @@
             position: absolute;
             bottom: 0;
             left: 0;
+            bottom: 0;
+            margin-bottom: 20px;
         }
     }
 

@@ -25,11 +25,21 @@
             </div>
             <div class="card-footer">
                 <div id="action-btn">
-                    <button type="submit" class="btn btn-block"
-                        [disabled]="RespondentSelectionForm.invalid">Continue</button>
+                    <button type="submit" class="btn btn-block" [disabled]="RespondentSelectionForm.invalid">
+                        <span *ngIf="(gameIsLoading$ | async)">Loading...</span>
+                        <span *ngIf="!(gameIsLoading$ | async)">Continue</span>
+                        </button>
                     <button type="button" class="btn btn-block" (click)="closeDialog()">Cancel</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+
+<!-- <span *ngIf="(isLoading$ | async)">Loading...</span>
+<span *ngIf="!(isLoading$ | async)">{{submitBtnLabel}}</span> -->
+
+<ng-template #loading>
+    <small class="text-info">Loading</small>
+</ng-template>

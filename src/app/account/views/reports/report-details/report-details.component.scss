@@ -113,16 +113,17 @@
 }
 
 
+.action-button {
+    margin-right: 0.5em;
+    padding-right: 1.3em;
+    padding-left: 1.3em;
+    font-size: 26px !important;
+    &:last-child {
+        margin-right: 0;
+    }
+}
 
-.actions-btn {
+.actions-btn-wrapper {
     display: inline-flex;
     align-items: center;
-    button {
-        margin-right: 0.5em;
-        padding-right: 1.3em;
-        padding-left: 1.3em;
-        &:last-child {
-            margin-right: 0;
-        }
-    }
 }

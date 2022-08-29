@@ -21,7 +21,9 @@ export class RespondentListComponent implements OnInit, OnDestroy {
   @select((s) => s.occupantsList.occupantsList) occupantsList$: any;
   @select((s) => s.occupantsList.isLoading) isLoading$: any;
   list: any;
-  Subscriptions: Subscription[]=[]
+  Subscriptions: Subscription[] = [];
+  dangerBtnTitle = 'Delete';
+  primaryBtnTitle = "Edit"
   constructor(
     private _occupantSvc: OccupantService,
     private ngReux: NgRedux<IAppState>,
@@ -30,7 +32,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-   let subscription = this.occupantsList$.subscribe({
+    let subscription = this.occupantsList$.subscribe({
       next: (response: any) => {
         if (response) {
           // console.log('response: ', response);
@@ -43,7 +45,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
         }
       },
     });
-    this.Subscriptions.push(subscription)
+    this.Subscriptions.push(subscription);
   }
 
   onViewRespondentDetails(item: any) {
@@ -68,7 +70,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
 
   onDeleteOccupant(Occupant: any) {
     this.ngReux.dispatch({ type: REMOVE_OCCUPANT });
-    let subscription =  this._occupantSvc.RemoveOccupant(Occupant).subscribe({
+    let subscription = this._occupantSvc.RemoveOccupant(Occupant).subscribe({
       next: (response: any) => {
         if (response) {
           // console.log('response: ', response);
@@ -88,7 +90,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
         }
       },
     });
-    this.Subscriptions.push(subscription)
+    this.Subscriptions.push(subscription);
   }
 
   ngOnDestroy(): void {

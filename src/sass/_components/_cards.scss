@@ -188,3 +188,51 @@
             }
     }
 }
+
+
+
+.account-verification-card{
+    &.card {
+        background: #ffffff;
+        // border: 1px solid #9d9d9d;
+        border: none;
+        // display: inline-block;
+        .brand-title-image {
+            // max-width: 335px;
+            max-width: 48.5%;
+            margin: 0 auto;
+        }
+        p {
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            color: #1e1e1e;
+            line-height: 50px;
+        }
+    }
+    .card-header {
+        background-color: #ececec;
+        border: 1px solid #009cf3;
+        padding-top: 1.2em;
+        padding-bottom: 1.2em;
+    }
+    .card-body {
+        border: 1px solid #9d9d9d;
+        border-top: none;
+        form{
+            max-width: 517px;
+            margin: 0 auto;
+            .form-group{
+                margin-bottom: 2.3em;
+                &:first-child{
+                    margin-top: 1.5em;
+                }
+            }
+            padding-bottom: calc(2.3em - 1.25rem);
+        }
+    }
+}

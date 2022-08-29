@@ -122,14 +122,23 @@
 #replay-voice-btn {
     display: flex;
     align-items: center;
+    padding: 0 !important;
     &::before {
         content: "";
         display: block;
         height: 70px;
         width: 70px;
         background-image: url(../../assets/images/icons/replay-icon.svg);
-        background-size: contain;
+        background-size: cover;
+        // background-size: auto;
         background-repeat: no-repeat;
         background-position: center;
+        border-radius: 7px;
+    }
+    @include mixins.maxmq(500px) {
+        &::before {
+            height: 40px;
+            width: 40px;
+        }
     }
 }
