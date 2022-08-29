@@ -1,0 +1,25 @@
+<!-- <p>verify-email-code works!</p> -->
+<div id="forgot-password-content">
+    <div class="card account-verification-card">
+        <div class="card-header">
+            <div class="brand-title-image">
+                <img src="../../../../../assets/images/TEP-school-custom-title-image.png" alt="" class="img-fluid">
+            </div>
+        </div>
+        <div class="card-body">
+            <p>Please enter the verification code sent to you email address</p>
+            <form [formGroup]="VerifyEmailCodeForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="text" class="form-control verification-code-input" name="VerificationCode"
+                        id="VerificationCode" formControlName="VerificationCode"
+                        [ngClass]="{'is-invalid': VerifyEmailCodeForm.get('VerificationCode')?.touched && VerifyEmailCodeForm.get('VerificationCode')?.invalid}"
+                        required>
+                    <small id="VerificationCodeErrorMsg" class="form-text text-danger invalid-feedback">Provide
+                        verification code.</small>
+                </div>
+                <app-button [btnTitle]="btnTitle" [btnClasses]="btnClasses" [disabled]="!VerifyEmailCodeForm.valid">
+                </app-button>
+            </form>
+        </div>
+    </div>
+</div>
