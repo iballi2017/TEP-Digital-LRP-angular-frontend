@@ -8,17 +8,17 @@ import {
   FETCH_GAME_SESSION_ERROR,
   FETCH_GAME_SESSION_SUCCESS,
 } from './game.actions';
-import { INITIAL_GAME_STATE, JID_GameState } from './game.store';
+import { INITIAL_GAME_STATE, LRP_GameState } from './game.store';
 
 // ADD OCCUPANT
 
-const AddGameSession = (state: JID_GameState, action: any) => {
+const AddGameSession = (state: LRP_GameState, action: any) => {
   return tassign(state, {
     isLoading: true,
   });
 };
 
-const AddGameSessionSuccess = (state: JID_GameState, action: any) => {
+const AddGameSessionSuccess = (state: LRP_GameState, action: any) => {
   console.log('action*****: ', action);
   var newGameSession = {
     // id: state.reportsList?.length + 1,
@@ -44,7 +44,7 @@ const AddGameSessionSuccess = (state: JID_GameState, action: any) => {
   });
 };
 
-const AddGameSessionFailure = (state: JID_GameState, action: any) => {
+const AddGameSessionFailure = (state: LRP_GameState, action: any) => {
   return tassign(state, {
     error: action.error,
     isLoading: false,
@@ -52,9 +52,9 @@ const AddGameSessionFailure = (state: JID_GameState, action: any) => {
 };
 
 export function GameReducer(
-  state: JID_GameState | any = INITIAL_GAME_STATE,
+  state: LRP_GameState | any = INITIAL_GAME_STATE,
   action: any
-): JID_GameState {
+): LRP_GameState {
   switch (action.type) {
     case FETCH_GAME_SESSION:
       console.log('load gameSession action: ', action);

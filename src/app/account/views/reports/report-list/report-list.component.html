@@ -40,7 +40,7 @@
                             <div class="custom-drop">
                                 <select name="Filter" id="" class="form-control" (change)="sortReportListBy(FilterForm)"
                                     [(ngModel)]="SortItem">
-                                    <option value="" selected="selected">Filter---</option>
+                                    <!-- <option value="" selected="selected">FILTER</option> -->
                                     <option [value]="item" *ngFor="let item of filterDropdownList">{{item}}</option>
                                 </select>
                             </div>

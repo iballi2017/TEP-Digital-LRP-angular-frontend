@@ -20,15 +20,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.onGetUserDetails();
+    // this.onGetUserDetails();
   }
   onGetUserDetails() {
-    this._identitySvc.getUserById();
-    // this.ngRedux.dispatch({ type: FETCH_USER_DETAILS });
-    // let loggedInUser = this._identitySvc.getLoggedInUserData();
-    // this.ngRedux.dispatch({
-    //   type: FETCH_USER_DETAILS_SUCCESS,
-    //   payload: loggedInUser,
-    // });
+    // this._identitySvc.getUserById();
   }
 }

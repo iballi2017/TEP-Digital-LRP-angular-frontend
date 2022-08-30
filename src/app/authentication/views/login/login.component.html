@@ -39,6 +39,9 @@
                         <div class="form-group">
                             <label for="Password" class="form-label text-uppercase">Password</label>
                             <input type="password" id="Password" class="form-control" formControlName="Password">
+                            <aside>
+                                <a [routerLink]="['/auth/forgot-password']" class="forgot-password-link">Forgot password</a>
+                            </aside>
                         </div>
                         <button class="btn primary-btn btn-block text-uppercase form-btn"
                             [disabled]="LoginUserForm.invalid || (isLoading | async)">

@@ -15,6 +15,7 @@ export class AuthenticationService {
   // RegisterUserUrl = baseUrl + '/RegisterUser';
   LoginUserUrl = baseUrl + '/user-login';
   RegisterUserUrl = baseUrl + '/create-user';
+  ResetUserPasswordUrl = baseUrl + '/create-user';
 
   RefreshTokenUrl = baseUrl + 'api/Identity/refresh-token/****';
   isRegistrationSending: boolean = false;
@@ -107,8 +108,19 @@ export class AuthenticationService {
     return localStorage.getItem('RefreshToken');
   }
 
+
+  resetUserPassword(ChangePasswordData:ChangePasswordData){
+return this._http.post(this.ResetUserPasswordUrl, ChangePasswordData);
+  }
+
   logoutUser() {
     localStorage.clear();
     this._router.navigate(['/auth']);
   }
+}
+
+
+export interface ChangePasswordData{
+  reset_selector: string,
+  usr_password: string,
 }

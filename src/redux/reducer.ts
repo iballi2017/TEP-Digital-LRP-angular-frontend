@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { ForgotPasswordReducer } from './_forgot-password.store/forgot-password.reducer';
 import { GameReducer } from './_game.store/game.reducer';
 import { LoginUserReducer } from './_login-user-store/login-user.reducer';
 import { OccupantReducer } from './_occupant.store/occupant.reducer';
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   userDetails: UserDetailsReducer,
   reportsList: ReportReducer,
   game: GameReducer,
+  forgotPassword: ForgotPasswordReducer
 });

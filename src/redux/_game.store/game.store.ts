@@ -1,4 +1,4 @@
-export interface JID_GameState {
+export interface LRP_GameState {
   gameSession: any;
   gameResult: any;
   error: any;
@@ -6,7 +6,7 @@ export interface JID_GameState {
   isLoading: boolean;
 }
 
-export const INITIAL_GAME_STATE: JID_GameState = {
+export const INITIAL_GAME_STATE: LRP_GameState = {
   gameSession: null,
   gameResult: null,
   error: null,
