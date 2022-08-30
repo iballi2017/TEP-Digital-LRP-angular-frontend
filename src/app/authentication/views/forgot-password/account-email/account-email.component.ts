@@ -64,6 +64,7 @@ export class AccountEmailComponent implements OnInit {
             type: SEND_REGISTERED_EMAIL_SUCCESS,
             payload: response.msg,
           });
+          this.VerifyEmailForm.reset();
         }
       },
       error: (err: any) => {

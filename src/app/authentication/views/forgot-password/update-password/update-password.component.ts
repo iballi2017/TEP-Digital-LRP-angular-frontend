@@ -1,6 +1,7 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import {
   AuthenticationService,
   ChangePasswordData,
@@ -38,17 +39,22 @@ export class UpdatePasswordComponent implements OnInit {
   btnTitle = 'Submit';
   btnClasses = 'btn primary-btn text-uppercase px-5 py-2';
   UpdatePasswordForm!: FormGroup;
+  verificationCode!: string;
+  verificationCode2: any;
   constructor(
     private _fb: FormBuilder,
     private _authSvc: AuthenticationService,
-    private ngRedux: NgRedux<IAppState>
+    private ngRedux: NgRedux<IAppState>,
+    private _route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.buildForm();  this.isLoading$.subscribe((load: boolean) => {
+    this.buildForm();
+    this.getUrlParams();
+    this.isLoading$.subscribe((load: boolean) => {
       if (load) {
         this.btnTitle = 'Loading...';
-      }else{
+      } else {
         this.btnTitle = 'Submit';
       }
     });
@@ -66,6 +72,21 @@ export class UpdatePasswordComponent implements OnInit {
     );
   }
 
+  getUrlParams() {
+    this._route.paramMap.subscribe({
+      next: (params: any) => {
+        // f45a912c/13f6729dc63dbb858682f174725db8
+        if (params) {
+          console.log(params);
+          this.verificationCode = params.get('verification-code1');
+          this.verificationCode2 = params.get('verification-code2');
+          console.log('this.verificationCode: ', this.verificationCode);
+          console.log('this.verificationCode2: ', this.verificationCode2);
+        }
+      },
+    });
+  }
+
   onSubmit() {
     console.log(
       'this.UpdatePasswordForm.value: ',
@@ -76,7 +97,7 @@ export class UpdatePasswordComponent implements OnInit {
       this.UpdatePasswordForm.value.ConfirmNewPassword
     ) {
       const Payload: ChangePasswordData = {
-        reset_selector: 'b13bdf2f',
+        reset_selector: this.verificationCode,
         usr_password: this.UpdatePasswordForm.value.NewPassword,
       };
       console.log('Payload: ', Payload);

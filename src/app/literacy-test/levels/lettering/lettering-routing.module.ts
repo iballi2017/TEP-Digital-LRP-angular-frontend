@@ -87,6 +87,13 @@ const routes: Routes = [
             './stages/lettering-stage-two/consonants-lettering-splash/consonants-lettering-splash.module'
           ).then((m) => m.ConsonantsLetteringSplashModule),
       },
+      {
+        path: 'pronunciation',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-two/lettering-stage-two-pronunciation/lettering-stage-two-pronunciation.module'
+          ).then((m) => m.LetteringStageTwoPronunciationModule),
+      },
     ],
   },
   {

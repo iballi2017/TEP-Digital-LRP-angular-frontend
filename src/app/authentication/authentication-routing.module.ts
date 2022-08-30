@@ -38,7 +38,7 @@ const routes: Routes = [
         component: VerifyEmailCodeComponent
       },
       {
-        path: 'update-password',
+        path: 'update-password/:verification-code1/:verification-code2',
         component: UpdatePasswordComponent
       },
       {

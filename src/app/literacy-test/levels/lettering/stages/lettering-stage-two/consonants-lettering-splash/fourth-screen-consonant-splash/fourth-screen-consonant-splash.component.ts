@@ -7,7 +7,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class FourthScreenConsonantSplashComponent implements OnInit, OnDestroy {
   leftLink = '/literacy/lettering/stage-2/lettering-splash/third-screen';
-  rightLink = '/literacy/lettering/stage-2/lettering-splash/fifth-screen';
+  rightLink = '/literacy/lettering/stage-2/pronunciation';
   srcFile = '../../../../../../../../assets/audio/literacy_stage-1_lettering-splash_fourth-screen.mp3';
   constructor() { }
 
