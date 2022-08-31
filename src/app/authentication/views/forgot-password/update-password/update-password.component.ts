@@ -40,7 +40,7 @@ export class UpdatePasswordComponent implements OnInit {
   btnClasses = 'btn primary-btn text-uppercase px-5 py-2';
   UpdatePasswordForm!: FormGroup;
   verificationCode!: string;
-  verificationCode2: any;
+  reset_selector!: string;
   constructor(
     private _fb: FormBuilder,
     private _authSvc: AuthenticationService,
@@ -78,10 +78,10 @@ export class UpdatePasswordComponent implements OnInit {
         // f45a912c/13f6729dc63dbb858682f174725db8
         if (params) {
           console.log(params);
-          this.verificationCode = params.get('verification-code1');
-          this.verificationCode2 = params.get('verification-code2');
+          this.reset_selector = params.get('reset_selector');
+          this.verificationCode = params.get('verification-code');
           console.log('this.verificationCode: ', this.verificationCode);
-          console.log('this.verificationCode2: ', this.verificationCode2);
+          console.log('this.reset_selector: ', this.reset_selector);
         }
       },
     });
@@ -97,7 +97,7 @@ export class UpdatePasswordComponent implements OnInit {
       this.UpdatePasswordForm.value.ConfirmNewPassword
     ) {
       const Payload: ChangePasswordData = {
-        reset_selector: this.verificationCode,
+        reset_selector: this.reset_selector,
         usr_password: this.UpdatePasswordForm.value.NewPassword,
       };
       console.log('Payload: ', Payload);
@@ -109,18 +109,39 @@ export class UpdatePasswordComponent implements OnInit {
             console.log('response: ', response);
             this.ngRedux.dispatch({
               type: UPDATE_USER_PASSWORD_SUCCESS,
-              payload: response,
+              payload: response?.msg,
             });
+            this.UpdatePasswordForm.reset();
           }
         },
         error: (err: any) => {
           if (err) {
             console.warn('Error: ', err);
-            this.ngRedux.dispatch({
-              type: UPDATE_USER_PASSWORD_ERROR,
-              payload: err?.error?.message,
-            });
+            console.warn('Error.status: ', err.status);
+            console.warn('Error.error?.msg: ', err.error?.msg);
+            switch (err.status) {
+              case 400:
+                this.ngRedux.dispatch({
+                  type: UPDATE_USER_PASSWORD_ERROR,
+                  payload: err?.error?.msg,
+                });
+                break;
+
+              default:
+                this.ngRedux.dispatch({
+                  type: UPDATE_USER_PASSWORD_ERROR,
+                  payload: err?.error?.message,
+                });
+                break;
+            }
           }
+          // if (err) {
+          //   console.warn('Error: ', err);
+          //   this.ngRedux.dispatch({
+          //     type: UPDATE_USER_PASSWORD_ERROR,
+          //     payload: err?.error?.message,
+          //   });
+          // }
         },
       });
     }

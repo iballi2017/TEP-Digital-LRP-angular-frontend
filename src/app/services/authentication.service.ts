@@ -15,7 +15,7 @@ export class AuthenticationService {
   // RegisterUserUrl = baseUrl + '/RegisterUser';
   LoginUserUrl = baseUrl + '/user-login';
   RegisterUserUrl = baseUrl + '/create-user';
-  ResetUserPasswordUrl = baseUrl + '/create-user';
+  ResetUserPasswordUrl = baseUrl + '/reset-password';
 
   RefreshTokenUrl = baseUrl + 'api/Identity/refresh-token/****';
   isRegistrationSending: boolean = false;

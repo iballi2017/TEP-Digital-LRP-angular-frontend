@@ -65,6 +65,7 @@ const UpdateUserPasswordFailure = (
   action: any
 ) => {
   return tassign(state, {
+    updateUserPasswordResponse: null,
     error: action.payload,
     isLoading: false,
   });
