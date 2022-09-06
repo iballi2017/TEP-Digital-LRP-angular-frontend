@@ -52,7 +52,6 @@ const UpdateUserPasswordSuccess = (
   action: any
 ) => {
   console.log('action*****: ', action);
-
   return tassign(state, {
     error: null,
     updateUserPasswordResponse: action.payload,
