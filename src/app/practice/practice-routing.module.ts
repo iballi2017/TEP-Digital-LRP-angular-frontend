@@ -21,6 +21,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./ui-templates/ui-templates.module').then((s) => s.UiTemplatesModule),
       },
+      {
+        path: 'lrp-activity',
+        loadChildren: () =>
+          import('./lrp-activity/lrp-activity.module').then((s) => s.LrpActivityModule),
+      },
     ],
   },
 ];

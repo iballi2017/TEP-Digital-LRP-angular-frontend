@@ -1,0 +1,26 @@
+<p>lettering-stage-one-activity works!</p>
+<table>
+    <thead>
+        <tr>
+            <th>Consonant</th>
+            <th>Vowel</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{consonants?.length}}</td>
+            <td>{{vowels?.length}}</td>
+        </tr>
+    </tbody>
+</table>
+{{alphabets | json}}
+<ul class="list-style-none pl-0 mb-0" id="activity-canvas">
+    <li *ngFor="let item of alphabets">
+        <input type="checkbox" id="{{item?.id}}" hidden [(ngModel)]="item.isChecked"
+            [ngModelOptions]="{standalone: true}" (change)="onChecked()">
+        <label for="{{item?.id}}">
+            <span class="fake-box"
+                [ngClass]="{'right-answer': item.isChecked && item?.type == vowel,'wrong-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>
+        </label>
+    </li>
+</ul>

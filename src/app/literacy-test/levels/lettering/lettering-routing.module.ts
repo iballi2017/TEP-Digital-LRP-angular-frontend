@@ -67,6 +67,13 @@ const routes: Routes = [
             './stages/lettering-stage-one/identify-vowel-letters/identify-vowel-letters.module'
           ).then((m) => m.IdentifyVowelLettersModule),
       },
+      {
+        path: 'activity',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-one/activity/activity.module'
+          ).then((m) => m.ActivityModule),
+      },
     ],
   },
   // {
