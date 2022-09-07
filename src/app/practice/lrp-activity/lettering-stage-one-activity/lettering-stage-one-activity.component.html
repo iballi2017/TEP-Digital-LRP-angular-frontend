@@ -14,7 +14,7 @@
     </tbody>
 </table>
 {{alphabets | json}}
-<ul class="list-style-none pl-0 mb-0" id="activity-canvas">
+<ul class="list-style-none pl-0" id="activity-canvas">
     <li *ngFor="let item of alphabets">
         <input type="checkbox" id="{{item?.id}}" hidden [(ngModel)]="item.isChecked"
             [ngModelOptions]="{standalone: true}" (change)="onChecked()">
