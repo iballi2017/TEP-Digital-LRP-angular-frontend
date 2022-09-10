@@ -9,6 +9,7 @@ import { ConsonantsLetteringSplashComponent } from './consonants-lettering-splas
 import { ThirdScreenConsonantSplashComponent } from './third-screen-consonant-splash/third-screen-consonant-splash.component';
 import { FourthScreenConsonantSplashComponent } from './fourth-screen-consonant-splash/fourth-screen-consonant-splash.component';
 import { FifthScreenConsonantSplashComponent } from './fifth-screen-consonant-splash/fifth-screen-consonant-splash.component';
+import { InstructionalVidLetteringStageTwoComponent } from './instructional-vid-lettering-stage-two/instructional-vid-lettering-stage-two.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FifthScreenConsonantSplashComponent } from './fifth-screen-consonant-sp
     FirstScreenConsonantSplashComponent,
     ThirdScreenConsonantSplashComponent,
     FourthScreenConsonantSplashComponent,
-    FifthScreenConsonantSplashComponent
+    FifthScreenConsonantSplashComponent,
+    InstructionalVidLetteringStageTwoComponent
   ],
   imports: [
     CommonModule,

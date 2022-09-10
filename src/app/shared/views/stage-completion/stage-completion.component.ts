@@ -93,33 +93,22 @@ export class StageCompletionComponent implements OnInit {
     this._router.navigate([`/literacy/levels/lettering`]);
   }
 
-  SubmitStageResult(GameStageResult: GameStageResult, NextPage: string) {
-    this._gameSvc.SubmitGameStageResult(GameStageResult).subscribe({
-      next: (response: any) => {
-        if (response) {
-          console.log('response: ', response);
-          this.openSnackBar(response?.message);
-          setTimeout(() => {
-            this._router.navigate([NextPage]);
-          }, 3000);
-        }
-      },
-      error: (err: any) => {
-        if (err) {
-          console.warn('Error: ', err);
-        }
-      },
-    });
-  }
+  // SubmitStageResult(GameStageResult: GameStageResult, NextPage: string) {
+  //   this._gameSvc.SubmitGameStageResult(GameStageResult).subscribe({
+  //     next: (response: any) => {
+  //       if (response) {
+  //         console.log('response: ', response);
+  //         setTimeout(() => {
+  //           this._router.navigate([NextPage]);
+  //         }, 3000);
+  //       }
+  //     },
+  //     error: (err: any) => {
+  //       if (err) {
+  //         console.warn('Error: ', err);
+  //       }
+  //     },
+  //   });
+  // }
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-  openSnackBar(data: any) {
-    this._snackBar.openFromComponent(SnackbarComponent, {
-      duration: this.durationInSeconds * 1000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      data: data,
-    });
-  }
 }

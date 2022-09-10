@@ -7,7 +7,8 @@ import { alphabets } from 'src/assets/data/lettering-stage-alphabets';
 export class ActivityService {
   constructor() {}
   GetAlphabet() {
-    return alphabets;
+    let x = [...alphabets]
+    return x;
   }
 
   GetStageTwoAlphabet() {

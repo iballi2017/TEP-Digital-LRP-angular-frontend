@@ -101,6 +101,13 @@ const routes: Routes = [
             './stages/lettering-stage-two/lettering-stage-two-pronunciation/lettering-stage-two-pronunciation.module'
           ).then((m) => m.LetteringStageTwoPronunciationModule),
       },
+      {
+        path: 'activity',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-two/lettering-stage-two-activity/lettering-stage-two-activity.module'
+          ).then((m) => m.LetteringStageTwoActivityModule),
+      },
     ],
   },
   {

@@ -5,21 +5,14 @@ import { Router } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity.service';
 import { GameService } from 'src/app/services/game.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
-import {
-  Alphabet,
-  AlphabetType,
-} from 'src/assets/data/lettering-stage-alphabets';
+import { Alphabet, AlphabetType } from 'src/assets/data/lettering-stage-alphabets';
 import { IAppState } from 'src/redux/store';
-import {
-  SUBMIT_GAME_STAGE_RESULT,
-  SUBMIT_GAME_STAGE_RESULT_ERROR,
-  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
-} from 'src/redux/_game.store/game.actions';
+import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.scss'],
+  styleUrls: ['./exercise.component.scss']
 })
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
@@ -59,6 +52,7 @@ export class ExerciseComponent implements OnInit {
 
   onGetAlphabet() {
     // this.alphabets = this._activitySvc.GetAlphabet();
+    
     let x = this._activitySvc.GetAlphabet();
     const alphabetList = [...x];
     this.alphabets = alphabetList
@@ -93,7 +87,7 @@ export class ExerciseComponent implements OnInit {
       }
     }
 
-    if (this.vowels.length == 5) {
+    if (this.consonants.length == 6) {
       this.onSumbit();
     }
   }
