@@ -5,13 +5,18 @@ import { alphabets } from 'src/assets/data/lettering-stage-alphabets';
   providedIn: 'root',
 })
 export class ActivityService {
+  alphabetsList:any = [];
   constructor() {}
   GetAlphabet() {
-    let x = [...alphabets]
-    return x;
+    this.alphabetsList = [...alphabets];
+    return   this.alphabetsList;
+  }
+  GetAlphabetForStageTwo() {
+    this.alphabetsList = [...alphabets];
+    return   this.alphabetsList;
   }
 
   GetStageTwoAlphabet() {
-    return alphabets;
+    return this.alphabetsList;
   }
 }

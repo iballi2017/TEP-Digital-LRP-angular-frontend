@@ -1,6 +1,10 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity.service';
 import { GameService } from 'src/app/services/game.service';
@@ -59,9 +63,8 @@ export class ExerciseComponent implements OnInit {
 
   onGetAlphabet() {
     // this.alphabets = this._activitySvc.GetAlphabet();
-    let x = this._activitySvc.GetAlphabet();
-    const alphabetList = [...x];
-    this.alphabets = alphabetList
+    const l = this._activitySvc.GetAlphabet();
+    this.alphabets = Object.assign([], l);
     this.vowels = this.alphabets.filter(
       (alphabet) => alphabet.type == AlphabetType.VOWEL && alphabet.isChecked
     );
@@ -151,7 +154,6 @@ export class ExerciseComponent implements OnInit {
       },
     });
   }
-
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';

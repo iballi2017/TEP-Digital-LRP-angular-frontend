@@ -51,11 +51,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   onGetAlphabet() {
-    // this.alphabets = this._activitySvc.GetAlphabet();
-    
-    let x = this._activitySvc.GetAlphabet();
-    const alphabetList = [...x];
-    this.alphabets = alphabetList
+    this.alphabets = this._activitySvc.GetAlphabetForStageTwo();
     this.vowels = this.alphabets.filter(
       (alphabet) => alphabet.type == AlphabetType.VOWEL && alphabet.isChecked
     );
