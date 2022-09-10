@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class LrpActivityService {
-  constructor() {}
+export class LrpLetteringActivityService {
 
+  constructor() { }
   alphabets = [
     {
       id: 1,
@@ -165,7 +165,92 @@ export class LrpActivityService {
     },
   ];
 
+  stageThreeAlphabets = [
+    {
+      id: 1,
+      name: 'Mo',
+      value: 'Mo',
+      isChecked: false,
+    },
+    {
+      id: 2,
+      name: 'So',
+      value: 'So',
+      isChecked: false,
+    },
+    {
+      id: 3,
+      name: 'Bo',
+      value: 'Bo',
+      isChecked: false,
+    },
+    {
+      id: 4,
+      name: 'Fa',
+      value: 'Fa',
+      isChecked: false,
+    },
+    {
+      id: 5,
+      name: 'La',
+      value: 'La',
+      isChecked: false,
+    },
+    {
+      id: 6,
+      name: 'Ma',
+      value: 'Ma',
+      isChecked: false,
+    },
+    {
+      id: 7,
+      name: 'Bi',
+      value: 'Bi',
+      isChecked: false,
+    },
+    {
+      id: 8,
+      name: 'Ra',
+      value: 'Ra',
+      isChecked: false,
+    },
+    {
+      id: 9,
+      name: 'Lo',
+      value: 'Lo',
+      isChecked: false,
+    },
+    {
+      id: 10,
+      name: 'Ba',
+      value: 'Ba',
+      isChecked: false,
+    },
+    {
+      id: 11,
+      name: 'Ta',
+      value: 'Ta',
+      isChecked: false,
+    },
+    {
+      id: 12,
+      name: 'Ka',
+      value: 'Ka',
+      isChecked: false,
+    },
+    {
+      id: 13,
+      name: 'Ga',
+      value: 'Ga',
+      isChecked: false,
+    },
+  ];
+
   GetAlphabet() {
+    return this.alphabets;
+  }
+
+  GetStageTwoAlphabet() {
     return this.alphabets;
   }
 }

@@ -1,0 +1,21 @@
+{
+    "session_id": "8f8d98a7-6d75-4428b9ae",
+    "anwser": "1",
+    "data": [
+        {
+            "id": 1,
+            "name": "a",
+            "type": "VOWEL"
+        },
+        {
+            "id": 2,
+            "name": "b",
+            "type": "CONSONANT"
+        },
+        {
+            "id": 3,
+            "name": "c",
+            "type": "CONSONANT"
+        }
+    ]
+}

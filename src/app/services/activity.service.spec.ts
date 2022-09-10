@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LrpActivityService } from './lrp-activity.service';
+import { ActivityService } from './activity.service';
 
-describe('LrpActivityService', () => {
-  let service: LrpActivityService;
+describe('ActivityService', () => {
+  let service: ActivityService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LrpActivityService);
+    service = TestBed.inject(ActivityService);
   });
 
   it('should be created', () => {

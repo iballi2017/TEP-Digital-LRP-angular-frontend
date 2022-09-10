@@ -18,3 +18,9 @@ export interface GameStageResult {
   session_id: string;
   result: any;
 }
+
+export interface LetteringStageOneResult {
+  session_id: string;
+  answer: string;
+  data: [];
+}

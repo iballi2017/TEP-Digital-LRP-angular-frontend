@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   GameSessionData,
   GameStageResult,
+  LetteringStageOneResult,
   StartGame,
 } from '../models/types/game';
 import { IAppState } from 'src/redux/store';
@@ -14,6 +15,8 @@ import {
   FETCH_GAME_SESSION_SUCCESS,
 } from 'src/redux/_game.store/game.actions';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { LetteringStageOneAnswer } from '../literacy-test/levels/lettering/stages/lettering-stage-one/activity/exercise/exercise.component';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +29,7 @@ export class GameService {
   isCorrectAnswerBehaviorSubject: BehaviorSubject<any> =
     new BehaviorSubject<any>(null);
 
-  constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) {}
+  constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>, private _router: Router) {}
 
   sendIsCorrectAnswerBehaviorSubject(data: any) {
     this.isCorrectAnswerBehaviorSubject.next(data);
@@ -49,6 +52,7 @@ export class GameService {
         type: FETCH_GAME_SESSION_ERROR,
         payload: 'No Session stored',
       });
+      this._router.navigate(['/test-onboarding']);
     }
   }
 
@@ -89,4 +93,11 @@ export class GameService {
   SubmitGameStageResult(_GameStageResult: GameStageResult) {
     return this._http.post(`${this.SubmitGameStage_1_Url}`, _GameStageResult);
   }
+
+
+  SubmitLetteringStageOneResult(_LetteringStageOneResult: LetteringStageOneAnswer) {
+    return this._http.post(`${this.SubmitGameStage_1_Url}`, _LetteringStageOneResult);
+  }
+
+  
 }

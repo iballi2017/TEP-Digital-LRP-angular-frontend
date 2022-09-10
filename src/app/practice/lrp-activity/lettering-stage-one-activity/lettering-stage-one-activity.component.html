@@ -1,23 +1,29 @@
 <p>lettering-stage-one-activity works!</p>
-<table>
+<div class="alert alert-info text-center" *ngIf="isFinishedMessage">{{isFinishedMessage}}</div>
+<table class="table">
     <thead>
         <tr>
             <th>Consonant</th>
             <th>Vowel</th>
+            <th>Selected count</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>{{consonants?.length}}</td>
             <td>{{vowels?.length}}</td>
+            <td>{{this.selectedAlphabets?.length}}</td>
         </tr>
     </tbody>
 </table>
-{{alphabets | json}}
+<!-- {{alphabets | json}} -->
+<div class="alert alert-success">
+    Selected: {{this.selectedAlphabets | json}}
+</div>
 <ul class="list-style-none pl-0" id="activity-canvas">
     <li *ngFor="let item of alphabets">
         <input type="checkbox" id="{{item?.id}}" hidden [(ngModel)]="item.isChecked"
-            [ngModelOptions]="{standalone: true}" (change)="onChecked()">
+            [ngModelOptions]="{standalone: true}" (change)="onChecked(); onSelected(item)">
         <label for="{{item?.id}}">
             <span class="fake-box"
                 [ngClass]="{'right-answer': item.isChecked && item?.type == vowel,'wrong-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>

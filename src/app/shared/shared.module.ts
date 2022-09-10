@@ -35,7 +35,7 @@ import { TopProgressBarComponent } from './components/top-progress-bar/top-progr
     ButtonComponent,
     LevelLoaderComponent,
     SnackbarComponent,
-    TopProgressBarComponent
+    TopProgressBarComponent,
   ],
   imports: [
     CommonModule,

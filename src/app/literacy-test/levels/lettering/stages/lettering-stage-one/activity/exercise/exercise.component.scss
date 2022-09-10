@@ -1,0 +1,114 @@
+.title {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 1.5em;
+    margin-bottom: 3em;
+}
+
+#activity-canvas {
+    // background-color: #a7ae1d;
+    // max-width: calc(1000px + 2em);
+    max-width:1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 1em;
+    padding-left: 1em;
+    // display: grid;
+    // grid-template-columns: repeat(1fr, minmax(80px));
+
+    li {
+        // margin-right: 1em;
+        // margin-bottom: .8em;
+        // padding: .3em;
+        &:last-child {
+            margin-right: 0;
+        }
+
+        .fake-box {
+            &.right-answer {
+                background: #73cf48;
+                border: 7px solid #73cf48;
+                color: #ffffff;
+            }
+            &.wrong-answer {
+                background: #ffffff;
+                border: 7px solid #d93333;
+            }
+        }
+    }
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    &:checked + label {
+        // color: red;
+    }
+    position: absolute;
+    opacity: 0;
+    &:checked + label {
+        color: rgba(76, 111, 53, 1);
+        .fake-box {
+            padding: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            // background: #73cf48;
+            // border: 7px solid #73cf48;
+            &::before {
+                // @include mixins.before("\f00c", 12px);
+                color: #ffffff;
+            }
+        }
+    }
+}
+label {
+    display: flex;
+    align-items: center;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 5.9rem;
+    min-width: 5.9rem;
+    height: 5.9rem;
+    margin-bottom: 0;
+    padding: .3em;
+    position: relative;
+    // z-index: 0;
+    .linen{
+        // position: absolute;
+        // background-color: rgba(255, 255, 255, .3);
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        // z-index: 10;
+    }
+    .fake-box {
+        background-color: #ffffff;
+        border: 7px solid #73cf48;
+        display: block;
+        width: 100%;
+        height: 100%;
+        left: 409px;
+        top: 450px;
+        box-sizing: border-box;
+        // margin-right: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 49px;
+        color: #000000;
+        cursor: pointer;
+    }
+}

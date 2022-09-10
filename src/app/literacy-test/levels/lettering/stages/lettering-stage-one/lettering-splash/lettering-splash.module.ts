@@ -11,6 +11,7 @@ import { FirstScreenComponent } from './first-screen/first-screen.component';
 import { SecondScreenComponent } from './second-screen/second-screen.component';
 import { LetteringSplashComponent } from './lettering-splash.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { InstructionalVidComponent } from './instructional-vid/instructional-vid.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FourthScreenComponent,
     FifthScreenComponent,
     SixthScreenComponent,
+    InstructionalVidComponent,
   ],
   imports: [
     CommonModule,
