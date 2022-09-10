@@ -1,12 +1,20 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity.service';
 import { GameService } from 'src/app/services/game.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import {
   Alphabet,
   AlphabetType,
 } from 'src/assets/data/lettering-stage-alphabets';
+import { IAppState } from 'src/redux/store';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -15,6 +23,7 @@ import {
 })
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
+  @select((s) => s.game.isLoading) isLoading$: any;
   alphabets!: Alphabet[];
   vowel = AlphabetType.VOWEL;
   consonant = AlphabetType.CONSONANT;
@@ -24,10 +33,13 @@ export class ExerciseComponent implements OnInit {
   isFinishedMessage!: string;
   gameSessionId: any;
   successMessage: any;
+  durationInSeconds = 10;
   constructor(
     private _activitySvc: ActivityService,
     private _router: Router,
-    private _gameSvc: GameService
+    private _gameSvc: GameService,
+    private ngRedux: NgRedux<IAppState>,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -95,9 +107,14 @@ export class ExerciseComponent implements OnInit {
     };
     console.log('Payload: ', Payload);
 
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._gameSvc.SubmitLetteringStageOneResult(Payload).subscribe({
       next: (response: any) => {
         if (response) {
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+            payload: Payload,
+          });
           console.log('response: ', response);
           this.successMessage = response?.message;
 
@@ -107,21 +124,40 @@ export class ExerciseComponent implements OnInit {
             this.consonants?.length +
             ' wrong answers!';
           console.log('Payload: ', this.isFinishedMessage);
+          this.openSnackBar(response?.message);
 
           setTimeout(() => {
             this.isFinishedMessage = '';
-            this.successMessage = ''
-          }, 10000);
-
-          alert('completed!!!');
-          // this._router.navigate(['/literacy/stage-completion']);
+            this.successMessage = '';
+            this.vowels = [];
+            this.selectedAlphabets = [];
+            this.consonants = [];
+            alert('completed!!!');
+            this._router.navigate(['/literacy/stage-completion']);
+          }, 6000);
         }
       },
       error: (err: any) => {
         if (err) {
           console.log('Error: ', err);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+            payload: err,
+          });
         }
       },
+    });
+  }
+
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  openSnackBar(data: any) {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: data,
     });
   }
 }

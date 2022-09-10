@@ -1,6 +1,10 @@
 import { select } from '@angular-redux/store';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { GameSessionData, GameStageResult } from 'src/app/models/types/game';
 import { GameService } from 'src/app/services/game.service';
@@ -75,17 +79,10 @@ export class StageCompletionComponent implements OnInit {
     console.log('$event: ', $event);
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
-    }
-    const GameStageResult: GameStageResult = {
-      session_id: this.gameSessionId,
-      result: this.gameResult,
-    };
-    console.log('GameStageResult: ', GameStageResult);
-    this.SubmitStageResult(
-      GameStageResult,
-      `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`
-    );
-    // this.openSnackBar('Letter Level stage One (1) saved successfully');
+    }    
+    setTimeout(() => {
+      this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
+    }, 3000);
   }
 
   onEndAssessment($event: any) {
@@ -93,12 +90,7 @@ export class StageCompletionComponent implements OnInit {
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
     }
-    const GameStageResult: GameStageResult = {
-      session_id: this.gameSessionId,
-      result: this.gameResult,
-    };
-    console.log('GameStageResult: ', GameStageResult);
-    this.SubmitStageResult(GameStageResult, `/literacy/levels/lettering`);
+    this._router.navigate([`/literacy/levels/lettering`]);
   }
 
   SubmitStageResult(GameStageResult: GameStageResult, NextPage: string) {
@@ -107,10 +99,6 @@ export class StageCompletionComponent implements OnInit {
         if (response) {
           console.log('response: ', response);
           this.openSnackBar(response?.message);
-          // ***response***
-          // message: 'Letter Level stage One (1) saved successfully';
-          // session_id: '55f2cdc3-b44e-44d4abff';
-          // status: 'success';
           setTimeout(() => {
             this._router.navigate([NextPage]);
           }, 3000);

@@ -7,72 +7,35 @@ import {
   FETCH_GAME_SESSION,
   FETCH_GAME_SESSION_ERROR,
   FETCH_GAME_SESSION_SUCCESS,
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
 } from './game.actions';
+import {
+  AddGameSession,
+  AddGameSessionFailure,
+  AddGameSessionSuccess,
+  FetchGameSession,
+  FetchGameSessionFailure,
+  FetchGameSessionSuccess,
+  SubmitGameStageResult,
+  SubmitGameStageResultFailure,
+  SubmitGameStageResultSuccess,
+} from './game.function';
 import { INITIAL_GAME_STATE, LRP_GameState } from './game.store';
-
-// ADD OCCUPANT
-
-const AddGameSession = (state: LRP_GameState, action: any) => {
-  return tassign(state, {
-    isLoading: true,
-  });
-};
-
-const AddGameSessionSuccess = (state: LRP_GameState, action: any) => {
-  console.log('action*****: ', action);
-  var newGameSession = {
-    // id: state.reportsList?.length + 1,
-    id: new Date().getTime().toString(),
-    ...action.payload,
-  };
-  // var newGameSession = { id: action.todo.id, title: action.todo.title };
-  console.log('newGameSession*****: ', newGameSession);
-  let sessionData = JSON.stringify(newGameSession);
-  // localStorage.setItem(GameSessionData.name, sessionData);
-  sessionStorage.setItem(GameSessionData.name, sessionData);
-  const gameResult = {}
-  let result = JSON.stringify(gameResult);
-  // localStorage.setItem(GameSessionData.result, result);
-  sessionStorage.setItem(GameSessionData.result, result);
-
-  return tassign(state, {
-    // gameSession: action.payload,
-    gameSession: newGameSession,
-    gameResult: gameResult,
-    isLoading: false,
-    // lastUpdate: new Date(),
-  });
-};
-
-const AddGameSessionFailure = (state: LRP_GameState, action: any) => {
-  return tassign(state, {
-    error: action.error,
-    isLoading: false,
-  });
-};
 
 export function GameReducer(
   state: LRP_GameState | any = INITIAL_GAME_STATE,
   action: any
 ): LRP_GameState {
   switch (action.type) {
+    // FETCH_GAME_SESSION
     case FETCH_GAME_SESSION:
-      console.log('load gameSession action: ', action);
-      return tassign(state, {
-        isLoading: true,
-      });
+      return FetchGameSession(state, action);
     case FETCH_GAME_SESSION_SUCCESS:
-      console.log('load gameSession action: ', action);
-      return tassign(state, {
-        gameSession: action.payload,
-        isLoading: false,
-      });
-
+      return FetchGameSessionSuccess(state, action);
     case FETCH_GAME_SESSION_ERROR:
-      console.log('load gameSession action: ', action);
-      return tassign(state, {
-        error: action.payload,
-      });
+      return FetchGameSessionFailure(state, action);
 
     // ADD_GAME_SESSION
     case ADD_GAME_SESSION:
@@ -81,6 +44,14 @@ export function GameReducer(
       return AddGameSessionSuccess(state, action);
     case ADD_GAME_SESSION_ERROR:
       return AddGameSessionFailure(state, action);
+
+    // ADD_GAME_SESSION
+    case SUBMIT_GAME_STAGE_RESULT:
+      return SubmitGameStageResult(state, action);
+    case SUBMIT_GAME_STAGE_RESULT_SUCCESS:
+      return SubmitGameStageResultSuccess(state, action);
+    case SUBMIT_GAME_STAGE_RESULT_ERROR:
+      return SubmitGameStageResultFailure(state, action);
   }
   return state;
 }

@@ -10,11 +10,15 @@
     margin-bottom: 3em;
 }
 
+.canvas-wrapper{
+    max-width:1000px;
+    margin: 0 auto;
+}
+
 #activity-canvas {
     // background-color: #a7ae1d;
     // max-width: calc(1000px + 2em);
-    max-width:1000px;
-    margin: 0 auto;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
