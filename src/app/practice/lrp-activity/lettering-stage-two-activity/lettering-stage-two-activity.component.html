@@ -1,50 +1,12 @@
 <p>lettering-stage-two-activity works!</p>
-<div class="canvas-wrapper">
-    <!-- <div class="alert alert-info text-center" *ngIf="isFinishedMessage">{{isFinishedMessage}}</div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Consonant</th>
-                <th>Vowel</th>
-                <th>Selected count</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{consonants?.length}}</td>
-                <td>{{vowels?.length}}</td>
-                <td>{{this.selectedAlphabets?.length}}</td>
-            </tr>
-        </tbody>
-    </table> -->
-    <!-- {{alphabets | json}} -->
-    <!-- <div class="alert alert-success">
-        Selected: {{this.selectedAlphabets | json}}
-    </div> -->
-    <div id="result-screen">
-        <div class="inner">
-            <ul class="list-style-none" id="result-list">
-                <li *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 'a', 'b', 'c', 'd']">
-                    at
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div id="output-screen">
-        <div class="inner">
-            <div class="obj" id="first-obj">{{selectedAlphabets[0]?.name}}</div>
-            <button id="operator" class="btn"></button>
-            <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name}}</div>
-        </div>
-    </div>
-    <ul class="list-style-none pl-0" id="activity-canvas">
-        <li *ngFor="let item of consonants | slice:0:9">
-            <input type="checkbox" id="{{item?.id}}" hidden [(ngModel)]="item.isChecked"
-                [ngModelOptions]="{standalone: true}" (change)="onChecked(); onSelected(item)">
-            <label for="{{item?.id}}">
-                <span class="fake-box"
-                    [ngClass]="{'right-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>
-            </label>
+<nav>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/practice/lrp-activity/ui-sample-two']" routerLinkActive="router-link-active" >Type One</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/practice/lrp-activity/ui-sample-two/type-two']" routerLinkActive="router-link-active" >Type Two</a>
         </li>
     </ul>
-</div>
+</nav>
+<router-outlet></router-outlet>
