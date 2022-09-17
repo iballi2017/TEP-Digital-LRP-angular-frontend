@@ -1,7 +1,7 @@
 @use "../_partials/mixins";
 
 #ui-template-sample-one {
-    .inner {
+  >  .inner {
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;

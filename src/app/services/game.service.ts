@@ -16,7 +16,7 @@ import {
 } from 'src/redux/_game.store/game.actions';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { LetteringStageOneAnswer } from '../literacy-test/levels/lettering/stages/lettering-stage-one/activity/exercise/exercise.component';
+
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,7 @@ export class GameService {
   // FetchUserByIdrUrl = baseUrl + '/fetch-user-by-id';
   // UpdatePasswordUrl = baseUrl + '/update-user-password';
   SubmitGameStage_1_Url = baseUrl + '/submit-letter-stage-1';
+  SubmitGameStage_2_Url = baseUrl + '/submit-letter-stage-2';
   isCorrectAnswerBehaviorSubject: BehaviorSubject<any> =
     new BehaviorSubject<any>(null);
 
@@ -95,9 +96,20 @@ export class GameService {
   }
 
 
-  SubmitLetteringStageOneResult(_LetteringStageOneResult: LetteringStageOneAnswer) {
+  SubmitLetteringStageOneResult(_LetteringStageOneResult: any) {
     return this._http.post(`${this.SubmitGameStage_1_Url}`, _LetteringStageOneResult);
   }
 
+  SubmitLetteringStageTwoResult(_LetteringStageTwoResult: any){
+    return this._http.post(`${this.SubmitGameStage_2_Url}`, _LetteringStageTwoResult);
+  }
+
   
+}
+
+
+export interface LetteringStageOneAnswer {
+  session_id: string;
+  answer: string;
+  data: any[];
 }

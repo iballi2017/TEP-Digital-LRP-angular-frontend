@@ -1,18 +1,26 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ActivityService } from 'src/app/services/activity.service';
+import { Alphabet, AlphabetType } from 'src/app/models/types/alphabet';
 import { GameService } from 'src/app/services/game.service';
+import { StageTwoActivityService } from 'src/app/services/stage-two-activity.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
-import { Alphabet, AlphabetType } from 'src/assets/data/lettering-stage-alphabets';
 import { IAppState } from 'src/redux/store';
-import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.scss']
+  styleUrls: ['./exercise.component.scss'],
 })
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
@@ -28,7 +36,7 @@ export class ExerciseComponent implements OnInit {
   successMessage: any;
   durationInSeconds = 10;
   constructor(
-    private _activitySvc: ActivityService,
+    private _stageTwoActivitySvc: StageTwoActivityService,
     private _router: Router,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
@@ -51,7 +59,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   onGetAlphabet() {
-    this.alphabets = this._activitySvc.GetAlphabetForStageTwo();
+    this.alphabets = this._stageTwoActivitySvc.GetAlphabetForStageTwo();
     this.vowels = this.alphabets.filter(
       (alphabet) => alphabet.type == AlphabetType.VOWEL && alphabet.isChecked
     );
@@ -101,7 +109,7 @@ export class ExerciseComponent implements OnInit {
     console.log('Payload: ', Payload);
 
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._gameSvc.SubmitLetteringStageOneResult(Payload).subscribe({
+    this._gameSvc.SubmitLetteringStageTwoResult(Payload).subscribe({
       next: (response: any) => {
         if (response) {
           this.ngRedux.dispatch({
@@ -141,7 +149,6 @@ export class ExerciseComponent implements OnInit {
       },
     });
   }
-
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';

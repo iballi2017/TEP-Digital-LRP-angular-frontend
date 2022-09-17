@@ -1,7 +1,8 @@
 @use "../../../../../sass/_partials/mixins";
 
 .bg-classroom {
-    background-image: url(../../assets_/images/blackboard.jpg);
+    // background-image: url(../../practice-assets/images/blackboard.jpg);
+    background-image: url(../../../../../assets/images/blackboard.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

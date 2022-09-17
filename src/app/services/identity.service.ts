@@ -16,7 +16,7 @@ import { UpdatePassword, UpdateUserModel } from '../models/types/user';
 })
 export class IdentityService {
   UpdateUserUrl = baseUrl + '/update-user-profile';
-  FetchUserByIdrUrl = baseUrl + '/fetch-user-by-id';
+  FetchUserByIdUrl = baseUrl + '/fetch-user-by-id';
   UpdatePasswordUrl = baseUrl + '/update-user-password';
 
   constructor(
@@ -35,14 +35,14 @@ export class IdentityService {
   }
 
   getUserById() {
-    // return this._http.get(`${this.FetchUserByIdrUrl}/${userId}`)
+    // return this._http.get(`${this.FetchUserByIdUrl}/${userId}`)
     let userData: any;
     let storedData = this.getLoggedInUserData();
     console.log('  userData: ', userData);
     this.ngRedux.dispatch({ type: FETCH_USER_DETAILS });
     if (storedData) {
       this._http
-        .get(`${this.FetchUserByIdrUrl}/${storedData?.usr_id}`)
+        .get(`${this.FetchUserByIdUrl}/${storedData?.usr_id}`)
         .subscribe({
           next: (response: any) => {
             if (response) {

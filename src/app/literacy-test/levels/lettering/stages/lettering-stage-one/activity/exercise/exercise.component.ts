@@ -6,13 +6,11 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ActivityService } from 'src/app/services/activity.service';
-import { GameService } from 'src/app/services/game.service';
+import { Alphabet, AlphabetType } from 'src/app/models/types/alphabet';
+import { GameService, LetteringStageOneAnswer } from 'src/app/services/game.service';
+import { StageOneActivityService } from 'src/app/services/stage-one-activity.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
-import {
-  Alphabet,
-  AlphabetType,
-} from 'src/assets/data/lettering-stage-alphabets';
+
 import { IAppState } from 'src/redux/store';
 import {
   SUBMIT_GAME_STAGE_RESULT,
@@ -39,7 +37,7 @@ export class ExerciseComponent implements OnInit {
   successMessage: any;
   durationInSeconds = 10;
   constructor(
-    private _activitySvc: ActivityService,
+    private _stageOneActivitySvc: StageOneActivityService,
     private _router: Router,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
@@ -62,8 +60,8 @@ export class ExerciseComponent implements OnInit {
   }
 
   onGetAlphabet() {
-    // this.alphabets = this._activitySvc.GetAlphabet();
-    const l = this._activitySvc.GetAlphabet();
+    // this.alphabets = this._stageOneActivitySvc.GetAlphabet();
+    const l = this._stageOneActivitySvc.GetAlphabetList();
     this.alphabets = Object.assign([], l);
     this.vowels = this.alphabets.filter(
       (alphabet) => alphabet.type == AlphabetType.VOWEL && alphabet.isChecked
@@ -96,7 +94,7 @@ export class ExerciseComponent implements OnInit {
       }
     }
 
-    if (this.vowels.length == 5) {
+    if (this.vowels.length > 6) {
       this.onSumbit();
     }
   }
@@ -108,8 +106,8 @@ export class ExerciseComponent implements OnInit {
   onSumbit() {
     const Payload: LetteringStageOneAnswer = {
       session_id: this.gameSessionId,
-      anwser: '1',
-      result: this.selectedAlphabets,
+      answer: '1',
+      data: [...this.selectedAlphabets],
     };
     console.log('Payload: ', Payload);
 
@@ -167,8 +165,8 @@ export class ExerciseComponent implements OnInit {
   }
 }
 
-export interface LetteringStageOneAnswer {
-  session_id: string;
-  anwser: string;
-  result: any[];
-}
+// export interface LetteringStageOneAnswer {
+//   session_id: string;
+//   anwser: string;
+//   result: any[];
+// }

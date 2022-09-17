@@ -39,11 +39,10 @@
     <ul class="list-style-none pl-0" id="activity-canvas">
         <li *ngFor="let item of alphabets">
             <input type="checkbox" id="{{item?.id}}" hidden [(ngModel)]="item.isChecked"
-                [ngModelOptions]="{standalone: true}" (change)="onChecked(); onSelected(item)"
-                [disabled]="consonants?.length == 5">
+                [ngModelOptions]="{standalone: true}" (change)="onChecked(); onSelected(item)">
             <label for="{{item?.id}}">
                 <span class="fake-box"
-                    [ngClass]="{'right-answer': item.isChecked && item?.type == vowel,'wrong-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>
+                    [ngClass]="{'right-answer': item.isChecked && item?.type == consonant,'wrong-answer': item.isChecked && item?.type == vowel}">{{item?.name}}</span>
                 <span class="linen"></span>
             </label>
         </li>

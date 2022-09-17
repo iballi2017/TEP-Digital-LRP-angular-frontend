@@ -18,6 +18,7 @@ import { LevelLoaderComponent } from './views/level-loader/level-loader.componen
 import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TopProgressBarComponent } from './components/top-progress-bar/top-progress-bar.component';
+import { AudienceApplauseComponent } from './components/audience-applause/audience-applause.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TopProgressBarComponent } from './components/top-progress-bar/top-progr
     LevelLoaderComponent,
     SnackbarComponent,
     TopProgressBarComponent,
+    AudienceApplauseComponent,
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ import { TopProgressBarComponent } from './components/top-progress-bar/top-progr
     StageCompletionComponent,
     ButtonComponent,
     LevelLoaderComponent,
-    TopProgressBarComponent
+    TopProgressBarComponent,
+    AudienceApplauseComponent,
   ],
 })
 export class SharedModule {}

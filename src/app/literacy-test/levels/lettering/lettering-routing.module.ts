@@ -70,9 +70,9 @@ const routes: Routes = [
       {
         path: 'activity',
         loadChildren: () =>
-          import(
-            './stages/lettering-stage-one/activity/activity.module'
-          ).then((m) => m.ActivityModule),
+          import('./stages/lettering-stage-one/activity/activity.module').then(
+            (m) => m.ActivityModule
+          ),
       },
     ],
   },
@@ -111,8 +111,17 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'stage-3',
+    path: 'lettering/stage-3',
     component: LetteringStageThreeComponent,
+    children: [
+      {
+        path: 'activity',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-three/lettering-stage-three-activity/lettering-stage-three-activity.module'
+          ).then((m) => m.LetteringStageThreeActivityModule),
+      },
+    ],
   },
   {
     path: 'stage-4',

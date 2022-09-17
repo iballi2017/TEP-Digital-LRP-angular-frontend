@@ -1,0 +1,36 @@
+<!-- <p>exercise-two works!</p> -->
+
+
+<div class="canvas-wrapper">
+    <!-- <div class="text-white">
+        {{resultTwoLetterWords | json}}
+    </div> -->
+    <div id="result-screen">
+        <div class="inner">
+            <ul class="list-style-none" id="result-list">
+                <li *ngFor="let item of resultFourLetterWords">
+                    <!-- at -->
+                    <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="output-screen">
+        <div class="inner">
+            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">{{selectedAlphabets[0]?.name}}</div>
+            <button id="operator" class="btn"></button>
+            <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name}}</div>
+        </div>
+    </div>
+    <!-- <div class="alert alert-danger">{{this.selectedAlphabets.length | json}}
+        &nbsp;
+        {{this.selectedAlphabets | json}}</div> -->
+    <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
+        <li *ngFor="let item of exerciseAlphabets">
+            <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name}}</button>
+        </li>
+    </ul>
+</div>
+
+<!-- <app-audience-applause (onPlayApplause)="onPlayApplause()"></app-audience-applause> -->
+<!-- <app-voice-audio-player [audioFile]="srcFile"></app-voice-audio-player> -->
