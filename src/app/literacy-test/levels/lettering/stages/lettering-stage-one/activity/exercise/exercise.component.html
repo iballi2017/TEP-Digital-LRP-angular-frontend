@@ -1,5 +1,4 @@
 <!-- <p>exercise works!</p> -->
-<h1 class="title">Identify vowel letters among the alphabets</h1>
 
 <!-- <div class="card">
     <div class="card-body">
@@ -23,27 +22,38 @@
     </div>
 </div> -->
 <!-- {{alphabets | json}} -->
-<!-- <div class="alert alert-success">
+<!-- <div class="alert alert-info">
     Selected: {{this.selectedAlphabets | json}}
+</div>
+<div class="alert alert-success">
+    Selected: {{this.vowels | json}}
 </div> -->
 <div class="canvas-wrapper">
-    <ng-container *ngIf="(isLoading$ | async)">
+    <h1 class="title">Identify vowel letters among the alphabets</h1>
+    <!-- <ng-container *ngIf="(isLoading$ | async)">
         <small class="text-white">Loading...</small>
-    </ng-container>
+    </ng-container> -->
     <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
         <p>{{successMessage}}<br />
             {{isFinishedMessage}}
         </p>
     </div>
-    <ul class="list-style-none pl-0" id="activity-canvas">
+    <ul class="keyboard list-style-none pl-0" id="activity-canvas" [ngClass]="{'isLoading': (isLoading$ | async)}">
         <li *ngFor="let item of alphabets">
-            <input type="checkbox" id="{{item?.id}}" hidden [(ngModel)]="item.isChecked"
-                [ngModelOptions]="{standalone: true}" (change)="onChecked(); onSelected(item)">
-            <label for="{{item?.id}}">
+            <input type="checkbox" id="{{item?.name}}" hidden [(ngModel)]="item.isChecked"
+                [ngModelOptions]="{standalone: true}" (change)="onSelected(item)">
+            <label for="{{item?.name}}">
                 <span class="fake-box"
                     [ngClass]="{'right-answer': item.isChecked && item?.type == vowel,'wrong-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>
                 <span class="linen"></span>
             </label>
         </li>
     </ul>
+    <!--  -->
+    <!-- <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
+        <li *ngFor="let item of alphabets">
+            <button class="btn key rounded-0" (click)="onSelected(item)">{{item?.name}}</button>
+
+        </li>
+    </ul> -->
 </div>

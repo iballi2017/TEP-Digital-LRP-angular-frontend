@@ -1,0 +1,37 @@
+<!-- <p>exercise works!</p> -->
+
+<div class="canvas-wrapper">
+    <div id="result-screen-type-2">
+        <div class="inner">
+            <ul class="list-style-none" id="result-list">
+                <!-- <li *ngFor="let item of resultTwoLetterWords"> -->
+                <li *ngFor="let item of resultLetterWords">
+                    <!-- at -->
+                    <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name | uppercase}}</span>
+                    <!-- <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name}}</span> -->
+                </li>
+            </ul>
+            <!-- <ul class="list-style-none" id="result-list">
+                <li *ngFor="let item of resultTwoLetterWords">
+                <li *ngFor="let item of [1, 2, 3]">
+                    at
+                    <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name}}</span>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    
+    <div id="output-screen">
+        <div class="inner">
+            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">{{selectedAlphabets[0]?.name | uppercase}}</div>
+            <button id="operator" class="btn"></button>
+            <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name | uppercase}}</div>
+        </div>
+    </div>
+
+    <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
+        <li *ngFor="let item of actionAlphabets">
+            <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name | uppercase}}</button>
+        </li>
+    </ul>
+</div>

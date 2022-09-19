@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameStage } from 'src/app/models/types/game-stage';
 import { LetteringStageCompletionComponent } from './lettering-stage-completion/lettering-stage-completion.component';
 import { LetteringStageFourComponent } from './stages/lettering-stage-four/lettering-stage-four.component';
 import { FifthScreenComponent } from './stages/lettering-stage-one/lettering-splash/fifth-screen/fifth-screen.component';
@@ -11,12 +13,12 @@ import { SixthScreenComponent } from './stages/lettering-stage-one/lettering-spl
 import { ThirdScreenComponent } from './stages/lettering-stage-one/lettering-splash/third-screen/third-screen.component';
 import { LetteringStageOneComponent } from './stages/lettering-stage-one/lettering-stage-one.component';
 import { LetteringStageThreeComponent } from './stages/lettering-stage-three/lettering-stage-three.component';
-import { FirstScreenConsonantSplashComponent } from './stages/lettering-stage-two/consonants-lettering-splash/first-screen-consonant-splash/first-screen-consonant-splash.component';
+import { FirstScreenConsonantSplashComponent } from './stages/lettering-stage-two/lettering-stage-two-splash/first-screen-consonant-splash/first-screen-consonant-splash.component';
 import { LetteringStageTwoComponent } from './stages/lettering-stage-two/lettering-stage-two.component';
 
 const routes: Routes = [
   {
-    path: 'lettering/stage-1',
+    path: `${GameLevel.LETTER}/stage-${GameStage.ONE}`,
     component: LetteringStageOneComponent,
     children: [
       // {
@@ -84,15 +86,15 @@ const routes: Routes = [
   //     ),
   // },
   {
-    path: 'lettering/stage-2',
+    path: `${GameLevel.LETTER}/stage-${GameStage.TWO}`,
     component: LetteringStageTwoComponent,
     children: [
       {
         path: 'lettering-splash',
         loadChildren: () =>
           import(
-            './stages/lettering-stage-two/consonants-lettering-splash/consonants-lettering-splash.module'
-          ).then((m) => m.ConsonantsLetteringSplashModule),
+            './stages/lettering-stage-two/lettering-stage-two-splash/lettering-stage-two-splash.module'
+          ).then((m) => m.LetteringStageTwoSplashModule),
       },
       {
         path: 'pronunciation',
@@ -111,9 +113,16 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'lettering/stage-3',
+    path: `${GameLevel.LETTER}/stage-${GameStage.THREE}`,
     component: LetteringStageThreeComponent,
     children: [
+      {
+        path: 'lettering-splash',
+        loadChildren: () =>
+          import(
+            './stages/lettering-stage-three/lettering-stage-three-splash/lettering-stage-three-splash.module'
+          ).then((m) => m.LetteringStageThreeSplashModule),
+      },
       {
         path: 'activity',
         loadChildren: () =>
@@ -124,11 +133,11 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'stage-4',
+    path: `${GameLevel.LETTER}/stage-${GameStage.THREE}`,
     component: LetteringStageFourComponent,
   },
   {
-    path: 'stage-completion',
+    path: 'stage-completion/:game-level/:stage-number',
     component: LetteringStageCompletionComponent,
   },
 ];

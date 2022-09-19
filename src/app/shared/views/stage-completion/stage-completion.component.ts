@@ -57,6 +57,7 @@ export class StageCompletionComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.onGetGameSessionId();
     this.onGetStageResult();
+
   }
 
   onGetGameSessionId() {
@@ -81,6 +82,7 @@ export class StageCompletionComponent implements OnInit {
       this._router.navigate(['/']);
     }    
     setTimeout(() => {
+      // this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
       this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
     }, 3000);
   }

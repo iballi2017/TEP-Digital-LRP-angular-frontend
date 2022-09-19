@@ -7,5 +7,9 @@ export const handleError = (errorResponse: HttpErrorResponse) => {
   } else {
     console.error('Server Side Error: ', errorResponse);
   }
-  return throwError('There is a problem with the service. We are notified & working on it. Please try again later');
+  return throwError({
+    error: errorResponse,
+    message:
+      'There is a problem with the service. We are notified & working on it. Please try again later',
+  });
 };

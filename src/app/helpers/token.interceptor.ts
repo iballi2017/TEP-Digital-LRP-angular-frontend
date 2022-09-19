@@ -7,12 +7,18 @@ import {
   HttpEventType,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { BehaviorSubject, filter, Observable, throwError,
+import {
+  BehaviorSubject,
+  filter,
+  Observable,
+  throwError,
   tap,
   switchMap,
   take,
-  catchError} from 'rxjs';
+  catchError,
+} from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -20,7 +26,10 @@ export class TokenInterceptor implements HttpInterceptor {
   private RefreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
     null
   );
-  constructor(private _authenticationSvc: AuthenticationService) {}
+  constructor(
+    private _authenticationSvc: AuthenticationService,
+    private _router: Router
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -51,6 +60,9 @@ export class TokenInterceptor implements HttpInterceptor {
           Response: err.error,
         };
         console.log('errorMessage from Interceptor: ', errormgs);
+        if (errormgs?.Response?.error == 'Expired token') {
+          this._router.navigate(['/auth']);
+        }
         // return throwError(errormgs);
         return throwError(() => err);
       })
@@ -63,7 +75,6 @@ export class TokenInterceptor implements HttpInterceptor {
     });
   }
 
-  
   private Handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.IsRefreshing) {
       this.IsRefreshing = true;

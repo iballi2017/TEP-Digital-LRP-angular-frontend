@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-consonants-lettering-splash',
-  templateUrl: './consonants-lettering-splash.component.html',
-  styleUrls: ['./consonants-lettering-splash.component.scss']
+  selector: 'app-lettering-stage-three-splash',
+  templateUrl: './lettering-stage-three-splash.component.html',
+  styleUrls: ['./lettering-stage-three-splash.component.scss']
 })
-export class ConsonantsLetteringSplashComponent implements OnInit {
+export class LetteringStageThreeSplashComponent implements OnInit {
   menuList = [
     {
       title: 'LITERACY',

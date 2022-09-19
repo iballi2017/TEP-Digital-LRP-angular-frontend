@@ -71,7 +71,9 @@ export class AuthenticationService {
 
   RegisterUser(Payload: UserRegister) {
     this.isRegistrationSending = true;
-    return this._http.post(this.RegisterUserUrl, Payload);
+    return this._http
+      .post(this.RegisterUserUrl, Payload)
+      .pipe(catchError(handleError));
   }
 
   isLogin() {
@@ -96,7 +98,8 @@ export class AuthenticationService {
           console.log('NEW DATA UserModel: ', UserModel);
           this.setToken(UserModel.AccessToken);
           localStorage.setItem('RefreshToken', UserModel.RefreshToken);
-        })
+        }),
+        catchError(handleError)
       );
   }
 
@@ -108,9 +111,9 @@ export class AuthenticationService {
     return localStorage.getItem('RefreshToken');
   }
 
-
-  resetUserPassword(ChangePasswordData:ChangePasswordData){
-return this._http.post(this.ResetUserPasswordUrl, ChangePasswordData);
+  resetUserPassword(ChangePasswordData: ChangePasswordData) {
+    return this._http.post(this.ResetUserPasswordUrl, ChangePasswordData)
+    .pipe(catchError(handleError));
   }
 
   logoutUser() {
@@ -119,8 +122,7 @@ return this._http.post(this.ResetUserPasswordUrl, ChangePasswordData);
   }
 }
 
-
-export interface ChangePasswordData{
-  reset_selector: string,
-  usr_password: string,
+export interface ChangePasswordData {
+  reset_selector: string;
+  usr_password: string;
 }

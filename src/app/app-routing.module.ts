@@ -42,7 +42,7 @@ const routes: Routes = [
       import('./account/account.module').then((m) => m.AccountModule),
   },
   {
-    path: 'shared',
+    path: 'shared/new-task-loading/:game-level/:stageNumber',
     canActivate: [AuthGuard],
     loadChildren: () =>
       import('./shared/shared.module').then((s) => s.SharedModule),

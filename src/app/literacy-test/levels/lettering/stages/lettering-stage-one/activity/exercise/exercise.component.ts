@@ -1,5 +1,5 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -7,7 +7,12 @@ import {
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Alphabet, AlphabetType } from 'src/app/models/types/alphabet';
-import { GameService, LetteringStageOneAnswer } from 'src/app/services/game.service';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
+import {
+  GameService,
+  LetteringStageOneAnswer,
+} from 'src/app/services/game.service';
 import { StageOneActivityService } from 'src/app/services/stage-one-activity.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 
@@ -36,6 +41,8 @@ export class ExerciseComponent implements OnInit {
   gameSessionId: any;
   successMessage: any;
   durationInSeconds = 10;
+  stageNumber: number = 1;
+  gameLevel = GameLevel.LETTER;
   constructor(
     private _stageOneActivitySvc: StageOneActivityService,
     private _router: Router,
@@ -73,6 +80,8 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSelected(Alphabet: any) {
+    console.log('Alphabet: ', Alphabet);
+    this.onGetAlphabet();
     let itemExists = false;
     let AlphabetItem = {
       id: Alphabet.id,
@@ -84,7 +93,7 @@ export class ExerciseComponent implements OnInit {
     } else {
       for (let item of this.selectedAlphabets) {
         // console.log('item: ', item);
-        if (item?.id == Alphabet?.id) {
+        if (item?.name == Alphabet?.name) {
           // console.log(item, ' exists');
           itemExists = true;
         }
@@ -94,16 +103,12 @@ export class ExerciseComponent implements OnInit {
       }
     }
 
-    if (this.vowels.length > 6) {
-      this.onSumbit();
+    if (this.vowels.length > 4) {
+      this.onSubmit();
     }
   }
 
-  onChecked() {
-    this.onGetAlphabet();
-  }
-
-  onSumbit() {
+  onSubmit() {
     const Payload: LetteringStageOneAnswer = {
       session_id: this.gameSessionId,
       answer: '1',
@@ -137,7 +142,9 @@ export class ExerciseComponent implements OnInit {
             this.selectedAlphabets = [];
             this.consonants = [];
             alert('completed!!!');
-            this._router.navigate(['/literacy/stage-completion']);
+            this._router.navigate([
+              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`
+            ]);
           }, 6000);
         }
       },

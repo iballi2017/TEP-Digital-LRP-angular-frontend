@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GameType } from 'src/app/models/types/game';
+import { GameLevel } from 'src/app/models/types/game-level';
 
 @Component({
   selector: 'app-lettering',
@@ -12,7 +14,11 @@ export class LetteringComponent implements OnInit {
     { id: 3, title: 'stage-3' },
     { id: 4, title: 'stage-4' },
   ];
+  // url='/literacy/lettering/';
+  // url = `${GameType.Literacy}/${GameLevel.LETTER}`
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.url = `${GameType.Literacy}/${GameLevel.LETTER}`
+  }
 }

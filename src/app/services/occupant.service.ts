@@ -1,7 +1,7 @@
 import { NgRedux } from '@angular-redux/store';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription } from 'rxjs';
 import { IAppState } from 'src/redux/store';
 import {
   ADD_OCCUPANT,
@@ -15,6 +15,7 @@ import {
   FETCH_SINGLE_OCCUPANT_SUCCESS,
 } from 'src/redux/_occupant.store/occupant.actions';
 import { baseUrl } from '../config/api';
+import { handleError } from '../helpers/errorHandler';
 
 @Injectable({
   providedIn: 'root',
@@ -81,7 +82,8 @@ export class OccupantService implements OnDestroy {
 
   UpdateOccupantDetails(Occupant: Occupant) {
     // UpdateOccupantAccountUrl
-    return this._http.post(this.UpdateOccupantAccountUrl, Occupant);
+    return this._http.post(this.UpdateOccupantAccountUrl, Occupant)
+    .pipe(catchError(handleError));
   }
 
   RemoveOccupant(Item: any) {
@@ -94,7 +96,8 @@ export class OccupantService implements OnDestroy {
     return this._http.post(
       'https://lrp.mainlandcode.com/v1/api/delete-occupant',
       x
-    );
+    )
+    .pipe(catchError(handleError));
     // return this._http.delete(`${this.RemoveOccupantUrl}/${Item?.occ_id}`);
   }
 

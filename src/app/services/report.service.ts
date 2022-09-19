@@ -1,7 +1,7 @@
 import { NgRedux } from '@angular-redux/store';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { map, Observable, Subscription } from 'rxjs';
+import { catchError, map, Observable, Subscription } from 'rxjs';
 import { IAppState } from 'src/redux/store';
 import {
   FETCH_GAME_RESULT_DETAILS,
@@ -12,6 +12,7 @@ import {
   FETCH_REPORTS_LIST_SUCCESS,
 } from 'src/redux/_report.store/report.actions';
 import { baseUrl } from '../config/api';
+import { handleError } from '../helpers/errorHandler';
 import { GameReport, SessionId } from '../models/types/game-report';
 
 @Injectable({
@@ -33,7 +34,7 @@ export class ReportService implements OnDestroy {
   constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) {}
 
   GetReports(): Observable<any> {
-    return this._http.get<any>(this.testUrl);
+    return this._http.get<any>(this.testUrl).pipe(catchError(handleError));
   }
 
   LoadReports() {
@@ -95,7 +96,8 @@ export class ReportService implements OnDestroy {
           }
           console.log('reportList%%%%%: ', reportList);
           return reportList;
-        })
+        }),
+        catchError(handleError)
       )
       .subscribe({
         next: (response: any) => {
@@ -128,7 +130,8 @@ export class ReportService implements OnDestroy {
         map((response: any) => {
           console.log('response details: ', response);
           return response;
-        })
+        }),
+        catchError(handleError)
       )
       .subscribe({
         next: (resultDetails: any) => {
@@ -156,7 +159,8 @@ export class ReportService implements OnDestroy {
   RemoveReport(sessionId: SessionId) {
     console.log('sessionId: ', sessionId);
     // return this._http.delete(`${this.testUrl}/${reportId}`);
-    return this._http.post(`${this.DeleteUserGameResultUrl}`, sessionId);
+    return this._http.post(`${this.DeleteUserGameResultUrl}`, sessionId)
+    .pipe(catchError(handleError));
   }
 
   ngOnDestroy(): void {

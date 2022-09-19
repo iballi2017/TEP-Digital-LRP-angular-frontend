@@ -7,6 +7,8 @@ import {
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Alphabet, AlphabetType } from 'src/app/models/types/alphabet';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
 import { GameService } from 'src/app/services/game.service';
 import { StageTwoActivityService } from 'src/app/services/stage-two-activity.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
@@ -29,12 +31,15 @@ export class ExerciseComponent implements OnInit {
   vowel = AlphabetType.VOWEL;
   consonant = AlphabetType.CONSONANT;
   vowels!: Alphabet[];
+  consonantCount: number = 5;
   selectedAlphabets: any[] = [];
   consonants!: Alphabet[];
   isFinishedMessage!: string;
   gameSessionId: any;
   successMessage: any;
   durationInSeconds = 10;
+  stageNumber: number = 2;
+  gameLevel = GameLevel.LETTER;
   constructor(
     private _stageTwoActivitySvc: StageTwoActivityService,
     private _router: Router,
@@ -70,6 +75,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSelected(Alphabet: any) {
+    this.onGetAlphabet();
     let itemExists = false;
     let AlphabetItem = {
       id: Alphabet.id,
@@ -91,20 +97,19 @@ export class ExerciseComponent implements OnInit {
       }
     }
 
-    if (this.consonants.length == 6) {
-      this.onSumbit();
+    
+    console.log("no submit!!!", this.consonants.length)
+    if (this.consonants.length > this.consonantCount) {
+      console.log("submit!!!")
+      this.onSubmit();
     }
   }
 
-  onChecked() {
-    this.onGetAlphabet();
-  }
-
-  onSumbit() {
-    const Payload: LetteringStageOneAnswer = {
+  onSubmit() {
+    const Payload: LetteringStageTwoAnswer = {
       session_id: this.gameSessionId,
       anwser: '1',
-      result: this.selectedAlphabets,
+      data: this.selectedAlphabets,
     };
     console.log('Payload: ', Payload);
 
@@ -134,13 +139,20 @@ export class ExerciseComponent implements OnInit {
             this.selectedAlphabets = [];
             this.consonants = [];
             alert('completed!!!');
-            this._router.navigate(['/literacy/stage-completion']);
+            // this._router.navigate([
+            //   '/literacy/stage-completion',
+            //   this.stageNumber,
+            // ]);
+            this._router.navigate([
+              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`
+            ]);
           }, 6000);
         }
       },
       error: (err: any) => {
         if (err) {
-          console.log('Error: ', err);
+          console.warn('Error: ', err);
+          console.error('Error: ', err);
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_ERROR,
             payload: err,
@@ -162,8 +174,8 @@ export class ExerciseComponent implements OnInit {
   }
 }
 
-export interface LetteringStageOneAnswer {
+export interface LetteringStageTwoAnswer {
   session_id: string;
   anwser: string;
-  result: any[];
+  data: any[];
 }

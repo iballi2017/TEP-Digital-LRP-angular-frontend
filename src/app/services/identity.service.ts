@@ -2,6 +2,7 @@ import { NgRedux } from '@angular-redux/store';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { IAppState } from 'src/redux/store';
 import {
   FETCH_USER_DETAILS,
@@ -9,6 +10,7 @@ import {
   FETCH_USER_DETAILS_SUCCESS,
 } from 'src/redux/_userDetails.store/user-details.actions';
 import { baseUrl } from '../config/api';
+import { handleError } from '../helpers/errorHandler';
 import { UpdatePassword, UpdateUserModel } from '../models/types/user';
 
 @Injectable({
@@ -78,10 +80,12 @@ export class IdentityService {
 
   UpdateUserDetails(payload: UpdateUserModel) {
     console.log('payload: ', payload);
-    return this._http.post(this.UpdateUserUrl, payload);
+    return this._http.post(this.UpdateUserUrl, payload)
+    .pipe(catchError(handleError));
   }
 
   UpdateUserPassword(Payload: UpdatePassword) {
-    return this._http.post(`${this.UpdatePasswordUrl}`, Payload);
+    return this._http.post(`${this.UpdatePasswordUrl}`, Payload)
+    .pipe(catchError(handleError));
   }
 }

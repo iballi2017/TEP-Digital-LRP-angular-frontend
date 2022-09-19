@@ -14,9 +14,9 @@ import {
   FETCH_GAME_SESSION_ERROR,
   FETCH_GAME_SESSION_SUCCESS,
 } from 'src/redux/_game.store/game.actions';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError } from 'rxjs';
 import { Router } from '@angular/router';
-
+import { handleError } from '../helpers/errorHandler';
 
 @Injectable({
   providedIn: 'root',
@@ -27,10 +27,15 @@ export class GameService {
   // UpdatePasswordUrl = baseUrl + '/update-user-password';
   SubmitGameStage_1_Url = baseUrl + '/submit-letter-stage-1';
   SubmitGameStage_2_Url = baseUrl + '/submit-letter-stage-2';
+  SubmitGameStage_3_Url = baseUrl + '/submit-letter-stage-3';
   isCorrectAnswerBehaviorSubject: BehaviorSubject<any> =
     new BehaviorSubject<any>(null);
 
-  constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>, private _router: Router) {}
+  constructor(
+    private _http: HttpClient,
+    private ngRedux: NgRedux<IAppState>,
+    private _router: Router
+  ) {}
 
   sendIsCorrectAnswerBehaviorSubject(data: any) {
     this.isCorrectAnswerBehaviorSubject.next(data);
@@ -92,21 +97,29 @@ export class GameService {
   }
 
   SubmitGameStageResult(_GameStageResult: GameStageResult) {
-    return this._http.post(`${this.SubmitGameStage_1_Url}`, _GameStageResult);
+    return this._http
+      .post(`${this.SubmitGameStage_1_Url}`, _GameStageResult)
+      .pipe(catchError(handleError));
   }
-
 
   SubmitLetteringStageOneResult(_LetteringStageOneResult: any) {
-    return this._http.post(`${this.SubmitGameStage_1_Url}`, _LetteringStageOneResult);
+    return this._http
+      .post(`${this.SubmitGameStage_1_Url}`, _LetteringStageOneResult)
+      .pipe(catchError(handleError));
   }
 
-  SubmitLetteringStageTwoResult(_LetteringStageTwoResult: any){
-    return this._http.post(`${this.SubmitGameStage_2_Url}`, _LetteringStageTwoResult);
+  SubmitLetteringStageTwoResult(_LetteringStageTwoResult: any) {
+    return this._http
+      .post(`${this.SubmitGameStage_2_Url}`, _LetteringStageTwoResult)
+      .pipe(catchError(handleError));
   }
 
-  
+  SubmitLetteringStageThreeResult(_LetteringStageThreeResult: any) {
+    return this._http
+      .post(`${this.SubmitGameStage_3_Url}`, _LetteringStageThreeResult)
+      .pipe(catchError(handleError));
+  }
 }
-
 
 export interface LetteringStageOneAnswer {
   session_id: string;

@@ -67,7 +67,7 @@ export const AddGameSessionFailure = (state: LRP_GameState, action: any) => {
 
 // SUBMIT GAME STAGE RESULT
 export const SubmitGameStageResult = (state: LRP_GameState, action: any) => {
-  console.log('load gameSession action: ', action);
+  console.log('load gameSession: ', action);
   return tassign(state, {
     isLoading: true,
   });
@@ -77,7 +77,7 @@ export const SubmitGameStageResultSuccess = (
   state: LRP_GameState,
   action: any
 ) => {
-  console.log('load gameSession action: ', action);
+  console.log('submit game success: ', action);
   return tassign(state, {
     gameResult: action.payload,
     isLoading: false,
@@ -88,8 +88,68 @@ export const SubmitGameStageResultFailure = (
   state: LRP_GameState,
   action: any
 ) => {
-  console.log('load gameSession action: ', action);
+  console.log('submit game failure: ', action);
   return tassign(state, {
     error: action.payload,
+    isLoading: false,
+  });
+};
+
+// ADD_LETTERING_STAGE_THREE_EXERCISE_ONE
+export const AddLetteringStageThreeExerciseOne = (
+  state: LRP_GameState,
+  action: any
+) => {
+  return tassign(state, {
+    isLoading: true,
+  });
+};
+export const AddLetteringStageThreeExerciseOneSuccess = (
+  state: LRP_GameState,
+  action: any
+) => {
+  return tassign(state, {
+    letteringStageThreeExerciseOne: action.payload,
+    isLoading: false,
+  });
+};
+export const AddLetteringStageThreeExerciseFailure = (
+  state: LRP_GameState,
+  action: any
+) => {
+  return tassign(state, {
+    error: action.payload,
+    isLoading: false,
+  });
+};
+
+
+
+// FETCH_LETTERING_STAGE_THREE_EXERCISE_ONE
+export const FetchLetteringStageThreeExerciseOne = (
+  state: LRP_GameState,
+  action: any
+) => {
+  return tassign(state, {
+    isLoading: true,
+  });
+};
+export const FetchLetteringStageThreeExerciseOneSuccess = (
+  state: LRP_GameState,
+  action: any
+) => {
+  console.log("action: ", action)
+  return tassign(state, {
+    letteringStageThreeExerciseOne: action.payload,
+    isLoading: false,
+  });
+};
+export const FetchLetteringStageThreeExerciseFailure = (
+  state: LRP_GameState,
+  action: any
+) => {
+  return tassign(state, {
+    isLoading: false,
+    error: action.payload
   });
 };

@@ -1,1 +1,23 @@
-<p class="text-white">word works!</p>
+<!-- <p class="text-white">word works!</p> -->
+
+<ul class="row list-style-none pl-0">
+    <!-- [routerLink]="['/literacy/stage-1']" routerLinkActive="router-link-active"  -->
+    <!-- <li class="col-12 col-lg-3 cursor-pointer" *ngFor="let item of letteringStages; let i = index"
+    [routerLink]="['/literacy', item?.title]"> -->
+    <li class="col-12 col-lg-3 cursor-pointer" *ngFor="let item of Stages; let i = index"
+    [routerLink]="['/literacy/word/', item?.title, 'word-stage-one-splash']">
+    <!-- /literacy/stage-1/lettering-splash/first-screen -->
+        <div class="stage-card">
+            <!-- <div class="card-body">
+                       <div class="number-card"> -->
+            <p>{{i + 1}}</p>
+            <!-- </div>
+                    </div> -->
+        </div>
+        <ul class="stage-star-rating list-style-none pl-0">
+            <li *ngFor="let item of  [1, 2, 3, 4]">
+                <img src="../../../../assets/images/icons/white-grey-bordered-star..svg" alt="" class="img-fluid">
+            </li>
+        </ul>
+    </li>
+</ul>

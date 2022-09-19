@@ -10,6 +10,7 @@ import { LiteracyTestSideNavigationComponent } from './components/literacy-test-
 import { LiteracyTestComponent } from './literacy-test.component';
 import { LetteringModule } from './levels/lettering/lettering.module';
 import { SharedModule } from '../shared/shared.module';
+import { WordModule } from './levels/word/word.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     LiteracyTestRoutingModule,
     LetteringModule,
+    WordModule,
     SharedModule
   ]
 })
