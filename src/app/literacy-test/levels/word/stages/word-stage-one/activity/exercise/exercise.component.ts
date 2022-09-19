@@ -1,6 +1,10 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/services/game.service';
 import { WordStageOneService } from 'src/app/services/word/word-stage-one.service';
@@ -22,10 +26,13 @@ export class ExerciseComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 10;
-  constructor(private _wordStageOneService: WordStageOneService,
-    private _gameSvc: GameService, private _router: Router,
+  constructor(
+    private _wordStageOneService: WordStageOneService,
+    private _gameSvc: GameService,
+    private _router: Router,
     private ngRedux: NgRedux<IAppState>,
-    private _snackBar: MatSnackBar) {}
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.onGetActionAlphabets();
@@ -33,9 +40,8 @@ export class ExerciseComponent implements OnInit {
     this.onGetGameSessionId();
   }
 
-  
   onGetGameSessionId() {
-    this._gameSvc.LoadGameSession()
+    this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
         console.log('gameSession$ data: ', data);
@@ -95,9 +101,8 @@ export class ExerciseComponent implements OnInit {
     this.onSubmit();
   }
 
-  
   onPush(LetterItem: any) {
-     console.log('LetterItem: ', LetterItem);
+    console.log('LetterItem: ', LetterItem);
     let itemExists = false;
     let LetterItemItem = {
       id: LetterItem.id,
@@ -110,7 +115,7 @@ export class ExerciseComponent implements OnInit {
       let isItemExist = this.selectedAlphabets.includes(LetterItem);
       if (isItemExist) {
         let x = [...this.selectedAlphabets];
-        console.log(LetterItem, ": removed!!!")
+        console.log(LetterItem, ': removed!!!');
         this.selectedAlphabets = x.filter(
           (item: any) => item.name != LetterItem.name
         );
@@ -120,7 +125,7 @@ export class ExerciseComponent implements OnInit {
           return;
         }
         this.selectedAlphabets.push(LetterItem);
-        console.log("this.selectedAlphabets: ", this.selectedAlphabets)
+        console.log('this.selectedAlphabets: ', this.selectedAlphabets);
         this.onTestValues();
       }
     } else {
@@ -129,19 +134,28 @@ export class ExerciseComponent implements OnInit {
         return;
       }
       this.selectedAlphabets.push(LetterItem);
-      console.log("this.selectedAlphabets: ", this.selectedAlphabets)
+      console.log('this.selectedAlphabets: ', this.selectedAlphabets);
       this.onTestValues();
     }
-
   }
 
   onSubmit() {
+    let complete = this.resultLetterWords.filter(
+      (done: any) => done?.isDone == true
+    );
+
+    console.log('complete: ', complete);
+
+    if (complete.length == 3) {
+      const Payload: WordStageOneExerciseAnswer = {
+        session_id: this.gameSessionId,
+        anwser: '2',
+        data: complete,
+      };
+      console.log('x: ', Payload);
+    }
   }
 
-
-
-
-  
   openSnackBar(data: any) {
     this._snackBar.openFromComponent(SnackbarComponent, {
       duration: this.durationInSeconds * 1000,
@@ -150,4 +164,10 @@ export class ExerciseComponent implements OnInit {
       data: data,
     });
   }
+}
+
+export interface WordStageOneExerciseAnswer {
+  session_id: string;
+  anwser: string;
+  data: any[];
 }
