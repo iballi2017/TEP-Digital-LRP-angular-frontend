@@ -46,7 +46,7 @@ const routes: Routes = [
           ).then((m) => m.WordStageTwoSplashModule),
       },
       {
-        path: 'word-stage-one-splash',
+        path: 'word-stage-two-splash',
         loadChildren: () =>
           import(
             './stages/word-stage-two/word-stage-two-splash/word-stage-two-splash.module'
@@ -56,6 +56,33 @@ const routes: Routes = [
         path: 'activity',
         loadChildren: () =>
           import('./stages/word-stage-two/activity/activity.module').then(
+            (m) => m.ActivityModule
+          ),
+      },
+    ],
+  },
+  {
+    path: 'word/stage-3',
+    component: WordStageTwoComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import(
+            './stages/word-stage-three/word-stage-three-splash/word-stage-three-splash.module'
+          ).then((m) => m.WordStageThreeSplashModule),
+      },
+      {
+        path: 'word-stage-three-splash',
+        loadChildren: () =>
+          import(
+            './stages/word-stage-three/word-stage-three-splash/word-stage-three-splash.module'
+          ).then((m) => m.WordStageThreeSplashModule),
+      },
+      {
+        path: 'activity',
+        loadChildren: () =>
+          import('./stages/word-stage-three/activity/activity.module').then(
             (m) => m.ActivityModule
           ),
       },
