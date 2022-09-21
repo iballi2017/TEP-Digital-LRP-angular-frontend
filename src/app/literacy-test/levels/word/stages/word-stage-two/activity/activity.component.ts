@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-word-stage-one-splash',
-  templateUrl: './word-stage-one-splash.component.html',
-  styleUrls: ['./word-stage-one-splash.component.scss']
+  selector: 'app-activity',
+  templateUrl: './activity.component.html',
+  styleUrls: ['./activity.component.scss']
 })
-export class WordStageOneSplashComponent implements OnInit {
+export class ActivityComponent implements OnInit {
+
   menuList = [
     {
       title: 'LITERACY',

@@ -20,8 +20,8 @@ export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
   resultLetterWords: any[] = [];
-  selectedAlphabets: any[] = [];
   actionAlphabets: any[] = [];
+  selectedAlphabets: any[] = [];
   gameSessionId: any;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';

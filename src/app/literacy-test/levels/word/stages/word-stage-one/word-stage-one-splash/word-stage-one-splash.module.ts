@@ -10,8 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [
     WordStageOneInstructionalVideoComponent,
-    WordStageOneSplashComponent
-  ],
+    WordStageOneSplashComponent,],
   imports: [
     CommonModule,
     WordStageOneSplashRoutingModule,
