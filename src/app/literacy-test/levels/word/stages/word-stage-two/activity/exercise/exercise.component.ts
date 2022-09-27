@@ -5,10 +5,10 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameService } from 'src/app/services/game.service';
 import { WordStageTwoService } from 'src/app/services/word/word-stage-two.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
-import { WordStageOneExerciseAnswer } from '../../../word-stage-one/activity/exercise/exercise.component';
 
 @Component({
   selector: 'app-exercise',
@@ -106,7 +106,7 @@ export class ExerciseComponent implements OnInit {
     console.log('complete: ', complete);
 
     if (complete.length == this.resultLetterWords?.length) {
-      const Payload: WordStageOneExerciseAnswer = {
+      const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
         anwser: '2',
         data: complete,

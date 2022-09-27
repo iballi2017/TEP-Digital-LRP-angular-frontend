@@ -6,6 +6,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameService } from 'src/app/services/game.service';
 import { WordStageOneService } from 'src/app/services/word/word-stage-one.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
@@ -147,7 +148,7 @@ export class ExerciseComponent implements OnInit {
     console.log('complete: ', complete);
 
     if (complete.length == 3) {
-      const Payload: WordStageOneExerciseAnswer = {
+      const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
         anwser: '2',
         data: complete,
@@ -164,10 +165,4 @@ export class ExerciseComponent implements OnInit {
       data: data,
     });
   }
-}
-
-export interface WordStageOneExerciseAnswer {
-  session_id: string;
-  anwser: string;
-  data: any[];
 }

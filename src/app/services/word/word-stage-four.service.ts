@@ -85,6 +85,10 @@ export const actionwords = [
     name: 'fish',
     isWellPlaced: null,
   },
+  {
+    name: 'to',
+    isWellPlaced: null,
+  },
 ];
 
 export const results = [
@@ -105,7 +109,8 @@ export const results = [
       },
       {
         name: 'fish',
-        isWellPlaced: null,
+        isWellPlaced: true,
+        isHint: true,
       },
     ],
   },
@@ -118,10 +123,11 @@ export const results = [
       },
       {
         name: 'fish',
-        isWellPlaced: null,
+        isWellPlaced: true,
+        isHint: true,
       },
       {
-        name: 'lives',
+        name: 'live',
         isWellPlaced: null,
       },
       {
@@ -151,7 +157,134 @@ export const results = [
       },
       {
         name: 'fish',
+        isWellPlaced: true,
+        isHint: true,
+      },
+    ],
+  },
+  {
+    isDone: false,
+    word: [
+      {
+        name: 'i',
         isWellPlaced: null,
+      },
+      {
+        name: 'have',
+        isWellPlaced: null,
+      },
+      {
+        name: 'a',
+        isWellPlaced: null,
+      },
+      {
+        name: 'fish',
+        isWellPlaced: true,
+        isHint: true,
+      },
+    ],
+  },
+  {
+    isDone: false,
+    word: [
+      {
+        name: 'i',
+        isWellPlaced: null,
+      },
+      {
+        name: 'have',
+        isWellPlaced: null,
+      },
+      {
+        name: 'a',
+        isWellPlaced: null,
+      },
+      {
+        name: 'big',
+        isWellPlaced: null,
+      },
+      {
+        name: 'fish',
+        isWellPlaced: true,
+        isHint: true,
+      },
+    ],
+  },
+  {
+    isDone: false,
+    word: [
+      {
+        name: 'my',
+        isWellPlaced: null,
+      },
+      {
+        name: 'fish',
+        isWellPlaced: true,
+        isHint: true,
+      },
+      {
+        name: 'like',
+        isWellPlaced: null,
+      },
+      {
+        name: 'worms',
+        isWellPlaced: null,
+      },
+    ],
+  },
+  {
+    isDone: false,
+    word: [
+      {
+        name: 'my',
+        isWellPlaced: null,
+      },
+      {
+        name: 'fish',
+        isWellPlaced: true,
+        isHint: true,
+      },
+      {
+        name: 'like',
+        isWellPlaced: null,
+      },
+      {
+        name: 'to',
+        isWellPlaced: null,
+      },
+      {
+        name: 'eat',
+        isWellPlaced: null,
+      },
+      {
+        name: 'worms',
+        isWellPlaced: null,
+      },
+    ],
+  },
+  {
+    isDone: false,
+    word: [
+      {
+        name: 'i',
+        isWellPlaced: null,
+      },
+      {
+        name: 'like',
+        isWellPlaced: null,
+      },
+      {
+        name: 'to',
+        isWellPlaced: null,
+      },
+      {
+        name: 'eat',
+        isWellPlaced: null,
+      },
+      {
+        name: 'fish',
+        isWellPlaced: true,
+        isHint: true,
       },
     ],
   },

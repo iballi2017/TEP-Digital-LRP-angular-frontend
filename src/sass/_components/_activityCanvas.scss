@@ -196,6 +196,10 @@
                 &.bad {
                     border: 3px solid #f30000;
                 }
+
+                &.bg-none{
+                    background-color: unset;
+                }
             }
 
             #operator {
