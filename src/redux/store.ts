@@ -1,4 +1,7 @@
-import { INITIAL_FORGOTPASSWORD_STATE, LRP_ForgotPasswordState } from './_forgot-password.store/forgot-password.store';
+import {
+  INITIAL_FORGOTPASSWORD_STATE,
+  LRP_ForgotPasswordState,
+} from './_forgot-password.store/forgot-password.store';
 import { INITIAL_GAME_STATE, LRP_GameState } from './_game.store/game.store';
 import {
   INITIAL_LOGINUSER_STATE,
@@ -17,6 +20,10 @@ import {
   LRP_ReportState,
 } from './_report.store/report.store';
 import {
+  INITIAL_SPEECH_TO_TEXT_STATE,
+  LRP_SpeechToTextState,
+} from './_speechToText.store/speechToText.store';
+import {
   INITIAL_USER_DETAILS_STATE,
   LRP_UserDetailsState,
 } from './_userDetails.store/user-details.store';
@@ -29,6 +36,7 @@ export interface IAppState {
   reportsList: LRP_ReportState;
   game: LRP_GameState;
   forgotPassword: LRP_ForgotPasswordState;
+  SpeechTexts: LRP_SpeechToTextState;
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -38,5 +46,6 @@ export const INITIAL_STATE: IAppState = {
   userDetails: INITIAL_USER_DETAILS_STATE,
   reportsList: INITIAL_REPORT_STATE,
   game: INITIAL_GAME_STATE,
-  forgotPassword: INITIAL_FORGOTPASSWORD_STATE
+  forgotPassword: INITIAL_FORGOTPASSWORD_STATE,
+  SpeechTexts: INITIAL_SPEECH_TO_TEXT_STATE,
 };

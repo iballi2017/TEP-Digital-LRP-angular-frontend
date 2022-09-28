@@ -95,8 +95,9 @@
         justify-content: center;
         flex-wrap: wrap;
         text-transform: capitalize;
-        &:first-child {
-            margin-right: 7px;
+        margin-right: 7px;
+        &:last-child {
+            margin-right: 0;
         }
 
         @include mixins.minmq(768px) {

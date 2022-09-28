@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PracticeComponent } from './practice.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { SpeechSynthesisUtteranceComponent } from './speech-synthesis-utterance/speech-synthesis-utterance.component';
+import { SpeechToTextComponent } from './speech-to-text/speech-to-text.component';
 import { UiTemplatesComponent } from './ui-templates/ui-templates.component';
 
 const routes: Routes = [
@@ -25,6 +26,9 @@ const routes: Routes = [
         path: 'lrp-activity',
         loadChildren: () =>
           import('./lrp-activity/lrp-activity.module').then((s) => s.LrpActivityModule),
+      },{
+        path: 'speech-to-text',
+        component: SpeechToTextComponent,
       },
     ],
   },

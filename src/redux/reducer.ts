@@ -5,6 +5,7 @@ import { LoginUserReducer } from './_login-user-store/login-user.reducer';
 import { OccupantReducer } from './_occupant.store/occupant.reducer';
 import { RegisterUserReducer } from './_register-user-store/register-user.reducer';
 import { ReportReducer } from './_report.store/report.reducer';
+import { SpeechToTextReducer } from './_speechToText.store/speechToText.reducer';
 import { UserDetailsReducer } from './_userDetails.store/user-details.reducer';
 
 export const rootReducer = combineReducers({
@@ -14,5 +15,6 @@ export const rootReducer = combineReducers({
   userDetails: UserDetailsReducer,
   reportsList: ReportReducer,
   game: GameReducer,
-  forgotPassword: ForgotPasswordReducer
+  forgotPassword: ForgotPasswordReducer,
+  SpeechTexts: SpeechToTextReducer,
 });

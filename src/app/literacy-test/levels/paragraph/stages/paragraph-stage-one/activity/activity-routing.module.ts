@@ -11,11 +11,10 @@ const routes: Routes = [
       { path: '', component: ExerciseComponent },
       { path: 'exercise', component: ExerciseComponent },
     ],
-  },
-];
+  },];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class ActivityRoutingModule {}
+export class ActivityRoutingModule { }
