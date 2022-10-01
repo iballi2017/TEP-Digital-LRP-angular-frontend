@@ -156,7 +156,7 @@ export class ExerciseComponent implements OnInit {
     if (complete.length == 3) {
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
-        anwser: '1',
+        answer: '1',
         data: complete,
       };
       console.log('x: ', Payload);

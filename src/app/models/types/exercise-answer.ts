@@ -1,5 +1,5 @@
 export interface ExerciseAnswer {
     session_id: string;
-    anwser: string;
+    answer: string;
     data: any[];
 }

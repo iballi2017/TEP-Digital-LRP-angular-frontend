@@ -148,7 +148,7 @@ export class ExerciseComponent implements OnInit {
 
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
-        anwser: '1',
+        answer: '1',
         data: [this.resultLetterWords],
       };
       console.log('x: ', Payload);

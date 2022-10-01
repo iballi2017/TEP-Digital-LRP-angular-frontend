@@ -141,7 +141,7 @@ export class ExerciseComponent implements OnInit {
 
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
-        anwser: '1',
+        answer: '1',
         data: this.resultList,
       };
       let y = Payload.data.filter((item: any) => item.isDone == true);

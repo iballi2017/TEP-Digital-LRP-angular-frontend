@@ -12,6 +12,7 @@ import { LetteringModule } from './levels/lettering/lettering.module';
 import { SharedModule } from '../shared/shared.module';
 import { WordModule } from './levels/word/word.module';
 import { ParagraphModule } from './levels/paragraph/paragraph.module';
+import { StoryModule } from './levels/story/story.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ParagraphModule } from './levels/paragraph/paragraph.module';
     LetteringModule,
     WordModule,
     ParagraphModule,
+    StoryModule,
     SharedModule
   ]
 })

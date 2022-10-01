@@ -9,12 +9,16 @@ const routes: Routes = [
     component: ParagraphStageOneSplashComponent,
     children: [
       { path: '', component: ParagraphStageOneInstructionalVideoComponent },
-      { path: 'interlude', component: ParagraphStageOneInstructionalVideoComponent },
+      {
+        path: 'interlude',
+        component: ParagraphStageOneInstructionalVideoComponent,
+      },
     ],
-  },];
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ParagraphStageOneSplashRoutingModule { }
+export class ParagraphStageOneSplashRoutingModule {}
