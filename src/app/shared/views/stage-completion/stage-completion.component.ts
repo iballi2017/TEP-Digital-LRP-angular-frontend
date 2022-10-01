@@ -7,6 +7,8 @@ import {
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { GameSessionData, GameStageResult } from 'src/app/models/types/game';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameStage } from 'src/app/models/types/game-stage';
 import { GameService } from 'src/app/services/game.service';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 
@@ -17,6 +19,7 @@ import { SnackbarComponent } from '../../components/snackbar/snackbar.component'
 })
 export class StageCompletionComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
+  @Input() gameType!: string;
   @Input() levelTitle!: string;
   @Input() stageNumber!: number;
   pageTitle = '! ! STAGE COMPLETE ! !';
@@ -57,7 +60,6 @@ export class StageCompletionComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.onGetGameSessionId();
     this.onGetStageResult();
-
   }
 
   onGetGameSessionId() {
@@ -80,10 +82,41 @@ export class StageCompletionComponent implements OnInit {
     console.log('$event: ', $event);
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
-    }    
+    }
     setTimeout(() => {
-      // this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
-      this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
+      if (
+        this.levelTitle === GameLevel.LETTER &&
+        this.stageNumber == GameStage.THREE
+      ) {
+        this.levelTitle = GameLevel.WORD;
+        this.stageNumber = 0;
+        this._router.navigate([
+          `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
+        ]);
+      } else if (
+        this.levelTitle === GameLevel.WORD &&
+        this.stageNumber == GameStage.FOUR
+      ) {
+        this.levelTitle = GameLevel.PARAGRAPH;
+        this.stageNumber = 0;
+        this._router.navigate([
+          `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
+        ]);
+      } else if (
+        this.levelTitle === GameLevel.PARAGRAPH &&
+        this.stageNumber == GameStage.FOUR
+      ) {
+        this.levelTitle = GameLevel.STORY;
+        this.stageNumber = 0;
+        this._router.navigate([
+          `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
+        ]);
+      } else {
+        // this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
+        this._router.navigate([
+          `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
+        ]);
+      }
     }, 3000);
   }
 
@@ -112,5 +145,4 @@ export class StageCompletionComponent implements OnInit {
   //     },
   //   });
   // }
-
 }

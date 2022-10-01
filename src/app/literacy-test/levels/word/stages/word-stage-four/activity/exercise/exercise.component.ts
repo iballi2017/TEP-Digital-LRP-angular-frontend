@@ -1,8 +1,17 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
 import { GameService } from 'src/app/services/game.service';
 import { WordStageFourService } from 'src/app/services/word/word-stage-four.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-exercise',
@@ -17,9 +26,20 @@ export class ExerciseComponent implements OnInit {
   resultList: any[] = [];
   exerciseNumber: number = 0;
   gameSessionId: any;
+  durationInSeconds = 10;
+  gameLevel = GameLevel.WORD;
+  isFinishedMessage!: string;
+  stageNumber: number = 4;
+  successMessage: any;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  constructor(private _wordStageFourService: WordStageFourService,
-    private _gameSvc: GameService) {}
+  constructor(
+    private _wordStageFourService: WordStageFourService,
+    private _router: Router,
+    private _gameSvc: GameService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.onGetActionWords();
@@ -108,7 +128,7 @@ export class ExerciseComponent implements OnInit {
     this.onTestValues(list, resultItem);
   }
 
-  onTestValues(List: any, ResultItem:any) {
+  onTestValues(List: any, ResultItem: any) {
     let complete = List.filter((done: any) => done?.isWellPlaced == true);
 
     console.log('complete: ', complete);
@@ -121,15 +141,50 @@ export class ExerciseComponent implements OnInit {
 
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
-        anwser: '4',
+        anwser: '1',
         data: this.resultList,
       };
-      console.log('x: ', Payload);
-      this.onSubmit(Payload)
+      let y = Payload.data.filter((item: any) => item.isDone == true);
+      if (y.length == this.resultList?.length) {
+        console.log('All done!!!: ', y);
+        // alert('All done!!!!!');
+        console.log('x: ', Payload);
+        this.onSubmit(Payload)
+      }
     }
   }
 
   onSubmit(Result: ExerciseAnswer) {
     console.log('Result: ', Result);
+    this._wordStageFourService.SubmitGameStageResult(Result).subscribe({
+      next: (response: any) => {
+        if (response) {
+          console.log('response: ', response);
+          this.openSnackBar(response?.message);
+          setTimeout(() => {
+            this.isFinishedMessage = '';
+            this.successMessage = '';
+            alert('completed!!!');
+            this._router.navigate([
+              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+            ]);
+          }, 6000);
+        }
+      },
+      error: (err: any) => {
+        if (err) {
+          console.warn('Error: ', err);
+        }
+      },
+    });
+  }
+
+  openSnackBar(data: any) {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: data,
+    });
   }
 }

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameStage } from 'src/app/models/types/game-stage';
 import { LetteringStageCompletionComponent } from './lettering-stage-completion/lettering-stage-completion.component';
-import { LetteringStageFourComponent } from './stages/lettering-stage-four/lettering-stage-four.component';
 import { FifthScreenComponent } from './stages/lettering-stage-one/lettering-splash/fifth-screen/fifth-screen.component';
 import { FirstScreenComponent } from './stages/lettering-stage-one/lettering-splash/first-screen/first-screen.component';
 import { FourthScreenComponent } from './stages/lettering-stage-one/lettering-splash/fourth-screen/fourth-screen.component';
@@ -131,10 +130,6 @@ const routes: Routes = [
           ).then((m) => m.LetteringStageThreeActivityModule),
       },
     ],
-  },
-  {
-    path: `${GameLevel.LETTER}/stage-${GameStage.THREE}`,
-    component: LetteringStageFourComponent,
   },
   {
     path: 'stage-completion/:game-level/:stage-number',

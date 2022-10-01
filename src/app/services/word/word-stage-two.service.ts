@@ -1,10 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs';
+import { baseUrl } from 'src/app/config/api';
+import { handleError } from 'src/app/helpers/errorHandler';
+import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import { actionwords, resultWords } from 'src/assets/data/word-stage-two.data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WordStageTwoService {
-  constructor() {}
+  StartGameUrl = baseUrl + '/start-game-session';
+  SubmitGameStage_2_Url = baseUrl + '/submit-word-stage-2';
+  constructor(private _http: HttpClient) {}
 
   GetActionwords() {
     let wordsList = [...actionwords];
@@ -19,62 +27,9 @@ export class WordStageTwoService {
   //   let wordsList = [...resultLetterWords];
   //   return wordsList;
   // }
-}
-
-export const actionwords = [
-  {
-    name: 'Classroom',
-    isChecked: false,
-  },
-  {
-    name: 'Duster',
-    isChecked: false,
-  },
-  {
-    name: 'Juice',
-    isChecked: false,
-  },
-  {
-    name: 'Desk',
-    isChecked: false,
-  },
-  {
-    name: 'Coca',
-    isChecked: false,
-  },
-  {
-    name: 'Blackboard',
-    isChecked: false,
-  },
-  {
-    name: 'Cassava',
-    isChecked: false,
-  },
-  {
-    name: 'Chair',
-    isChecked: false,
-  },
-];
-
-export const resultWords= [
-  {
-    name: 'Duster',
-    isChecked: false,
-  },
-  {
-    name: 'Desk',
-    isChecked: false,
-  },
-  {
-    name: 'Blackboard',
-    isChecked: false,
-  },
-  {
-    name: 'Chair',
-    isChecked: false,
-  },
-  {
-    name: 'Classroom',
-    isChecked: false,
+  SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
+    return this._http
+      .post(`${this.SubmitGameStage_2_Url}`, _GameStageResult)
+      .pipe(catchError(handleError));
   }
-]
+}

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WordStageOneComponent } from './stages/word-stage-one/word-stage-one.component';
 import { WordStageTwoComponent } from './stages/word-stage-two/word-stage-two.component';
+import { WordStageCompletionComponent } from './word-stage-completion/word-stage-completion.component';
 
 const routes: Routes = [
   {
@@ -114,6 +115,10 @@ const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: 'stage-completion/:game-level/:stage-number',
+    component: WordStageCompletionComponent,
   },
 ];
 

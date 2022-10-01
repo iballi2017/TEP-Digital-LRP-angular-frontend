@@ -42,14 +42,14 @@ export class LevelLoaderComponent implements OnInit, AfterViewChecked {
               this.stageNumber == GameStage.THREE
             ) {
               this._router.navigate([
-                '/literacy/word/stage-1/word-stage-one-splash',
+                '/literacy/word/stage-1',
               ]);
             } else {
               this._router.navigate([
                 // /literacy/lettering/stage-2/lettering-splash
                 `/literacy/${this.levelTitle}/stage-${
                   this.stageNumber + 1
-                }/lettering-splash`,
+                }`,
               ]);
             }
           }, 3000);

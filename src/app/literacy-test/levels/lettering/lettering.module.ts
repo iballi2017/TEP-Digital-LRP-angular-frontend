@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LetteringRoutingModule } from './lettering-routing.module';
-import { LetteringStageFourComponent } from './stages/lettering-stage-four/lettering-stage-four.component';
 import { LetteringStageOneComponent } from './stages/lettering-stage-one/lettering-stage-one.component';
 import { LetteringStageTwoComponent } from './stages/lettering-stage-two/lettering-stage-two.component';
 import { LetteringStageThreeComponent } from './stages/lettering-stage-three/lettering-stage-three.component';
@@ -21,7 +20,6 @@ import { LetteringStageCompletionComponent } from './lettering-stage-completion/
     LetteringStageOneComponent,
     LetteringStageTwoComponent,
     LetteringStageThreeComponent,
-    LetteringStageFourComponent,
     LetteringStageCompletionComponent,
     // 
     // FirstScreenComponent,

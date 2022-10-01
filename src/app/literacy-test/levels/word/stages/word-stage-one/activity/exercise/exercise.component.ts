@@ -7,6 +7,8 @@ import {
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
 import { GameService } from 'src/app/services/game.service';
 import { WordStageOneService } from 'src/app/services/word/word-stage-one.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
@@ -27,6 +29,10 @@ export class ExerciseComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 10;
+  isFinishedMessage!: string;
+  successMessage: any;
+  stageNumber: number = 1;
+  gameLevel = GameLevel.WORD;
   constructor(
     private _wordStageOneService: WordStageOneService,
     private _gameSvc: GameService,
@@ -150,10 +156,31 @@ export class ExerciseComponent implements OnInit {
     if (complete.length == 3) {
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
-        anwser: '2',
+        anwser: '1',
         data: complete,
       };
       console.log('x: ', Payload);
+      this._wordStageOneService.SubmitGameStageResult(Payload).subscribe({
+        next: (response: any) => {
+          if (response) {
+            console.log('response: ', response);
+            this.openSnackBar(response?.message);
+            setTimeout(() => {
+              this.isFinishedMessage = '';
+              this.successMessage = '';
+              alert('completed!!!');
+              this._router.navigate([
+                `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              ]);
+            }, 6000);
+          }
+        },
+        error: (err: any) => {
+          if (err) {
+            console.warn('Error: ', err);
+          }
+        },
+      });
     }
   }
 

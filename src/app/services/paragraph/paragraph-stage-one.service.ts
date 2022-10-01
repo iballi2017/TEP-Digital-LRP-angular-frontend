@@ -1,5 +1,12 @@
 import { NgRedux } from '@angular-redux/store';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs';
+import { baseUrl } from 'src/app/config/api';
+import { handleError } from 'src/app/helpers/errorHandler';
+import { SpeechToText } from 'src/app/models/classes/speech-to-text';
+import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import { exerciseTexts } from 'src/assets/data/paragraph-stage-one.data';
 import { IAppState } from 'src/redux/store';
 import {
   ADD_SPEECH_TO_TEXT,
@@ -11,13 +18,15 @@ declare var webkitSpeechRecognition: any;
   providedIn: 'root',
 })
 export class ParagraphStageOneService {
+  StartGameUrl = baseUrl + '/start-game-session';
+  SubmitGameStage_1_Url = baseUrl + '/submit-paragraph-stage-1';
   recognition = new webkitSpeechRecognition();
   isStoppedSpeechRecog = false;
   public text = '';
   tempWords: any;
   VoiceText: any;
 
-  constructor(private ngRedux: NgRedux<IAppState>) {}
+  constructor(private ngRedux: NgRedux<IAppState>, private _http: HttpClient) {}
 
   init() {
     this.recognition.interimResults = true;
@@ -72,36 +81,26 @@ export class ParagraphStageOneService {
   }
 
   wordConcat() {
-    this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
-    this.text = this.text + ' ' + this.tempWords + ' ';
-    this.tempWords = '';
+    let x = new SpeechToText(this.ngRedux, this.text, this.tempWords);
+    console.log('x: ', x);
+    x.wordConcat();
+    // this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
+    // this.text = this.text + ' ' + this.tempWords + ' ';
+    // this.tempWords = '';
 
-    this.ngRedux.dispatch({
-      type: ADD_SPEECH_TO_TEXT_SUCCESS,
-      payload: this.text.trim(),
-    });
+    // this.ngRedux.dispatch({
+    //   type: ADD_SPEECH_TO_TEXT_SUCCESS,
+    //   payload: this.text.trim(),
+    // });
   }
 
   GetExerciseTexts() {
     return exerciseTexts;
   }
-}
 
-export const exerciseTexts = [
-  {
-    text: 'this is a rat',
-    isDone: false,
-  },
-  {
-    text: 'this is a cat',
-    isDone: false,
-  },
-  {
-    text: 'cats eat rats',
-    isDone: false,
-  },
-  {
-    text: 'rats do not play with cats',
-    isDone: false,
-  },
-];
+  SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
+    return this._http
+      .post(`${this.SubmitGameStage_1_Url}`, _GameStageResult)
+      .pipe(catchError(handleError));
+  }
+}

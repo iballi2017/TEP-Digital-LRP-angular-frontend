@@ -17,24 +17,31 @@
     <div id="word-result-screen-type-1">
         <div class="inner">
             <div class="word-result-board">
+                <!-- {{resultLetterWords | json}} -->
                 <ul class="list-style-none mb-0 pl-0">
-                    <li *ngFor="let item of selectedAlphabets"
-                        [ngClass]="{'text-capitalize ': item == selectedAlphabets[0]}">{{item?.name}}</li>
+                    <li *ngFor="let item of resultLetterWords.word"
+                        [ngClass]="{'text-capitalize ': item == resultLetterWords.word[0]}">
+                        <span [ngClass]="{'d-none': item?.isWellPlaced != true}">{{item?.name}}</span>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div id="output-screen">
+    <div id="output-screen">
         <div class="inner">
-            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">
-                {{selectedAlphabets[0]?.name}}</div>
-            <div id="operator" class="btn"></div>
-            <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name}}</div>
-            <div id="operator" class="btn"></div>
-            <div class="obj" id="second-obj">{{selectedAlphabets[2]?.name}}</div>
-            <div id="operator" class="btn"></div>
-            <div class="obj" id="second-obj">{{selectedAlphabets[3]?.name}}</div>
+            <div class="prev-item d-flex align-items-center" *ngFor="let item of resultLetterWords?.word">
+                <div class="obj">
+                    <span
+                        [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}
+                    </span>
+                </div>
+                <div id="operator" class="btn"></div>
+            </div>
+            <!-- <div class="obj" *ngFor="let item of resultLetterWords?.word" [ngClass]="{'border-0': item?.isHint == true,'bg-none': item?.isHint == true}">
+                <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
+            </div> -->
         </div>
     </div>
 
@@ -47,7 +54,7 @@
 
     <ul class="list-style-none pl-0 word-keyboard row no-gutters">
         <li class="col-3 p-1 p-lg-2" *ngFor="let item of actionWords">
-            <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name}}</button>
+            <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
         </li>
     </ul>
 </div>

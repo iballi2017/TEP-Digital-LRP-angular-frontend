@@ -6,6 +6,8 @@ import { WordStageOneComponent } from './stages/word-stage-one/word-stage-one.co
 import { WordStageThreeComponent } from './stages/word-stage-three/word-stage-three.component';
 import { WordStageTwoComponent } from './stages/word-stage-two/word-stage-two.component';
 import { WordStageFourComponent } from './stages/word-stage-four/word-stage-four.component';
+import { WordStageCompletionComponent } from './word-stage-completion/word-stage-completion.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,8 @@ import { WordStageFourComponent } from './stages/word-stage-four/word-stage-four
     WordStageTwoComponent,
     WordStageThreeComponent,
     WordStageFourComponent,
+    WordStageCompletionComponent
   ],
-  imports: [CommonModule, WordRoutingModule],
+  imports: [CommonModule, WordRoutingModule, SharedModule],
 })
 export class WordModule {}

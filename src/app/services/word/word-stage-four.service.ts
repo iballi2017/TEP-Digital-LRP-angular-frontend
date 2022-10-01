@@ -1,12 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs';
+import { baseUrl } from 'src/app/config/api';
+import { handleError } from 'src/app/helpers/errorHandler';
+import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import { actionwords, results } from 'src/assets/data/word-stage-four.data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WordStageFourService {
+  StartGameUrl = baseUrl + '/start-game-session';
+  SubmitGameStage_4_Url = baseUrl + '/submit-word-stage-4';
   // alphabetsList: any = [];
 
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   GetActionWords() {
     let list = [...actionwords];
@@ -22,270 +30,11 @@ export class WordStageFourService {
   //   this.alphabetsList = [...exerciseAlphabets];
   //   return this.alphabetsList;
   // }
+
+
+  SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
+    return this._http
+      .post(`${this.SubmitGameStage_4_Url}`, _GameStageResult)
+      .pipe(catchError(handleError));
+  }
 }
-
-export const actionwords = [
-  {
-    name: 'love',
-    isWellPlaced: null,
-  },
-  {
-    name: 'in',
-    isWellPlaced: null,
-  },
-  {
-    name: 'water',
-    isWellPlaced: true,
-  },
-  {
-    name: 'like',
-    isWellPlaced: null,
-  },
-  {
-    name: 'i',
-    isWellPlaced: null,
-  },
-  {
-    name: 'my',
-    isWellPlaced: null,
-  },
-  {
-    name: 'a',
-    isWellPlaced: null,
-  },
-  {
-    name: 'have',
-    isWellPlaced: null,
-  },
-  {
-    name: 'live',
-    isWellPlaced: null,
-  },
-  {
-    name: 'worms',
-    isWellPlaced: null,
-  },
-  {
-    name: 'this',
-    isWellPlaced: null,
-  },
-  {
-    name: 'big',
-    isWellPlaced: null,
-  },
-  {
-    name: 'is',
-    isWellPlaced: null,
-  },
-  {
-    name: 'eat',
-    isWellPlaced: null,
-  },
-  {
-    name: 'fish',
-    isWellPlaced: null,
-  },
-  {
-    name: 'to',
-    isWellPlaced: null,
-  },
-];
-
-export const results = [
-  {
-    isDone: false,
-    word: [
-      {
-        name: 'this',
-        isWellPlaced: null,
-      },
-      {
-        name: 'is',
-        isWellPlaced: null,
-      },
-      {
-        name: 'my',
-        isWellPlaced: null,
-      },
-      {
-        name: 'fish',
-        isWellPlaced: true,
-        isHint: true,
-      },
-    ],
-  },
-  {
-    isDone: false,
-    word: [
-      {
-        name: 'my',
-        isWellPlaced: null,
-      },
-      {
-        name: 'fish',
-        isWellPlaced: true,
-        isHint: true,
-      },
-      {
-        name: 'live',
-        isWellPlaced: null,
-      },
-      {
-        name: 'in',
-        isWellPlaced: null,
-      },
-      {
-        name: 'water',
-        isWellPlaced: null,
-      },
-    ],
-  },
-  {
-    isDone: false,
-    word: [
-      {
-        name: 'i',
-        isWellPlaced: null,
-      },
-      {
-        name: 'love',
-        isWellPlaced: null,
-      },
-      {
-        name: 'my',
-        isWellPlaced: null,
-      },
-      {
-        name: 'fish',
-        isWellPlaced: true,
-        isHint: true,
-      },
-    ],
-  },
-  {
-    isDone: false,
-    word: [
-      {
-        name: 'i',
-        isWellPlaced: null,
-      },
-      {
-        name: 'have',
-        isWellPlaced: null,
-      },
-      {
-        name: 'a',
-        isWellPlaced: null,
-      },
-      {
-        name: 'fish',
-        isWellPlaced: true,
-        isHint: true,
-      },
-    ],
-  },
-  {
-    isDone: false,
-    word: [
-      {
-        name: 'i',
-        isWellPlaced: null,
-      },
-      {
-        name: 'have',
-        isWellPlaced: null,
-      },
-      {
-        name: 'a',
-        isWellPlaced: null,
-      },
-      {
-        name: 'big',
-        isWellPlaced: null,
-      },
-      {
-        name: 'fish',
-        isWellPlaced: true,
-        isHint: true,
-      },
-    ],
-  },
-  {
-    isDone: false,
-    word: [
-      {
-        name: 'my',
-        isWellPlaced: null,
-      },
-      {
-        name: 'fish',
-        isWellPlaced: true,
-        isHint: true,
-      },
-      {
-        name: 'like',
-        isWellPlaced: null,
-      },
-      {
-        name: 'worms',
-        isWellPlaced: null,
-      },
-    ],
-  },
-  {
-    isDone: false,
-    word: [
-      {
-        name: 'my',
-        isWellPlaced: null,
-      },
-      {
-        name: 'fish',
-        isWellPlaced: true,
-        isHint: true,
-      },
-      {
-        name: 'like',
-        isWellPlaced: null,
-      },
-      {
-        name: 'to',
-        isWellPlaced: null,
-      },
-      {
-        name: 'eat',
-        isWellPlaced: null,
-      },
-      {
-        name: 'worms',
-        isWellPlaced: null,
-      },
-    ],
-  },
-  {
-    isDone: false,
-    word: [
-      {
-        name: 'i',
-        isWellPlaced: null,
-      },
-      {
-        name: 'like',
-        isWellPlaced: null,
-      },
-      {
-        name: 'to',
-        isWellPlaced: null,
-      },
-      {
-        name: 'eat',
-        isWellPlaced: null,
-      },
-      {
-        name: 'fish',
-        isWellPlaced: true,
-        isHint: true,
-      },
-    ],
-  },
-];

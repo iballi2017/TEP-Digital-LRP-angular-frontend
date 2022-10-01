@@ -1,0 +1,24 @@
+<!-- <p>exercise works!</p> -->
+
+
+<div class="canvas-wrapper">
+    <div id="result-screen">
+        <!-- <div class="inner"> -->
+        <div id="result-board">
+            <!-- <h1 class="text-center">{{resultTexts}}</h1> -->
+            <h1 class="text-center">{{resultTextList[textPosition]?.uiText}}</h1>
+            <!-- <h1 class="text-center">{{speechText}}</h1> -->
+            <!-- <h1 class="text-center text-capitalize">{{_paragraphStageOneSvc.text}}</h1> -->
+        </div>
+        <!-- </div> -->
+    </div>
+    <h5 class="text-danger text-bold text-center">{{speechTexts$ | async}}</h5>
+    <!-- <p class="text-white text-bold text-center">{{_paragraphStageOneSvc.text}}</p> -->
+
+
+    <div id="action-buttons" class="mark-control">
+        <button class="btn btn-success" (click)="startService()">Start</button>
+        <button class="btn btn-danger" (click)="stopService()">Stop</button>
+        <button class="btn btn-warning" (click)="clearService()">Clear</button>
+    </div>
+</div>

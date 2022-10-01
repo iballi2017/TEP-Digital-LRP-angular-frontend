@@ -51,3 +51,15 @@
         }
     }
 }
+
+.prev-item{
+    &:last-child{
+        // background-color: red;
+        display: none;
+        .obj{
+            + #operator{
+                display: none !important;
+            }
+        }
+    }
+}
