@@ -13,6 +13,8 @@ import { SharedModule } from '../shared/shared.module';
 import { WordModule } from './levels/word/word.module';
 import { ParagraphModule } from './levels/paragraph/paragraph.module';
 import { StoryModule } from './levels/story/story.module';
+import { LiteracyStageCompletionComponent } from './literacy-stage-completion/literacy-stage-completion.component';
+import { LiteracyLevelCompletionComponent } from './literacy-level-completion/literacy-level-completion.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { StoryModule } from './levels/story/story.module';
     WordComponent,
     ParagraphComponent,
     StoryComponent,
-    LiteracyTestSideNavigationComponent
+    LiteracyTestSideNavigationComponent,
+    LiteracyStageCompletionComponent,
+    LiteracyLevelCompletionComponent
   ],
   imports: [
     CommonModule,

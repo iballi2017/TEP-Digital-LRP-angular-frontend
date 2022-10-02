@@ -14,7 +14,7 @@ export class LetteringStageThreeSplashComponent implements OnInit {
       title: 'LETTERING',
     },
     {
-      title: 'STAGE 2',
+      title: 'STAGE 3',
     }
   ];
   constructor() { }

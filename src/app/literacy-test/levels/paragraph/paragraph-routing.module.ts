@@ -18,7 +18,7 @@ const routes: Routes = [
           ).then((m) => m.ParagraphStageOneSplashModule),
       },
       {
-        path: 'paragraph-stage-one-splash',
+        path: 'paragraph-splash',
         loadChildren: () =>
           import(
             './stages/paragraph-stage-one/paragraph-stage-one-splash/paragraph-stage-one-splash.module'
@@ -48,7 +48,7 @@ const routes: Routes = [
           ).then((m) => m.ParagraphStageTwoSplashModule),
       },
       {
-        path: 'paragraph-stage-two-splash',
+        path: 'paragraph-splash',
         loadChildren: () =>
           import(
             './stages/paragraph-stage-two/paragraph-stage-two-splash/paragraph-stage-two-splash.module'
@@ -75,7 +75,7 @@ const routes: Routes = [
           ).then((m) => m.ParagraphStageThreeSplashModule),
       },
       {
-        path: 'paragraph-stage-three-splash',
+        path: 'paragraph-splash',
         loadChildren: () =>
           import(
             './stages/paragraph-stage-three/paragraph-stage-three-splash/paragraph-stage-three-splash.module'
@@ -102,7 +102,7 @@ const routes: Routes = [
           ).then((m) => m.ParagraphStageFourSplashModule),
       },
       {
-        path: 'paragraph-stage-four-splash',
+        path: 'paragraph-splash',
         loadChildren: () =>
           import(
             './stages/paragraph-stage-four/paragraph-stage-four-splash/paragraph-stage-four-splash.module'

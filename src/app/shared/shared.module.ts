@@ -19,6 +19,7 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TopProgressBarComponent } from './components/top-progress-bar/top-progress-bar.component';
 import { AudienceApplauseComponent } from './components/audience-applause/audience-applause.component';
+import { LevelCompletionComponent } from './views/level-completion/level-completion.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AudienceApplauseComponent } from './components/audience-applause/audien
     SnackbarComponent,
     TopProgressBarComponent,
     AudienceApplauseComponent,
+    LevelCompletionComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +62,7 @@ import { AudienceApplauseComponent } from './components/audience-applause/audien
     LevelLoaderComponent,
     TopProgressBarComponent,
     AudienceApplauseComponent,
+    LevelCompletionComponent,
   ],
 })
 export class SharedModule {}

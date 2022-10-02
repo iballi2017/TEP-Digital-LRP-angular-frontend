@@ -20,7 +20,7 @@ const routes: Routes = [
           ).then((m) => m.WordStageOneSplashModule),
       },
       {
-        path: 'word-stage-one-splash',
+        path: 'word-splash',
         loadChildren: () =>
           import(
             './stages/word-stage-one/word-stage-one-splash/word-stage-one-splash.module'
@@ -47,7 +47,7 @@ const routes: Routes = [
           ).then((m) => m.WordStageTwoSplashModule),
       },
       {
-        path: 'word-stage-two-splash',
+        path: 'word-splash',
         loadChildren: () =>
           import(
             './stages/word-stage-two/word-stage-two-splash/word-stage-two-splash.module'
@@ -74,7 +74,7 @@ const routes: Routes = [
           ).then((m) => m.WordStageThreeSplashModule),
       },
       {
-        path: 'word-stage-three-splash',
+        path: 'word-splash',
         loadChildren: () =>
           import(
             './stages/word-stage-three/word-stage-three-splash/word-stage-three-splash.module'
@@ -101,7 +101,7 @@ const routes: Routes = [
           ).then((m) => m.WordStageFourSplashModule),
       },
       {
-        path: 'word-stage-four-splash',
+        path: 'word-splash',
         loadChildren: () =>
           import(
             './stages/word-stage-four/word-stage-four-splash/word-stage-four-splash.module'

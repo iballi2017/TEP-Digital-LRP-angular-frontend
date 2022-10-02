@@ -14,7 +14,7 @@ export class ActivityComponent implements OnInit {
       title: 'LETTERING',
     },
     {
-      title: 'STAGE 1',
+      title: 'STAGE 2',
     }
   ];
   constructor() { }

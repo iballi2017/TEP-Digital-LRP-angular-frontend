@@ -14,7 +14,7 @@ export class ParagraphStageThreeSplashComponent implements OnInit {
       title: 'LETTERING',
     },
     {
-      title: 'STAGE 1',
+      title: 'STAGE 3',
     }
   ];
   constructor() { }

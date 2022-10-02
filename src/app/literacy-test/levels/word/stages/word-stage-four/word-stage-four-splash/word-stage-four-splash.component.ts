@@ -14,7 +14,7 @@ export class WordStageFourSplashComponent implements OnInit {
       title: 'LETTERING',
     },
     {
-      title: 'STAGE 1',
+      title: 'STAGE 4',
     }
   ];
   constructor() { }

@@ -111,6 +111,15 @@ export class StageCompletionComponent implements OnInit {
         this._router.navigate([
           `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
         ]);
+      }  else if (
+        this.levelTitle === GameLevel.STORY &&
+        this.stageNumber == GameStage.ONE
+      ) {
+        this.levelTitle = GameLevel.STORY;
+        this.stageNumber = 0;
+        this._router.navigate([
+          `/literacy/levels/lettering`,
+        ]);
       } else {
         // this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
         this._router.navigate([

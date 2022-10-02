@@ -5,6 +5,8 @@ import { LetteringComponent } from './levels/lettering/lettering.component';
 import { ParagraphComponent } from './levels/paragraph/paragraph.component';
 import { StoryComponent } from './levels/story/story.component';
 import { WordComponent } from './levels/word/word.component';
+import { LiteracyLevelCompletionComponent } from './literacy-level-completion/literacy-level-completion.component';
+import { LiteracyStageCompletionComponent } from './literacy-stage-completion/literacy-stage-completion.component';
 import { LiteracyTestComponent } from './literacy-test.component';
 
 const routes: Routes = [
@@ -19,9 +21,16 @@ const routes: Routes = [
       { path: 'levels/story', component: StoryComponent },
     ],
   },
-  // {
-  //   path:"stage-1", component: LetteringStageOneComponent
-  // },
+  {
+    path: 'stage-completion/:game-level/:stage-number',
+    // component: LetteringStageCompletionComponent,
+    component: LiteracyStageCompletionComponent,
+  },
+  {
+    path: 'level-completion/:game-level',
+    // component: LetteringLevelCompletionComponent,
+    component: LiteracyLevelCompletionComponent,
+  },
 ];
 
 @NgModule({
