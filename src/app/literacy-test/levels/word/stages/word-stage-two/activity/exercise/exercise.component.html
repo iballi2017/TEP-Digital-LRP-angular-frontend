@@ -1,6 +1,7 @@
 <!-- <p>exercise works!</p> -->
 
 <div class="canvas-wrapper">
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
     <!-- <div id="result-screen" class="result-screen-type-one"> -->
     <div class="table-responsive">
         <div class="result-screen-type-one">
@@ -9,8 +10,8 @@
                     <li *ngFor="let item of resultLetterWords">
                         <!-- <div class="blob"> -->
                         <div [ngClass]="{'blob': item.name != 'Classroom', 'classroom-blob': item.name == 'Classroom'}">
-                            <!-- {{item.isChecked}} -->
-                            <span [ngClass]="{'d-none': !item.isChecked}">{{item?.name}}</span>
+                            <!-- {{item.isWellPlaced}} -->
+                            <span [ngClass]="{'d-none': !item.isWellPlaced}">{{item?.name}}</span>
                         </div>
                     </li>
                     <!-- <li>

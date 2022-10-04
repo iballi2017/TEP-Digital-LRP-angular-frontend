@@ -28,16 +28,17 @@
 <div class="canvas-wrapper">
     <h1 class="title">Identify more than six(6) consonant letters among the alphabets</h1>
     
-    <ng-container *ngIf="(isLoading$ | async)">
+    <!-- <ng-container *ngIf="(isLoading$ | async)">
         <small class="text-white">Loading...</small>
-    </ng-container>
-    <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
+    </ng-container> -->
+    <!-- <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
         <p>{{successMessage}}<br />
             {{isFinishedMessage}}
         </p>
-    </div>
-    
-    <ul class="list-style-none pl-0" id="activity-canvas" [ngClass]="{'isLoading': (isLoading$ | async)}">
+    </div> -->
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+    <!-- keyboard list-style-none pl-0 isLoading -->
+    <ul class="keyboard list-style-none pl-0 isLoading" id="activity-canvas" [ngClass]="{'isLoading': (isLoading$ | async)}">
         <li *ngFor="let item of alphabets">
             <input type="checkbox" id="{{item?.name}}" hidden [(ngModel)]="item.isChecked"
                 [ngModelOptions]="{standalone: true}" (change)="onSelected(item)">

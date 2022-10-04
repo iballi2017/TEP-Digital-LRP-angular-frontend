@@ -22,6 +22,7 @@ import { NumeracyTestComponent } from './numeracy-test/numeracy-test.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 import { TokenInterceptor } from './helpers/token.interceptor';
 import { AuthGuard } from './services/guards/auth.guard';
+import { GameScreenLoaderComponent } from './shared/components/game-screen-loader/game-screen-loader.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AuthGuard } from './services/guards/auth.guard';
     LandingPageComponent,
     TestOnboardingComponent,
     NumeracyTestComponent,
+    GameScreenLoaderComponent,
   ],
   imports: [
     BrowserModule,

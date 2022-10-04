@@ -12,7 +12,11 @@ import {
   SUBMIT_GAME_STAGE_RESULT_ERROR,
   SUBMIT_GAME_STAGE_RESULT_SUCCESS,
 } from 'src/redux/_game.store/game.actions';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { GameType } from 'src/app/models/types/game-type';
 import { GameLevel } from 'src/app/models/types/game-level';
@@ -29,7 +33,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   @select((s) => s.game.gameSession)
   gameSession$: any;
   alphabets!: Alphabet[];
-  consonants!: Alphabet[];
   consonant = AlphabetType.CONSONANT;
   inputDate: any[] = [];
   selectedAlphabets: any[] = [];
@@ -42,7 +45,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   gameSessionId: any;
   stageNumber: number = 3;
   successMessage!: string;
-  isFinishedMessage!: string;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 10;
@@ -114,6 +116,16 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   getActionLetters() {
     this.exerciseAlphabets =
       this._stageThreeActivityExerciseTwoSvc.GetActionAlphabets();
+  }
+
+  onReset() {
+    console.log('reset: ', this.resultFourLetterWords);
+    let list = [...this.resultFourLetterWords];
+    list.forEach((item: any) => {
+      item.isDone = false;
+      item.isWellPlaced = false;
+    });
+    this.resultFourLetterWords = [...list];
   }
 
   onPush(LetterItem: any) {
@@ -233,34 +245,22 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
             });
             console.log('response: ', response);
             this.successMessage = response?.message;
-  
             console.log(Payload, ' submitted!');
-            this.isFinishedMessage =
-              'You have completed this level with ' +
-              this.consonants?.length +
-              ' wrong answers!';
-            console.log('Payload: ', this.isFinishedMessage);
-            this.openSnackBar(response?.message);  
+            this.openSnackBar(response?.message);
             setTimeout(() => {
-              this.isFinishedMessage = '';
               this.successMessage = '';
               this.selectedAlphabets = [];
-              this.consonants = [];
-              alert('completed!!!');
-              // this._router.navigate([
-              //   '/literacy/stage-completion',
-              //   this.stageNumber,
-              // ]);
+              this.onReset();
               this._router.navigate([
                 '/literacy/stage-completion',
                 this.stageNumber,
               ]);
               this._router.navigate([
-                `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`
+                `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
               ]);
 
               // /literacy/word/stage-1/word-stage-one-splash
-            }, 6000);
+            }, 3000);
 
             // this._router.navigate([
             //   '/literacy/lettering/stage-3/activity/exercise-two',
@@ -287,9 +287,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
     audio.load();
     audio.play();
   }
-
-
-  
 
   openSnackBar(data: any) {
     this._snackBar.openFromComponent(SnackbarComponent, {

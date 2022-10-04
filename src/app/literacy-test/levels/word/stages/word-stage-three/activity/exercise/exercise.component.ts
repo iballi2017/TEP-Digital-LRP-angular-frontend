@@ -13,6 +13,11 @@ import { GameService } from 'src/app/services/game.service';
 import { WordStageThreeService } from 'src/app/services/word/word-stage-three.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { IAppState } from 'src/redux/store';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -35,7 +40,7 @@ export class ExerciseComponent implements OnInit {
   successMessage: any;
   //
   actionWords: any[] = [];
-  newList: any[]=[];
+  newList: any[] = [];
   constructor(
     private _wordStageThreeService: WordStageThreeService,
     private _gameSvc: GameService,
@@ -108,7 +113,6 @@ export class ExerciseComponent implements OnInit {
     console.log('this.resultLetterWords: ', this.resultLetterWords);
   }
 
-  
   onSelect(WordItem: any) {
     console.log('WordItem :', WordItem);
     // let resultItem = this.resultList[this.exerciseNumber];
@@ -134,8 +138,7 @@ export class ExerciseComponent implements OnInit {
     this.onTestValues(list, resultItem);
   }
 
-
-  onTestValues(List: any, ResultItem:any) {
+  onTestValues(List: any, ResultItem: any) {
     console.log('onTest()');
     let complete = List.filter((done: any) => done?.isWellPlaced == true);
 
@@ -152,34 +155,53 @@ export class ExerciseComponent implements OnInit {
         data: [this.resultLetterWords],
       };
       console.log('x: ', Payload);
-      this.onSubmit(Payload)
+      this.onSubmit(Payload);
     }
   }
-  
 
-  onSubmit(Payload:any) {
-      console.log('x: ', Payload);
-      this._wordStageThreeService.SubmitGameStageResult(Payload).subscribe({
-        next: (response: any) => {
-          if (response) {
-            console.log('response: ', response);
-            this.openSnackBar(response?.message);
-            setTimeout(() => {
-              this.isFinishedMessage = '';
-              this.successMessage = '';
-              alert('completed!!!');
-              this._router.navigate([
-                `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
-              ]);
-            }, 6000);
-          }
-        },
-        error: (err: any) => {
-          if (err) {
-            console.warn('Error: ', err);
-          }
-        },
-      });
+  onReset() {
+    console.log('resultLetterWords: ', this.resultLetterWords.word);
+    let list = [...this.resultLetterWords.word];
+    list.forEach((item: any) => {
+      item.isDone = false;
+      item.isWellPlaced = false;
+    });
+    this.resultLetterWords.word = [...list];
+  }
+
+  onSubmit(Payload: any) {
+    console.log('x: ', Payload);
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
+    this._wordStageThreeService.SubmitGameStageResult(Payload).subscribe({
+      next: (response: any) => {
+        if (response) {
+          console.log('response: ', response);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+            payload: Payload,
+          });
+          this.openSnackBar(response?.message);
+          setTimeout(() => {
+            this.isFinishedMessage = '';
+            this.successMessage = '';
+            this.onReset();
+            // alert('completed!!!');
+            this._router.navigate([
+              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+            ]);
+          }, 3000);
+        }
+      },
+      error: (err: any) => {
+        if (err) {
+          console.warn('Error: ', err);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+            payload: err?.error?.message,
+          });
+        }
+      },
+    });
   }
 
   openSnackBar(data: any) {

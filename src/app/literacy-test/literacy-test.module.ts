@@ -15,6 +15,7 @@ import { ParagraphModule } from './levels/paragraph/paragraph.module';
 import { StoryModule } from './levels/story/story.module';
 import { LiteracyStageCompletionComponent } from './literacy-stage-completion/literacy-stage-completion.component';
 import { LiteracyLevelCompletionComponent } from './literacy-level-completion/literacy-level-completion.component';
+import { LiteracyProgramCompletionComponent } from './literacy-program-completion/literacy-program-completion.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { LiteracyLevelCompletionComponent } from './literacy-level-completion/li
     StoryComponent,
     LiteracyTestSideNavigationComponent,
     LiteracyStageCompletionComponent,
-    LiteracyLevelCompletionComponent
+    LiteracyLevelCompletionComponent,
+    LiteracyProgramCompletionComponent
   ],
   imports: [
     CommonModule,

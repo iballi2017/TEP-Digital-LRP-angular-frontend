@@ -8,11 +8,10 @@
     <ng-container *ngIf="(isLoading$ | async)">
         <small class="text-white">Loading...</small>
     </ng-container>
-    <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
-        <p>{{successMessage}}<br />
-            {{isFinishedMessage}}
-        </p>
+    <div class="alert alert-info text-center" *ngIf="successMessage">
+        <p>{{successMessage}} </p>
     </div>
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
     <div id="result-screen">
         <div class="inner">
             <ul class="list-style-none" id="result-list">

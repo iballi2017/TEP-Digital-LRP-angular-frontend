@@ -1,4 +1,4 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import {
   MatSnackBar,
@@ -12,6 +12,8 @@ import { GameType } from 'src/app/models/types/game-type';
 import { GameService } from 'src/app/services/game.service';
 import { WordStageTwoService } from 'src/app/services/word/word-stage-two.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { IAppState } from 'src/redux/store';
+import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -35,8 +37,9 @@ export class ExerciseComponent implements OnInit {
   constructor(
     private _wordStageTwoSvc: WordStageTwoService,
     private _gameSvc: GameService,
+    private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar,
-    private _router: Router,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -95,7 +98,7 @@ export class ExerciseComponent implements OnInit {
 
     //Update object's name property.
     if (this.resultLetterWords[objIndex]) {
-      this.resultLetterWords[objIndex].isChecked = true;
+      this.resultLetterWords[objIndex].isWellPlaced = true;
     }
 
     //Log object to console again.
@@ -105,10 +108,20 @@ export class ExerciseComponent implements OnInit {
     this.onSubmit();
   }
 
+  onReset() {
+    console.log('resultLetterWords: ', this.resultLetterWords);
+    let list = [...this.resultLetterWords];
+    list.forEach((item: any) => {
+      item.isDone = false;
+      item.isWellPlaced = false;
+    });
+    this.resultLetterWords = [...list];
+  }
+
   onSubmit() {
     console.log('onSubmit: ');
     let complete = this.resultLetterWords.filter(
-      (done: any) => done?.isChecked == true
+      (done: any) => done?.isWellPlaced == true
     );
 
     console.log('complete: ', complete);
@@ -120,24 +133,34 @@ export class ExerciseComponent implements OnInit {
         data: complete,
       };
       console.log('x: ', Payload);
+      this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
       this._wordStageTwoSvc.SubmitGameStageResult(Payload).subscribe({
         next: (response: any) => {
           if (response) {
             console.log('response: ', response);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+              payload: Payload,
+            });
             this.openSnackBar(response?.message);
             setTimeout(() => {
               this.isFinishedMessage = '';
               this.successMessage = '';
-              alert('completed!!!');
+              // alert('completed!!!');
+              this.onReset();
               this._router.navigate([
                 `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
               ]);
-            }, 6000);
+            }, 3000);
           }
         },
         error: (err: any) => {
           if (err) {
             console.warn('Error: ', err);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+              payload: err,
+            });
           }
         },
       });

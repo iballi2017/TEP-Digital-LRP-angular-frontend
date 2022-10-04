@@ -79,6 +79,15 @@ export class ExerciseComponent implements OnInit {
     );
   }
 
+  onReset() {
+    console.log('alphabets: ', this.alphabets);
+    let list = [...this.alphabets];
+    list.forEach((item: any) => {
+      item.isChecked = false;
+    });
+    this.alphabets = [...list];
+  }
+
   onSelected(Alphabet: any) {
     console.log('Alphabet: ', Alphabet);
     this.onGetAlphabet();
@@ -141,11 +150,11 @@ export class ExerciseComponent implements OnInit {
             this.vowels = [];
             this.selectedAlphabets = [];
             this.consonants = [];
-            alert('completed!!!');
+            this.onReset();
             this._router.navigate([
-              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`
+              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
             ]);
-          }, 6000);
+          }, 3000);
         }
       },
       error: (err: any) => {

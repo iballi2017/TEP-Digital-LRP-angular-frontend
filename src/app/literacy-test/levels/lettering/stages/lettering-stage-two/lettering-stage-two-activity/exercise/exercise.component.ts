@@ -97,12 +97,20 @@ export class ExerciseComponent implements OnInit {
       }
     }
 
-    
-    console.log("no submit!!!", this.consonants.length)
+    console.log('no submit!!!', this.consonants.length);
     if (this.consonants.length > this.consonantCount) {
-      console.log("submit!!!")
+      console.log('submit!!!');
       this.onSubmit();
     }
+  }
+
+  onReset() {
+    console.log('alphabets: ', this.alphabets);
+    let list = [...this.alphabets];
+    list.forEach((item: any) => {
+      item.isChecked = false;
+    });
+    this.alphabets = [...list];
   }
 
   onSubmit() {
@@ -138,15 +146,16 @@ export class ExerciseComponent implements OnInit {
             this.vowels = [];
             this.selectedAlphabets = [];
             this.consonants = [];
-            alert('completed!!!');
+            this.onReset();
+            // alert('completed!!!');
             // this._router.navigate([
             //   '/literacy/stage-completion',
             //   this.stageNumber,
             // ]);
             this._router.navigate([
-              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`
+              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
             ]);
-          }, 6000);
+          }, 2000);
         }
       },
       error: (err: any) => {

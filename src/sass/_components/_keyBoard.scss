@@ -39,30 +39,30 @@
     }
 }
 
-.keyboard{
-    position: relative;
-    z-index: 1;
-    &.isLoading{
-        &::after{
-            content: "Loading...";
-            font-size: 2rem;
-            font-weight: 600;
-            color: #73cf48;
-            text-shadow: 2px 2px #554c4c;
-            display: block;
-            position: absolute;
-            background-color: rgb(255, 255, 255, .3);
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    }
-}
+// .keyboard{
+//     position: relative;
+//     z-index: 1;
+//     &.isLoading{
+//         &::after{
+//             content: "Loading...";
+//             font-size: 2rem;
+//             font-weight: 600;
+//             color: #73cf48;
+//             text-shadow: 2px 2px #554c4c;
+//             display: block;
+//             position: absolute;
+//             background-color: rgb(255, 255, 255, .3);
+//             top: 0;
+//             bottom: 0;
+//             right: 0;
+//             left: 0;
+//             z-index: 1000;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//         }
+//     }
+// }
 
 // input[type="checkbox"] {
 //     position: absolute;

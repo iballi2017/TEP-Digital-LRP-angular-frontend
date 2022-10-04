@@ -1,4 +1,4 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import {
   MatSnackBar,
@@ -12,6 +12,8 @@ import { GameType } from 'src/app/models/types/game-type';
 import { GameService } from 'src/app/services/game.service';
 import { WordStageFourService } from 'src/app/services/word/word-stage-four.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { IAppState } from 'src/redux/store';
+import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -38,6 +40,7 @@ export class ExerciseComponent implements OnInit {
     private _wordStageFourService: WordStageFourService,
     private _router: Router,
     private _gameSvc: GameService,
+    private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
   ) {}
 
@@ -67,54 +70,42 @@ export class ExerciseComponent implements OnInit {
     console.log('this.resultList : ', this.resultList);
   }
 
-  onPush(LetterItem: any) {
-    console.log('LetterItem: ', LetterItem);
-    let itemExists = false;
-    let LetterItemItem = {
-      id: LetterItem.id,
-      name: LetterItem.name,
-      type: LetterItem.type,
-      isWellPlaced: LetterItem.isWellPlaced,
-    };
-
-    if (this.selectedAlphabets.length) {
-      let isItemExist = this.selectedAlphabets.includes(LetterItem);
-      if (isItemExist) {
-        let x = [...this.selectedAlphabets];
-        console.log(LetterItem, ': removed!!!');
-        this.selectedAlphabets = x.filter(
-          (item: any) => item.name != LetterItem.name
-        );
-      } else {
-        if (this.selectedAlphabets.length > 3) {
-          alert('Filled!!!');
-          return;
-        }
-        this.selectedAlphabets.push(LetterItem);
-        console.log('this.selectedAlphabets: ', this.selectedAlphabets);
-        // this.onTestValues();
-      }
-    } else {
-      if (this.selectedAlphabets.length > 1) {
-        alert('Filled!!!');
-        return;
-      }
-      this.selectedAlphabets.push(LetterItem);
-      console.log('this.selectedAlphabets: ', this.selectedAlphabets);
-      // this.onTestValues();
-    }
-  }
+  // onPush(LetterItem: any) {
+  //   console.log('LetterItem: ', LetterItem);
+  //   if (this.selectedAlphabets.length) {
+  //     let isItemExist = this.selectedAlphabets.includes(LetterItem);
+  //     if (isItemExist) {
+  //       let x = [...this.selectedAlphabets];
+  //       console.log(LetterItem, ': removed!!!');
+  //       this.selectedAlphabets = x.filter(
+  //         (item: any) => item.name != LetterItem.name
+  //       );
+  //     } else {
+  //       if (this.selectedAlphabets.length > 3) {
+  //         alert('Filled!!!');
+  //         return;
+  //       }
+  //       this.selectedAlphabets.push(LetterItem);
+  //       console.log('this.selectedAlphabets: ', this.selectedAlphabets);
+  //       // this.onTestValues();
+  //     }
+  //   } else {
+  //     if (this.selectedAlphabets.length > 1) {
+  //       alert('Filled!!!');
+  //       return;
+  //     }
+  //     this.selectedAlphabets.push(LetterItem);
+  //     console.log('this.selectedAlphabets: ', this.selectedAlphabets);
+  //     // this.onTestValues();
+  //   }
+  // }
 
   onSelect(WordItem: any) {
     console.log('WordItem :', WordItem);
     let resultItem = this.resultList[this.exerciseNumber];
+    console.log('resultItem :', resultItem);
     let list = this.resultList[this.exerciseNumber]?.word;
     console.log('list :', list);
-    // let y = list.findIndex((i: any) => i.name == WordItem.name);
-    // console.log('y :', y);
-    // let y = list.find((i: any) => i.name == WordItem.name);
-    // console.log('y :', y);
-
     let objIndex = list.findIndex((obj: any) => obj.name == WordItem.name);
     //Log object to Console.
     console.log('Before update: ', list[objIndex]);
@@ -133,6 +124,12 @@ export class ExerciseComponent implements OnInit {
 
     console.log('complete: ', complete);
     console.log('this.exerciseNumber: ', this.exerciseNumber);
+    console.log('complete.length : ', complete.length);
+    console.log('List?.length : ', List?.length);
+    console.log(
+      'complete.length  == List?.length: ',
+      complete.length == List?.length
+    );
 
     if (complete.length == List?.length) {
       ResultItem.isDone = true;
@@ -149,31 +146,56 @@ export class ExerciseComponent implements OnInit {
         console.log('All done!!!: ', y);
         // alert('All done!!!!!');
         console.log('x: ', Payload);
-        this.onSubmit(Payload)
+        this.onSubmit(Payload);
       }
     }
   }
 
+  onReset() {
+    console.log('resultLetterWords: ', this.resultList);
+    let list = [...this.resultList];
+    list.forEach((item: any) => {
+      item.isDone = false;
+      item.isWellPlaced = false;
+      let x = item.word.filter((i: any) => i.name != 'fish');
+      x.forEach((element: any) => {
+        element.isDone = false;
+        element.isWellPlaced = false;
+      });
+    });
+    this.exerciseNumber = 0;
+  }
+
   onSubmit(Result: ExerciseAnswer) {
     console.log('Result: ', Result);
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._wordStageFourService.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
           console.log('response: ', response);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+            payload: Result,
+          });
           this.openSnackBar(response?.message);
           setTimeout(() => {
             this.isFinishedMessage = '';
             this.successMessage = '';
-            alert('completed!!!');
+            // alert('completed!!!');
+            this.onReset();
             this._router.navigate([
               `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
             ]);
-          }, 6000);
+          }, 3000);
         }
       },
       error: (err: any) => {
         if (err) {
           console.warn('Error: ', err);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+            payload: err,
+          });
         }
       },
     });

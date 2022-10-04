@@ -1,4 +1,4 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import {
   ChangeDetectorRef,
   Component,
@@ -14,6 +14,8 @@ import { GameService } from 'src/app/services/game.service';
 import { ParagraphStageThreeService } from 'src/app/services/paragraph/paragraph-stage-three.service';
 import { ParagraphStageTwoService } from 'src/app/services/paragraph/paragraph-stage-two.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { IAppState } from 'src/redux/store';
+import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -43,6 +45,7 @@ export class ExerciseComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private _router: Router,
     private _snackBar: MatSnackBar,
+    private ngRedux: NgRedux<IAppState>,
     private _gameSvc: GameService
   ) {
     this._paragraphStageThreeSvc?.init();
@@ -126,6 +129,7 @@ export class ExerciseComponent implements OnInit {
 
     if (complete.length == List?.length) {
       console.log('completed!!!');
+      this.clearService();
       this.stopService();
       // alert('completed!!!');
       // this.textPosition += 1;
@@ -167,24 +171,33 @@ export class ExerciseComponent implements OnInit {
 
   onSubmit(Result: ExerciseAnswer) {
     console.log('Result: ', Result);
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._paragraphStageThreeSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
           console.log('response: ', response);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+            payload: Result,
+          });
           this.openSnackBar(response?.message);
           setTimeout(() => {
             this.isFinishedMessage = '';
             this.successMessage = '';
-            alert('completed!!!');
+            // alert('completed!!!');
             this._router.navigate([
               `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
             ]);
-          }, 6000);
+          }, 3000);
         }
       },
       error: (err: any) => {
         if (err) {
           console.warn('Error: ', err);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+            payload: err,
+          });
         }
       },
     });

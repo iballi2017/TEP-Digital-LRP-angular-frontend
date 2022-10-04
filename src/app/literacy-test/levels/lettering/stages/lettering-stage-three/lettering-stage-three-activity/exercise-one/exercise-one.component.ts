@@ -49,7 +49,7 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
   }
 
   onGetGameSessionId() {
-    this._gameSvc.LoadGameSession()
+    this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
         console.log('gameSession$ data: ', data);
@@ -201,6 +201,17 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
     }
   }
 
+  onReset() {
+    console.log('alphabets: ', this.alphabets);
+    console.log('this.resultTwoLetterWords: ', this.resultTwoLetterWords);
+    let list = [...this.resultTwoLetterWords];
+    list.forEach((item: any) => {
+      item.isDone = false;
+      item.isWellPlaced = false;
+    });
+    this.resultTwoLetterWords = [...list];
+  }
+
   onSubmit(complete: any) {
     this.ngRedux.dispatch({ type: ADD_LETTERING_STAGE_THREE_EXERCISE_ONE });
     const Payload: any = {
@@ -218,6 +229,7 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
       type: ADD_LETTERING_STAGE_THREE_EXERCISE_ONE_SUCCESS,
       payload: Payload,
     });
+    this.onReset();
     this._router.navigate([
       '/literacy/lettering/stage-3/activity/exercise-two',
     ]);

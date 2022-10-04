@@ -1,6 +1,15 @@
-import { select } from '@angular-redux/store';
-import { ChangeDetectorRef, Component, OnInit, SimpleChanges } from '@angular/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { NgRedux, select } from '@angular-redux/store';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
@@ -8,11 +17,17 @@ import { GameType } from 'src/app/models/types/game-type';
 import { GameService } from 'src/app/services/game.service';
 import { ParagraphStageTwoService } from 'src/app/services/paragraph/paragraph-stage-two.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { IAppState } from 'src/redux/store';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.scss']
+  styleUrls: ['./exercise.component.scss'],
 })
 export class ExerciseComponent implements OnInit {
   @select((s) => s.SpeechTexts.speechTexts) speechTexts$: any;
@@ -37,6 +52,7 @@ export class ExerciseComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private _router: Router,
     private _snackBar: MatSnackBar,
+    private ngRedux: NgRedux<IAppState>,
     private _gameSvc: GameService
   ) {
     this._paragraphStageTwoSvc?.init();
@@ -55,7 +71,6 @@ export class ExerciseComponent implements OnInit {
     this.onGetGameSessionId();
   }
 
-  
   ngOnChanges(changes: SimpleChanges): void {
     console.log('changes: ', changes);
     // this._paragraphStageTwoSvc.speechToTextBehaviorSubj.subscribe(
@@ -66,8 +81,6 @@ export class ExerciseComponent implements OnInit {
     //   }
     // );
   }
-
-
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
@@ -134,7 +147,8 @@ export class ExerciseComponent implements OnInit {
     console.log('this.textPosition: ', this.textPosition);
 
     if (complete.length == List?.length) {
-      console.log('completed!!!');
+      // console.log('completed!!!');
+      this.clearService();
       this.stopService();
       // alert('completed!!!');
       // this.textPosition += 1;
@@ -147,7 +161,7 @@ export class ExerciseComponent implements OnInit {
         data: List,
       };
       console.log('x: ', Payload);
-      this.onSubmit(Payload)
+      this.onSubmit(Payload);
     }
   }
 
@@ -163,27 +177,35 @@ export class ExerciseComponent implements OnInit {
     this._paragraphStageTwoSvc.clear();
   }
 
-  
   onSubmit(Result: ExerciseAnswer) {
     console.log('Result: ', Result);
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._paragraphStageTwoSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
           console.log('response: ', response);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+            payload: Result,
+          });
           this.openSnackBar(response?.message);
           setTimeout(() => {
             this.isFinishedMessage = '';
             this.successMessage = '';
-            alert('completed!!!');
+            // alert('completed!!!');
             this._router.navigate([
               `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
             ]);
-          }, 6000);
+          }, 3000);
         }
       },
       error: (err: any) => {
         if (err) {
           console.warn('Error: ', err);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+            payload: err,
+          });
         }
       },
     });

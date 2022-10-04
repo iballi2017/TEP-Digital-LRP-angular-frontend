@@ -1,5 +1,5 @@
-import { NgRedux } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { NgRedux, select } from '@angular-redux/store';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { IAppState } from 'src/redux/store';
 import {
   FETCH_USER_DETAILS,
@@ -12,7 +12,10 @@ import { IdentityService } from './services/identity.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterContentInit {
+  @select((s) => s.game.gameSession) gameSession$: any;
+  @select((s) => s.game.isLoading) isLoading$: any;
+  isSubmittingData!: boolean;
   title = 'tep-digital-lrp';
   constructor(
     private _identitySvc: IdentityService,
@@ -21,6 +24,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // this.onGetUserDetails();
+    this.isLoading$.subscribe((l: any) => {
+      if (l) {
+        this.isSubmittingData = l;
+      }
+    });
+  }
+
+  ngAfterContentInit(): void {
   }
   onGetUserDetails() {
     // this._identitySvc.getUserById();

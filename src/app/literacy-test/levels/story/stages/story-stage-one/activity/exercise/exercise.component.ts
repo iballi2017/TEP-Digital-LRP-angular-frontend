@@ -1,4 +1,4 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import {
   MatSnackBar,
@@ -12,6 +12,12 @@ import { GameType } from 'src/app/models/types/game-type';
 import { GameService } from 'src/app/services/game.service';
 import { StoryStageOneService } from 'src/app/services/story/story-stage-one.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { IAppState } from 'src/redux/store';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -40,6 +46,7 @@ export class ExerciseComponent implements OnInit {
     private _storyStageOneSvc: StoryStageOneService,
     private _router: Router,
     private _gameSvc: GameService,
+    private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
   ) {}
 
@@ -59,7 +66,6 @@ export class ExerciseComponent implements OnInit {
       },
     });
   }
-
 
   onGetActionWords() {
     let list = this._storyStageOneSvc.GetActionWords();
@@ -205,7 +211,10 @@ export class ExerciseComponent implements OnInit {
         // alert('All done!!!!!');
         console.log('x: ', Payload);
         console.log('this.titleTestData: ', this.titleTestData);
-        const newData = {...Payload, data: Payload.data.concat(this.titleTestData.data)}
+        const newData = {
+          ...Payload,
+          data: Payload.data.concat(this.titleTestData.data),
+        };
         console.log('newData: ', newData);
         // let z = Object.assign(Payload, this.titleTestData);
         // console.log('z: ', z);
@@ -214,26 +223,72 @@ export class ExerciseComponent implements OnInit {
     }
   }
 
+  onReset() {
+    // console.log('titleResultList: ', this.titleResultList);
+    let list: any = [...this.titleResultList];
+    console.log('list: ', list);
+    list.forEach((c: any) => {
+      c.isDone = false;
+      c.word.forEach((element: any) => {
+        element.isWellPlaced = false;
+      });
+    });
+    this.titleResultList = list;
+    console.log('titleResultList: ', this.titleResultList);
+    //
+    let list2: any = [...this.storyResultList];
+    console.log('list2: ', list2);
+    list2.forEach((c: any) => {
+      c.isDone = false;
+      c.word.forEach((element: any) => {
+        element.isWellPlaced = false;
+      });
+    });
+    this.storyResultList = list2;
+    console.log('storyResultList: ', this.storyResultList);
+    this.isStory = false;
+
+    // list.forEach((item: any) => {
+    //   item.isDone = false;
+    //   let x = item.word.filter((i: any) => i.isHint != true);
+    //   console.log('x : ', x );
+    //   x.forEach((element: any) => {
+    //     element.isWellPlaced = false;
+    //   });
+    // });
+    this.exerciseNumber = 0;
+  }
+
   onSubmit(Result: ExerciseAnswer) {
     console.log('Result: ', Result);
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._storyStageOneSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
           console.log('response: ', response);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+            payload: Result,
+          });
           this.openSnackBar(response?.message);
           setTimeout(() => {
             this.isFinishedMessage = '';
             this.successMessage = '';
-            alert('completed!!!');
+            this.onReset();
+            // alert('completed!!!');
             this._router.navigate([
               `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
             ]);
-          }, 6000);
+          }, 3000);
         }
       },
       error: (err: any) => {
         if (err) {
           console.warn('Error: ', err);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+            payload: err,
+          });
         }
       },
     });
