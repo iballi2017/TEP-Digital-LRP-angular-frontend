@@ -21,4 +21,7 @@
         <button class="btn btn-danger" (click)="stopService()">Stop</button>
         <button class="btn btn-warning" (click)="clearService()">Clear</button>
     </div>
+
+    
+    <app-refresh-game-button (onRefreshGame)="clearService()"></app-refresh-game-button>
 </div>

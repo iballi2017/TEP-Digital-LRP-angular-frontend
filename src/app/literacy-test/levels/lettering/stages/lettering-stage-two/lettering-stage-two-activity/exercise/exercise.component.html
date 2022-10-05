@@ -38,6 +38,7 @@
     </div> -->
     <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
     <!-- keyboard list-style-none pl-0 isLoading -->
+        <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
     <ul class="keyboard list-style-none pl-0 isLoading" id="activity-canvas" [ngClass]="{'isLoading': (isLoading$ | async)}">
         <li *ngFor="let item of alphabets">
             <input type="checkbox" id="{{item?.name}}" hidden [(ngModel)]="item.isChecked"

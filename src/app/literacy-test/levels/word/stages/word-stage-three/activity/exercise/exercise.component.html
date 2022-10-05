@@ -58,4 +58,7 @@
             <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
         </li>
     </ul>
+
+    
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
 </div>

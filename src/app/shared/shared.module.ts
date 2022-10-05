@@ -21,6 +21,7 @@ import { TopProgressBarComponent } from './components/top-progress-bar/top-progr
 import { AudienceApplauseComponent } from './components/audience-applause/audience-applause.component';
 import { LevelCompletionComponent } from './views/level-completion/level-completion.component';
 import { ProgramCompletionComponent } from './views/program-completion/program-completion.component';
+import { RefreshGameButtonComponent } from './components/refresh-game-button/refresh-game-button.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ProgramCompletionComponent } from './views/program-completion/program-c
     AudienceApplauseComponent,
     LevelCompletionComponent,
     ProgramCompletionComponent,
+    RefreshGameButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -66,6 +68,7 @@ import { ProgramCompletionComponent } from './views/program-completion/program-c
     AudienceApplauseComponent,
     LevelCompletionComponent,
     ProgramCompletionComponent,
+    RefreshGameButtonComponent,
   ],
 })
 export class SharedModule {}

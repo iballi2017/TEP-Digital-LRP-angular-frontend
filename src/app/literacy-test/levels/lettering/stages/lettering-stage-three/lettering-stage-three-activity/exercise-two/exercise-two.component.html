@@ -12,6 +12,7 @@
         <p>{{successMessage}} </p>
     </div>
     <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+        <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
     <div id="result-screen">
         <div class="inner">
             <ul class="list-style-none" id="result-list">

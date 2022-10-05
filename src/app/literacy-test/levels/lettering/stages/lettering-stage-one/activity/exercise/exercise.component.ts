@@ -80,6 +80,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   onReset() {
+    // alert($event)
     console.log('alphabets: ', this.alphabets);
     let list = [...this.alphabets];
     list.forEach((item: any) => {

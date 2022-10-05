@@ -29,6 +29,7 @@
             <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name | uppercase}}</div>
         </div>
     </div>
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
 
     <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
         <li *ngFor="let item of actionAlphabets">
