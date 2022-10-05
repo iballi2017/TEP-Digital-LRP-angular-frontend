@@ -11,7 +11,7 @@ export class ParagraphStageFourSplashComponent implements OnInit {
       title: 'LITERACY',
     },
     {
-      title: 'LETTERING',
+      title: 'PARAGRAPH',
     },
     {
       title: 'STAGE 4',

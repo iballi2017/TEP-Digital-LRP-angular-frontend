@@ -11,7 +11,7 @@ export class StoryStageOneSplashComponent implements OnInit {
       title: 'LITERACY',
     },
     {
-      title: 'LETTERING',
+      title: 'STORY',
     },
     {
       title: 'STAGE 1',

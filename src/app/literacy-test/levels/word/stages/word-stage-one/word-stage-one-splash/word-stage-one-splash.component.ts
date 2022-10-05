@@ -12,7 +12,7 @@ export class WordStageOneSplashComponent implements OnInit {
       title: 'LITERACY',
     },
     {
-      title: 'LETTERING',
+      title: 'WORD',
     },
     {
       title: 'STAGE 1',
