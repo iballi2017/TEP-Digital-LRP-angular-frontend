@@ -1,0 +1,37 @@
+<!-- <p>number-recognition-two works!</p> -->
+
+<ul class="row no-gutters list-style-none pl-0">
+    <!-- [routerLink]="['/literacy/stage-1']" routerLinkActive="router-link-active"  -->
+    <!-- <li class="col-12 col-lg-3 cursor-pointer" *ngFor="let item of numberingStages; let i = index"
+    [routerLink]="['/literacy', item?.title]"> -->
+    <!-- <li class="col-12 col-lg-3 cursor-pointer" *ngFor="let item of numberingStages; let i = index"
+    [routerLink]="['/literacy/lettering/', item?.title, 'lettering-splash']"> -->
+    <li class="col-12 col-lg-4 cursor-pointer" *ngFor="let item of testStageStars; let i = index"
+        [routerLink]="['/numeracy/number-recognition-two/', item?.title, 'number-recognition-two-splash']">
+        <div class="stage-card-wrap">
+            <!-- /numeracy/levels/number-recognition-one -->
+            <!-- /literacy/stage-1/lettering-splash/first-screen -->
+            <div class="stage-card">
+                <!-- <div class="card-body">
+                   <div class="number-card"> -->
+                <p>{{i + 1}}</p>
+                <!-- </div>
+                </div> -->
+            </div>
+            <ul class="stage-star-rating list-style-none pl-0">
+                <!-- <li *ngFor="let item2 of  item?.rating"> -->
+                <li *ngFor="let stageStar of item?.starArray">
+                    <div *ngIf="stageStar?.isDone">
+                        <img src="../../../../assets/images/icons/yellow-black-bordered-star.svg" alt=""
+                            class="img-fluid">
+                    </div>
+                    <div *ngIf="!stageStar?.isDone">
+                        <img src="../../../../assets/images/icons/white-grey-bordered-star..svg" alt=""
+                            class="img-fluid">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>
+

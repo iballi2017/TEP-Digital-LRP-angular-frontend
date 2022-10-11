@@ -5,7 +5,7 @@ import { catchError } from 'rxjs';
 import { baseUrl } from 'src/app/config/api';
 import { handleError } from 'src/app/helpers/errorHandler';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
-import { actionwords, results } from 'src/assets/data/paragraph-stage-four.data';
+import { actionwords, results } from 'src/assets/data/literacy.data/paragraph-stage-four.data';
 import { IAppState } from 'src/redux/store';
 
 @Injectable({

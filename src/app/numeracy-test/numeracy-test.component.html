@@ -1,1 +1,38 @@
-<p>numeracy-test works!</p>
+<!-- <p>numeracy-test works!</p> -->
+<div id="level-and-stage-selection-page">
+    <div class="page-wrapper school-bg py-5 pb-3">
+        <div class="inner container-fluid">
+            <!--  -->
+            <app-breadcrumb-topbar [title]="title" [menuList]="menuList"></app-breadcrumb-topbar>
+            <!-- <app-breadcrumb-topbar [title]="title"></app-breadcrumb-topbar> -->
+
+            <div class="row">
+                <div class="col-12 col-xl-3">
+                    <!-- Side Navigation -->
+                    <div class="d-none d-xl-block">
+                        <!-- <app-literacy-test-side-navigation [title]="literacyTestSideNavTitle"
+                            [navItemList]="navItemList">
+                        </app-literacy-test-side-navigation> -->
+                        <app-program-test-side-navigation [title]="literacyTestSideNavTitle"
+                        [navItemList]="navItemList"></app-program-test-side-navigation>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-9">
+                    <main>
+                        <div class="d-xl-none">
+                            <button id="side-menu-toggler" class="btn" (click)="onOpenMenu()">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-12"> -->
+                        <h2 class="program-title">CHOOSE STAGE</h2>
+                        <router-outlet></router-outlet>
+                        <!-- </div>
+                        </div> -->
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

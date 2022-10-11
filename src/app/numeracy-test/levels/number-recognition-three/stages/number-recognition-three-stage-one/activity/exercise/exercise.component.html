@@ -1,0 +1,62 @@
+<!-- <p>exercise works!</p> -->
+
+<div class="canvas-wrapper">
+
+    <!-- <ng-container *ngIf="(isLoading$ | async)">
+        <small class="text-white">Loading...</small>
+    </ng-container> -->
+    <!-- <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
+        <p>{{successMessage}}<br />
+            {{isFinishedMessage}}
+        </p>
+    </div> -->
+
+    <div id="word-result-screen-type-1">
+        <div class="inner">
+            <div class="word-result-board">
+                <!-- {{resultLetterWords | json}} -->
+                <ul id="result-number-list" class="list-style-none mb-0 pl-0">
+                    <li *ngFor="let item of resultNumbers.numbers">
+                        <span>
+                            <span class="space">
+                                <span [ngClass]="{'d-none': item?.isWellPlaced != true}">{{item?.name}}</span>
+                            </span>
+                        </span>
+                    </li>
+                </ul>
+                <!-- <ul id="result-number-list" class="list-style-none mb-0 pl-0">
+                    <li *ngFor="let item of [1, 2, 3, 4]">
+                        <span>5</span>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+    </div>
+    <h1 class="title">{{pageTitle}}</h1>
+
+
+    <ul class="list-style-none pl-0 word-keyboard row no-gutters">
+        <li class="col-3 col-md-2 p-1 p-lg-2" *ngFor="let item of actionWords">
+            <button class="btn key rounded-0" (click)="onSelect(item)"
+                [ngClass]="{'wrong-answer': item?.isWrongNumber, 'right-answer':item?.isCorrectNumber}">{{item?.name}}</button>
+        </li>
+    </ul>
+
+
+
+
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+    <!-- keyboard list-style-none pl-0 isLoading -->
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+    <!-- <ul class="keyboard list-style-none pl-0 isLoading" id="activity-canvas" [ngClass]="{'isLoading': (isLoading$ | async)}">
+        <li *ngFor="let item of alphabets">
+            <input type="checkbox" id="{{item?.name}}" hidden [(ngModel)]="item.isChecked"
+                [ngModelOptions]="{standalone: true}" (change)="onSelected(item)">
+            <label for="{{item?.name}}">
+                <span class="fake-box"
+                    [ngClass]="{'right-answer': item.isChecked && item?.type == consonant,'wrong-answer': item.isChecked && item?.type == vowel}">{{item?.name}}</span>
+                <span class="linen"></span>
+            </label>
+        </li>
+    </ul> -->
+</div>

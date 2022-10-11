@@ -31,6 +31,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'numeracy',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./numeracy-test/numeracy-test.module').then(
+        (m) => m.NumeracyTestModule
+      ),
+  },
+  {
     path: 'practice',
     loadChildren: () =>
       import('./practice/practice.module').then((m) => m.PracticeModule),

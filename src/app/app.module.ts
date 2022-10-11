@@ -18,7 +18,6 @@ import {
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TestOnboardingComponent } from './test-onboarding/test-onboarding.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NumeracyTestComponent } from './numeracy-test/numeracy-test.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 import { TokenInterceptor } from './helpers/token.interceptor';
 import { AuthGuard } from './services/guards/auth.guard';
@@ -29,7 +28,6 @@ import { GameScreenLoaderComponent } from './shared/components/game-screen-loade
     AppComponent,
     LandingPageComponent,
     TestOnboardingComponent,
-    NumeracyTestComponent,
     GameScreenLoaderComponent,
   ],
   imports: [

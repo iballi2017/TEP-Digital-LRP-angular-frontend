@@ -4,7 +4,7 @@ import { catchError } from 'rxjs';
 import { baseUrl } from 'src/app/config/api';
 import { handleError } from 'src/app/helpers/errorHandler';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
-import { actionwords, resultWords } from 'src/assets/data/word-stage-two.data';
+import { actionwords, resultWords } from 'src/assets/data/literacy.data/word-stage-two.data';
 
 @Injectable({
   providedIn: 'root',

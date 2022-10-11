@@ -29,36 +29,35 @@
         </div>
     </div>
 
-    <div id="output-screen">
-    <div id="output-screen">
-        <div class="inner">
-            <div class="prev-item d-flex align-items-center" *ngFor="let item of resultLetterWords?.word">
-                <div class="obj">
-                    <span
-                        [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}
-                    </span>
+    <!-- <div id="output-screen"> -->
+        <div id="output-screen">
+            <div class="inner">
+                <div class="prev-item d-flex align-items-center" *ngFor="let item of resultLetterWords?.word">
+                    <div class="obj">
+                        <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}
+                        </span>
+                    </div>
+                    <div id="operator" class="btn"></div>
                 </div>
-                <div id="operator" class="btn"></div>
-            </div>
-            <!-- <div class="obj" *ngFor="let item of resultLetterWords?.word" [ngClass]="{'border-0': item?.isHint == true,'bg-none': item?.isHint == true}">
+                <!-- <div class="obj" *ngFor="let item of resultLetterWords?.word" [ngClass]="{'border-0': item?.isHint == true,'bg-none': item?.isHint == true}">
                 <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
             </div> -->
+            </div>
         </div>
-    </div>
 
-    <!-- <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
+        <!-- <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
         <li *ngFor="let item of actionAlphabets">
             <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name | uppercase}}</button>
         </li>
     </ul> -->
 
 
-    <ul class="list-style-none pl-0 word-keyboard row no-gutters">
-        <li class="col-3 p-1 p-lg-2" *ngFor="let item of actionWords">
-            <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
-        </li>
-    </ul>
+        <ul class="list-style-none pl-0 word-keyboard row no-gutters">
+            <li class="col-3 p-1 p-lg-2" *ngFor="let item of actionWords">
+                <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
+            </li>
+        </ul>
 
-    
-    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
-</div>
+
+        <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+    <!-- </div> -->

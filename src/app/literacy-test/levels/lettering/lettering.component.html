@@ -1,24 +1,48 @@
 <!-- <p class="text-white">lettering works!</p> -->
 <!-- <div class="text-white">Lettering</div> -->
-<ul class="row list-style-none pl-0">
+<ul class="row no-gutters list-style-none pl-0">
     <!-- [routerLink]="['/literacy/stage-1']" routerLinkActive="router-link-active"  -->
     <!-- <li class="col-12 col-lg-3 cursor-pointer" *ngFor="let item of letteringStages; let i = index"
     [routerLink]="['/literacy', item?.title]"> -->
-    <li class="col-12 col-lg-3 cursor-pointer" *ngFor="let item of letteringStages; let i = index"
-    [routerLink]="['/literacy/lettering/', item?.title, 'lettering-splash']">
-
-    <!-- /literacy/stage-1/lettering-splash/first-screen -->
-        <div class="stage-card">
-            <!-- <div class="card-body">
-                       <div class="number-card"> -->
-            <p>{{i + 1}}</p>
-            <!-- </div>
-                    </div> -->
+    <!-- <li class="col-12 col-lg-3 cursor-pointer" *ngFor="let item of letteringStages; let i = index"
+    [routerLink]="['/literacy/lettering/', item?.title, 'lettering-splash']"> -->
+    <li class="col-12 col-lg-4 cursor-pointer" *ngFor="let item of testStageStars; let i = index"
+        [routerLink]="['/literacy/lettering/', item?.title, 'lettering-splash']">
+        <div class="stage-card-wrap">
+            <!-- /literacy/stage-1/lettering-splash/first-screen -->
+            <div class="stage-card">
+                <!-- <div class="card-body">
+                   <div class="number-card"> -->
+                <p>{{i + 1}}</p>
+                <!-- </div>
+                </div> -->
+            </div>
+            <ul class="stage-star-rating list-style-none pl-0">
+                <!-- <li *ngFor="let item2 of  item?.rating"> -->
+                <li *ngFor="let stageStar of item?.starArray">
+                    <div *ngIf="stageStar?.isDone">
+                        <img src="../../../../assets/images/icons/yellow-black-bordered-star.svg" alt=""
+                            class="img-fluid">
+                    </div>
+                    <div *ngIf="!stageStar?.isDone">
+                        <img src="../../../../assets/images/icons/white-grey-bordered-star..svg" alt=""
+                            class="img-fluid">
+                    </div>
+                </li>
+            </ul>
         </div>
-        <ul class="stage-star-rating list-style-none pl-0">
-            <li *ngFor="let item of  [1, 2, 3, 4]">
-                <img src="../../../../assets/images/icons/white-grey-bordered-star..svg" alt="" class="img-fluid">
-            </li>
-        </ul>
     </li>
 </ul>
+
+
+
+<!-- <span *ngFor="let s of stageStar?.starArray" class="text-white">
+    <span *ngIf="s?.isDone">
+        <img src="../../../../assets/images/icons/white-grey-bordered-star.svg" alt=""
+            class="img-fluid">
+    </span>
+    <span *ngIf="!s?.isDone">
+        <img src="../../../../assets/images/icons/yellow-black-bordered-star.svg" alt=""
+            class="img-fluid">
+    </span>
+</span> -->

@@ -6,7 +6,7 @@ import { baseUrl } from 'src/app/config/api';
 import { handleError } from 'src/app/helpers/errorHandler';
 import { SpeechToText } from 'src/app/models/classes/speech-to-text';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
-import { exerciseTexts } from 'src/assets/data/paragraph-stage-one.data';
+import { exerciseTexts } from 'src/assets/data/literacy.data/paragraph-stage-one.data';
 import { IAppState } from 'src/redux/store';
 import {
   ADD_SPEECH_TO_TEXT,

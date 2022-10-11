@@ -7,7 +7,7 @@ import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import {
   actionAlphabets,
   resultLetterWords,
-} from 'src/assets/data/word-stage-one.data';
+} from 'src/assets/data/literacy.data/word-stage-one.data';
 
 @Injectable({
   providedIn: 'root',

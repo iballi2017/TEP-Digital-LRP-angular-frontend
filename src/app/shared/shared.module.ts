@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BreadcrumbTopbarComponent } from '../literacy-test/components/breadcrumb-topbar/breadcrumb-topbar.component';
 import { SpeechSynthesisUtteranceComponent } from './components/speech-synthesis-utterance/speech-synthesis-utterance.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArrowControlsComponent } from './components/arrow-controls/arrow-controls.component';
@@ -22,6 +21,8 @@ import { AudienceApplauseComponent } from './components/audience-applause/audien
 import { LevelCompletionComponent } from './views/level-completion/level-completion.component';
 import { ProgramCompletionComponent } from './views/program-completion/program-completion.component';
 import { RefreshGameButtonComponent } from './components/refresh-game-button/refresh-game-button.component';
+import { BreadcrumbTopbarComponent } from './components/breadcrumb-topbar/breadcrumb-topbar.component';
+import { ProgramTestSideNavigationComponent } from './components/program-test-side-navigation/program-test-side-navigation.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { RefreshGameButtonComponent } from './components/refresh-game-button/ref
     LevelCompletionComponent,
     ProgramCompletionComponent,
     RefreshGameButtonComponent,
+    ProgramTestSideNavigationComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,7 @@ import { RefreshGameButtonComponent } from './components/refresh-game-button/ref
     LevelCompletionComponent,
     ProgramCompletionComponent,
     RefreshGameButtonComponent,
+    ProgramTestSideNavigationComponent,
   ],
 })
 export class SharedModule {}
