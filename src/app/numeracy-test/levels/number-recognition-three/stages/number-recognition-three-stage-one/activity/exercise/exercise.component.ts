@@ -12,7 +12,7 @@ import { NumberRecognitionThreeService } from 'src/app/services/number-recogniti
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
-  pageTitle: string = 'can you identify the 2-digit numbers here';
+  pageTitle: string = 'can you identify the 3-digit numbers here';
   actionWords: any[] = [];
   resultNumbers: any;
   gameSessionId: any;
