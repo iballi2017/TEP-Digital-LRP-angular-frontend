@@ -17,10 +17,11 @@ const routes: Routes = [
         component: PlaceValueStageOneInstructionalVideoComponent,
       },
     ],
-  },];
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PlaceValueStageOneSplashRoutingModule { }
+export class PlaceValueStageOneSplashRoutingModule {}

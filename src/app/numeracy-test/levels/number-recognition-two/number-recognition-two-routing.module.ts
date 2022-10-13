@@ -13,8 +13,6 @@ const routes: Routes = [
         path: '',
         loadChildren: () =>
           import(
-            // './stages/number-recognition-stage-one/number-recognition-stage-one-splash/number-recognition-stage-one-splash.module'
-            // './stages/number-recognition-two-stage-one/number-recognition-two-stage-one-splash/number-recognition-two-stage-one-splash.module'
             './stages/number-recognition-two-stage-one/number-recognition-two-stage-one-splash/number-recognition-two-stage-one-splash.module'
           ).then((m) => m.NumberRecognitionTwoStageOneSplashModule),
       },

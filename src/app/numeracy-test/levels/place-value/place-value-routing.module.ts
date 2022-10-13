@@ -31,10 +31,11 @@ const routes: Routes = [
           ).then((m) => m.ActivityModule),
       },
     ],
-  },];
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PlaceValueRoutingModule { }
+export class PlaceValueRoutingModule {}
