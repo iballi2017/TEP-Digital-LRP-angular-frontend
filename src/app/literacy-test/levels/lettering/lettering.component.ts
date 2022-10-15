@@ -28,12 +28,12 @@ export class LetteringComponent implements OnInit {
     {
       id: 3,
       title: 'stage-3',
-      rating: 4,
+      rating: 5,
     },
     {
       id: 4,
       title: 'stage-4',
-      rating: 2,
+      rating: 5,
     },
   ];
   totalStarNumber: number = 5;

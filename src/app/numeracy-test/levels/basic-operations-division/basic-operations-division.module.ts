@@ -7,7 +7,7 @@ import { BasicOperationsDivisionStageOneComponent } from './stages/basic-operati
 
 @NgModule({
   declarations: [
-    BasicOperationsDivisionStageOneComponent
+    BasicOperationsDivisionStageOneComponent,
   ],
   imports: [
     CommonModule,

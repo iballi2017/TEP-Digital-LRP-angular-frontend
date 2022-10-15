@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BasicOperationsAdditionStageOneComponent } from './basic-operations-division-stage-one.component';
+import { BasicOperationsDivisionStageOneComponent } from './basic-operations-division-stage-one.component';
 
-describe('BasicOperationsAdditionStageOneComponent', () => {
-  let component: BasicOperationsAdditionStageOneComponent;
-  let fixture: ComponentFixture<BasicOperationsAdditionStageOneComponent>;
+describe('BasicOperationsDivisionStageOneComponent', () => {
+  let component: BasicOperationsDivisionStageOneComponent;
+  let fixture: ComponentFixture<BasicOperationsDivisionStageOneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BasicOperationsAdditionStageOneComponent ]
+      declarations: [ BasicOperationsDivisionStageOneComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BasicOperationsAdditionStageOneComponent);
+    fixture = TestBed.createComponent(BasicOperationsDivisionStageOneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
