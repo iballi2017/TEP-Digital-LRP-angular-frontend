@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameStage } from 'src/app/models/types/game-stage';
 import { BasicOperationsAdditionStageOneComponent } from './stages/basic-operations-addition-stage-one/basic-operations-addition-stage-one.component';
+import { BasicOperationsAdditionStageTwoComponent } from './stages/basic-operations-addition-stage-two/basic-operations-addition-stage-two.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,33 @@ const routes: Routes = [
         loadChildren: () =>
           import(
             './stages/basic-operations-addition-stage-one/activity/activity.module'
+          ).then((m) => m.ActivityModule),
+      },
+    ],
+  },
+  {
+    path: `${GameLevel.BASIC_OPERATIONS_ADDITION}/stage-${GameStage.TWO}`,
+    component: BasicOperationsAdditionStageTwoComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-addition-stage-two/basic-operations-addition-stage-two-splash/basic-operations-addition-stage-two-splash.module'
+          ).then((m) => m.BasicOperationsAdditionStageTwoSplashModule),
+      },
+      {
+        path: 'number-recognition-one-splash',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-addition-stage-two/basic-operations-addition-stage-two-splash/basic-operations-addition-stage-two-splash.module'
+          ).then((m) => m.BasicOperationsAdditionStageTwoSplashModule),
+      },
+      {
+        path: 'activity',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-addition-stage-two/activity/activity.module'
           ).then((m) => m.ActivityModule),
       },
     ],

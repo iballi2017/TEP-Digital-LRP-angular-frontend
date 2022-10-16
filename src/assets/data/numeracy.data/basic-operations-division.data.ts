@@ -1,21 +1,21 @@
 export const actionNumbers = [
   {
-    name: '6',
+    figure: 3,
   },
   {
-    name: '9',
+    figure: 25,
   },
   {
-    name: '1',
+    figure: 10,
   },
   {
-    name: '4',
+    figure: 2,
   },
   {
-    name: '5',
+    figure: 12,
   },
   {
-    name: '8',
+    figure: 6,
   },
 ];
 
@@ -25,18 +25,18 @@ export const resultNumbers = {
     {
       isDone: false,
       answer: {
-        figure: '5',
+        figure: 3,
         isWellPlaced: false,
       },
       questionItems: [
         {
-          figure: '2',
+          figure: 9,
           // hint: false,
           // type: 'first number',
           // isWellPlaced: false,
         },
         {
-          figure: '3',
+          figure: 3,
           // hint: false,
           // type: 'second number',
           // isWellPlaced: false,
@@ -46,21 +46,15 @@ export const resultNumbers = {
     {
       isDone: false,
       answer: {
-        figure: '8',
+        figure: 2,
         isWellPlaced: false,
       },
       questionItems: [
         {
-          figure: '4',
-          // hint: false,
-          // type: 'first number',
-          // isWellPlaced: false,
+          figure: 6,
         },
         {
-          figure: '4',
-          // hint: false,
-          // type: 'second number',
-          // isWellPlaced: false,
+          figure: 3,
         },
       ],
     },

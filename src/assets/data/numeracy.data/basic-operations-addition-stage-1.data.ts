@@ -1,21 +1,21 @@
 export const actionNumbers = [
   {
-    name: '6',
+    figure: 6,
   },
   {
-    name: '9',
+    figure: 9,
   },
   {
-    name: '1',
+    figure: 1,
   },
   {
-    name: '4',
+    figure: 4,
   },
   {
-    name: '5',
+    figure: 5,
   },
   {
-    name: '8',
+    figure: 8,
   },
 ];
 
