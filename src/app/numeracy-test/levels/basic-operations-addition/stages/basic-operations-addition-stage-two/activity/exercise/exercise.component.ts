@@ -1,7 +1,7 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
-import { BasicOperationsAdditionStageTwoService } from 'src/app/services/basic-operations/basic-operations-addition-stage-two.service';
+import { BasicOperationsAdditionStageTwoService } from 'src/app/services/basic-operations/addition/basic-operations-addition-stage-two.service';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({

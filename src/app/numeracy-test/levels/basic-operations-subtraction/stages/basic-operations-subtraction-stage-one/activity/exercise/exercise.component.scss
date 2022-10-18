@@ -1,4 +1,13 @@
 @use "../../../../../../../../sass/_partials/mixins";
+
+.canvas-wrapper #word-result-screen-type-1 {
+    max-width: 100%;
+}
+
+.blue-triangle-wrap{
+    // display: inline-block;
+    margin-bottom: .05em;
+}
 .word-keyboard {
     max-width: 500px;
     margin: 1.2em auto;
@@ -42,26 +51,41 @@
     justify-content: center;
 }
 
-#result-number-list {
+.canvas-wrapper #word-result-screen-type-1 > .inner .word-result-board {
+    max-width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+#result-number-list {
     li {
-        span {
-            font-family: "Open Sans";
-            font-style: normal;
-            font-weight: 800;
-            font-size: 5rem;
-            line-height: 131px;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            letter-spacing: -0.015em;
-            color: #000000;
-            &::after{
-                content: ",";
-                display: inline-block;
-                margin-right: .15em;
-            }
+        &::after {
+            content: "-";
         }
     }
 }
+// #result-number-list {
+//     display: flex;
+//     flex-wrap: wrap;
+//     li {
+//         span {
+//             font-family: "Open Sans";
+//             font-style: normal;
+//             font-weight: 800;
+//             font-size: 5rem;
+//             line-height: 131px;
+//             display: flex;
+//             align-items: center;
+//             text-align: center;
+//             letter-spacing: -0.015em;
+//             color: #000000;
+//             &::after{
+//                 content: ",";
+//                 display: inline-block;
+//                 margin-right: .15em;
+//             }
+//         }
+//     }
+// }

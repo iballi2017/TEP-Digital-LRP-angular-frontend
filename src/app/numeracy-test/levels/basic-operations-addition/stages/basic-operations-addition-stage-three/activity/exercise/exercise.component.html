@@ -1,5 +1,6 @@
 <!-- <p>exercise works!</p> -->
-<div id="basic-operations">    
+
+<div id="basic-operations">
     <div class="canvas-wrapper">
 
         <!-- <ng-container *ngIf="(isLoading$ | async)">
@@ -10,28 +11,37 @@
             {{isFinishedMessage}}
         </p>
     </div> -->
-
         <div id="word-result-screen-type-1">
             <div class="inner">
                 <div class="word-result-board">
-                    <!-- {{resultLetterWords | json}} -->
+                    <!-- <div class="text-danger">{{uiExercise | json}}</div> -->
+                    <aside class="note">There are {{uiExercise[0].figure}} balls in a pot, Bobo puts in
+                        {{uiExercise[1].figure}} more, how many balls are in the pot
+                        all together?"</aside>
+                    <ul id="ball-counters" class="list-style-none pl-o mb-0">
+                        <li class="mb-4" *ngFor="let item of uiExercise">
+                            <ul class="ball-counter-list list-style-none pl-0 mb-0">
+                                <li *ngFor="let ball of item?.ballCounterList">
+                                    <div class="ball-counter"
+                                        [ngClass]="{'blue-ball': item?.type == 'blue', 'black-ball': item?.type == 'black'}">
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
                     <!-- <ul id="result-number-list" class="list-style-none mb-0 pl-0">
                     <li *ngFor="let item of resultNumbers.numbers">
                         <span [ngClass]="{'d-none': item?.isWellPlaced != true}">{{item?.name}}</span>
                     </li>
                 </ul> -->
-                    <div id="result-number">
+                    <!-- <div id="result-number">
                         <ul id="result-number-list" class="list-style-none mb-0 pl-0">
-                            <li class="question-item text-center" *ngFor="let item of uiExercise">
+                            <li class="question-item text-center" *ngFor="let item of questionResultNumbers">
                                 <div class="wrap">
                                     <div class="num-wrap">
                                         <span>{{item?.figure}}</span>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="blue-triangle-wrap" *ngFor="let item of item?.blueTriangleList">
-                                            <img src="../../../../../../../../assets/images/blue-triangle.svg" alt=""
-                                                class="img-fluid">
-                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -42,26 +52,19 @@
                                     <div class="num-wrap">
                                         <span *ngIf="answerNumber?.isWellPlaced">{{answerNumber?.figure}}</span>
                                     </div>
-                                    <!-- <div class="d-flex">
+                                    <div class="d-flex">
                                     <div class="blue-triangle-wrap" *ngFor="let item of [1,2]">
                                         <img src="../../../../../../../../assets/images/blue-traiangle.svg" alt=""
                                             class="img-fluid">
                                     </div>
-                                </div> -->
+                                </div>
                                 </div>
                             </li>
-                            <!-- <li>
-                            <span>10</span>
-                            <div class="number-dash">
-                                <span></span>
-                            </div>
-                        </li> -->
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
-        <h1 class="title">{{pageTitle}}</h1>
 
         <ul class="list-style-none pl-0 word-keyboard row no-gutters">
             <li class="col-4 p-1 p-lg-2" *ngFor="let item of actionWords">

@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { actionNumbers, resultNumbers } from 'src/assets/data/numeracy.data/basic-operations-division.data';
+import { actionNumbers, resultNumbers } from 'src/assets/data/numeracy.data/basic-operations-subtraction-stage-1.data';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BasicOperationsDivisionService {
+export class BasicOperationsSubtractionStageOneService {
   // StartGameUrl = baseUrl + '/start-game-session';
   // SubmitGameStage_3_Url = baseUrl + '/submit-word-stage-3';
 
@@ -15,7 +15,7 @@ export class BasicOperationsDivisionService {
     let numbersList = [...actionNumbers];
     return numbersList;
   }
-  GetresultNumbers() {
+  GetResultNumbers() {
     let numbersList = { ...resultNumbers };
     return numbersList;
   }

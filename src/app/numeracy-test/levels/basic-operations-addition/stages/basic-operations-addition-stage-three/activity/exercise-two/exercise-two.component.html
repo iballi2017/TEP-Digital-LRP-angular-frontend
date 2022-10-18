@@ -1,5 +1,7 @@
-<!-- <p>exercise works!</p> -->
-<div id="basic-operations">    
+<!-- <p>exercise-two works!</p> -->
+
+<div class="text-white">{{answerNumber?.isWellPlaced}}</div>
+<div id="basic-operations">
     <div class="canvas-wrapper">
 
         <!-- <ng-container *ngIf="(isLoading$ | async)">
@@ -21,7 +23,26 @@
                     </li>
                 </ul> -->
                     <div id="result-number">
-                        <ul id="result-number-list" class="list-style-none mb-0 pl-0">
+                        <div id="exercise-container">
+                            <!-- <ul class="list-style-none pl-0 mb-0"> -->
+                            <ul class="question-content">
+                                <li *ngFor="let item of questionResultNumbers">
+                                    <div class="list-inner">
+                                        <div *ngFor="let number of item?.uiNumbers">{{number}}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="answer-content">
+                                <li>
+                                    <div class="list-inner" [ngClass]="{'d-none': !answerNumber?.isWellPlaced}">
+                                        <div *ngFor="let answerNumber of answerNumber?.uiNumbers">
+                                            <span>{{answerNumber}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <ul id="result-number-list" class="list-style-none mb-0 pl-0">
                             <li class="question-item text-center" *ngFor="let item of uiExercise">
                                 <div class="wrap">
                                     <div class="num-wrap">
@@ -29,7 +50,7 @@
                                     </div>
                                     <div class="d-flex">
                                         <div class="blue-triangle-wrap" *ngFor="let item of item?.blueTriangleList">
-                                            <img src="../../../../../../../../assets/images/blue-triangle.svg" alt=""
+                                            <img src="../../../../../../../../assets/images/blue-traiangle.svg" alt=""
                                                 class="img-fluid">
                                         </div>
                                     </div>
@@ -42,21 +63,9 @@
                                     <div class="num-wrap">
                                         <span *ngIf="answerNumber?.isWellPlaced">{{answerNumber?.figure}}</span>
                                     </div>
-                                    <!-- <div class="d-flex">
-                                    <div class="blue-triangle-wrap" *ngFor="let item of [1,2]">
-                                        <img src="../../../../../../../../assets/images/blue-traiangle.svg" alt=""
-                                            class="img-fluid">
-                                    </div>
-                                </div> -->
                                 </div>
                             </li>
-                            <!-- <li>
-                            <span>10</span>
-                            <div class="number-dash">
-                                <span></span>
-                            </div>
-                        </li> -->
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>
