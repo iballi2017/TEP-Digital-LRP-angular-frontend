@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameStage } from 'src/app/models/types/game-stage';
 import { BasicOperationsSubtractionStageOneComponent } from './stages/basic-operations-subtraction-stage-one/basic-operations-subtraction-stage-one.component';
+import { BasicOperationsSubtractionStageTwoComponent } from './stages/basic-operations-subtraction-stage-two/basic-operations-subtraction-stage-two.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,33 @@ const routes: Routes = [
         loadChildren: () =>
           import(
             './stages/basic-operations-subtraction-stage-one/activity/activity.module'
+          ).then((m) => m.ActivityModule),
+      },
+    ],
+  },
+  {
+    path: `${GameLevel.BASIC_OPERATIONS_SUBTRACTION}/stage-${GameStage.TWO}`,
+    component: BasicOperationsSubtractionStageTwoComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-subtraction-stage-two/basic-operations-subtraction-stage-two-splash/basic-operations-subtraction-stage-two-splash.module'
+          ).then((m) => m.BasicOperationsSubtractionStageTwoSplashModule),
+      },
+      {
+        path: 'number-recognition-two-splash',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-subtraction-stage-two/basic-operations-subtraction-stage-two-splash/basic-operations-subtraction-stage-two-splash.module'
+          ).then((m) => m.BasicOperationsSubtractionStageTwoSplashModule),
+      },
+      {
+        path: 'activity',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-subtraction-stage-two/activity/activity.module'
           ).then((m) => m.ActivityModule),
       },
     ],
