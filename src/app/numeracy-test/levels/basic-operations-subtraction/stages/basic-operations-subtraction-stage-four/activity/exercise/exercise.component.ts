@@ -1,7 +1,7 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
-import { BasicOperationsSubtractionStageTwoService } from 'src/app/services/basic-operations/subtraction/basic-operations-subtraction-stage-two.service';
+import { BasicOperationsSubtractionStageFourService } from 'src/app/services/basic-operations/subtraction/basic-operations-subtraction-stage-four.service';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -12,11 +12,9 @@ import { GameService } from 'src/app/services/game.service';
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
-  pageTitle: string = 'Can you add the 2-digit numbers here';
+  pageTitle: string = 'Solve the following 3-digit number sums';
   actionWords: any[] = [];
   gameSessionId: any;
-  // testLoopNumber: number = 0;
-
   uiExercise: any[] = [];
   totalStarNumber: number = 5;
   resultNumbers: any = [];
@@ -26,13 +24,13 @@ export class ExerciseComponent implements OnInit {
   itemIndex: number = 0;
 
   constructor(
-    private _basicOperationsSubtractionSvc: BasicOperationsSubtractionStageTwoService,
+    private _basicOperationsSubtractionStageFourSvc: BasicOperationsSubtractionStageFourService,
     private _gameSvc: GameService
   ) {}
 
   ngOnInit(): void {
     this.getActionNumbers();
-    this.getresultNumbers();
+    this.getResultNumbers();
     this.onGetGameSessionId();
   }
 
@@ -48,13 +46,14 @@ export class ExerciseComponent implements OnInit {
 
   getActionNumbers() {
     let numbersList =
-      this._basicOperationsSubtractionSvc.GetActionNumbers();
-    console.log('actionWords: ', numbersList);
+      this._basicOperationsSubtractionStageFourSvc.GetActionNumbers();
+    console.log('numbersList: ', numbersList);
     this.actionWords = numbersList;
   }
-  getresultNumbers() {
+  getResultNumbers() {
     let numbersList =
-      this._basicOperationsSubtractionSvc.GetResultNumbers();
+      this._basicOperationsSubtractionStageFourSvc.GetResultNumbers();
+    console.log('numbersList: ', numbersList);
     this.resultNumbers = numbersList;
     console.log('resultNumbers: ', numbersList);
     console.log(
@@ -64,8 +63,6 @@ export class ExerciseComponent implements OnInit {
     this.answerNumber = numbersList?.numbers[this.testLoopNumber].answer;
     this.questionResultNumbers =
       numbersList?.numbers[this.testLoopNumber]?.questionItems;
-
-    // this.modifyStageArray();
   }
 
   trackResultHint() {
@@ -87,7 +84,7 @@ export class ExerciseComponent implements OnInit {
       this.testLoopNumber++;
       setTimeout(() => {
         this.uiExercise = [];
-        this.getresultNumbers();
+        this.getResultNumbers();
       }, 1200);
     }
 
@@ -118,13 +115,12 @@ export class ExerciseComponent implements OnInit {
 
   onSelect(item: any) {
     let result = this.resultNumbers?.numbers[this.testLoopNumber];
+    console.log('item :', item);
     console.log('answer :', result.answer);
-    console.log('item: ', item);
     if (item.figure == result.answer.figure) {
       item.isCorrectNumber = true;
       result.answer.isWellPlaced = true;
       this.trackResultHint();
-      console.log('answer :', result.answer);
     } else {
       item.isWrongNumber = true;
       // console.log('item: ', item);
@@ -138,7 +134,7 @@ export class ExerciseComponent implements OnInit {
     });
     this.testLoopNumber = 0;
     this.uiExercise = [];
-    this.getresultNumbers();
+    this.getResultNumbers();
   }
 
   onSubmit(Payload: any) {}

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BasicOperationsAdditionStageOneComponent } from './basic-operations-subtraction-stage-one.component';
+import { BasicOperationsSubtractionStageOneComponent } from './basic-operations-subtraction-stage-one.component';
 
-describe('BasicOperationsAdditionStageOneComponent', () => {
-  let component: BasicOperationsAdditionStageOneComponent;
-  let fixture: ComponentFixture<BasicOperationsAdditionStageOneComponent>;
+describe('BasicOperationsSubtractionStageOneComponent', () => {
+  let component: BasicOperationsSubtractionStageOneComponent;
+  let fixture: ComponentFixture<BasicOperationsSubtractionStageOneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BasicOperationsAdditionStageOneComponent ]
+      declarations: [ BasicOperationsSubtractionStageOneComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BasicOperationsAdditionStageOneComponent);
+    fixture = TestBed.createComponent(BasicOperationsSubtractionStageOneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

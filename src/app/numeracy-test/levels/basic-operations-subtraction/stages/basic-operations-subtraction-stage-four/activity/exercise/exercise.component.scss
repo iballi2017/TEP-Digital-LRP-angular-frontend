@@ -1,0 +1,136 @@
+@use "../../../../../../../../sass/_partials/mixins";
+
+.canvas-wrapper #word-result-screen-type-1 {
+    max-width: 100%;
+}
+
+.blue-triangle-wrap {
+    // display: inline-block;
+    margin-bottom: 0.05em;
+}
+.word-keyboard {
+    max-width: 500px;
+    margin: 1.2em auto;
+    .key {
+        // width: 7.3rem;
+        // height: 5.6rem;
+        width: 100%;
+        background-color: #ffffff;
+        border: 7px solid #73cf48;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.8rem;
+        line-height: 49px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000000;
+        border-radius: 0;
+
+        &.right-answer {
+            &:focus {
+                background: #73cf48;
+                border: 7px solid #73cf48;
+                color: #ffffff;
+            }
+        }
+        &.wrong-answer {
+            &:focus {
+                background: #ffffff;
+                border: 7px solid #d93333;
+                color: #000000;
+            }
+        }
+
+        @include mixins.maxmq(786px) {
+            font-size: 0.75rem;
+        }
+    }
+}
+.canvas-wrapper #word-result-screen-type-1 > .inner .word-result-board {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvas-wrapper #word-result-screen-type-1 > .inner .word-result-board {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+#result-number-list {
+    li {
+        &::after {
+            content: "-";
+            margin-right: 0.6em;
+            margin-left: 0.6em;
+        }
+
+        .wrap {
+            &::before {
+                content: "₦";
+                margin-right: 0.2em;
+            }
+        }
+    }
+}
+#answer-item {
+    display: flex;
+    &::before {
+        content: "₦";
+        margin-right: 0.2em;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 5rem;
+        line-height: 131px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.015em;
+        color: #000000;
+    }
+}
+#basic-operations #result-number-list li .wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 200px;
+}
+#basic-operations #result-number-list li::after {
+    display: inline-block;
+    margin-right: 0.35em;
+    margin-left: 0.43em;
+}
+#basic-operations #answer-item .number-dash::after {
+    right: -0.3em;
+}
+// #result-number-list {
+//     display: flex;
+//     flex-wrap: wrap;
+//     li {
+//         span {
+//             font-family: "Open Sans";
+//             font-style: normal;
+//             font-weight: 800;
+//             font-size: 5rem;
+//             line-height: 131px;
+//             display: flex;
+//             align-items: center;
+//             text-align: center;
+//             letter-spacing: -0.015em;
+//             color: #000000;
+//             &::after{
+//                 content: ",";
+//                 display: inline-block;
+//                 margin-right: .15em;
+//             }
+//         }
+//     }
+// }
