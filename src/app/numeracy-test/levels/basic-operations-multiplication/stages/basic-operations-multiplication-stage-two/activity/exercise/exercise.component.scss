@@ -19,15 +19,19 @@
         justify-content: center;
         color: #000000;
         border-radius: 0;
-      
+
         &.right-answer {
-            background: #73cf48;
-            border: 7px solid #73cf48;
-            color: #ffffff;
+            &:focus {
+                background: #73cf48;
+                border: 7px solid #73cf48;
+                color: #ffffff;
+            }
         }
         &.wrong-answer {
-            background: #ffffff;
-            border: 7px solid #d93333;
+            &:focus {
+                background: #ffffff;
+                border: 7px solid #d93333;
+            }
         }
 
         @include mixins.maxmq(786px) {
@@ -52,4 +56,3 @@
 #basic-operations #answer-item .number-dash::after {
     right: -0.3em;
 }
-

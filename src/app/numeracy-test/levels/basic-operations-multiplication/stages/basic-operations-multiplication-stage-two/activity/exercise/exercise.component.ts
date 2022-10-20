@@ -12,7 +12,7 @@ import { GameService } from 'src/app/services/game.service';
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
-  pageTitle: string = 'Can you multiply the 1-digit by i-digit number here';
+  pageTitle: string = 'Can you multiply the 2-digit by i-digit number here';
   actionWords: any[] = [];
   gameSessionId: any;
   resultNumbers: any = [];

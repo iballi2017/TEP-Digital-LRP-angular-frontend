@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { actionNumbers, resultNumbers } from 'src/assets/data/numeracy.data/basic-operations-multiplication.data';
+import { actionNumbers, resultNumbers } from 'src/assets/data/numeracy.data/basic-operations-multiplication-stage-1.data';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BasicOperationsMultiplicationService {
+export class BasicOperationsMultiplicationStageOneService {
 
   // StartGameUrl = baseUrl + '/start-game-session';
   // SubmitGameStage_3_Url = baseUrl + '/submit-word-stage-3';
