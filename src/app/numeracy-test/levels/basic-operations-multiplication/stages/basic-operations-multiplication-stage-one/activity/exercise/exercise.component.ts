@@ -1,7 +1,7 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
-import { BasicOperationsMultiplicationStageOneService } from 'src/app/services/basic-operations/subtraction/basic-operations-multiplication-stage-one.service';
+import { BasicOperationsMultiplicationStageOneService } from 'src/app/services/basic-operations/multiplication/basic-operations-multiplication-stage-one.service';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { GameService } from 'src/app/services/game.service';
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
-  pageTitle: string = 'Can you multiply the 1-digit by i-digit number here';
+  pageTitle: string = 'Can you multiply the 1-digit by 1-digit number here';
   actionWords: any[] = [];
   gameSessionId: any;
   resultNumbers: any = [];
