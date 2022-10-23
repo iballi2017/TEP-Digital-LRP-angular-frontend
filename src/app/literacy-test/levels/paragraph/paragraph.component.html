@@ -1,26 +1,16 @@
 <!-- <p class="text-white">paragraph works!</p> -->
 
 <!-- <div class="text-white">Paragraph</div> -->
-<ul class="row no-gutters list-style-none pl-0">
-    <!-- [routerLink]="['/literacy/stage-1']" routerLinkActive="router-link-active"  -->
-    <!-- <li class="col-12 col-lg-3 cursor-pointer" *ngFor="let item of letteringStages; let i = index"
-    [routerLink]="['/literacy', item?.title]"> -->
-    <li class="col-12 col-lg-4 cursor-pointer stage-card-wrap" *ngFor="let item of Stages; let i = index"
+<ul class="stage-status list-style-none pl-0">
+    <li class="cursor-pointer stage-card-wrap" *ngFor="let item of Stages; let i = index"
         [routerLink]="['/literacy/paragraph/', item?.title, 'paragraph-splash']">
-        <div class="stage-card-wrap">
-            <!-- /literacy/stage-1/lettering-splash/first-screen -->
             <div class="stage-card">
-                <!-- <div class="card-body">
-                       <div class="number-card"> -->
                 <p>{{i + 1}}</p>
-                <!-- </div>
-                    </div> -->
             </div>
             <ul class="stage-star-rating list-style-none pl-0">
                 <li *ngFor="let item of  [1, 2, 3, 4]">
                     <img src="../../../../assets/images/icons/white-grey-bordered-star..svg" alt="" class="img-fluid">
                 </li>
             </ul>
-        </div>
     </li>
 </ul>

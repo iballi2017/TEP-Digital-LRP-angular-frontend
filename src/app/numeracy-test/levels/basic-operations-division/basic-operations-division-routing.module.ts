@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameStage } from 'src/app/models/types/game-stage';
 import { BasicOperationsDivisionStageFiveComponent } from './stages/basic-operations-division-stage-five/basic-operations-division-stage-five.component';
-import { BasicOperationsDivisionStageFourComponent } from './stages/basic-operations-division-stage-Four/basic-operations-division-stage-four.component';
+import { BasicOperationsDivisionStageFourComponent } from './stages/basic-operations-division-stage-four/basic-operations-division-stage-four.component';
 import { BasicOperationsDivisionStageOneComponent } from './stages/basic-operations-division-stage-one/basic-operations-division-stage-one.component';
 import { BasicOperationsDivisionStageThreeComponent } from './stages/basic-operations-division-stage-three/basic-operations-division-stage-three.component';
 import { BasicOperationsDivisionStageTwoComponent } from './stages/basic-operations-division-stage-two/basic-operations-division-stage-two.component';
@@ -99,7 +99,7 @@ const routes: Routes = [
         loadChildren: () =>
           import(
             // './stages/basic-operations-division-stage-four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
-            './stages/basic-operations-division-stage-Four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
+            './stages/basic-operations-division-stage-four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
           ).then((m) => m.BasicOperationsDivisionStageFourSplashModule),
       },
       {
@@ -107,7 +107,7 @@ const routes: Routes = [
         loadChildren: () =>
           import(
             // './stages/basic-operations-division-stage-four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
-            './stages/basic-operations-division-stage-Four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
+            './stages/basic-operations-division-stage-four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
           ).then((m) => m.BasicOperationsDivisionStageFourSplashModule),
       },
       {

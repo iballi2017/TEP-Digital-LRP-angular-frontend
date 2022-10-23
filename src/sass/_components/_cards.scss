@@ -69,7 +69,7 @@
             margin-bottom: 20px;
         }
 
-        div:last-child.item-card-body{
+        div:last-child.item-card-body {
             border-bottom: none;
             margin-bottom: 0;
         }
@@ -104,7 +104,7 @@
         background: #ffffff;
     }
 }
-.details-card-2 {    
+.details-card-2 {
     .title-wrapper {
         background: #1e2b19;
         border-radius: 10px 10px 0px 0px;
@@ -173,25 +173,22 @@
                 padding-left: 1.3em;
             }
 
-            #search-btn{
-                padding-right: .9em;
-                padding-left: .9em;
+            #search-btn {
+                padding-right: 0.9em;
+                padding-left: 0.9em;
             }
-
-
         }
     }
 
-        @include mixins.maxmq(768px) {
-            .title-wrapper,.body-wrapper {
-                padding: 0.8em .8em;
-            }
+    @include mixins.maxmq(768px) {
+        .title-wrapper,
+        .body-wrapper {
+            padding: 0.8em 0.8em;
+        }
     }
 }
 
-
-
-.account-verification-card{
+.account-verification-card {
     &.card {
         background: #ffffff;
         // border: 1px solid #9d9d9d;
@@ -224,12 +221,12 @@
     .card-body {
         border: 1px solid #9d9d9d;
         border-top: none;
-        form{
+        form {
             max-width: 517px;
             margin: 0 auto;
-            .form-group{
+            .form-group {
                 margin-bottom: 2.3em;
-                &:first-child{
+                &:first-child {
                     margin-top: 1.5em;
                 }
             }
@@ -238,8 +235,8 @@
     }
 }
 
-
-.stage-card-wrap{
-    padding-right: 1em;
-    padding-bottom: 1em;
+.stage-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 25px;
 }
