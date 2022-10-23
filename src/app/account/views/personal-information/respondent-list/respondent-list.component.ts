@@ -35,7 +35,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
     let subscription = this.occupantsList$.subscribe({
       next: (response: any) => {
         if (response) {
-          // console.log('response: ', response);
+          // 
           this.list = response;
         }
       },
@@ -61,7 +61,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
       maxWidth: '500px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log(`Dialog result: ${result}`);
+      // 
       if (result) {
         this.onDeleteOccupant(item);
       }
@@ -73,7 +73,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
     let subscription = this._occupantSvc.RemoveOccupant(Occupant).subscribe({
       next: (response: any) => {
         if (response) {
-          // console.log('response: ', response);
+          // 
           this.ngReux.dispatch({
             type: REMOVE_OCCUPANT_SUCCESS,
             payload: Occupant,
@@ -94,7 +94,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
+    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

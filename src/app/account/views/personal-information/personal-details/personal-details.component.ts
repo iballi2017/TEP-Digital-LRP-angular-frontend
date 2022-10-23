@@ -23,28 +23,18 @@ export class PersonalDetailsComponent
   constructor() {}
 
   ngOnInit(): void {
-    // let subscription = this.userDetails$.subscribe((e: any) => {
-    //   if (e) {
-    //     this.userData = e[0];
-    //     console.log('this.userData: ', this.userData);
-    //   }
-    // });
-    // this.Subscriptions.push(subscription);
   }
 
   ngAfterContentInit(): void {
     let subscription = this.userDetails$.subscribe((e: any) => {
       if (e) {
         this.userData = e[0];
-
-        console.log('this.userData: ', this.userData);
       }
     });
     this.Subscriptions.push(subscription);
   }
 
   ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

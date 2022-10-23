@@ -21,17 +21,15 @@ export class SpeechToTextService {
         .map((result: any) => result.transcript)
         .join('');
       this.tempWords = transcript;
-      console.log('transcript: ', transcript);
     });
   }
   start() {
     this.isStoppedSpeechRecog = false;
     this.recognition.start();
-    console.log('Speech recognition started');
     this.recognition.addEventListener('end', (condition: any) => {
       if (this.isStoppedSpeechRecog) {
         this.recognition.stop();
-        console.log('End speech recognition');
+        
       } else {
         this.wordConcat();
         this.recognition.start();
@@ -43,7 +41,7 @@ export class SpeechToTextService {
     this.isStoppedSpeechRecog = true;
     this.wordConcat();
     this.recognition.stop();
-    console.log('End speech recognition');
+    
   }
 
   wordConcat() {

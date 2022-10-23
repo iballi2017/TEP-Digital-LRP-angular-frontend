@@ -35,10 +35,9 @@ export class StageThreeActivityExerciseOneService {
 
   LoadStageThreeExerciseOneResult() {
     this.ngRedux.dispatch({ type: FETCH_LETTERING_STAGE_THREE_EXERCISE_ONE });
-    let data: any = sessionStorage.getItem(
+    let data: any = localStorage.getItem(
       LetteringStageThreeExerciseOneStorage.EXERCISE_ONE
     );
-    //  console.log('data: ', data);
     if (data) {
       this.ngRedux.dispatch({
         type: FETCH_LETTERING_STAGE_THREE_EXERCISE_ONE_SUCCESS,

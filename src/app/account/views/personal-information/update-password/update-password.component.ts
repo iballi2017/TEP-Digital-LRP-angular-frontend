@@ -32,8 +32,6 @@ export class UpdatePasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('UpdatePasswordForm: ', this.UpdatePasswordForm.value);
-
     this.isLoading = true;
     this.submitBtnLabel = 'Loading...';
     const Payload: UpdatePassword = {
@@ -44,7 +42,7 @@ export class UpdatePasswordComponent implements OnInit {
     this._identitySvc.UpdateUserPassword(Payload).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.UpdatePasswordForm.reset();
           this.isLoading = false;
           this.submitBtnLabel = 'Update';
@@ -56,7 +54,7 @@ export class UpdatePasswordComponent implements OnInit {
       },
       error: (err: any) => {
         if (err) {
-          console.log('Error: ', err);
+          console.error('Error: ', err);
           this.isLoading = false;
           this.submitBtnLabel = 'Update';
           this.errorMsg = err?.error?.msg;

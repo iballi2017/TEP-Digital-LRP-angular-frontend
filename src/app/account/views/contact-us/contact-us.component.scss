@@ -30,6 +30,7 @@
         margin-bottom: 2em;
         &:last-child {
             padding-right: 0;
+            margin-bottom: 0;
         }
     }
     @include mixins.maxmq(768px) {

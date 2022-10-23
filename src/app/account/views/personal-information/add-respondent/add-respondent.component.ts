@@ -63,20 +63,16 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log('AddRespondentForm: ', this.AddRespondentForm.value);
     const Payload = {
       occ_name: this.AddRespondentForm.value.FullName,
       occ_state: this.AddRespondentForm.value.Location,
       occ_age: this.AddRespondentForm.value.Age,
       occ_gender: this.AddRespondentForm.value.Gender,
     };
-    console.log('Payload: ', Payload);
-
     this.ngRedux.dispatch({ type: ADD_OCCUPANT });
     let subscription =   this._occupantSvc.AddOccupant(Payload).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
           this.ngRedux.dispatch({
             type: ADD_OCCUPANT_SUCCESS,
             payload: response,
@@ -99,7 +95,6 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

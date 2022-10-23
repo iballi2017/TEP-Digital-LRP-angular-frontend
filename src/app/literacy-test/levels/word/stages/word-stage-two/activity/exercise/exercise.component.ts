@@ -13,7 +13,11 @@ import { GameService } from 'src/app/services/game.service';
 import { WordStageTwoService } from 'src/app/services/word/word-stage-two.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { IAppState } from 'src/redux/store';
-import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -57,25 +61,19 @@ export class ExerciseComponent implements OnInit {
     //   var tmp = x[i];
     //   x[i] = x[j];
     //   x[j] = tmp;
-    //   console.log('x[j]: ', x[j]);
-    //   console.log('x[i]: ', x[i]);
     //   this.actionWords.push(x[i]);
     // }
-    // console.log(' x: ', x);
-    // console.log(' y: ', y);
-    // console.log(' this.actionWords: ', this.actionWords);
+    //
   }
 
   onGetResultwords() {
     this.resultLetterWords = this._wordStageTwoSvc.GetResultwords();
-    console.log(' this.resultLetterWords: ', this.resultLetterWords);
   }
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
         this.gameSessionId = data?.session_id;
       },
     });
@@ -86,30 +84,24 @@ export class ExerciseComponent implements OnInit {
       ...LetterItem,
       isWellPlaced: LetterItem.isWellPlaced,
     };
-    console.log('LetterItemItem: ', LetterItemItem);
-    console.log('resultLetterWords: ', this.resultLetterWords);
+
     //Find index of specific object using findIndex method.
     let objIndex = this.resultLetterWords.findIndex(
       (obj) => obj.name == LetterItemItem.name
     );
 
     //Log object to Console.
-    console.log('Before update: ', this.resultLetterWords[objIndex]);
+    //console.warn('Before update: ', this.resultLetterWords[objIndex]);
 
     //Update object's name property.
     if (this.resultLetterWords[objIndex]) {
       this.resultLetterWords[objIndex].isWellPlaced = true;
     }
-
-    //Log object to console again.
-    console.log('After update: ', this.resultLetterWords[objIndex]);
-
     this.onGetResultwords();
     this.onSubmit();
   }
 
   onReset() {
-    console.log('resultLetterWords: ', this.resultLetterWords);
     let list = [...this.resultLetterWords];
     list.forEach((item: any) => {
       item.isDone = false;
@@ -119,12 +111,9 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('onSubmit: ');
     let complete = this.resultLetterWords.filter(
       (done: any) => done?.isWellPlaced == true
     );
-
-    console.log('complete: ', complete);
 
     if (complete.length == this.resultLetterWords?.length) {
       const Payload: ExerciseAnswer = {
@@ -132,12 +121,10 @@ export class ExerciseComponent implements OnInit {
         answer: '1',
         data: complete,
       };
-      console.log('x: ', Payload);
       this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
       this._wordStageTwoSvc.SubmitGameStageResult(Payload).subscribe({
         next: (response: any) => {
           if (response) {
-            console.log('response: ', response);
             this.ngRedux.dispatch({
               type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
               payload: Payload,
@@ -156,7 +143,7 @@ export class ExerciseComponent implements OnInit {
         },
         error: (err: any) => {
           if (err) {
-            console.warn('Error: ', err);
+            // console.warn('Error: ', err);
             this.ngRedux.dispatch({
               type: SUBMIT_GAME_STAGE_RESULT_ERROR,
               payload: err,

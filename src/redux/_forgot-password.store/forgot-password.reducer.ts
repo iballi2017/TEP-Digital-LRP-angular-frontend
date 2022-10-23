@@ -22,7 +22,7 @@ const SendRegisteredEmailSuccess = (
   state: LRP_ForgotPasswordState,
   action: any
 ) => {
-  console.log('action*****: ', action);
+  
 
   return tassign(state, {
     error: null,
@@ -51,7 +51,7 @@ const UpdateUserPasswordSuccess = (
   state: LRP_ForgotPasswordState,
   action: any
 ) => {
-  console.log('action*****: ', action);
+  
   return tassign(state, {
     error: null,
     updateUserPasswordResponse: action.payload,
@@ -74,7 +74,7 @@ export function ForgotPasswordReducer(
   state: LRP_ForgotPasswordState | any = INITIAL_FORGOTPASSWORD_STATE,
   action: any
 ): LRP_ForgotPasswordState {
-  console.log('ACTION: ', action);
+  
   switch (action.type) {
     // ADD_REPORT
     case SEND_REGISTERED_EMAIL:

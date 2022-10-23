@@ -53,7 +53,7 @@ export class ExerciseComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -61,60 +61,58 @@ export class ExerciseComponent implements OnInit {
 
   onGetActionWords() {
     let list = this._wordStageFourService.GetActionWords();
-    console.log('list : ', list);
+    
     this.actionWords = list.filter((l: any) => l.name != 'fish');
-    console.log('this.actionWords : ', this.actionWords);
+    
   }
   onGetResultList() {
     this.resultList = this._wordStageFourService.GetresultList();
-    console.log('this.resultList : ', this.resultList);
+    
   }
 
   // onPush(LetterItem: any) {
-  //   console.log('LetterItem: ', LetterItem);
   //   if (this.selectedAlphabets.length) {
   //     let isItemExist = this.selectedAlphabets.includes(LetterItem);
   //     if (isItemExist) {
   //       let x = [...this.selectedAlphabets];
-  //       console.log(LetterItem, ': removed!!!');
+  //       
   //       this.selectedAlphabets = x.filter(
   //         (item: any) => item.name != LetterItem.name
   //       );
   //     } else {
   //       if (this.selectedAlphabets.length > 3) {
-  //         alert('Filled!!!');
+  //         
   //         return;
   //       }
   //       this.selectedAlphabets.push(LetterItem);
-  //       console.log('this.selectedAlphabets: ', this.selectedAlphabets);
+  //       
   //       // this.onTestValues();
   //     }
   //   } else {
   //     if (this.selectedAlphabets.length > 1) {
-  //       alert('Filled!!!');
+  //       
   //       return;
   //     }
   //     this.selectedAlphabets.push(LetterItem);
-  //     console.log('this.selectedAlphabets: ', this.selectedAlphabets);
+  //     
   //     // this.onTestValues();
   //   }
   // }
 
   onSelect(WordItem: any) {
-    console.log('WordItem :', WordItem);
+    
     let resultItem = this.resultList[this.exerciseNumber];
-    console.log('resultItem :', resultItem);
     let list = this.resultList[this.exerciseNumber]?.word;
-    console.log('list :', list);
+    
     let objIndex = list.findIndex((obj: any) => obj.name == WordItem.name);
     //Log object to Console.
-    console.log('Before update: ', list[objIndex]);
+    
     //Update object's name property.
     if (list[objIndex]) {
       list[objIndex].isWellPlaced = true;
     }
     //Log object to console again.
-    console.log('After update: ', list[objIndex]);
+    
     // this.resultList =  list;
     this.onTestValues(list, resultItem);
   }
@@ -122,18 +120,11 @@ export class ExerciseComponent implements OnInit {
   onTestValues(List: any, ResultItem: any) {
     let complete = List.filter((done: any) => done?.isWellPlaced == true);
 
-    console.log('complete: ', complete);
+    
     console.log('this.exerciseNumber: ', this.exerciseNumber);
-    console.log('complete.length : ', complete.length);
-    console.log('List?.length : ', List?.length);
-    console.log(
-      'complete.length  == List?.length: ',
-      complete.length == List?.length
-    );
-
     if (complete.length == List?.length) {
       ResultItem.isDone = true;
-      console.log('completed!!!');
+      
       this.exerciseNumber += 1;
 
       const Payload: ExerciseAnswer = {
@@ -142,17 +133,14 @@ export class ExerciseComponent implements OnInit {
         data: this.resultList,
       };
       let y = Payload.data.filter((item: any) => item.isDone == true);
-      if (y.length == this.resultList?.length) {
-        console.log('All done!!!: ', y);
-        // alert('All done!!!!!');
-        console.log('x: ', Payload);
+      if (y.length == this.resultList?.length) {       
         this.onSubmit(Payload);
       }
     }
   }
 
   onReset() {
-    console.log('resultLetterWords: ', this.resultList);
+    
     let list = [...this.resultList];
     list.forEach((item: any) => {
       item.isDone = false;
@@ -167,12 +155,12 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSubmit(Result: ExerciseAnswer) {
-    console.log('Result: ', Result);
+    
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._wordStageFourService.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Result,

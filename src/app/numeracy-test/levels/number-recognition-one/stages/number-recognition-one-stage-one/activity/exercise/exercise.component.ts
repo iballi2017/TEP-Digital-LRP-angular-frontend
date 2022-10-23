@@ -31,7 +31,6 @@ export class ExerciseComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
         this.gameSessionId = data?.session_id;
       },
     });
@@ -39,63 +38,63 @@ export class ExerciseComponent implements OnInit {
 
   getActionNumbers() {
     let numbersList = this._numberRecognitionOneSvc.GetActionNumbers();
-    console.log('numbersList: ', numbersList);
+    
     this.actionWords = numbersList;
   }
   getresultNumbers() {
     let numbersList = this._numberRecognitionOneSvc.GetresultNumbers();
-    console.log('numbersList: ', numbersList);
+    
     this.resultNumbers = numbersList;
   }
 
   onSelect(item: any) {
-    console.log('item: ', item);
+    
     let resultItem = this.resultNumbers;
     let list = this.resultNumbers.numbers;
-    console.log('list :', list);
+    
     let objIndex = list.findIndex((obj: any) => obj.name == item.name);
-    console.log('objIndex :', objIndex);
+    
     if (objIndex == -1) {
       item.isWrongNumber = true;
-      console.log('item: ', item);
+      
     } else {
       item.isCorrectNumber = true;
     }
     //Log object to Console.
-    console.log('Before update: ', list[objIndex]);
+    
     //Update object's name property.
     if (list[objIndex]) {
       list[objIndex].isWellPlaced = true;
     }
     //Log object to console again.
-    console.log('After update: ', list[objIndex]);
+    
     // this.resultList =  list;
     this.onTestValues(list, resultItem);
   }
 
   onTestValues(List: any, ResultItem: any) {
-    console.log('onTest()');
+    
     let complete = List.filter((done: any) => done?.isWellPlaced == true);
 
-    console.log('complete: ', complete);
-    // console.log('this.exerciseNumber: ', this.exerciseNumber);
+    
+    
 
     if (complete.length == List?.length) {
       ResultItem.isDone = true;
-      console.log('completed!!!');
+      
 
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
         answer: '1',
         data: [this.resultNumbers],
       };
-      console.log('x: ', Payload);
+     
       // this.onSubmit(Payload);
     }
   }
 
   onReset() {
-    console.log('resultNumbers: ', this.resultNumbers.numbers);
+    // console.warn('resultNumbers: ', this.resultNumbers.numbers);
     let list = [...this.resultNumbers.numbers];
     list.forEach((item: any) => {
       item.isDone = false;
@@ -103,20 +102,18 @@ export class ExerciseComponent implements OnInit {
     });
     this.resultNumbers.numbers = [...list];
     this.actionWords.forEach((a: any) => {
-      console.log('a: ', a);
       a.isCorrectNumber = null;
       a.isWrongNumber = null;
-      console.log('b: ', a);
     });
   }
 
   // onSubmit(Payload: any) {
-  //   console.log('x: ', Payload);
+  //  
   //   this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
   //   this._wordStageThreeService.SubmitGameStageResult(Payload).subscribe({
   //     next: (response: any) => {
   //       if (response) {
-  //         console.log('response: ', response);
+  //         
   //         this.ngRedux.dispatch({
   //           type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
   //           payload: Payload,

@@ -66,18 +66,16 @@ export class ExerciseComponent implements OnInit, OnChanges {
     // this.speechText = this._paragraphStageOneSvc.text;
     // console.log('this.speechText: ', this.speechText);
     // let x = this._paragraphStageOneSvc.GetVoiceText();
-    // console.log('x: ', x);
+    // 
     this.cdr.detectChanges();
     this.onTestTexts();
     this.onGetGameSessionId();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes: ', changes);
     // this._paragraphStageOneSvc.speechToTextBehaviorSubj.subscribe(
     //   (text: any) => {
     //     if (text) {
-    //       console.log('text: ', text);
     //     }
     //   }
     // );
@@ -87,7 +85,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -100,10 +98,10 @@ export class ExerciseComponent implements OnInit, OnChanges {
     this.speechTexts$.subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           let speechText = response.replace(/\s/g, '');
           let resultTexts = this.resultTexts.replace(/\s/g, '');
-          console.log(
+          console.warn(
             this.resultTexts.replace(/\s/g, '') == response.replace(/\s/g, '')
           );
           // if (speechText == resultTexts) {
@@ -111,9 +109,9 @@ export class ExerciseComponent implements OnInit, OnChanges {
           // }
 
           this.resultTextList.findIndex((obj: any) => {
-            console.log('obj: ', obj.text.replace(/\s/g, ''));
-            console.log('speechText: ', speechText);
-            console.log('obj----speechText: ', obj == speechText);
+            ////console.warn('obj: ', obj.text.replace(/\s/g, ''));
+            //console.warn('speechText: ', speechText);
+            //console.warn('obj----speechText: ', obj == speechText);
             // obj.text.replace(/\s/g, '') == speechText
           });
 
@@ -121,22 +119,21 @@ export class ExerciseComponent implements OnInit, OnChanges {
             (obj: any) => obj.text.replace(/\s/g, '') == speechText
           );
           //Log object to Console.
-          console.log('Before update: ', this.resultTextList[objIndex]);
+          // console.warn('Before update: ', this.resultTextList[objIndex]);
           //Update object's name property.
           if (this.resultTextList[objIndex]) {
             this.resultTextList[objIndex].isDone = true;
             this.textPosition += 1;
-            console.log('this.textPosition: ', this.textPosition);
+            // console.warn('this.textPosition: ', this.textPosition);
             this.onTestValues(this.resultTextList);
             this.clearService();
           }
           //Log object to console again.
-          console.log('After update: ', this.resultTextList[objIndex]);
-          console.log('>>>>>>>>>>>: ', this.resultTextList);
+          
         }
       },
       error: (err: any) => {
-        console.log('Error: ', err);
+        console.error('Error: ', err);
       },
     });
   }
@@ -144,11 +141,10 @@ export class ExerciseComponent implements OnInit, OnChanges {
   onTestValues(List: any) {
     let complete = List.filter((done: any) => done?.isDone == true);
 
-    console.log('complete: ', complete);
-    console.log('this.textPosition: ', this.textPosition);
+    
 
     if (complete.length == List?.length) {
-      console.log('completed!!!');
+      
       this.stopService();
       // alert('completed!!!');
       // this.textPosition += 1;
@@ -160,7 +156,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
         answer: '4',
         data: List,
       };
-      console.log('x: ', Payload);
+     
       this.onSubmit(Payload);
     }
   }
@@ -177,12 +173,12 @@ export class ExerciseComponent implements OnInit, OnChanges {
   }
 
   onSubmit(Result: ExerciseAnswer) {
-    console.log('Result: ', Result);
+    
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._paragraphStageOneSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.openSnackBar(response?.message);
           setTimeout(() => {
             this.isFinishedMessage = '';

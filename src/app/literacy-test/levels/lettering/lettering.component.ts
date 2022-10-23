@@ -55,7 +55,7 @@ export class LetteringComponent implements OnInit {
   onGetGameSessionId() {
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
         this.onGetUserGameResult(this.gameSessionId);
       },
@@ -66,7 +66,6 @@ export class LetteringComponent implements OnInit {
     this._gameResultRatingSvc.GetUserGameResult(GameSessionId).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('GetUserGameResult response: ', response);
         }
       },
       error: (err: any) => {
@@ -79,7 +78,6 @@ export class LetteringComponent implements OnInit {
 
   modifyStageArray() {
     this.letteringStages.forEach((stage: any) => {
-      // console.log('stage: ', stage);
       let starArray: any[] = [];
       for (let i = 0; i < stage.rating; i++) {
         starArray.push({ isDone: true });
@@ -90,6 +88,5 @@ export class LetteringComponent implements OnInit {
       let x: any = { ...stage, starArray: starArray };
       this.testStageStars.push(x);
     });
-    // console.log('testStageStars: ', this.testStageStars);
   }
 }

@@ -49,14 +49,13 @@ export class ReportService implements OnDestroy {
       )
       .subscribe({
         next: (response: any) => {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: FETCH_REPORTS_LIST_SUCCESS,
             payload: response,
           });
         },
         error: (err: any) => {
-          console.log('Error: ', err);
           this.ngRedux.dispatch({
             type: FETCH_REPORTS_LIST_ERROR,
             payload: err,
@@ -78,7 +77,6 @@ export class ReportService implements OnDestroy {
           let reports: any[] = result?.data;
           let reportList: GameReport[] = [];
           if (result) {
-            console.log('result!!!: ', result);
             // return result;
 
             for (let key in reports) {
@@ -94,7 +92,6 @@ export class ReportService implements OnDestroy {
               reportList.push({ ...report, key: key });
             }
           }
-          console.log('reportList%%%%%: ', reportList);
           return reportList;
         }),
         catchError(handleError)
@@ -102,7 +99,6 @@ export class ReportService implements OnDestroy {
       .subscribe({
         next: (response: any) => {
           if (response) {
-            console.log('xxxxx: ', response);
             this.ngRedux.dispatch({
               type: FETCH_REPORTS_LIST_SUCCESS,
               payload: response,
@@ -111,7 +107,6 @@ export class ReportService implements OnDestroy {
         },
         error: (err: any) => {
           if (err) {
-            console.warn('Error: ', err);
             this.ngRedux.dispatch({
               type: FETCH_REPORTS_LIST_ERROR,
               payload: err,
@@ -128,7 +123,6 @@ export class ReportService implements OnDestroy {
       .get(`${this.GetUserGameResultDetailsUrl}/${sessionId}`)
       .pipe(
         map((response: any) => {
-          console.log('response details: ', response);
           return response;
         }),
         catchError(handleError)
@@ -136,7 +130,7 @@ export class ReportService implements OnDestroy {
       .subscribe({
         next: (resultDetails: any) => {
           if (resultDetails) {
-            console.log('result details: ', resultDetails);
+            
             this.ngRedux.dispatch({
               type: FETCH_GAME_RESULT_DETAILS_SUCCESS,
               payload: resultDetails?.data,
@@ -157,14 +151,14 @@ export class ReportService implements OnDestroy {
   }
 
   RemoveReport(sessionId: SessionId) {
-    console.log('sessionId: ', sessionId);
+    
     // return this._http.delete(`${this.testUrl}/${reportId}`);
     return this._http.post(`${this.DeleteUserGameResultUrl}`, sessionId)
     .pipe(catchError(handleError));
   }
 
   ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
+    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

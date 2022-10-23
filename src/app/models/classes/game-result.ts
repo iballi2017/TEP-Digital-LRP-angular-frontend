@@ -6,11 +6,11 @@ export class GameResult {
     this.result = result;
   }
   save() {
-    let x: any = sessionStorage.getItem(GameSessionData.result);
+    let x: any = localStorage.getItem(GameSessionData.result);
     let y = JSON.parse(x);
     let result = Object.assign(y, this.result);
-    console.log('result: ', result);
+    
     let z = JSON.stringify(result);
-    sessionStorage.setItem(GameSessionData.result, z);
+    localStorage.setItem(GameSessionData.result, z);
   }
 }

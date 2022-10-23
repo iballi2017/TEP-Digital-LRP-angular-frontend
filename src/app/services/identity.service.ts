@@ -40,7 +40,6 @@ export class IdentityService {
     // return this._http.get(`${this.FetchUserByIdUrl}/${userId}`)
     let userData: any;
     let storedData = this.getLoggedInUserData();
-    console.log('  userData: ', userData);
     this.ngRedux.dispatch({ type: FETCH_USER_DETAILS });
     if (storedData) {
       this._http
@@ -48,7 +47,7 @@ export class IdentityService {
         .subscribe({
           next: (response: any) => {
             if (response) {
-              console.log('response: ', response);
+              
               userData = response?.data;
               this.ngRedux.dispatch({
                 type: FETCH_USER_DETAILS_SUCCESS,
@@ -79,7 +78,7 @@ export class IdentityService {
   }
 
   UpdateUserDetails(payload: UpdateUserModel) {
-    console.log('payload: ', payload);
+    
     return this._http.post(this.UpdateUserUrl, payload)
     .pipe(catchError(handleError));
   }

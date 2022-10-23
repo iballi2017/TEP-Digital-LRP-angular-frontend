@@ -87,13 +87,13 @@ const AddReport = (state: LRP_ReportState, action: any) => {
 };
 
 const AddReportSuccess = (state: LRP_ReportState, action: any) => {
-  console.log('action*****: ', action);
+  
   var newReport = {
     id: state.reportsList?.length + 1,
     ...action.payload,
   };
   // var newReport = { id: action.todo.id, title: action.todo.title };
-  console.log('newReport*****: ', newReport);
+  
 
   return tassign(state, {
     reportsList: action.payload,
@@ -120,7 +120,7 @@ const UpdateReportSuccess = (state: LRP_ReportState, action: any) => {
   var occupantItem = state.reportsList.find((t: any) => t.Id === action.Id);
 
   var index = state.reportsList.indexOf(occupantItem);
-  console.log('action: ', action);
+  
   return tassign(state, {
     reportsList: [
       ...state.reportsList.slice(0, index),
@@ -142,7 +142,7 @@ export function ReportReducer(
   state: LRP_ReportState | any = INITIAL_REPORT_STATE,
   action: any
 ): LRP_ReportState {
-  console.log('ACTION: ', action);
+  
   switch (action.type) {
     // FETCH_REPORT_LIST
     case FETCH_REPORTS_LIST:
@@ -186,13 +186,13 @@ export function ReportReducer(
 
     // REMOVE_REPORT
     case REMOVE_REPORT:
-      console.log('action: ', action);
+      
       return tassign(state, {
         isLoading: true,
       });
 
     case REMOVE_REPORT_SUCCESS:
-      console.log('action: ', action);
+      
       return tassign(state, {
         reportsList: state.reportsList.filter(
           (t: any) => t.sessionId !== action.payload?.sessionId

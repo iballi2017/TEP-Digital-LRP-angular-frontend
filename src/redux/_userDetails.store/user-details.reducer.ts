@@ -52,13 +52,13 @@ const AddUserDetails = (state: LRP_UserDetailsState, action: any) => {
 };
 
 const AddUserDetailsSuccess = (state: LRP_UserDetailsState, action: any) => {
-  console.log('action*****: ', action);
+  
   var newUserDetails = {
     id: state.userDetails?.length + 1,
     ...action.payload,
   };
   // var newUserDetails = { id: action.todo.id, title: action.todo.title };
-  console.log('newUserDetails*****: ', newUserDetails);
+  
 
   return tassign(state, {
     userDetails: action.payload,
@@ -85,7 +85,7 @@ const UpdateUserDetailsSuccess = (state: LRP_UserDetailsState, action: any) => {
   // var userItem = state.userDetails.find((t: any) => t.Id === action.Id);
 
   // var index = state.userDetails.indexOf(userItem);
-  console.log('action: ', action);
+  
   // return tassign(state, {
   //   userDetails:
   //     tassign({...state.userDetails}, action.payload),
@@ -96,7 +96,6 @@ const UpdateUserDetailsSuccess = (state: LRP_UserDetailsState, action: any) => {
     isLoading: false,
   });
   localStorage.setItem('currentUserData', JSON.stringify(x.userDetails));
-  console.log('x****: ', x);
   return x;
 };
 const UpdateUserDetailsFailure = (state: LRP_UserDetailsState, action: any) => {

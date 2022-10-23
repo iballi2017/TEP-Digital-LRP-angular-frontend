@@ -50,17 +50,6 @@ export class MyInformationComponent implements OnInit, OnDestroy {
   }
 
   getUserData() {
-    // let userData = this._identitySvc.getLoggedInUserData();
-    // console.log('  userData: ', userData);
-    // this._identitySvc.getUserById(userData.user_id).subscribe({
-    //   next: (response: any) => {
-    //     console.log('response: ', response);
-    //     this.userData = response?.data;
-    //   },
-    //   error: (err: any) => {
-    //     console.warn('Error: ', err);
-    //   },
-    // });
     this.userData = this._identitySvc.getUserById();
   }
 
@@ -76,19 +65,17 @@ export class MyInformationComponent implements OnInit, OnDestroy {
     });
 
     let subscription = dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      
     });
     this.Subscriptions.push(subscription);
   }
 
   onEditPersonalDetails(userData: any) {
-    console.log('userData: ', userData);
     this._router.navigate([
       `/account/update-personal-details/${userData?.usr_id}`,
     ]);
   }
   ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

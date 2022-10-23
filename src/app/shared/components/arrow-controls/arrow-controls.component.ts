@@ -13,6 +13,5 @@ export class ArrowControlsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('isCorrect>>>: ', this.isCorrect);
   }
 }

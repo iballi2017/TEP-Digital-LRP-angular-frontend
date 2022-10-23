@@ -29,7 +29,7 @@ export class LevelLoaderComponent implements OnInit, AfterViewChecked {
     this._route.paramMap.subscribe({
       next: (params) => {
         if (params) {
-          console.log(params);
+          
           // let x: any = params.get('levelTitle');
           let x: any = params.get('game-level');
           this.levelTitle = x?.toLowerCase();

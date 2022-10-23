@@ -43,17 +43,17 @@ export class ReportDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRouteParams();
-    console.log('gameResultDetails??????????????: ', this.gameResultDetails$);
+    
   }
 
   getRouteParams() {
     this._route.paramMap.subscribe({
       next: (params: any) => {
         if (params) {
-          console.log('params: ', params);
+          
           // let x = JSON.parse(params.get('reportId'));
           let x = params.get('sessionId');
-          console.log(' x: ', x);
+          
           this.respondentInformation = x;
           this.onGetReportDetails(x);
         }
@@ -75,7 +75,7 @@ export class ReportDetailsComponent implements OnInit {
       },
       error: (err: any) => {
         if (err) {
-          console.log('Error: ', err);
+          console.error('Error: ', err);
         }
       },
     });
@@ -91,7 +91,7 @@ export class ReportDetailsComponent implements OnInit {
       maxWidth: '500px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log(`Dialog result: ${result}`);
+      // 
       if (result) {
         this.onDeleteOccupant(item);
       }
@@ -103,11 +103,11 @@ export class ReportDetailsComponent implements OnInit {
     const _sessionId: SessionId = {
       session_id: sessionId,
     };
-    console.log('_sessionId: ', _sessionId);
+    
     this._reportSvc.RemoveReport(_sessionId).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: REMOVE_REPORT_SUCCESS,
             payload: {

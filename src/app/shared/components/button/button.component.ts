@@ -16,7 +16,6 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.disabled) {
-      console.log(this.disabled)
     }
   }
 

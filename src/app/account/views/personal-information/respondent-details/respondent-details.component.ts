@@ -63,10 +63,8 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
   onGetParams() {
     let subscription = this._route.paramMap.subscribe({
       next: (params: any) => {
-        // console.log('params: ', params);
         let respondentId = params.get('respondentId');
         this.respondentId = respondentId;
-        // console.log('respondentId: ', respondentId);
         this._occupantSvc.FetchOccupantDetails(respondentId);
       },
       error: (err: any) => {
@@ -97,8 +95,6 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
   }
 
   prefillForm(data: any) {
-    // console.log('prefillForm data: ', data);
-    // console.log('prefillForm data?.occ_age: ', data?.occ_age);
     this.UpdateRespondentDetailsForm.controls['FullName'].setValue(
       data?.occ_name
     );
@@ -114,10 +110,6 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // console.log(
-    //   'this.UpdateRespondentDetailsForm: ',
-    //   this.UpdateRespondentDetailsForm.value
-    // );
     const Payload: Occupant = {
       occ_id: this.respondentId,
       occ_name: this.UpdateRespondentDetailsForm.value.FullName,
@@ -126,13 +118,11 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
       occ_gender: this.UpdateRespondentDetailsForm.value.Gender,
     };
 
-    // console.log('Payload: ', Payload);
     let subscription = this._occupantSvc
       .UpdateOccupantDetails(Payload)
       .subscribe({
         next: (response: any) => {
           if (response) {
-            // console.log('response: ', response);
             this._router.navigate(['/account/personal-information']);
           }
         },
@@ -149,13 +139,11 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
     this.openDialog(item);
   }
   openDialog(item: any) {
-    console.log("item: ", item)
     const dialogRef = this.dialog.open(BooleanAlertDialogComponent, {
       width: '100%',
       maxWidth: '500px',
     });
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log(`Dialog result: ${result}`);
       if (result) {
         this.onDeleteOccupant(item);
       }
@@ -170,7 +158,6 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
     let subscription = this._occupantSvc.RemoveOccupant(Payload).subscribe({
       next: (response: any) => {
         if (response) {
-          // console.log('response: ', response);
           this._router.navigate(['/account']);
         }
       },
@@ -186,7 +173,7 @@ export class RespondentDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
+    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

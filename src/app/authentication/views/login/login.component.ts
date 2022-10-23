@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('LoginUserForm: ', this.LoginUserForm.value);
     const Payload = {
       usr_email: this.LoginUserForm.value.Email,
       usr_password: this.LoginUserForm.value.Password,
@@ -48,7 +47,7 @@ export class LoginComponent implements OnInit {
       this.ngRedux.dispatch({ type: ADD_LOGINUSER });
       this._authSvc.LoginUser(Payload).subscribe({
         next: (response: any) => {
-          console.log('response: ', response);
+          
           if(response){
             // setTimeout(() => {
               this.ngRedux.dispatch({

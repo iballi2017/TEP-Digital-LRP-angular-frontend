@@ -14,7 +14,7 @@ export class SpeechToText {
   }
 
   wordConcat() {
-    console.log(this.ngRedux)
+    
     this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
     this.text = this.text + ' ' + this.tempWords + ' ';
     this.tempWords = '';

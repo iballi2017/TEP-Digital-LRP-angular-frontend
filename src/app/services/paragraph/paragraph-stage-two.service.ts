@@ -8,11 +8,14 @@ import { SpeechToText } from 'src/app/models/classes/speech-to-text';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { exerciseTexts } from 'src/assets/data/literacy.data/paragraph-stage-two.data';
 import { IAppState } from 'src/redux/store';
-import { ADD_SPEECH_TO_TEXT, ADD_SPEECH_TO_TEXT_SUCCESS } from 'src/redux/_speechToText.store/speechToText.actions';
+import {
+  ADD_SPEECH_TO_TEXT,
+  ADD_SPEECH_TO_TEXT_SUCCESS,
+} from 'src/redux/_speechToText.store/speechToText.actions';
 
 declare var webkitSpeechRecognition: any;
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ParagraphStageTwoService {
   StartGameUrl = baseUrl + '/start-game-session';
@@ -35,26 +38,21 @@ export class ParagraphStageTwoService {
         .map((result: any) => result.transcript)
         .join('');
       this.tempWords = transcript;
-      console.log('transcript: ', transcript);
-      console.log('text: ', this.text);
       this.VoiceText = this.text;
       this.GetVoiceText();
     });
   }
 
   GetVoiceText() {
-    console.log('this.VoiceText: ', this.VoiceText);
     return this.VoiceText;
   }
 
   start() {
     this.isStoppedSpeechRecog = false;
     this.recognition.start();
-    console.log('Speech recognition started');
     this.recognition.addEventListener('end', (condition: any) => {
       if (this.isStoppedSpeechRecog) {
         this.recognition.stop();
-        console.log('End speech recognition');
       } else {
         this.wordConcat();
         this.recognition.start();
@@ -66,12 +64,10 @@ export class ParagraphStageTwoService {
     this.isStoppedSpeechRecog = true;
     this.wordConcat();
     this.recognition.stop();
-    console.log('End speech recognition');
   }
 
   clear() {
     // let x = new SpeechToText(this.ngRedux, this.text, this.tempWords)
-    // console.log("x: ", x)
     // x.clear();
     this.text = '';
     this.ngRedux.dispatch({
@@ -82,7 +78,6 @@ export class ParagraphStageTwoService {
 
   wordConcat() {
     // let x = new SpeechToText(this.ngRedux, this.text, this.tempWords)
-    // console.log("x: ", x)
     // x.wordConcat();
     this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
     this.text = this.text + ' ' + this.tempWords + ' ';
@@ -98,7 +93,6 @@ export class ParagraphStageTwoService {
     return exerciseTexts;
   }
 
-  
   SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
     return this._http
       .post(`${this.SubmitGameStage_2_Url}`, _GameStageResult)

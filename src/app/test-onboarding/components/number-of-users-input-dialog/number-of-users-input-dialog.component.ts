@@ -51,11 +51,10 @@ export class NumberOfUsersInputDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('NumberOfUsersForm: ', this.NumberOfUsersForm.value);
     let category = this.data.QuestionCategory;
     const Payload = Object.assign(this.NumberOfUsersForm.value, category, {
       NumberOfUsers: this.count,
     });
-    console.log('Payload: ', Payload);
+    
   }
 }

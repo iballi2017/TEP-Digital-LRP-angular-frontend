@@ -36,7 +36,7 @@ export class ExerciseComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -44,18 +44,15 @@ export class ExerciseComponent implements OnInit {
 
   getActionNumbers() {
     let numbersList = this._basicOperationsDivisionSvc.GetActionNumbers();
-    console.log('numbersList: ', numbersList);
+    
     this.actionWords = numbersList;
   }
   getresultNumbers() {
     let numbersList = this._basicOperationsDivisionSvc.GetresultNumbers();
-    console.log('numbersList: ', numbersList);
+    
     this.resultNumbers = numbersList;
-    console.log('resultNumbers: ', numbersList);
-    console.log(
-      'resultNumbers: ',
-      numbersList?.numbers[this.testLoopNumber]?.questionItems
-    );
+    
+    
     this.answerNumber = numbersList?.numbers[this.testLoopNumber].answer;
     this.questionResultNumbers =
       numbersList?.numbers[this.testLoopNumber]?.questionItems;
@@ -63,21 +60,21 @@ export class ExerciseComponent implements OnInit {
 
   onSelect(item: any) {
     let result = this.resultNumbers?.numbers[this.testLoopNumber];
-    console.log('item :', item);
-    console.log('answer :', result.answer);
+    
+    
     if (item.figure == result.answer.figure) {
       item.isCorrectNumber = true;
       result.answer.isWellPlaced = true;
       this.trackResultHint();
     } else {
       item.isWrongNumber = true;
-      // console.log('item: ', item);
+      // 
     }
   }
   trackResultHint() {
-    console.log('==>: ', this.resultNumbers.numbers[this.testLoopNumber]);
+    
     let x = this.resultNumbers.numbers[this.testLoopNumber];
-    console.log('x: ', x);
+    
     if (x.answer?.isWellPlaced == true) {
       x.isDone = true;
     }
@@ -86,9 +83,9 @@ export class ExerciseComponent implements OnInit {
 
   textExercise() {
     let questionItems = this.resultNumbers.numbers;
-    console.log('question item: ', questionItems);
+    
     let done = questionItems.filter((i: any) => i.isDone == true);
-    console.log('done item: ', done);
+    
     if (done.length < questionItems.length) {
       this.testLoopNumber++;
       setTimeout(() => {
@@ -102,22 +99,22 @@ export class ExerciseComponent implements OnInit {
 
   onTestValues() {
     let questionItems = this.resultNumbers.numbers;
-    console.log('onTest()');
+    
     let complete = questionItems.filter((done: any) => done?.isDone == true);
 
-    console.log('complete: ', complete);
-    console.log('ResultItem: ', this.resultNumbers);
-    // console.log('this.exerciseNumber: ', this.exerciseNumber);
+    
+    
+    
 
     if (complete.length == questionItems?.length) {
       this.resultNumbers.isComplete = true;
-      console.log('completed!!!');
+      
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
         answer: '1',
         data: [this.resultNumbers],
       };
-      console.log('x: ', Payload);
+     
       // this.onSubmit(Payload);
     }
   }

@@ -35,7 +35,7 @@ export class OccupantService implements OnDestroy {
     this._http.get(this.GetOccupantUrl).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: FETCH_OCCUPANTS_LIST_SUCCESS,
             payload: response.data,
@@ -62,7 +62,7 @@ export class OccupantService implements OnDestroy {
     let subscription =   this._http.get(`${this.FetchOccupantUrl}/${OccupantId}`).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: FETCH_SINGLE_OCCUPANT_SUCCESS,
             payload: response.data,
@@ -70,7 +70,7 @@ export class OccupantService implements OnDestroy {
         }
       },
       error: (err: any) => {
-        console.warn('Error: ', err);
+        // console.warn('Error: ', err);
         this.ngRedux.dispatch({
           type: FETCH_SINGLE_OCCUPANT_ERROR,
           payload: err,
@@ -87,11 +87,10 @@ export class OccupantService implements OnDestroy {
   }
 
   RemoveOccupant(Item: any) {
-    console.log('Item?.occ_id: ', Item?.occ_id);
     let x: any = {
       occ_id: Item?.occ_id,
     };
-    console.log('x: ', x);
+    
     // return this._http.delete(this.RemoveOccupantUrl, x);
     return this._http.post(
       'https://lrp.mainlandcode.com/v1/api/delete-occupant',
@@ -102,8 +101,7 @@ export class OccupantService implements OnDestroy {
   }
 
   
-  ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
+  ngOnDestroy(): void {    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

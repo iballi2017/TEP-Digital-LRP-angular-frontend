@@ -52,14 +52,13 @@ export class AccountEmailComponent implements OnInit {
 
   onSubmit() {
     this.ngRedux.dispatch({ type: SEND_REGISTERED_EMAIL });
-    console.log('this.VerifyEmailForm.value: ', this.VerifyEmailForm.value);
     const Payload: RegisteredEmail = {
       usr_email: this.VerifyEmailForm.value.Email,
     };
     this._forgotPasswordSvc.SendRegisteredEmail(Payload).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: SEND_REGISTERED_EMAIL_SUCCESS,
             payload: response.msg,
@@ -69,7 +68,7 @@ export class AccountEmailComponent implements OnInit {
       },
       error: (err: any) => {
         if (err) {
-          console.log('Error: ', err);
+          console.error('Error: ', err);
           this.ngRedux.dispatch({
             type: SEND_REGISTERED_EMAIL_ERROR,
             payload: err.error.msg,

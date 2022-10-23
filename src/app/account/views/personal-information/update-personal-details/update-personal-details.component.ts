@@ -51,19 +51,6 @@ export class UpdatePersonalDetailsComponent implements OnInit, OnDestroy {
     this.Subscriptions.push(subscription);
   }
 
-  // onGetParams() {
-  //   this._route.paramMap.subscribe({
-  //     next: (params: any) => {
-  //       console.log('params: ', params);
-  //       let userId = params.get('userId');
-  //       console.log('userId: ', userId);
-  //     },
-  //     error: (err: any) => {
-  //       console.log('Error: ', err);
-  //     },
-  //   });
-  // }
-
   buildForm() {
     this.UpdatePersonalDetailsForm = this._fb.group({
       FullName: ['', [Validators.required]],
@@ -88,10 +75,6 @@ export class UpdatePersonalDetailsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.ngRedux.dispatch({ type: UPDATE_USER_DETAILS });
-    console.log(
-      'this.UpdatePersonalDetailsForm: ',
-      this.UpdatePersonalDetailsForm.value
-    );
     const Payload: UpdateUserModel = {
       usr_fullname: this.UpdatePersonalDetailsForm.value.FullName,
       usr_gender: this.UpdatePersonalDetailsForm.value.Gender,
@@ -99,7 +82,7 @@ export class UpdatePersonalDetailsComponent implements OnInit, OnDestroy {
     let subscription =   this._identitySvc.UpdateUserDetails(Payload).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: UPDATE_USER_DETAILS_SUCCESS,
             payload: {
@@ -130,7 +113,7 @@ export class UpdatePersonalDetailsComponent implements OnInit, OnDestroy {
 
   
   ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
+    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

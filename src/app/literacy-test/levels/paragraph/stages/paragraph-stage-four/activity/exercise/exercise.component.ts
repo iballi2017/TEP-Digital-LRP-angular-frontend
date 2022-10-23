@@ -56,7 +56,6 @@ export class ExerciseComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
         this.gameSessionId = data?.session_id;
       },
     });
@@ -64,43 +63,32 @@ export class ExerciseComponent implements OnInit {
 
   onGetActionWords() {
     let list = this._paragraphStageFourSvc.GetActionWords();
-    console.log('list : ', list);
     this.actionWords = list.filter((l: any) => l.name != 'fish');
-    console.log('this.actionWords : ', this.actionWords);
   }
   onGetResultList() {
     this.resultList = this._paragraphStageFourSvc.GetresultList();
-    console.log('this.resultList : ', this.resultList);
   }
 
   onSelect(WordItem: any) {
-    console.log('WordItem :', WordItem);
+    
     let resultItem = this.resultList[this.exerciseNumber];
     let list = this.resultList[this.exerciseNumber]?.word;
-    console.log('list :', list);
     let objIndex = list.findIndex(
       (obj: any) => obj.name == WordItem.name && (obj.isWellPlaced == null || obj.isWellPlaced == false)
     );
-    //Log object to Console.
-    console.log('Before update: ', list[objIndex]);
-    //Update object's name property.
     if (list[objIndex]) {
       list[objIndex].isWellPlaced = true;
     }
     //Log object to console again.
-    console.log('After update: ', list[objIndex]);
     // this.resultList =  list;
     this.onTestValues(list, resultItem);
   }
 
   onTestValues(List: any, ResultItem: any) {
     let complete = List.filter((done: any) => done?.isWellPlaced == true);
-    console.log('complete: ', complete);
-    console.log('this.exerciseNumber: ', this.exerciseNumber);
 
     if (complete.length == List?.length) {
       ResultItem.isDone = true;
-      console.log('completed!!!');
       this.exerciseNumber += 1;
 
       const Payload: ExerciseAnswer = {
@@ -108,24 +96,20 @@ export class ExerciseComponent implements OnInit {
         answer: '5',
         data: this.resultList,
       };
-      console.log('x: ', Payload);
       let y = Payload.data.filter((item: any) => item.isDone == true);
       if (y.length == this.resultList?.length) {
-        console.log('All done!!!: ', y);
         // alert('All done!!!!!');
-        console.log('x: ', Payload);
         this.onSubmit(Payload);
       }
     }
   }
 
   onReset() {
-    console.log('resultList: ', this.resultList);
     let list = [...this.resultList];
     list.forEach((item: any) => {
       item.isDone = false;
       let x = item.word.filter((i: any) => i.isHint != true);
-      console.log('x : ', x );
+      
       x.forEach((element: any) => {
         element.isWellPlaced = false;
       });
@@ -134,12 +118,12 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSubmit(Result: ExerciseAnswer) {
-    console.log('Result: ', Result);
+    
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._paragraphStageFourSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Result,

@@ -42,14 +42,12 @@ export class GameService {
   }
 
   StartGame(Payload: StartGame) {
-    console.log('Start game payload: ', Payload);
     return this._http.post(this.StartGameUrl, Payload);
   }
 
   LoadGameSession() {
     this.ngRedux.dispatch({ type: FETCH_GAME_SESSION });
-    let sessionData = sessionStorage.getItem(GameSessionData.name);
-    console.log('sessionData: ', sessionData);
+    let sessionData = localStorage.getItem(GameSessionData.name);
     if (sessionData) {
       let x = JSON.parse(sessionData);
       this.ngRedux.dispatch({ type: FETCH_GAME_SESSION_SUCCESS, payload: x });
@@ -91,8 +89,8 @@ export class GameService {
   }
 
   IsGame() {
-    let sessionData: any = sessionStorage.getItem(GameSessionData.name);
-    let stageResultBook: any = sessionStorage.getItem(GameSessionData.result);
+    let sessionData: any = localStorage.getItem(GameSessionData.name);
+    let stageResultBook: any = localStorage.getItem(GameSessionData.result);
     return sessionData && stageResultBook ? true : false;
   }
 

@@ -43,7 +43,6 @@ export class TestRespondentSelectionComponent implements OnInit {
     this.buildForm();
 
     let isGame = this._gameSvc.IsGame();
-    console.log('IsGame: ', isGame);
   }
   getOccupantList() {
     this._occupantSvc.LoadOccupants();
@@ -56,19 +55,15 @@ export class TestRespondentSelectionComponent implements OnInit {
   }
   onSubmit() {
     this.ngRedux.dispatch({ type: ADD_GAME_SESSION });
-    console.log(
-      'RespondentSelectionForm: ',
-      this.RespondentSelectionForm.value
-    );
     const Payload: StartGame = {
       occ_id: this.RespondentSelectionForm.value.RespondentId,
       game_type: GameType.Literacy,
     };
-    console.log('Payload: ', Payload);
+    
     this._gameSvc.StartGame(Payload).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: ADD_GAME_SESSION_SUCCESS,
             payload: response,
@@ -87,13 +82,6 @@ export class TestRespondentSelectionComponent implements OnInit {
         }
       },
     });
-    // const data = JSON.parse(this.RespondentSelectionForm.value.Respondent);
-    // console.log('data: ', data);
-
-    // if (this.RespondentSelectionForm.valid) {
-    //   const data = JSON.parse(this.RespondentSelectionForm.value.Respondent);
-    //   console.log('data: ', data);
-    // }
   }
   closeDialog() {
     this.dialogRef.close('dialod closed!');
@@ -107,7 +95,7 @@ export class TestRespondentSelectionComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      
     });
   }
 }

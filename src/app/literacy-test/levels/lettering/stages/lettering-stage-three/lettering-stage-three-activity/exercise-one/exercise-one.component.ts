@@ -42,8 +42,6 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    // console.log('Something Happpend!!!');
-    // console.log('selectedAlphabets: ', this.selectedAlphabets);
     this.onTestValues();
     this.onComplete();
   }
@@ -52,7 +50,7 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -60,13 +58,10 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
 
   onTestValues() {
     for (let i in this.resultTwoLetterWords) {
-      // console.log('i: ', this.resultTwoLetterWords[i].word);
-      // console.log('i: ', this.selectedAlphabets);
       if (
         this.resultTwoLetterWords[i].word[0]?.name ==
         this.selectedAlphabets[0]?.name
       ) {
-        // console.log('true: ', this.resultTwoLetterWords[i]);
         this.selectedAlphabets[0].isWellPlaced = true;
       }
 
@@ -75,7 +70,6 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
           this.resultTwoLetterWords[i].word[0]?.name !=
           this.selectedAlphabets[0]?.name
         ) {
-          // console.log('bad: ', this.resultTwoLetterWords[i]);
         }
       }
       if (
@@ -90,11 +84,11 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
         this.resultTwoLetterWords[i].word[1]?.name ==
           this.selectedAlphabets[1]?.name
       ) {
-        console.log('YES!!!');
+        
         this.resultTwoLetterWords[i].isDone = true;
         this.selectedAlphabets = [];
       } else {
-        console.log('NO!!!');
+        
       }
     }
   }
@@ -110,52 +104,10 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
   getresultTwoLetterWords() {
     this.resultTwoLetterWords =
       this._stageThreeActivitySvc.GetresultTwoLetterWords();
-    // console.log(' this.resultTwoLetterWords: ', this.resultTwoLetterWords);
   }
 
-  // onSelected(Alphabet: any) {
-  //   // console.log('Alphabet: ', Alphabet);
-  //   let itemExists = false;
-  //   let AlphabetItem = {
-  //     id: Alphabet.id,
-  //     name: Alphabet.name,
-  //     type: Alphabet.type,
-  //     isWellPlaced: Alphabet.isWellPlaced,
-  //     // isChecked: Alphabet.isChecked,
-  //   };
-  //   if (!Alphabet.isChecked) {
-  //     this.selectedAlphabets = this.selectedAlphabets.filter(
-  //       (items: any) => items.id != Alphabet.id
-  //     );
-  //   }
-  //   if (Alphabet.isChecked) {
-  //     if (!this.selectedAlphabets.length) {
-  //       this.selectedAlphabets.push(AlphabetItem);
-  //     } else if (this.selectedAlphabets.length == 2) {
-  //       Alphabet.isChecked = false;
-  //       return;
-  //     } else {
-  //       for (let item of this.selectedAlphabets) {
-  //         // console.log('item: ', item);
-  //         if (item?.name == Alphabet?.name) {
-  //           // console.log(item, ' exists');
-  //           itemExists = true;
-  //         }
-  //       }
-  //       if (!itemExists) {
-  //         this.selectedAlphabets.push(AlphabetItem);
-
-  //         this.exerciseAlphabets.forEach((item: any) => {
-  //           console.log('item: ', item);
-  //           item.isChecked = false;
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
 
   onPush(LetterItem: any) {
-    console.log('LetterItem: ', LetterItem);
     let itemExists = false;
     let LetterItemItem = {
       id: LetterItem.id,
@@ -173,14 +125,14 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
         );
       } else {
         if (this.selectedAlphabets.length > 1) {
-          alert('Filled!!!');
+          
           return;
         }
         this.selectedAlphabets.push(LetterItem);
       }
     } else {
       if (this.selectedAlphabets.length > 1) {
-        alert('Filled!!!');
+        
         return;
       }
       this.selectedAlphabets.push(LetterItem);
@@ -191,7 +143,7 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
     let complete: any = this.resultTwoLetterWords.filter(
       (done: any) => done?.isDone == true
     );
-    console.log('complete: ', complete);
+    
     if (complete.length == 5) {
       this.onSubmit(complete);
       // alert('Congratulations!!!');
@@ -202,8 +154,6 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
   }
 
   onReset() {
-    console.log('alphabets: ', this.alphabets);
-    console.log('this.resultTwoLetterWords: ', this.resultTwoLetterWords);
     let list = [...this.resultTwoLetterWords];
     list.forEach((item: any) => {
       item.isDone = false;
@@ -219,9 +169,9 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
       // anwser: '1',
       data: complete,
     };
-    console.log('Payload: ', Payload);
+    
     let x = JSON.stringify(Payload);
-    sessionStorage.setItem(
+    localStorage.setItem(
       LetteringStageThreeExerciseOneStorage.EXERCISE_ONE,
       x
     );

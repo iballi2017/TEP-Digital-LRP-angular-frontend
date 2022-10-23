@@ -6,7 +6,7 @@ export const FetchSpeechToTextSession = (
   state: LRP_SpeechToTextState,
   action: any
 ) => {
-  console.log('load SpeechToText action: ', action);
+  
   return tassign(state, {
     isLoading: true,
   });
@@ -16,7 +16,7 @@ export const FetchSpeechToTextSessionSuccess = (
   state: LRP_SpeechToTextState,
   action: any
 ) => {
-  console.log('load SpeechToText action: ', action);
+  
   return tassign(state, {
     speechTexts: action.payload,
     isLoading: false,
@@ -27,7 +27,7 @@ export const FetchSpeechToTextSessionFailure = (
   state: LRP_SpeechToTextState,
   action: any
 ) => {
-  console.log('load SpeechToText action: ', action);
+  
   return tassign(state, {
     error: action.payload,
   });
@@ -38,7 +38,7 @@ export const AddSpeechToTextSession = (
   state: LRP_SpeechToTextState,
   action: any
 ) => {
-  console.log('load SpeechToText action: ', action);
+  
   return tassign(state, {
     isLoading: true,
   });
@@ -48,7 +48,7 @@ export const AddSpeechToTextSessionSuccess = (
   state: LRP_SpeechToTextState,
   action: any
 ) => {
-  console.log('load SpeechToText action: ', action);
+  
   return tassign(state, {
     speechTexts: action.payload,
     isLoading: false,
@@ -59,7 +59,7 @@ export const AddSpeechToTextSessionFailure = (
   state: LRP_SpeechToTextState,
   action: any
 ) => {
-  console.log('load SpeechToText action: ', action);
+  
   return tassign(state, {
     error: action.payload,
   });

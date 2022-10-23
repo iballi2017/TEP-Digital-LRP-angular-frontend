@@ -4,14 +4,12 @@ import { LRP_GameState } from './game.store';
 
 // FETCH GAME SESSION
 export const FetchGameSession = (state: LRP_GameState, action: any) => {
-  console.log('load gameSession action: ', action);
   return tassign(state, {
     isLoading: true,
   });
 };
 
 export const FetchGameSessionSuccess = (state: LRP_GameState, action: any) => {
-  console.log('load gameSession action: ', action);
   return tassign(state, {
     gameSession: action.payload,
     isLoading: false,
@@ -19,7 +17,6 @@ export const FetchGameSessionSuccess = (state: LRP_GameState, action: any) => {
 };
 
 export const FetchGameSessionFailure = (state: LRP_GameState, action: any) => {
-  console.log('load gameSession action: ', action);
   return tassign(state, {
     error: action.payload,
   });
@@ -33,21 +30,19 @@ export const AddGameSession = (state: LRP_GameState, action: any) => {
 };
 
 export const AddGameSessionSuccess = (state: LRP_GameState, action: any) => {
-  console.log('action*****: ', action);
+  
   var newGameSession = {
     // id: state.reportsList?.length + 1,
     id: new Date().getTime().toString(),
     ...action.payload,
   };
-  // var newGameSession = { id: action.todo.id, title: action.todo.title };
-  console.log('newGameSession*****: ', newGameSession);
   let sessionData = JSON.stringify(newGameSession);
   // localStorage.setItem(GameSessionData.name, sessionData);
-  sessionStorage.setItem(GameSessionData.name, sessionData);
+  localStorage.setItem(GameSessionData.name, sessionData);
   const gameResult = {};
   let result = JSON.stringify(gameResult);
   // localStorage.setItem(GameSessionData.result, result);
-  sessionStorage.setItem(GameSessionData.result, result);
+  localStorage.setItem(GameSessionData.result, result);
 
   return tassign(state, {
     // gameSession: action.payload,
@@ -67,7 +62,6 @@ export const AddGameSessionFailure = (state: LRP_GameState, action: any) => {
 
 // SUBMIT GAME STAGE RESULT
 export const SubmitGameStageResult = (state: LRP_GameState, action: any) => {
-  console.log('load gameSession: ', action);
   return tassign(state, {
     isLoading: true,
   });
@@ -77,7 +71,6 @@ export const SubmitGameStageResultSuccess = (
   state: LRP_GameState,
   action: any
 ) => {
-  console.log('submit game success: ', action);
   return tassign(state, {
     gameResult: action.payload,
     isLoading: false,
@@ -88,7 +81,6 @@ export const SubmitGameStageResultFailure = (
   state: LRP_GameState,
   action: any
 ) => {
-  console.log('submit game failure: ', action);
   return tassign(state, {
     error: action.payload,
     isLoading: false,
@@ -138,7 +130,6 @@ export const FetchLetteringStageThreeExerciseOneSuccess = (
   state: LRP_GameState,
   action: any
 ) => {
-  console.log("action: ", action)
   return tassign(state, {
     letteringStageThreeExerciseOne: action.payload,
     isLoading: false,

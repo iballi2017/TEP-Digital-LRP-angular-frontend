@@ -46,7 +46,7 @@ export class LetteringStageOneActivityComponent implements OnInit {
       this.selectedAlphabets.push(AlphabetItem);
     } else {
       for (let item of this.selectedAlphabets) {
-        // console.log('item: ', item);
+        //
         if (item?.id == Alphabet?.id) {
           // console.log(item, ' exists');
           itemExists = true;
@@ -73,13 +73,10 @@ export class LetteringStageOneActivityComponent implements OnInit {
       data: [],
     };
 
-    console.log(Payload, ' submitted!');
     this.isFinishedMessage =
       'You have completed this level with ' +
       this.consonants?.length +
       ' wrong answers!';
-      console.log("Payload: ", this.isFinishedMessage);
-
     setTimeout(() => {
       this.isFinishedMessage = '';
     }, 3000);

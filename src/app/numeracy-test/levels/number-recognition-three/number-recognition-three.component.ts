@@ -39,7 +39,7 @@ export class NumberRecognitionThreeComponent implements OnInit {
   onGetGameSessionId() {
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
         this.onGetUserGameResult(this.gameSessionId);
       },
@@ -50,7 +50,7 @@ export class NumberRecognitionThreeComponent implements OnInit {
     this._gameResultRatingSvc.GetUserGameResult(GameSessionId).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('GetUserGameResult response: ', response);
+          console.warn('GetUserGameResult response: ', response);
         }
       },
       error: (err: any) => {
@@ -63,7 +63,7 @@ export class NumberRecognitionThreeComponent implements OnInit {
 
   modifyStageArray() {
     this.numberingStages.forEach((stage: any) => {
-      // console.log('stage: ', stage);
+      // 
       let starArray: any[] = [];
       for (let i = 0; i < stage.rating; i++) {
         starArray.push({ isDone: true });

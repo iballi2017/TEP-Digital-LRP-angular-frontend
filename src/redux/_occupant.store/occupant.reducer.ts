@@ -65,13 +65,12 @@ const AddOccupant = (state: LRP_OccupantState, action: any) => {
 };
 
 const AddOccupantSuccess = (state: LRP_OccupantState, action: any) => {
-  console.log('action*****: ', action);
+  
   var newOccupant = {
     id: state.occupantsList?.length + 1,
     ...action.payload,
   };
   // var newOccupant = { id: action.todo.id, title: action.todo.title };
-  console.log('newOccupant*****: ', newOccupant);
 
   return tassign(state, {
     occupantsList: action.payload,
@@ -98,7 +97,7 @@ const UpdateOccupantSuccess = (state: LRP_OccupantState, action: any) => {
   var occupantItem = state.occupantsList.find((t: any) => t.Id === action.Id);
 
   var index = state.occupantsList.indexOf(occupantItem);
-  console.log('action: ', action);
+  
   return tassign(state, {
     occupantsList: [
       ...state.occupantsList.slice(0, index),
@@ -120,7 +119,7 @@ export function OccupantReducer(
   state: LRP_OccupantState | any = INITIAL_OCCUPANT_STATE,
   action: any
 ): LRP_OccupantState {
-  console.log('ACTION: ', action);
+  
   switch (action.type) {
     // FETCH_OCCUPANT_LIST
     case FETCH_OCCUPANTS_LIST:

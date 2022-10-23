@@ -52,7 +52,7 @@ export class ExerciseComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -98,11 +98,11 @@ export class ExerciseComponent implements OnInit {
         this.resultLetterWords[i].word[1]?.name ==
           this.selectedAlphabets[1]?.name
       ) {
-        //  console.log('YES!!!');
+        //  
         this.resultLetterWords[i].isDone = true;
         this.selectedAlphabets = [];
       } else {
-        //  console.log('NO!!!');
+        //  
       }
     }
 
@@ -110,7 +110,6 @@ export class ExerciseComponent implements OnInit {
   }
 
   onPush(LetterItem: any) {
-    console.log('LetterItem: ', LetterItem);
     let itemExists = false;
     let LetterItemItem = {
       id: LetterItem.id,
@@ -123,32 +122,32 @@ export class ExerciseComponent implements OnInit {
       let isItemExist = this.selectedAlphabets.includes(LetterItem);
       if (isItemExist) {
         let x = [...this.selectedAlphabets];
-        console.log(LetterItem, ': removed!!!');
+        
         this.selectedAlphabets = x.filter(
           (item: any) => item.name != LetterItem.name
         );
       } else {
         if (this.selectedAlphabets.length > 1) {
-          alert('Filled!!!');
+          
           return;
         }
         this.selectedAlphabets.push(LetterItem);
-        console.log('this.selectedAlphabets: ', this.selectedAlphabets);
+        
         this.onTestValues();
       }
     } else {
       if (this.selectedAlphabets.length > 1) {
-        alert('Filled!!!');
+        
         return;
       }
       this.selectedAlphabets.push(LetterItem);
-      console.log('this.selectedAlphabets: ', this.selectedAlphabets);
+      
       this.onTestValues();
     }
   }
 
   onReset() {
-    console.log('resultLetterWords: ', this.resultLetterWords);
+    
     let list = [...this.resultLetterWords];
     list.forEach((item: any) => {
       item.isDone = false;
@@ -162,7 +161,7 @@ export class ExerciseComponent implements OnInit {
       (done: any) => done?.isDone == true
     );
 
-    console.log('complete: ', complete);
+    
 
     if (complete.length == 3) {
       const Payload: ExerciseAnswer = {
@@ -170,12 +169,12 @@ export class ExerciseComponent implements OnInit {
         answer: '1',
         data: complete,
       };
-      console.log('x: ', Payload);
+     
       this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
       this._wordStageOneService.SubmitGameStageResult(Payload).subscribe({
         next: (response: any) => {
           if (response) {
-            console.log('response: ', response);
+            
             this.ngRedux.dispatch({
               type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
               payload: Payload,

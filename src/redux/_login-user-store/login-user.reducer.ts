@@ -18,20 +18,17 @@ export function LoginUserReducer(
 ): LRP_LoginUserState {
   switch (action.type) {
     case FETCH_LOGINUSER:
-      console.log('load loginUser action: ', action);
       return tassign(state, {
         isLoading: true,
       });
 
     case FETCH_LOGINUSER_SUCCESS:
-      console.log('load loginUser action: ', action);
       return tassign(state, {
         LoginUser: action.User,
         isLoading: false,
       });
 
     case FETCH_LOGINUSER_FAILURE:
-      console.log('load loginUser action: ', action);
       return tassign(state, {
         error: action.error,
       });
@@ -43,11 +40,8 @@ export function LoginUserReducer(
         isLoading: true,
       });
     case ADD_LOGINUSER_SUCCESS:
-      console.log('action*****: ', action);
       // var newTodo = { id: state.todos.length + 1, title: action.title };
       var newLoginUser = action.payload;
-      console.log('newLoginUser*****: ', newLoginUser);
-
       return tassign(state, {
         // Instead of the push() method, we use the concat() method because the former mutates
         // the original array, whereas the latter returns a new array.
@@ -56,7 +50,6 @@ export function LoginUserReducer(
         isLoading: false,
       });
     case ADD_LOGINUSER_FAILURE:
-      console.log('add loginUser action: ', action);
       return tassign(state, {
         error: action.payload,
         isLoading: false,

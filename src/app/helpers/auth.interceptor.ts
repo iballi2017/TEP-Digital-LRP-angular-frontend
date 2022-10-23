@@ -16,11 +16,8 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // if (this._authenticationSvc.isRegistrationSending) {
     const key: any = '6mPsbhhN6ZGGWgwzn6wX';
     request = this.AddDeveloper_Key(request, key);
-    console.log('dev_key: ', key);
-    // }
     return next.handle(request);
   }
 

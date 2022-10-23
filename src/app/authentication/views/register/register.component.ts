@@ -43,7 +43,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('RegisterUserForm: ', this.RegisterUserForm.value);
     const Payload: UserRegister = {
       usr_fullname: this.RegisterUserForm.value.FullName,
       usr_email: this.RegisterUserForm.value.EmailAddress,
@@ -58,12 +57,12 @@ export class RegisterComponent implements OnInit {
     //   usr_gender: this.RegisterUserForm.value.FullName,
     //   // usr_password: this.RegisterUserForm.value.FullName,
     // };
-    console.log('Payload: ', Payload);
+    
     if (this.RegisterUserForm.valid) {
       this.ngRedux.dispatch({ type: ADD_REGISTER_USER });
       this._authSvc.RegisterUser(Payload).subscribe({
         next: (response: any) => {
-          console.log('response: ', response);
+          
           if (response) {
             setTimeout(() => {
               this.ngRedux.dispatch({
@@ -71,7 +70,6 @@ export class RegisterComponent implements OnInit {
                 payload: response,
               });
               this.isRegistered = true;
-              console.log('this.isRegistered: ', this.isRegistered);
               this.RegisterUserForm.reset();
             }, 6000);
             // this.ngRedux.dispatch({

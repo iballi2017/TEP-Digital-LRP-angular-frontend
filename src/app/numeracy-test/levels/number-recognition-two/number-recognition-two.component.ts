@@ -38,7 +38,7 @@ export class NumberRecognitionTwoComponent implements OnInit {
   onGetGameSessionId() {
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
         this.onGetUserGameResult(this.gameSessionId);
       },
@@ -62,7 +62,7 @@ export class NumberRecognitionTwoComponent implements OnInit {
 
   modifyStageArray() {
     this.numberingStages.forEach((stage: any) => {
-      // console.log('stage: ', stage);
+      // 
       let starArray: any[] = [];
       for (let i = 0; i < stage.rating; i++) {
         starArray.push({ isDone: true });

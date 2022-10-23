@@ -28,7 +28,6 @@ export class MobileNavigationDialogComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('data: ', this.data.navData);
     this.title = this.data.navData.title;
     this.navItemList = this.data.navData.navItemList;
     this.logout = this.data.navData.logout;
@@ -40,13 +39,13 @@ export class MobileNavigationDialogComponent implements OnInit, OnDestroy {
       next: (event: any) => {
         if (event instanceof NavigationStart) {
           // Show progress spinner or progress bar
-          console.log('Route change detected');
+          // console.log('Route change detected');
         }
 
         if (event instanceof NavigationEnd) {
           // Hide progress spinner or progress bar
           this.currentRoute = event.url;
-          console.log(event);
+          // console.log(event);
           // this._messengerSvc.sendOpenSideNavitionMessageBehaviorSubject(false);
           this.closeDialog();
         }
@@ -55,7 +54,7 @@ export class MobileNavigationDialogComponent implements OnInit, OnDestroy {
           // Hide progress spinner or progress bar
 
           // Present error to user
-          console.log(event.error);
+          console.error(event.error);
         }
       },
       error: (err: any) => {
@@ -73,8 +72,8 @@ export class MobileNavigationDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // console.log('destroyed!!!');
-    console.log('destroyed!!!', this.Subscriptions);
+    // 
+    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

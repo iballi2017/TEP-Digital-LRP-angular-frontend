@@ -35,7 +35,6 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // console.log('Interceptor is here!!!');
     if (this._authenticationSvc.isLogin()) {
       const token: any = localStorage.getItem('token');
       request = this.AddToken(request, token);
@@ -43,7 +42,6 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap((event: any) => {
         if (event.type === HttpEventType.Response) {
-          console.log('From interceptor event: ', event);
           console.warn('EventBody: ', event.body);
         }
       }),
@@ -59,7 +57,6 @@ export class TokenInterceptor implements HttpInterceptor {
           Message: err.message,
           Response: err.error,
         };
-        console.log('errorMessage from Interceptor: ', errormgs);
         if (errormgs?.Response?.error == 'Expired token') {
           this._router.navigate(['/auth']);
         }
@@ -84,7 +81,6 @@ export class TokenInterceptor implements HttpInterceptor {
         .RefreshToken(this._authenticationSvc.getRefreshToken())
         .pipe(
           switchMap((token: any) => {
-            console.log('token: ', token);
             this.IsRefreshing = false;
             // this.RefreshTokenSubject.next(token.jwt);
             // return next.handle(this.AddToken(request, token.jwt));

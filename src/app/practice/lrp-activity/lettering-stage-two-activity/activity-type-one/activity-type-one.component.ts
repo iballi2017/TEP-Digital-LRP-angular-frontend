@@ -28,14 +28,12 @@ export class ActivityTypeOneComponent implements OnInit {
     this.consonants = this.alphabets.filter(
       (alphabet) => alphabet.type == AlphabetType.CONSONANT
     );
-
-    console.log(' this.consonants: ', this.consonants);
   }
 
   onChecked() {}
 
   onSelected(Alphabet: any) {
-    console.log('Alphabet: ', Alphabet);
+    
     let itemExists = false;
     let AlphabetItem = {
       id: Alphabet.id,
@@ -55,7 +53,7 @@ export class ActivityTypeOneComponent implements OnInit {
         return;
       } else {
         for (let item of this.selectedAlphabets) {
-          // console.log('item: ', item);
+          // 
           if (item?.id == Alphabet?.id) {
             // console.log(item, ' exists');
             itemExists = true;

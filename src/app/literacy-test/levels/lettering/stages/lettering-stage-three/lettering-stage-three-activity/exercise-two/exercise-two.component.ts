@@ -69,29 +69,13 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
 
   ngAfterContentChecked(): void {
     this.GetStageThreeExerciseOneResult();
-    // this.letteringStageThreeExerciseOne$.subscribe({
-    //   next: (stageOneResult: any) => {
-    //     //  console.log('stageOneResult: ', stageOneResult);
-    //     if (stageOneResult == undefined || stageOneResult == null) {
-    //       this._router.navigate([
-    //         '/literacy/lettering/stage-3/activity/exercise-one',
-    //       ]);
-    //     }
-    //   },
-    // });
-
-    // if (!stageOneResult) {
-    //   this._router.navigate(['/literacy/lettering/stage-3/activity']);
-    // } else {
-    //   return;
-    // }
   }
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        //  console.log('gameSession$ data: ', data);
+        //
         this.gameSessionId = data?.session_id;
       },
     });
@@ -101,7 +85,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
     this._stageThreeActivityExerciseOneSvc.LoadStageThreeExerciseOneResult();
     this.letteringStageThreeExerciseOne$.subscribe({
       next: (stageOneResult: any) => {
-        //  console.log('stageOneResult: ', stageOneResult);
         this.stageOneResult = stageOneResult;
       },
     });
@@ -110,7 +93,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   GetResultFourLetterWords() {
     this.resultFourLetterWords =
       this._stageThreeActivityExerciseTwoSvc.GetresultFourLetterWords();
-    //  console.log(' this.resultFourLetterWords: ', this.resultFourLetterWords);
   }
 
   getActionLetters() {
@@ -119,7 +101,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   }
 
   onReset() {
-    console.log('reset: ', this.resultFourLetterWords);
     let list = [...this.resultFourLetterWords];
     list.forEach((item: any) => {
       item.isDone = false;
@@ -129,7 +110,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   }
 
   onPush(LetterItem: any) {
-    //  console.log('LetterItem: ', LetterItem);
     let itemExists = false;
     let LetterItemItem = {
       id: LetterItem.id,
@@ -147,7 +127,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
         );
       } else {
         if (this.selectedAlphabets.length > 1) {
-          alert('Filled!!!');
           return;
         }
         this.selectedAlphabets.push(LetterItem);
@@ -155,7 +134,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
       }
     } else {
       if (this.selectedAlphabets.length > 1) {
-        alert('Filled!!!');
         return;
       }
       this.selectedAlphabets.push(LetterItem);
@@ -165,13 +143,10 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
 
   onTestValues() {
     for (let i in this.resultFourLetterWords) {
-      //  console.log('i: ', this.resultFourLetterWords[i].word);
-      //  console.log('i: ', this.selectedAlphabets);
       if (
         this.resultFourLetterWords[i].word[0]?.name ==
         this.selectedAlphabets[0]?.name
       ) {
-        //  console.log('true: ', this.resultFourLetterWords[i]);
         this.selectedAlphabets[0].isWellPlaced = true;
       }
 
@@ -180,7 +155,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
           this.resultFourLetterWords[i].word[0]?.name !=
           this.selectedAlphabets[0]?.name
         ) {
-          //  console.log('bad: ', this.resultFourLetterWords[i]);
         }
       }
       if (
@@ -195,11 +169,9 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
         this.resultFourLetterWords[i].word[1]?.name ==
           this.selectedAlphabets[1]?.name
       ) {
-        //  console.log('YES!!!');
         this.resultFourLetterWords[i].isDone = true;
         this.selectedAlphabets = [];
       } else {
-        //  console.log('NO!!!');
       }
     }
 
@@ -210,32 +182,21 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
     let complete = this.resultFourLetterWords.filter(
       (done: any) => done?.isDone == true
     );
-    //  console.log('complete: ', complete);
     if (complete.length == 3) {
-      // alert('Congratulations!!!');
-      // this.onPlayApplause();
-      // this._router.navigate([
-      //   '/literacy/lettering/stage-3/activity/exercise-two',
-      // ]);
-
-      // this.ngRedux.dispatch({ type: ADD_LETTERING_STAGE_THREE_EXERCISE_ONE });
       const Payload: LetteringStageThreeExerciseAnswer = {
         session_id: this.gameSessionId,
         anwser: '2',
         data: complete,
       };
-      //  console.log('Payload: ', Payload);
+      //
       let x = {
         ...Payload,
         data: Payload.data.concat(this.stageOneResult.data),
       };
-      console.log('x: ', x);
-
       this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
       this._gameSvc.SubmitLetteringStageThreeResult(x).subscribe({
         next: (response: any) => {
           if (response) {
-            console.log('response: ', response);
             this.ngRedux.dispatch({
               type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
               payload: {
@@ -243,9 +204,8 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
                 apiResponse: response,
               },
             });
-            console.log('response: ', response);
+
             this.successMessage = response?.message;
-            console.log(Payload, ' submitted!');
             this.openSnackBar(response?.message);
             setTimeout(() => {
               this.successMessage = '';
@@ -258,18 +218,12 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
               this._router.navigate([
                 `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
               ]);
-
-              // /literacy/word/stage-1/word-stage-one-splash
             }, 3000);
-
-            // this._router.navigate([
-            //   '/literacy/lettering/stage-3/activity/exercise-two',
-            // ]);
           }
         },
         error: (err: any) => {
           if (err) {
-            //  console.log('Error: ', err);
+            //  console.error('Error: ', err);
             this.ngRedux.dispatch({
               type: SUBMIT_GAME_STAGE_RESULT_ERROR,
               payload: err,
@@ -281,7 +235,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   }
 
   onPlayApplause() {
-    //  console.log('click');
     let audio = new Audio();
     audio.src = this.audioFile;
     audio.load();

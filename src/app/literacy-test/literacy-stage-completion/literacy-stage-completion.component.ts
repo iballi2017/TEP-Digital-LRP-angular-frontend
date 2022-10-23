@@ -22,9 +22,7 @@ export class LiteracyStageCompletionComponent implements OnInit {
     this._route.paramMap.subscribe({
       next: (params: any) => {
         this.stageNumber = params.get('stage-number');
-        console.log('this.stageNumber: ', this.stageNumber);
         this.gameLevel = params.get('game-level');
-        console.log('this.stageNumber: ', this.stageNumber);
         this.levelTitle =  this.gameLevel;
       },
     });

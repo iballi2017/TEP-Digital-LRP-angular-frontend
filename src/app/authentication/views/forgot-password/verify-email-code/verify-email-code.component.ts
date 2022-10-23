@@ -23,6 +23,5 @@ export class VerifyEmailCodeComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('this.VerifyEmailCodeForm.value: ', this.VerifyEmailCodeForm.value);
   }
 }

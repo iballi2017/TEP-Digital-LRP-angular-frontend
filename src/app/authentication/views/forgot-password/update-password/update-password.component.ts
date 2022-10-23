@@ -76,22 +76,15 @@ export class UpdatePasswordComponent implements OnInit {
     this._route.paramMap.subscribe({
       next: (params: any) => {
         // f45a912c/13f6729dc63dbb858682f174725db8
-        if (params) {
-          console.log(params);
+        if (params) {          
           this.reset_selector = params.get('reset_selector');
           this.verificationCode = params.get('verification-code');
-          console.log('this.verificationCode: ', this.verificationCode);
-          console.log('this.reset_selector: ', this.reset_selector);
         }
       },
     });
   }
 
   onSubmit() {
-    console.log(
-      'this.UpdatePasswordForm.value: ',
-      this.UpdatePasswordForm.value
-    );
     if (
       this.UpdatePasswordForm.value.NewPassword ===
       this.UpdatePasswordForm.value.ConfirmNewPassword
@@ -100,13 +93,13 @@ export class UpdatePasswordComponent implements OnInit {
         reset_selector: this.reset_selector,
         usr_password: this.UpdatePasswordForm.value.NewPassword,
       };
-      console.log('Payload: ', Payload);
+      
 
       this.ngRedux.dispatch({ type: UPDATE_USER_PASSWORD });
       this._authSvc.resetUserPassword(Payload).subscribe({
         next: (response: any) => {
           if (response) {
-            console.log('response: ', response);
+            
             this.ngRedux.dispatch({
               type: UPDATE_USER_PASSWORD_SUCCESS,
               payload: response?.msg,
@@ -116,9 +109,9 @@ export class UpdatePasswordComponent implements OnInit {
         },
         error: (err: any) => {
           if (err) {
-            console.warn('Error: ', err);
-            console.warn('Error.status: ', err.status);
-            console.warn('Error.error?.msg: ', err.error?.msg);
+            // console.warn('Error: ', err);
+            // console.warn('Error.status: ', err.status);
+            // console.warn('Error.error?.msg: ', err.error?.msg);
             switch (err.status) {
               case 400:
                 this.ngRedux.dispatch({

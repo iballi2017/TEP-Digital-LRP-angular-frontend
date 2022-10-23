@@ -43,13 +43,13 @@ const AddHelloworld = (state: JID_HelloworldState, action: any) => {
 };
 
 const AddHelloworldSuccess = (state: JID_HelloworldState, action: any) => {
-  console.log('action*****: ', action);
+  
   var newHelloworld = {
     id: state.helloworldsList?.length + 1,
     ...action.payload,
   };
   // var newHelloworld = { id: action.todo.id, title: action.todo.title };
-  console.log('newHelloworld*****: ', newHelloworld);
+  // console.log('newHelloworld*****: ', newHelloworld);
 
   return tassign(state, {
     helloworldsList: action.payload,
@@ -76,7 +76,7 @@ const UpdateHelloworldSuccess = (state: JID_HelloworldState, action: any) => {
   var helloworldItem = state.helloworldsList.find((t: any) => t.Id === action.Id);
 
   var index = state.helloworldsList.indexOf(helloworldItem);
-  console.log('action: ', action);
+  
   return tassign(state, {
     helloworldsList: [
       ...state.helloworldsList.slice(0, index),

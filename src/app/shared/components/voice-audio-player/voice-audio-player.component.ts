@@ -16,7 +16,6 @@ export class VoiceAudioPlayerComponent implements OnInit {
   }
 
   playSound() {
-    console.log('click');
     let audio = new Audio();
     audio.src = this.audioFile;
     audio.load();

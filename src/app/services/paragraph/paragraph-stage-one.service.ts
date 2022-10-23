@@ -38,26 +38,22 @@ export class ParagraphStageOneService {
         .map((result: any) => result.transcript)
         .join('');
       this.tempWords = transcript;
-      console.log('transcript: ', transcript);
-      console.log('text: ', this.text);
       this.VoiceText = this.text;
       this.GetVoiceText();
     });
   }
 
   GetVoiceText() {
-    console.log('this.VoiceText: ', this.VoiceText);
     return this.VoiceText;
   }
 
   start() {
     this.isStoppedSpeechRecog = false;
     this.recognition.start();
-    console.log('Speech recognition started');
     this.recognition.addEventListener('end', (condition: any) => {
       if (this.isStoppedSpeechRecog) {
         this.recognition.stop();
-        console.log('End speech recognition');
+        
       } else {
         this.wordConcat();
         this.recognition.start();
@@ -69,7 +65,7 @@ export class ParagraphStageOneService {
     this.isStoppedSpeechRecog = true;
     this.wordConcat();
     this.recognition.stop();
-    console.log('End speech recognition');
+    
   }
 
   clear() {
@@ -82,7 +78,7 @@ export class ParagraphStageOneService {
 
   wordConcat() {
     let x = new SpeechToText(this.ngRedux, this.text, this.tempWords);
-    console.log('x: ', x);
+    
     x.wordConcat();
     // this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
     // this.text = this.text + ' ' + this.tempWords + ' ';

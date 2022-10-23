@@ -11,8 +11,6 @@ import jwt_decode from 'jwt-decode';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  // LoginUserUrl = baseUrl + '/LoginUser';
-  // RegisterUserUrl = baseUrl + '/RegisterUser';
   LoginUserUrl = baseUrl + '/user-login';
   RegisterUserUrl = baseUrl + '/create-user';
   ResetUserPasswordUrl = baseUrl + '/reset-password';
@@ -30,23 +28,17 @@ export class AuthenticationService {
     this.isRegistrationSending = true;
     return this._http.post<any>(this.LoginUserUrl, Payload).pipe(
       tap((res: any) => {
-        // authentication and local storage code can go here
-        // console.log('tap respone: ', res);
         if (res) {
-          // console.log('auth-user | login-user: ', res);
-          // console.log(res.Role[0]);
           this._router.navigate([`/test-onboarding`]);
         }
       }),
       map((response: any) => {
-        console.log('from map', response);
         this.setToken(response.jwt);
         this.RefreshToken(response.RefreshToken);
         localStorage.setItem('RefreshToken', response.RefreshToken);
         //
         let token: string = response.jwt;
         let decoded: any = jwt_decode(token);
-        console.log(decoded);
         const userData = {
           accessToken: token,
           expiration: decoded.exp,
@@ -95,7 +87,6 @@ export class AuthenticationService {
       })
       .pipe(
         map((UserModel) => {
-          console.log('NEW DATA UserModel: ', UserModel);
           this.setToken(UserModel.AccessToken);
           localStorage.setItem('RefreshToken', UserModel.RefreshToken);
         }),

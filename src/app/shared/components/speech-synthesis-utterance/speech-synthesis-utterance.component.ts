@@ -80,13 +80,11 @@ export class SpeechSynthesisUtteranceComponent
 
   ngOnChanges(): void {
     this.text = this.statement;
-    console.log('this.text: ', this.text);
   }
 
   // I get called once after the inputs have been bound for the first time.
   public ngOnInit(): void {
     this.text = this.statement;
-    console.log('this.text: ', this.text);
     this.voices = speechSynthesis.getVoices();
     // this.selectedVoice = this.voices[0] || null;
     this.updateSayCommand();
@@ -107,7 +105,6 @@ export class SpeechSynthesisUtteranceComponent
 
   ngAfterContentInit(): void {
     this.text = this.statement;
-    console.log('this.text: ', this.text);
   }
 
   // I synthesize speech from the current text for the currently-selected voice.

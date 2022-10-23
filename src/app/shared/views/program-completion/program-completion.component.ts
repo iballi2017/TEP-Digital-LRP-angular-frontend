@@ -37,7 +37,6 @@ export class ProgramCompletionComponent implements OnInit {
   ngOnInit(): void {}
 
   onContinueToNextStage($event: any) {
-    console.log('$event: ', $event);
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
     }
@@ -69,7 +68,6 @@ export class ProgramCompletionComponent implements OnInit {
   }
 
   onEndAssessment($event: any) {
-    console.log('$event: ', $event);
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
     }

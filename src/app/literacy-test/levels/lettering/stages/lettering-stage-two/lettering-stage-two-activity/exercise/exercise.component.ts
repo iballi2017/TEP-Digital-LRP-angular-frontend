@@ -57,7 +57,7 @@ export class ExerciseComponent implements OnInit {
   onGetGameSessionId() {
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -86,9 +86,8 @@ export class ExerciseComponent implements OnInit {
       this.selectedAlphabets.push(AlphabetItem);
     } else {
       for (let item of this.selectedAlphabets) {
-        // console.log('item: ', item);
+        // 
         if (item?.id == Alphabet?.id) {
-          // console.log(item, ' exists');
           itemExists = true;
         }
       }
@@ -97,15 +96,14 @@ export class ExerciseComponent implements OnInit {
       }
     }
 
-    console.log('no submit!!!', this.consonants.length);
     if (this.consonants.length > this.consonantCount) {
-      console.log('submit!!!');
+      
       this.onSubmit();
     }
   }
 
   onReset() {
-    console.log('alphabets: ', this.alphabets);
+    
     let list = [...this.alphabets];
     list.forEach((item: any) => {
       item.isChecked = false;
@@ -119,7 +117,7 @@ export class ExerciseComponent implements OnInit {
       anwser: '1',
       data: this.selectedAlphabets,
     };
-    console.log('Payload: ', Payload);
+    
 
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._gameSvc.SubmitLetteringStageTwoResult(Payload).subscribe({
@@ -129,15 +127,12 @@ export class ExerciseComponent implements OnInit {
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Payload,
           });
-          console.log('response: ', response);
+          
           this.successMessage = response?.message;
-
-          console.log(Payload, ' submitted!');
           this.isFinishedMessage =
             'You have completed this level with ' +
             this.consonants?.length +
             ' wrong answers!';
-          console.log('Payload: ', this.isFinishedMessage);
           this.openSnackBar(response?.message);
 
           setTimeout(() => {
@@ -160,8 +155,6 @@ export class ExerciseComponent implements OnInit {
       },
       error: (err: any) => {
         if (err) {
-          console.warn('Error: ', err);
-          console.error('Error: ', err);
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_ERROR,
             payload: err,

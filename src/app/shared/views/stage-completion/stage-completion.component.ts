@@ -46,11 +46,6 @@ export class StageCompletionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('stage info: ', {
-      levelTitle: this.levelTitle,
-      stageNumber: this.stageNumber,
-    });
-
     this.gameLevel = {
       stageNumber: this.stageNumber,
       levelTitle: this.levelTitle,
@@ -65,21 +60,18 @@ export class StageCompletionComponent implements OnInit {
   onGetGameSessionId() {
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
       },
     });
   }
 
   onGetStageResult() {
-    let x: any = sessionStorage.getItem(GameSessionData.result);
-    console.log('x: ', x);
-    console.log('parsed x: ', JSON.parse(x));
+    let x: any = localStorage.getItem(GameSessionData.result);
     this.gameResult = x;
   }
 
   onContinueToNextStage($event: any) {
-    console.log('$event: ', $event);
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
     }
@@ -130,7 +122,6 @@ export class StageCompletionComponent implements OnInit {
   }
 
   onEndAssessment($event: any) {
-    console.log('$event: ', $event);
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
     }
@@ -141,7 +132,7 @@ export class StageCompletionComponent implements OnInit {
   //   this._gameSvc.SubmitGameStageResult(GameStageResult).subscribe({
   //     next: (response: any) => {
   //       if (response) {
-  //         console.log('response: ', response);
+  //         
   //         setTimeout(() => {
   //           this._router.navigate([NextPage]);
   //         }, 3000);

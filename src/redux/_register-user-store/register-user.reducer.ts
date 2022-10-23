@@ -16,23 +16,19 @@ export function RegisterUserReducer(
   state: LRP_RegisterUserState | any = INITIAL_REGISTERUSER_STATE,
   action: any
 ): LRP_RegisterUserState {
-  console.log('load registerUser action: ', action);
   switch (action.type) {
     case FETCH_REGISTER_USER:
-      console.log('load registerUser action: ', action);
       return tassign(state, {
         isLoading: true,
       });
 
     case FETCH_REGISTER_USER_SUCCESS:
-      console.log('load registerUser action: ', action);
       return tassign(state, {
         RegisteredUser: action.User,
         isLoading: false,
       });
 
     case FETCH_REGISTER_USER_FAILURE:
-      console.log('load registerUser action: ', action);
       return tassign(state, {
         error: action.error,
       });
@@ -44,17 +40,14 @@ export function RegisterUserReducer(
         isLoading: true,
       });
     case ADD_REGISTER_USER_SUCCESS:
-      console.log('action*****: ', action);
+      
       var newRegisterUser = action.payload;
-      console.log('newRegisterUser*****: ', newRegisterUser);
-
       return tassign(state, {
         RegisteredUser: newRegisterUser,
         lastUpdate: new Date(),
         isLoading: false,
       });
     case ADD_REGISTER_USER_FAILURE:
-      console.log('add registerUser action: ', action);
       return tassign(state, {
         error: action.payload,
         isLoading: false,

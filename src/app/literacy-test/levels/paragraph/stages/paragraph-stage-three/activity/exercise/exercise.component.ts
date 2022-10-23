@@ -56,9 +56,8 @@ export class ExerciseComponent implements OnInit {
     this.GetExerciseTexts();
     // this._paragraphStageThreeSvc?.init();
     // this.speechText = this._paragraphStageThreeSvc.text;
-    // console.log('this.speechText: ', this.speechText);
     // let x = this._paragraphStageThreeSvc.GetVoiceText();
-    // console.log('x: ', x);
+    // 
     this.cdr.detectChanges();
     this.onTestTexts();
     this.onGetGameSessionId();
@@ -67,7 +66,7 @@ export class ExerciseComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        console.log('gameSession$ data: ', data);
+        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -80,43 +79,27 @@ export class ExerciseComponent implements OnInit {
     this.speechTexts$.subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           let speechText = response.replace(/\s/g, '');
-          let resultTexts = this.resultTexts.replace(/\s/g, '');
-          console.log(
-            this.resultTexts.replace(/\s/g, '') == response.replace(/\s/g, '')
-          );
-          // if (speechText == resultTexts) {
-          //   this.isCorrect = true;
-          // }
-
-          this.resultTextList.findIndex((obj: any) => {
-            console.log('obj: ', obj.text.replace(/\s/g, ''));
-            console.log('speechText: ', speechText);
-            console.log('obj----speechText: ', obj == speechText);
-            // obj.text.replace(/\s/g, '') == speechText
-          });
-
           let objIndex = this.resultTextList.findIndex(
             (obj: any) => obj.text.replace(/\s/g, '') == speechText
           );
           //Log object to Console.
-          console.log('Before update: ', this.resultTextList[objIndex]);
+          
           //Update object's name property.
           if (this.resultTextList[objIndex]) {
             this.resultTextList[objIndex].isDone = true;
             this.textPosition += 1;
-            console.log('this.textPosition: ', this.textPosition);
+            
             this.onTestValues(this.resultTextList);
             this.clearService();
           }
           //Log object to console again.
-          console.log('After update: ', this.resultTextList[objIndex]);
-          console.log('>>>>>>>>>>>: ', this.resultTextList);
+          
         }
       },
       error: (err: any) => {
-        console.log('Error: ', err);
+        console.error('Error: ', err);
       },
     });
   }
@@ -124,11 +107,10 @@ export class ExerciseComponent implements OnInit {
   onTestValues(List: any) {
     let complete = List.filter((done: any) => done?.isDone == true);
 
-    console.log('complete: ', complete);
-    console.log('this.textPosition: ', this.textPosition);
+    
 
     if (complete.length == List?.length) {
-      console.log('completed!!!');
+      
       this.clearService();
       this.stopService();
       // alert('completed!!!');
@@ -141,20 +123,12 @@ export class ExerciseComponent implements OnInit {
         answer: '4',
         data: List,
       };
-      console.log('x: ', Payload);
+     
       this.onSubmit(Payload)
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes: ', changes);
-    // this._paragraphStageThreeSvc.speechToTextBehaviorSubj.subscribe(
-    //   (text: any) => {
-    //     if (text) {
-    //       console.log('text: ', text);
-    //     }
-    //   }
-    // );
   }
 
   startService() {
@@ -170,12 +144,12 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSubmit(Result: ExerciseAnswer) {
-    console.log('Result: ', Result);
+    
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._paragraphStageThreeSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
-          console.log('response: ', response);
+          
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Result,

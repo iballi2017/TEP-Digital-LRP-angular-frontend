@@ -45,33 +45,11 @@ export class ReportListComponent implements OnInit {
   ngOnInit(): void {
     this.onGetReportList();
     this._reportSvc.LoadUserGameResult();
-    // let subscription = this._reportSvc.LoadUserGameResult().subscribe({
-    //   next: (response: any) => {
-    //     if (response) {
-    //       console.log('xxxxx: ', response);
-    //     }
-    //   },
-    //   error: (err: any) => {
-    //     if (err) {
-    //       console.warn('Error: ', err);
-    //     }
-    //   },
-    // });
-    // this.Subscriptions.push(subscription);
   }
 
   onGetReportList() {
-    // let subscription = this._reportSvc.GetReports().subscribe({
-    //   next: (response: any) => {
-    //     console.log('reports: ', response);
-    //     this.reportList = response;
-    //   },
-    // });
-    // this.Subscriptions.push(subscription);
-
     let subscription = this.reportsList$.subscribe({
       next: (response: any) => {
-        console.log('reports: ', response);
         this.reports = response;
       },
     });
@@ -79,11 +57,7 @@ export class ReportListComponent implements OnInit {
 
     this._reportSvc.LoadReports();
   }
-  // /account/reports/report/:reportId
   onViewReportDetails(item: any) {
-    // let x = JSON.stringify(item);
-    // this._router.navigate([`account/reports/${item?.id}`]);
-    // this._router.navigate([`account/reports/${x}`]);
     this._router.navigate([`account/reports/details/${item}`]);
   }
 
@@ -97,7 +71,7 @@ export class ReportListComponent implements OnInit {
       maxWidth: '500px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log(`Dialog result: ${result}`);
+      // 
       if (result) {
         this.onDeleteOccupant(item);
       }
@@ -109,10 +83,10 @@ export class ReportListComponent implements OnInit {
     const _sessionId: SessionId = {
       session_id: sessionId,
     };
-    console.log('_sessionId: ', _sessionId);
+    
     this._reportSvc.RemoveReport(_sessionId).subscribe({
       next: (response: any) => {
-        console.log('response: ', response);
+        
         this.ngRedux.dispatch({
           type: REMOVE_REPORT_SUCCESS,
           payload: {
@@ -133,7 +107,6 @@ export class ReportListComponent implements OnInit {
   onEditReport() {}
   FilterForm!: any;
   sortReportListBy(FilterForm:any) {
-    console.log(this.SortItem, FilterForm.value.Filter);
     let SortItem = FilterForm.value.Filter;
     switch (SortItem) {
       case FilterDropdown.ASCENDING:
@@ -150,7 +123,7 @@ export class ReportListComponent implements OnInit {
 
       case FilterDropdown.AGE:
         this.reports.sort((a: any, b: any) => {
-          console.log(a['age'], b['age']);
+          
           let x = parseInt(a['age']);
           let y = parseInt(b['age']);
           return x > y ? 1 : -1;
@@ -159,7 +132,6 @@ export class ReportListComponent implements OnInit {
 
       case FilterDropdown.HIGHEST_SCORE:
         this.reports.sort((a: any, b: any) => {
-          console.log(a['overallScore'], b['overallScore']);
           let x = parseInt(a['overallScore']);
           let y = parseInt(b['overallScore']);
           return x > y ? -1 : 1;
@@ -168,7 +140,6 @@ export class ReportListComponent implements OnInit {
 
       case FilterDropdown.LOWEST_SCORE:
         this.reports.sort((a: any, b: any) => {
-          console.log(a['overallScore'], b['overallScore']);
           let x = parseInt(a['overallScore']);
           let y = parseInt(b['overallScore']);
           return x > y ? 1 : -1;
@@ -178,45 +149,10 @@ export class ReportListComponent implements OnInit {
       default:
         return this.reports;
     }
-
-    // if (this.SortItem == FilterDropdown.ASCENDING) {
-    //   this.reports.sort((a: any, b: any) =>
-    //     a['fullname'] > b['fullname'] ? 1 : -1
-    //   );
-    // }
-    // if (this.SortItem == FilterDropdown.DESCENDING) {
-    //   this.reports.sort((a: any, b: any) =>
-    //     a['fullname'] > b['fullname'] ? -1 : 1
-    //   );
-    // }
-    // if (this.SortItem == FilterDropdown.AGE) {
-    //   this.reports.sort((a: any, b: any) => {
-    //     console.log(a['age'], b['age']);
-    //     let x = parseInt(a['age']);
-    //     let y = parseInt(b['age']);
-    //     return x > y ? 1 : -1;
-    //   });
-    // }
-    // if (this.SortItem == FilterDropdown.HIGHEST_SCORE) {
-    //   this.reports.sort((a: any, b: any) => {
-    //     console.log(a['overallScore'], b['overallScore']);
-    //     let x = parseInt(a['overallScore']);
-    //     let y = parseInt(b['overallScore']);
-    //     return x > y ? -1 : 1;
-    //   });
-    // }
-    // if (this.SortItem == FilterDropdown.LOWEST_SCORE) {
-    //   this.reports.sort((a: any, b: any) => {
-    //     console.log(a['overallScore'], b['overallScore']);
-    //     let x = parseInt(a['overallScore']);
-    //     let y = parseInt(b['overallScore']);
-    //     return x > y ? 1 : -1;
-    //   });
-    // }
   }
 
   ngOnDestroy(): void {
-    console.log('destroyed!!!', this.Subscriptions);
+    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();
