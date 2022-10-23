@@ -1,7 +1,7 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
-import { BasicOperationsDivisionStageOneService } from 'src/app/services/basic-operations/basic-operations-division-stage-one.service';
+import { BasicOperationsDivisionStageTwoService } from 'src/app/services/basic-operations/division/basic-operations-division-stage-two.service';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class ExerciseComponent implements OnInit {
   testLoopNumber: number = 0;
 
   constructor(
-    private _basicOperationsDivisionStageOneSvc: BasicOperationsDivisionStageOneService,
+    private _basicOperationsDivisionStageTwoSvc: BasicOperationsDivisionStageTwoService,
     private _gameSvc: GameService
   ) {}
 
@@ -62,13 +62,13 @@ export class ExerciseComponent implements OnInit {
   }
 
   getActionNumbers() {
-    let numbersList = this._basicOperationsDivisionStageOneSvc.GetActionNumbers();
+    let numbersList = this._basicOperationsDivisionStageTwoSvc.GetActionNumbers();
     console.log('numbersList: ', numbersList);
     this.actionWords = numbersList;
   }
   getresultNumbers() {
     // this.resultNumbers = numbersList;
-    let numbersList = this._basicOperationsDivisionStageOneSvc.GetresultNumbers();
+    let numbersList = this._basicOperationsDivisionStageTwoSvc.GetResultNumbers();
     this.resultNumbers = numbersList;
     console.log('resultNumbers: ', numbersList);
     console.log(

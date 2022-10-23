@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameStage } from 'src/app/models/types/game-stage';
 import { BasicOperationsDivisionStageOneComponent } from './stages/basic-operations-division-stage-one/basic-operations-division-stage-one.component';
+import { BasicOperationsDivisionStageTwoComponent } from './stages/basic-operations-division-stage-two/basic-operations-division-stage-two.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,33 @@ const routes: Routes = [
         loadChildren: () =>
           import(
             './stages/basic-operations-division-stage-one/activity/activity.module'
+          ).then((m) => m.ActivityModule),
+      },
+    ],
+  },
+  {
+    path: `${GameLevel.BASIC_OPERATIONS_DIVISION}/stage-${GameStage.TWO}`,
+    component: BasicOperationsDivisionStageTwoComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-division-stage-two/basic-operations-division-stage-two-splash/basic-operations-division-stage-two-splash.module'
+          ).then((m) => m.BasicOperationsDivisionStageTwoSplashModule),
+      },
+      {
+        path: 'number-recognition-one-splash',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-division-stage-two/basic-operations-division-stage-two-splash/basic-operations-division-stage-two-splash.module'
+          ).then((m) => m.BasicOperationsDivisionStageTwoSplashModule),
+      },
+      {
+        path: 'activity',
+        loadChildren: () =>
+          import(
+            './stages/basic-operations-division-stage-two/activity/activity.module'
           ).then((m) => m.ActivityModule),
       },
     ],
