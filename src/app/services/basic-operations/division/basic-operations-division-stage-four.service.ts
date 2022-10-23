@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   actionNumbers,
   resultNumbers,
-} from 'src/assets/data/numeracy.data/basic-operations-multiplication-stage-4.data';
+} from 'src/assets/data/numeracy.data/basic-operations-division-stage-4.data';
 
 @Injectable({
   providedIn: 'root',
@@ -22,20 +22,4 @@ export class BasicOperationsDivisionStageFourService {
     let numbersList = { ...resultNumbers };
     return numbersList;
   }
-
-  // GetTestTwoActionsNumbers() {
-  //   let numbersList = [...testTwoActionNumbers];
-  //   return numbersList;
-  // }
-
-  // GetTestTwoResultNumbers() {
-  //   let numbersList = { ...testTwoResultNumbers };
-  //   return numbersList;
-  // }
-
-  // SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
-  //   return this._http
-  //     .post(`${this.SubmitGameStage_3_Url}`, _GameStageResult)
-  //     .pipe(catchError(handleError));
-  // }
 }

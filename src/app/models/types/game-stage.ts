@@ -3,4 +3,5 @@ export enum GameStage {
   TWO,
   THREE,
   FOUR,
+  FIVE,
 }

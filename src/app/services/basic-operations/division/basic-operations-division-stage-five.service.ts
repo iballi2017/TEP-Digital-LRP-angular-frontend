@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import {
   actionNumbers,
   resultNumbers,
-} from 'src/assets/data/numeracy.data/basic-operations-division-stage-3.data';
+} from 'src/assets/data/numeracy.data/basic-operations-division-stage-5.data';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BasicOperationsDivisionStageThreeService {
+export class BasicOperationsDivisionStageFiveService {
   // StartGameUrl = baseUrl + '/start-game-session';
   // SubmitGameStage_3_Url = baseUrl + '/submit-word-stage-3';
 

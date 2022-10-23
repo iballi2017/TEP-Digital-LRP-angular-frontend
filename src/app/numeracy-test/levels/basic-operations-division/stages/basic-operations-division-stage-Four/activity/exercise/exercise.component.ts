@@ -1,7 +1,7 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
-import { BasicOperationsMultiplicationStageFourService } from 'src/app/services/basic-operations/multiplication/basic-operations-multiplication-stage-four.service';
+import { BasicOperationsDivisionStageFourService } from 'src/app/services/basic-operations/division/basic-operations-division-stage-four.service';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { GameService } from 'src/app/services/game.service';
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
-  pageTitle: string = 'Solve multiplication word problems presented';
+  pageTitle: string = 'Can you do the following division problems provided';
   actionWords: any[] = [];
   gameSessionId: any;
   totalStarNumber: number = 5;
@@ -24,7 +24,7 @@ export class ExerciseComponent implements OnInit {
   questionStatement!: string;
 
   constructor(
-    private _basicOperationsMultiplicationStageFourSvc: BasicOperationsMultiplicationStageFourService,
+    private _basicOperationsDivisionStageFourSvc: BasicOperationsDivisionStageFourService,
     private _gameSvc: GameService
   ) {}
 
@@ -46,13 +46,13 @@ export class ExerciseComponent implements OnInit {
 
   getActionNumbers() {
     let numbersList =
-      this._basicOperationsMultiplicationStageFourSvc.GetActionNumbers();
+      this._basicOperationsDivisionStageFourSvc.GetActionNumbers();
     console.log('numbersList: ', numbersList);
     this.actionWords = numbersList;
   }
   getResultNumbers() {
     let numbersList =
-      this._basicOperationsMultiplicationStageFourSvc.GetResultNumbers();
+      this._basicOperationsDivisionStageFourSvc.GetResultNumbers();
     console.log('numbersList: ', numbersList);
     this.resultNumbers = numbersList;
     console.log('resultNumbers: ', numbersList);
