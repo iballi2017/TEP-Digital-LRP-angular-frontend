@@ -50,7 +50,6 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -84,11 +83,9 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
         this.resultTwoLetterWords[i].word[1]?.name ==
           this.selectedAlphabets[1]?.name
       ) {
-        
         this.resultTwoLetterWords[i].isDone = true;
         this.selectedAlphabets = [];
       } else {
-        
       }
     }
   }
@@ -105,7 +102,6 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
     this.resultTwoLetterWords =
       this._stageThreeActivitySvc.GetresultTwoLetterWords();
   }
-
 
   onPush(LetterItem: any) {
     let itemExists = false;
@@ -125,14 +121,12 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
         );
       } else {
         if (this.selectedAlphabets.length > 1) {
-          
           return;
         }
         this.selectedAlphabets.push(LetterItem);
       }
     } else {
       if (this.selectedAlphabets.length > 1) {
-        
         return;
       }
       this.selectedAlphabets.push(LetterItem);
@@ -143,7 +137,7 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
     let complete: any = this.resultTwoLetterWords.filter(
       (done: any) => done?.isDone == true
     );
-    
+
     if (complete.length == 5) {
       this.onSubmit(complete);
       // alert('Congratulations!!!');
@@ -160,6 +154,8 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
       item.isWellPlaced = false;
     });
     this.resultTwoLetterWords = [...list];
+
+    this.selectedAlphabets = [];
   }
 
   onSubmit(complete: any) {
@@ -169,12 +165,9 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
       // anwser: '1',
       data: complete,
     };
-    
+
     let x = JSON.stringify(Payload);
-    localStorage.setItem(
-      LetteringStageThreeExerciseOneStorage.EXERCISE_ONE,
-      x
-    );
+    localStorage.setItem(LetteringStageThreeExerciseOneStorage.EXERCISE_ONE, x);
     this.ngRedux.dispatch({
       type: ADD_LETTERING_STAGE_THREE_EXERCISE_ONE_SUCCESS,
       payload: Payload,

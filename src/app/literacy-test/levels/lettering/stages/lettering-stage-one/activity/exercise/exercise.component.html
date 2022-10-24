@@ -1,63 +1,18 @@
 <!-- <p>exercise works!</p> -->
-
-<!-- <div class="card">
-    <div class="card-body">
-        <div class="alert alert-info text-center" *ngIf="isFinishedMessage">{{isFinishedMessage}}</div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Consonant</th>
-                    <th>Vowel</th>
-                    <th>Selected count</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{consonants?.length}}</td>
-                    <td>{{vowels?.length}}</td>
-                    <td>{{this.selectedAlphabets?.length}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div> -->
-<!-- {{alphabets | json}} -->
-<!-- <div class="alert alert-info">
-    Selected: {{this.selectedAlphabets | json}}
-</div>
-<div class="alert alert-success">
-    Selected: {{this.vowels | json}}
-</div> -->
 <div class="canvas-wrapper">
     <h1 class="title">{{title}}</h1>
-    <!-- <ng-container *ngIf="(isLoading$ | async)">
-        <small class="text-white">Loading...</small>
-    </ng-container> -->
-    <!-- <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
-        <p>{{successMessage}}
-            <br />
-            {{isFinishedMessage}}
-        </p>
-    </div> -->
-    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
-    <!-- <ul class="keyboard list-style-none pl-0" id="activity-canvas" [ngClass]="{'isLoading': (isLoading$ | async)}"> -->
-    <ul class="keyboard list-style-none pl-0" id="activity-canvas">
-        <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
-        <li *ngFor="let item of alphabets">
-            <input type="checkbox" id="{{item?.name}}" hidden [(ngModel)]="item.isChecked"
-                [ngModelOptions]="{standalone: true}" (change)="onSelected(item)">
-            <label for="{{item?.name}}">
-                <span class="fake-box"
-                    [ngClass]="{'right-answer': item.isChecked && item?.type == vowel,'wrong-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>
-                <span class="linen"></span>
-            </label>
-        </li>
-    </ul>
-    <!--  -->
-    <!-- <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
-        <li *ngFor="let item of alphabets">
-            <button class="btn key rounded-0" (click)="onSelected(item)">{{item?.name}}</button>
-
-        </li>
-    </ul> -->
+    <div id="lettering-input-keyboard">
+        <ul class="keyboard list-style-none pl-0">
+            <li class="key-item" *ngFor="let item of alphabets">
+                <input type="checkbox" id="{{item?.name}}" hidden [(ngModel)]="item.isChecked"
+                    [ngModelOptions]="{standalone: true}" (change)="onSelected(item)">
+                <label for="{{item?.name}}">
+                    <span class="fake-box"
+                        [ngClass]="{'right-answer': item.isChecked && item?.type == vowel,'wrong-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>
+                    <span class="linen"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
 </div>

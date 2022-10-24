@@ -1,72 +1,66 @@
+@use "../../../../../../../../sass/_partials/mixins";
 
-#result-screen {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2em 3em;
-    #result-list {
-        li {
-            width: 5.5rem;
-            min-width: 5.5rem;
-            margin: 0.5em;
-            &:last-child {
-                // margin-right: 0;
-            }
+#result-output-box-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-gap: 10px;
+    // display: flex;
+    // flex-wrap: wrap;
+    // li {
+    //     flex-basis: calc(100% / 7);
+    //     padding: 0.3em;
+    // }
+    .result-box {
+        width: 100%;
+        // min-width: 7.5rem;
+        max-height: 1.3rem;
+        // padding: 1.2em;
+        padding-top: 1.2em;
+        padding-bottom: 1.2em;
+        background: #fbff45;
+        border: 3px solid #4a3d96;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        //
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+        // margin: 0.5em;
+    }
+
+    @include mixins.minmq(768px) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        grid-gap: 10px;
+        .result-box {
+            width: 100%;
+            // min-width: 7.5rem;
+            max-height: 2rem;
+            padding: 1.6em;
+            border: 7px solid #4a3d96;
+            font-weight: 700;
+            font-size: 1.5rem;
         }
     }
 }
 
-
-// input[type="checkbox"] {
-//     position: absolute;
-//     &:checked + label {
-//         // color: red;
-//     }
-//     position: absolute;
-//     opacity: 0;
-//     &:checked + label {
-//         color: rgba(76, 111, 53, 1);
-//         .fake-box {
-//             padding: 1px;
-//             display: flex;
-//             align-items: center;
-//             justify-content: center;
-//             border: none;
-//             // background: #73cf48;
-//             // border: 7px solid #73cf48;
-//             &::before {
-//                 // @include mixins.before("\f00c", 12px);
-//                 color: #ffffff;
-//             }
-//         }
-//     }
-// }
-// label {
-//     display: flex;
-//     align-items: center;
-//     // display: grid;
-//     // grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-//     width: 5.2rem;
-//     min-width: 5.2rem;
-//     height: 5.2rem;
-//     .fake-box {
-//         background-color: #ffffff;
-//         border: 7px solid #73cf48;
-//         display: block;
-//         width: 100%;
-//         height: 100%;
-//         left: 409px;
-//         top: 450px;
-//         box-sizing: border-box;
-//         // margin-right: 1em;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         font-family: "Open Sans";
-//         font-style: normal;
-//         font-weight: 600;
-//         font-size: 36px;
-//         line-height: 49px;
-//         color: #000000;
-//         cursor: pointer;
-//     }
-// }
+.keyboard {
+    max-width: calc(970px + 2em);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 1em;
+    padding-left: 1em;
+    .key {
+        margin-right: 0.15em;
+        margin-left: 0.15em;
+        margin-bottom: 0.3em;
+    }
+}

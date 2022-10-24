@@ -31,17 +31,22 @@
     <div id="result-screen">
         <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
         <div class="inner">
-            <ul class="list-style-none" id="result-list">
+            <!-- <ul class="list-style-none" id="result-list"> -->
+            <ul class="list-style-none pl-0 mb-0" id="result-output-box-list">
                 <li *ngFor="let item of resultTwoLetterWords">
                     <!-- at -->
-                    <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name}}</span>
+                    <div class="result-box">
+                        <span *ngFor="let alphabet of item.word"
+                            [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name}}</span>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
     <div id="output-screen">
         <div class="inner">
-            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">{{selectedAlphabets[0]?.name}}</div>
+            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">
+                {{selectedAlphabets[0]?.name}}</div>
             <button id="operator" class="btn"></button>
             <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name}}</div>
         </div>
@@ -56,10 +61,9 @@
             </label>
         </li>
     </ul> -->
-    <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
+    <ul class="list-style-none pl-0 keyboard">
         <li *ngFor="let item of exerciseAlphabets">
             <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name}}</button>
         </li>
     </ul>
 </div>
-

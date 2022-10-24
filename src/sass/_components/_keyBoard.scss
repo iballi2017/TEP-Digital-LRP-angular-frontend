@@ -1,15 +1,18 @@
+@use "../../sass/_partials/mixins";
+
+
 .keyboard {
     .key {
-        width: 5.3rem;
-        height: 5.6rem;
+        width: 3.9rem;
+        min-width: 3.9rem;
+        height: 3.9rem;
         //
         background-color: #ffffff;
-        border: 7px solid #73cf48;
+        border: 3px solid #73cf48;
         font-family: "Open Sans";
         font-style: normal;
         font-weight: 600;
-        font-size: 2rem;
-        line-height: 49px;
+        font-size: 1.2rem;
         box-sizing: border-box;
         display: flex;
         align-items: center;
@@ -18,103 +21,164 @@
         border-radius: 0;
 
         &.pass {
-            background: #73cf48;
-            border: 7px solid #73cf48;
-            color: #ffffff;
+            // background: #73cf48;
+            // border: 4px solid #73cf48;
+            // color: #ffffff;
             &:focus {
                 background: #73cf48;
-                border: 7px solid #73cf48;
+                border: 4px solid #73cf48;
                 color: #ffffff;
             }
         }
 
         &.fail {
-            background: #ffffff;
-            border: 7px solid #d93333;
+            // background: #ffffff;
+            // border: 7px solid #d93333;
             &:focus {
                 background: #ffffff;
                 border: 7px solid #d93333;
             }
         }
     }
+    @include mixins.minmq(768px) {
+        .key {
+            width: 5.3rem;
+            min-width: 5.3rem;
+            height: 5.6rem;
+            //
+            border: 7px solid #73cf48;
+            font-weight: 600;
+            font-size: 2rem;
+            line-height: 49px;
+    
+            &.pass {
+                border: 7px solid #73cf48;
+                color: #ffffff;
+                &:focus {
+                    border: 7px solid #73cf48;
+                    color: #ffffff;
+                }
+            }
+    
+            &.fail {
+                border: 7px solid #d93333;
+                &:focus {
+                    border: 7px solid #d93333;
+                }
+            }
+        }
+    }
 }
 
-// .keyboard{
-//     position: relative;
-//     z-index: 1;
-//     &.isLoading{
-//         &::after{
-//             content: "Loading...";
-//             font-size: 2rem;
-//             font-weight: 600;
-//             color: #73cf48;
-//             text-shadow: 2px 2px #554c4c;
-//             display: block;
-//             position: absolute;
-//             background-color: rgb(255, 255, 255, .3);
-//             top: 0;
-//             bottom: 0;
-//             right: 0;
-//             left: 0;
-//             z-index: 1000;
-//             display: flex;
-//             align-items: center;
-//             justify-content: center;
-//         }
-//     }
-// }
+#lettering-input-keyboard {
+    .keyboard {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 1em;
+        padding-left: 1em;
+        .key-item {
+            input[type="checkbox"] {
+                position: absolute;
+                opacity: 0;
+                &:checked + label {
+                    color: rgba(76, 111, 53, 1);
+                    .fake-box {
+                        padding: 1px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: none;
+                        &::before {
+                            color: #ffffff;
+                        }
 
-// input[type="checkbox"] {
-//     position: absolute;
-//     &:checked + label {
-//         // color: red;
-//     }
-//     position: absolute;
-//     opacity: 0;
-//     &:checked + label {
-//         color: rgba(76, 111, 53, 1);
-//         .fake-box {
-//             padding: 1px;
-//             display: flex;
-//             align-items: center;
-//             justify-content: center;
-//             border: none;
-//             // background: #73cf48;
-//             // border: 7px solid #73cf48;
-//             &::before {
-//                 // @include mixins.before("\f00c", 12px);
-//                 color: #ffffff;
-//             }
-//         }
-//     }
-// }
-// label {
-//     display: flex;
-//     align-items: center;
-//     // display: grid;
-//     // grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-//     width: 5.2rem;
-//     min-width: 5.2rem;
-//     height: 5.2rem;
-//     .fake-box {
-//         background-color: #ffffff;
-//         border: 7px solid #73cf48;
-//         display: block;
-//         width: 100%;
-//         height: 100%;
-//         left: 409px;
-//         top: 450px;
-//         box-sizing: border-box;
-//         // margin-right: 1em;
-//         display: flex;
-//         align-items: center;
-//         justify-content: center;
-//         font-family: "Open Sans";
-//         font-style: normal;
-//         font-weight: 600;
-//         font-size: 36px;
-//         line-height: 49px;
-//         color: #000000;
-//         cursor: pointer;
-//     }
-// }
+                        &.right-answer {
+                            background: #73cf48;
+                            border: 3px solid #73cf48;
+                            color: #ffffff;
+                        }
+                        &.wrong-answer {
+                            background: #ffffff;
+                            border: 3px solid #d93333;
+                        }
+                    }
+                }
+            }
+            label {
+                display: flex;
+                align-items: center;
+                width: 3.9rem;
+                min-width: 3.9rem;
+                height: 3.9rem;
+                margin-bottom: 0;
+                position: relative;
+                .linen {
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                }
+                .fake-box {
+                    background-color: #ffffff;
+                    border: 3px solid #73cf48;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: "Open Sans";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 1.2rem;
+                    color: #000000;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        @include mixins.minmq(768px) {
+            .key-item {
+                margin-right: calc(0.3em / 2);
+                margin-left: calc(0.3em / 2);
+                margin-bottom: 0.3em;
+                &:last-child {
+                    margin-right: 0;
+                }
+                .fake-box {
+                    &.right-answer {
+                        border: 7px solid #73cf48;
+                    }
+                    &.wrong-answer {
+                        border: 7px solid #d93333;
+                    }
+                }
+                label {
+                    width: 5.9rem;
+                    min-width: 5.9rem;
+                    height: 5.9rem;
+                    .fake-box {
+                        border: 7px solid #73cf48;
+                        font-size: 1.5rem;
+                    }
+                }
+                input[type="checkbox"] {
+                    &:checked + label {
+                        .fake-box {
+                            &.right-answer {
+                                border: 7px solid #73cf48;
+                            }
+                            &.wrong-answer {
+                                border: 7px solid #d93333;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
