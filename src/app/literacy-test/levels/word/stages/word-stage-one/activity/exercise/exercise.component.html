@@ -8,7 +8,8 @@
                 <!-- <li *ngFor="let item of resultTwoLetterWords"> -->
                 <li *ngFor="let item of resultLetterWords">
                     <!-- at -->
-                    <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name | uppercase}}</span>
+                    <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name |
+                        uppercase}}</span>
                     <!-- <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name}}</span> -->
                 </li>
             </ul>
@@ -21,18 +22,24 @@
             </ul> -->
         </div>
     </div>
-    
+
     <div id="output-screen">
         <div class="inner">
-            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">{{selectedAlphabets[0]?.name | uppercase}}</div>
+            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">
+                {{selectedAlphabets[0]?.name | uppercase}}</div>
             <button id="operator" class="btn"></button>
             <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name | uppercase}}</div>
         </div>
     </div>
     <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
 
-    <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
+    <!-- <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
         <li *ngFor="let item of actionAlphabets">
+            <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name | uppercase}}</button>
+        </li>
+    </ul> -->
+    <ul class="list-style-none pl-0 keyboard">
+        <li class="key-item" *ngFor="let item of actionAlphabets">
             <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name | uppercase}}</button>
         </li>
     </ul>

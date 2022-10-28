@@ -139,11 +139,11 @@ aside {
         // height: 5.6rem;
         width: 100%;
         background-color: #ffffff;
-        border: 7px solid #73cf48;
+        border: 2px solid #73cf48;
         font-family: "Open Sans";
         font-style: normal;
         font-weight: 600;
-        font-size: 1.2rem;
+        font-size: .75rem;
         line-height: 49px;
         box-sizing: border-box;
         display: flex;
@@ -152,8 +152,9 @@ aside {
         color: #000000;
         border-radius: 0;
 
-        @include mixins.maxmq(786px){
-            font-size: .75rem;
+        @include mixins.minmq(786px){
+            font-size: 1.2rem;
+            border: 7px solid #73cf48;
         }
     }
 }

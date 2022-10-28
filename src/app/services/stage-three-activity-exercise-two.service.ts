@@ -9,7 +9,7 @@ export class StageThreeActivityExerciseTwoService {
   constructor() {}
 
   GetresultFourLetterWords() {
-    this.alphabetsList = [...resultFoutLetterWords];
+    this.alphabetsList = [...resultFourtLetterWords];
     return this.alphabetsList;
   }
 
@@ -87,7 +87,7 @@ export const actionAlphabets = [
   },
 ];
 
-export const resultFoutLetterWords = [
+export const resultFourtLetterWords = [
   {
     // id: 1,
     isDone: false,

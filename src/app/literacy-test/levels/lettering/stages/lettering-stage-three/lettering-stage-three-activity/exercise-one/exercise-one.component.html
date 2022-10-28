@@ -62,8 +62,8 @@
         </li>
     </ul> -->
     <ul class="list-style-none pl-0 keyboard">
-        <li *ngFor="let item of exerciseAlphabets">
-            <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name}}</button>
+        <li class="key-item" *ngFor="let item of exerciseAlphabets">
+            <button class="key rounded-0" (click)="onPush(item)">{{item?.name}}</button>
         </li>
     </ul>
 </div>

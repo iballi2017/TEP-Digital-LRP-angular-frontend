@@ -18,10 +18,12 @@ export class LetteringStageOneInstructionalVideoComponent implements OnInit {
     // this.isVideoEnded = true;
     const btn = document.querySelector('.btn-wrapper');
     btn?.classList.remove('d-none');
+    console.log("Ending!")
   }
   isPlaying() {
     // this.isVideoEnded = true;
     const btn = document.querySelector('.btn-wrapper');
     btn?.classList.add('d-none');
+    console.log("Playing!")
   }
 }

@@ -1,5 +1,6 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { BasicOperationsMultiplicationStageFourService } from 'src/app/services/basic-operations/multiplication/basic-operations-multiplication-stage-four.service';
 import { GameService } from 'src/app/services/game.service';
@@ -25,7 +26,8 @@ export class ExerciseComponent implements OnInit {
 
   constructor(
     private _basicOperationsMultiplicationStageFourSvc: BasicOperationsMultiplicationStageFourService,
-    private _gameSvc: GameService
+    private _gameSvc: GameService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -104,7 +106,7 @@ export class ExerciseComponent implements OnInit {
         data: [this.resultNumbers],
       };
      
-      // this.onSubmit(Payload);
+      this.onSubmit(Payload);
     }
   }
 
@@ -131,5 +133,14 @@ export class ExerciseComponent implements OnInit {
     this.getResultNumbers();
   }
 
-  onSubmit(Payload: any) {}
+
+  onSubmit(Payload: any) {
+    console.log('Payload: ', Payload);
+    setTimeout(() => {
+      alert('Completed');
+      this._router.navigate([
+        '/numeracy/basic-operations-division/stage-1/activity/',
+      ]);
+    }, 2000);
+  }
 }

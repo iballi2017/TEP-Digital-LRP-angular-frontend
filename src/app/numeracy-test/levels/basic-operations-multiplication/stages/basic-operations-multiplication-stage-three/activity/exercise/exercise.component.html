@@ -26,8 +26,10 @@
         <h1 class="title">{{pageTitle}}</h1>
         <ul class="list-style-none pl-0 word-keyboard row no-gutters">
             <li class="col-4 p-1 p-lg-2" *ngFor="let item of actionWords">
-                <button class="btn key rounded-0" (click)="onSelect(item)"
-                    [ngClass]="{'wrong-answer': item?.isWrongNumber, 'right-answer':item?.isCorrectNumber}">{{item?.figure}}{{item?.unit}}</button>
+                <!-- <button class="btn key rounded-0" (click)="onSelect(item)"
+                    [ngClass]="{'wrong-answer': item?.isWrongNumber, 'right-answer':item?.isCorrectNumber}">{{item?.figure}}{{item?.unit}}</button> -->
+                    <button class="btn key rounded-0" (click)="onSelect(item)"
+                        [ngClass]="{'wrong-answer': item?.isWrongNumber, 'right-answer':item?.isCorrectNumber}">{{item?.figure}}</button>
             </li>
         </ul>
 

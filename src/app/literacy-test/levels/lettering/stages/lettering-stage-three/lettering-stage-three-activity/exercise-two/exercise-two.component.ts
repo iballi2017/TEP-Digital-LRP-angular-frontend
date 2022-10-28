@@ -107,6 +107,7 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
       item.isWellPlaced = false;
     });
     this.resultFourLetterWords = [...list];
+    this.selectedAlphabets = []
   }
 
   onPush(LetterItem: any) {
