@@ -77,7 +77,7 @@
     #pages {
         --pagesWidth: calc(100% - var(--width));
         width: 100%;
-        background-color: red;
+        // background-color: red;
         // height: 45px;
         height: 38px;
         border-radius: 10px;
@@ -145,8 +145,10 @@
         }
 
         &.pd-left {
-            .page {
-                padding-left: 35px;
+            @include mixins.minmq(768px) {
+                .page {
+                    padding-left: 35px;
+                }
             }
         }
     }
