@@ -34,7 +34,7 @@
             }
         }
 
-        @include mixins.maxmq(786px) {
+        @include mixins.maxmq(768px) {
             font-size: 0.75rem;
         }
     }

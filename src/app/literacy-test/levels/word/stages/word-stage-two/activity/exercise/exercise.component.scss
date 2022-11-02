@@ -164,14 +164,14 @@ aside {
         color: #000000;
         border-radius: 0;
 
-        @include mixins.minmq(786px) {
+        @include mixins.minmq(768px) {
             font-size: 1.2rem;
             border: 7px solid #73cf48;
         }
     }
 }
 
-@include mixins.minmq(786px) {
+@include mixins.minmq(768px) {
     .result-screen-type-one {
         width: 850px;
         margin: 0 auto;
@@ -229,11 +229,23 @@ aside {
                         left: 0;
                         bottom: 0;
                     }
+                    .line {
+                        left: 0;
+                        top: 0;
+                        width: 333px;
+                        transform: rotate(-189deg);
+                    }
                 }
                 &:nth-of-type(4) {
                     .blob {
                         right: 0;
                         bottom: 0;
+                    }
+                    .line {
+                        right: 0;
+                        bottom: 4em;
+                        width: 333px;
+                        transform: rotate(189deg);
                     }
                 }
             }

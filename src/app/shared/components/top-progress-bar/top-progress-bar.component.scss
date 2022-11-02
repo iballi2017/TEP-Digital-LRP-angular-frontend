@@ -10,7 +10,7 @@
     // margin-left: 95px;
     li {
         // width: 340px;
-        height: 8px;
+        height: 3px;
         // left: 133px;
         background: #ffffff;
         border-radius: 10px;
@@ -21,5 +21,8 @@
     }
     @include mixins.minmq(768px) {
         margin-left: 95px;
+        li {
+            height: 8px;
+        }
     }
 }

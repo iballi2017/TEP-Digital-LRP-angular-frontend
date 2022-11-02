@@ -39,7 +39,7 @@
             border: 7px solid #d93333;
         }
 
-        @include mixins.maxmq(786px) {
+        @include mixins.maxmq(768px) {
             font-size: 0.75rem;
         }
     }
