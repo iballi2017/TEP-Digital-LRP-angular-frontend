@@ -1,9 +1,23 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
 import { BasicOperationsAdditionStageTwoService } from 'src/app/services/basic-operations/addition/basic-operations-addition-stage-two.service';
 import { GameService } from 'src/app/services/game.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { IAppState } from 'src/redux/store';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -16,7 +30,13 @@ export class ExerciseComponent implements OnInit {
   pageTitle: string = 'Can you add the 1-digit numbers here';
   actionWords: any[] = [];
   gameSessionId: any;
-  // testLoopNumber: number = 0;
+  stageNumber: number = 2;
+  isFinishedMessage!: string;
+  successMessage: any;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  gameLevel = GameLevel.BASIC_OPERATIONS_ADDITION;
+  durationInSeconds = 10;
 
   uiExercise: any[] = [];
   totalStarNumber: number = 5;
@@ -29,7 +49,9 @@ export class ExerciseComponent implements OnInit {
   constructor(
     private _basicOperationsAdditionStageTwoSvc: BasicOperationsAdditionStageTwoService,
     private _gameSvc: GameService,
-    private _router: Router
+    private _router: Router,
+    private ngRedux: NgRedux<IAppState>,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +64,6 @@ export class ExerciseComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -51,7 +72,7 @@ export class ExerciseComponent implements OnInit {
   getActionNumbers() {
     let numbersList =
       this._basicOperationsAdditionStageTwoSvc.GetActionNumbers();
-    
+
     this.actionWords = numbersList;
   }
   getresultNumbers() {
@@ -66,9 +87,8 @@ export class ExerciseComponent implements OnInit {
   }
 
   trackResultHint() {
-    
     let x = this.resultNumbers.numbers[this.testLoopNumber];
-    
+
     if (x.answer?.isWellPlaced == true) {
       x.isDone = true;
     }
@@ -93,33 +113,29 @@ export class ExerciseComponent implements OnInit {
     let questionItems = this.resultNumbers.numbers;
     let complete = questionItems.filter((done: any) => done?.isDone == true);
 
-    
-    
-    
-
     if (complete.length == questionItems?.length) {
       this.resultNumbers.isComplete = true;
-      
+
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
         answer: '1',
         data: [this.resultNumbers],
       };
-     
+
       this.onSubmit(Payload);
     }
   }
 
   onSelect(item: any) {
     let result = this.resultNumbers?.numbers[this.testLoopNumber];
-    
+
     if (item.figure == result.answer.figure) {
       item.isCorrectNumber = true;
       result.answer.isWellPlaced = true;
       this.trackResultHint();
     } else {
       item.isWrongNumber = true;
-      // 
+      //
     }
   }
 
@@ -135,11 +151,47 @@ export class ExerciseComponent implements OnInit {
 
   onSubmit(Payload: any) {
     console.log('Payload: ', Payload);
-    setTimeout(() => {
-      alert('Completed');
-      this._router.navigate([
-        '/numeracy/basic-operations-addition/stage-2/activity/exercise-2',
-      ]);
-    }, 2000);
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
+    this._basicOperationsAdditionStageTwoSvc
+      .SubmitGameStageResult(Payload)
+      .subscribe({
+        next: (response: any) => {
+          if (response) {
+            console.log('response: ', response);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+              payload: Payload,
+            });
+            this.openSnackBar(response?.message);
+            setTimeout(() => {
+              this.isFinishedMessage = '';
+              this.successMessage = '';
+              this.onReset();
+              // alert('completed!!!');
+              this._router.navigate([
+                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              ]);
+            }, 3000);
+          }
+        },
+        error: (err: any) => {
+          if (err) {
+            console.warn('Error: ', err);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+              payload: err?.error?.message,
+            });
+          }
+        },
+      });
+  }
+
+  openSnackBar(data: any) {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: data,
+    });
   }
 }

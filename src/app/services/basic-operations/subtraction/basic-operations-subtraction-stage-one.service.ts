@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs';
+import { baseUrl } from 'src/app/config/api';
+import { handleError } from 'src/app/helpers/errorHandler';
+import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { actionNumbers, resultNumbers } from 'src/assets/data/numeracy.data/basic-operations-subtraction-stage-1.data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasicOperationsSubtractionStageOneService {
-  // StartGameUrl = baseUrl + '/start-game-session';
-  // SubmitGameStage_3_Url = baseUrl + '/submit-word-stage-3';
-
+  SubmitBasicOperationsSubtractionGameStage_1_Url = baseUrl + '/submit-basic-operations-sub-stage-1';
   constructor(private _http: HttpClient) {}
 
   GetActionNumbers() {
@@ -20,9 +22,9 @@ export class BasicOperationsSubtractionStageOneService {
     return numbersList;
   }
 
-  // SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
-  //   return this._http
-  //     .post(`${this.SubmitGameStage_3_Url}`, _GameStageResult)
-  //     .pipe(catchError(handleError));
-  // }
+  SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
+    return this._http
+      .post(`${this.SubmitBasicOperationsSubtractionGameStage_1_Url}`, _GameStageResult)
+      .pipe(catchError(handleError));
+  }
 }

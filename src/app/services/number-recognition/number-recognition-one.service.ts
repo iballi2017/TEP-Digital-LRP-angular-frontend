@@ -1,14 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs';
 import { baseUrl } from 'src/app/config/api';
-import { actionNumbers, resultNumbers } from 'src/assets/data/numeracy.data/number-recognition-one.data';
+import { handleError } from 'src/app/helpers/errorHandler';
+import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import {
+  actionNumbers,
+  resultNumbers,
+} from 'src/assets/data/numeracy.data/number-recognition-one.data';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NumberRecognitionOneService {
-  // StartGameUrl = baseUrl + '/start-game-session';
-  // SubmitGameStage_3_Url = baseUrl + '/submit-word-stage-3';
+  SubmitNumberRecognition_1_GameStage_1_Url =
+    baseUrl + '/submit-number-recognition-1-stage-1';
 
   constructor(private _http: HttpClient) {}
 
@@ -21,9 +27,12 @@ export class NumberRecognitionOneService {
     return numbersList;
   }
 
-  // SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
-  //   return this._http
-  //     .post(`${this.SubmitGameStage_3_Url}`, _GameStageResult)
-  //     .pipe(catchError(handleError));
-  // }
+  SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
+    return this._http
+      .post(
+        `${this.SubmitNumberRecognition_1_GameStage_1_Url}`,
+        _GameStageResult
+      )
+      .pipe(catchError(handleError));
+  }
 }
