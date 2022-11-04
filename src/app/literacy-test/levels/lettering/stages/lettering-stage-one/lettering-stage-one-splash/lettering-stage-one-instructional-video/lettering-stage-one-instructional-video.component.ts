@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lettering-stage-one-instructional-video.component.scss'],
 })
 export class LetteringStageOneInstructionalVideoComponent implements OnInit {
-  // isVideoEnded = false;
   constructor() {}
 
   ngOnInit(): void {
@@ -15,15 +14,11 @@ export class LetteringStageOneInstructionalVideoComponent implements OnInit {
     video?.addEventListener('playing', this.isPlaying, false);
   }
   isEnded() {
-    // this.isVideoEnded = true;
     const btn = document.querySelector('.btn-wrapper');
     btn?.classList.remove('d-none');
-    console.log("Ending!")
   }
   isPlaying() {
-    // this.isVideoEnded = true;
     const btn = document.querySelector('.btn-wrapper');
     btn?.classList.add('d-none');
-    console.log("Playing!")
   }
 }
