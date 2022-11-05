@@ -173,8 +173,11 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
       payload: Payload,
     });
     this.onReset();
+    // this._router.navigate([
+    //   '/literacy/lettering/stage-3/activity/exercise-two',
+    // ]);
     this._router.navigate([
-      '/literacy/lettering/stage-3/activity/exercise-two',
+      '/literacy/lettering/stage-3/interlude-b',
     ]);
   }
 }

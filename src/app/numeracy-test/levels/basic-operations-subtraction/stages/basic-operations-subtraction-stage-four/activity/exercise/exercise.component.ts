@@ -1,9 +1,23 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
 import { BasicOperationsSubtractionStageFourService } from 'src/app/services/basic-operations/subtraction/basic-operations-subtraction-stage-four.service';
 import { GameService } from 'src/app/services/game.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { IAppState } from 'src/redux/store';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -13,7 +27,7 @@ import { GameService } from 'src/app/services/game.service';
 export class ExerciseComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
-  pageTitle: string = 'Solve the following 3-digit number sums';
+  pageTitle: string = 'Solve the following 3-digit number exercise';
   actionWords: any[] = [];
   gameSessionId: any;
   uiExercise: any[] = [];
@@ -23,11 +37,21 @@ export class ExerciseComponent implements OnInit {
   answerNumber!: any;
   testLoopNumber: number = 0;
   itemIndex: number = 0;
+  //
+  stageNumber: number = 4;
+  isFinishedMessage!: string;
+  successMessage: any;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  gameLevel = GameLevel.BASIC_OPERATIONS_SUBTRACTION;
+  durationInSeconds = 10;
 
   constructor(
     private _basicOperationsSubtractionStageFourSvc: BasicOperationsSubtractionStageFourService,
     private _gameSvc: GameService,
-    private _router: Router
+    private _router: Router,
+    private ngRedux: NgRedux<IAppState>,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +64,6 @@ export class ExerciseComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.gameSession$.subscribe({
       next: (data: any) => {
-        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -49,25 +72,23 @@ export class ExerciseComponent implements OnInit {
   getActionNumbers() {
     let numbersList =
       this._basicOperationsSubtractionStageFourSvc.GetActionNumbers();
-    
+
     this.actionWords = numbersList;
   }
   getResultNumbers() {
     let numbersList =
       this._basicOperationsSubtractionStageFourSvc.GetResultNumbers();
-    
+
     this.resultNumbers = numbersList;
-    
-    
+
     this.answerNumber = numbersList?.numbers[this.testLoopNumber].answer;
     this.questionResultNumbers =
       numbersList?.numbers[this.testLoopNumber]?.questionItems;
   }
 
   trackResultHint() {
-    
     let x = this.resultNumbers.numbers[this.testLoopNumber];
-    
+
     if (x.answer?.isWellPlaced == true) {
       x.isDone = true;
     }
@@ -76,9 +97,9 @@ export class ExerciseComponent implements OnInit {
 
   textExercise() {
     let questionItems = this.resultNumbers.numbers;
-    
+
     let done = questionItems.filter((i: any) => i.isDone == true);
-    
+
     if (done.length < questionItems.length) {
       this.testLoopNumber++;
       setTimeout(() => {
@@ -92,37 +113,32 @@ export class ExerciseComponent implements OnInit {
 
   onTestValues() {
     let questionItems = this.resultNumbers.numbers;
-    
-    let complete = questionItems.filter((done: any) => done?.isDone == true);
 
-    
-    
-    
+    let complete = questionItems.filter((done: any) => done?.isDone == true);
 
     if (complete.length == questionItems?.length) {
       this.resultNumbers.isComplete = true;
-      
+
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
         answer: '1',
         data: [this.resultNumbers],
       };
-     
+
       this.onSubmit(Payload);
     }
   }
 
   onSelect(item: any) {
     let result = this.resultNumbers?.numbers[this.testLoopNumber];
-    
-    
+
     if (item.figure == result.answer.figure) {
       item.isCorrectNumber = true;
       result.answer.isWellPlaced = true;
       this.trackResultHint();
     } else {
       item.isWrongNumber = true;
-      // 
+      //
     }
   }
 
@@ -136,15 +152,49 @@ export class ExerciseComponent implements OnInit {
     this.getResultNumbers();
   }
 
-
-
   onSubmit(Payload: any) {
     console.log('Payload: ', Payload);
-    setTimeout(() => {
-      alert('Completed');
-      this._router.navigate([
-        '/numeracy/basic-operations-multiplication/stage-1/activity/',
-      ]);
-    }, 2000);
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
+    this._basicOperationsSubtractionStageFourSvc
+      .SubmitGameStageResult(Payload)
+      .subscribe({
+        next: (response: any) => {
+          if (response) {
+            console.log('response: ', response);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+              payload: Payload,
+            });
+            this.openSnackBar(response?.message);
+            setTimeout(() => {
+              this.isFinishedMessage = '';
+              this.successMessage = '';
+              this.onReset();
+              // alert('completed!!!');
+              this._router.navigate([
+                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              ]);
+            }, 3000);
+          }
+        },
+        error: (err: any) => {
+          if (err) {
+            console.warn('Error: ', err);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+              payload: err?.error?.message,
+            });
+          }
+        },
+      });
+  }
+
+  openSnackBar(data: any) {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: data,
+    });
   }
 }

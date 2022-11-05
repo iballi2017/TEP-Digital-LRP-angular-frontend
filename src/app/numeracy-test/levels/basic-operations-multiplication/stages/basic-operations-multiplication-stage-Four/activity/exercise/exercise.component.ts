@@ -1,9 +1,15 @@
-import { select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
+import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
 import { BasicOperationsMultiplicationStageFourService } from 'src/app/services/basic-operations/multiplication/basic-operations-multiplication-stage-four.service';
 import { GameService } from 'src/app/services/game.service';
+import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
+import { IAppState } from 'src/redux/store';
+import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -23,11 +29,22 @@ export class ExerciseComponent implements OnInit {
   testLoopNumber: number = 0;
   itemIndex: number = 0;
   questionStatement!: string;
+  //
+  stageNumber: number = 4;
+  isFinishedMessage!: string;
+  successMessage: any;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  gameLevel = GameLevel.BASIC_OPERATIONS_MULTIPLICATION;
+  durationInSeconds = 10;
+
 
   constructor(
     private _basicOperationsMultiplicationStageFourSvc: BasicOperationsMultiplicationStageFourService,
     private _gameSvc: GameService,
-    private _router: Router
+    private _router: Router,
+    private ngRedux: NgRedux<IAppState>,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -136,11 +153,47 @@ export class ExerciseComponent implements OnInit {
 
   onSubmit(Payload: any) {
     console.log('Payload: ', Payload);
-    setTimeout(() => {
-      alert('Completed');
-      this._router.navigate([
-        '/numeracy/basic-operations-division/stage-1/activity/',
-      ]);
-    }, 2000);
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
+    this._basicOperationsMultiplicationStageFourSvc
+      .SubmitGameStageResult(Payload)
+      .subscribe({
+        next: (response: any) => {
+          if (response) {
+            console.log('response: ', response);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+              payload: Payload,
+            });
+            this.openSnackBar(response?.message);
+            setTimeout(() => {
+              this.isFinishedMessage = '';
+              this.successMessage = '';
+              this.onReset();
+              // alert('completed!!!');
+              this._router.navigate([
+                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              ]);
+            }, 3000);
+          }
+        },
+        error: (err: any) => {
+          if (err) {
+            console.warn('Error: ', err);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+              payload: err?.error?.message,
+            });
+          }
+        },
+      });
+  }
+
+  openSnackBar(data: any) {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      data: data,
+    });
   }
 }

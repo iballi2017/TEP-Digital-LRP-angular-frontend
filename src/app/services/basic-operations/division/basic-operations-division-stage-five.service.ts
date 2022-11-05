@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs';
+import { baseUrl } from 'src/app/config/api';
+import { handleError } from 'src/app/helpers/errorHandler';
+import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import {
   actionNumbers,
   resultNumbers,
@@ -9,8 +13,8 @@ import {
   providedIn: 'root',
 })
 export class BasicOperationsDivisionStageFiveService {
-  // StartGameUrl = baseUrl + '/start-game-session';
-  // SubmitGameStage_3_Url = baseUrl + '/submit-word-stage-3';
+  SubmitBasicOperationsDivisionGameStage_5_Url =
+    baseUrl + '/submit-basic-operations-div-stage-5';
 
   constructor(private _http: HttpClient) {}
 
@@ -33,9 +37,9 @@ export class BasicOperationsDivisionStageFiveService {
   //   return numbersList;
   // }
 
-  // SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
-  //   return this._http
-  //     .post(`${this.SubmitGameStage_3_Url}`, _GameStageResult)
-  //     .pipe(catchError(handleError));
-  // }
+  SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
+    return this._http
+      .post(`${this.SubmitBasicOperationsDivisionGameStage_5_Url}`, _GameStageResult)
+      .pipe(catchError(handleError));
+  }
 }
