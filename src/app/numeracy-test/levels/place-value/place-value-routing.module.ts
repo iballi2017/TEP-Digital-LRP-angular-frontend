@@ -17,11 +17,7 @@ const routes: Routes = [
           ).then((m) => m.PlaceValueStageOneSplashModule),
       },
       {
-<<<<<<< HEAD
         path: 'place-value-stage-one-splash',
-=======
-        path: 'number-recognition-one-splash',
->>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
         loadChildren: () =>
           import(
             './stages/place-value-stage-one/place-value-stage-one-splash/place-value-stage-one-splash.module'

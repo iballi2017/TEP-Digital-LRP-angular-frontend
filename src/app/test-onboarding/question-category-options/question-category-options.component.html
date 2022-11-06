@@ -3,10 +3,6 @@
 <div id="question-type-options-page">
     <div class="page-wrapper school-bg py-3 py-xl-5 pb-3">
         <div class="inner container-fluid">
-<<<<<<< HEAD
-=======
-            <!--  -->
->>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
             <div id="toolbar">
                 <ul class="inner-wrapper list-style-none pl-0 mb-0">
                     <li class="social-icons-wrapper">
@@ -48,40 +44,10 @@
                     <div class="content-label">
                         <h2>CHOOSE THE TYPE OF QUESTION</h2>
                     </div>
-<<<<<<< HEAD
                     <form [formGroup]="QuestionCategoryForm">
                         <ul class="type-option list-style-none pl-0 mb-0">
                             <li>
                                 <input hidden type="radio" id="Literacy" [value]="LiteracyGameType"
-=======
-                    <!-- <form #QuestionCategoryForm="ngForm">
-                        <ul class="type-option list-style-none pl-0 mb-0">
-                            <li>
-                                <input type="radio" name="questionCategory" id="Literacy" name="questionCategory" value="Literacy" ngModel #QuestionCategory="ngModel" (change)="onSubmit(QuestionCategoryForm)">
-                                <label for="Literacy" class="card">
-                                <img src="../assets/images/literacy-featured-image.png" class="card-img-top" alt="literacy featured image">
-                                <div class="card-body text-center">
-                                    <p class="card-text">Literacy</p>
-                                </div>
-                            </label>
-                            </li>
-                            <li>
-                                <input type="radio" name="questionCategory" id="Numeracy" name="questionCategory" value="Numeracy"  ngModel #QuestionCategory="ngModel" (change)="onSubmit(QuestionCategoryForm)">
-                                <label for="Numeracy" class="card">
-                                <img src="../assets/images/numeracy-featured-image.png" class="card-img-top" alt="numeracy featured image">
-                                <div class="card-body text-center">
-                                    <p class="card-text">Numeracy</p>
-                                </div>
-                            </label>
-                            </li>
-                        </ul>
-                    </form> -->
-
-                    <form [formGroup]="QuestionCategoryForm">
-                        <ul class="type-option list-style-none pl-0 mb-0">
-                            <li>
-                                <input hidden type="radio" id="Literacy" value="Literacy"
->>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
                                     formControlName="QuestionCategory" (change)="onSubmit(QuestionCategoryForm)">
                                 <label for="Literacy" class="card">
                                     <img src="../assets/images/literacy-featured-image.png" class="card-img-top"
@@ -92,11 +58,7 @@
                                 </label>
                             </li>
                             <li>
-<<<<<<< HEAD
                                 <input hidden type="radio" id="Numeracy" [value]="NumeracyGameType"
-=======
-                                <input hidden type="radio" id="Numeracy" value="Numeracy"
->>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
                                     formControlName="QuestionCategory" (change)="onSubmit(QuestionCategoryForm)">
                                 <label for="Numeracy" class="card">
                                     <img src="../assets/images/numeracy-featured-image.png" class="card-img-top"
