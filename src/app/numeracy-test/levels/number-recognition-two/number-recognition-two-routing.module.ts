@@ -17,7 +17,11 @@ const routes: Routes = [
           ).then((m) => m.NumberRecognitionTwoStageOneSplashModule),
       },
       {
+<<<<<<< HEAD
         path: 'number-recognition-two-stage-one-splash',
+=======
+        path: 'number-recognition-one-splash',
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
         loadChildren: () =>
           import(
             './stages/number-recognition-two-stage-one/number-recognition-two-stage-one-splash/number-recognition-two-stage-one-splash.module'

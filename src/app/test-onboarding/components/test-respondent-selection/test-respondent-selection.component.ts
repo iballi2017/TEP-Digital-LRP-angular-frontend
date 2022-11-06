@@ -1,14 +1,26 @@
 import { NgRedux, select } from '@angular-redux/store';
+<<<<<<< HEAD
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+=======
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
 import { Router } from '@angular/router';
 import { AddRespondentComponent } from 'src/app/account/views/personal-information/add-respondent/add-respondent.component';
 import {
   GameSessionData,
+<<<<<<< HEAD
   StartGame,
 } from 'src/app/models/types/game';
 import { GameType } from 'src/app/models/types/game-type';
+=======
+  GameType,
+  StartGame,
+} from 'src/app/models/types/game';
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
 import { GameService } from 'src/app/services/game.service';
 import { OccupantService } from 'src/app/services/occupant.service';
 import { IAppState } from 'src/redux/store';
@@ -35,16 +47,24 @@ export class TestRespondentSelectionComponent implements OnInit {
     private _fb: FormBuilder,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
+<<<<<<< HEAD
     private _router: Router,
     @Inject(MAT_DIALOG_DATA) public data: { QuestionCategory: any }
   ) { }
+=======
+    private _router: Router
+  ) {}
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
 
   ngOnInit(): void {
     this.getOccupantList();
     this.buildForm();
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
     let isGame = this._gameSvc.IsGame();
   }
   getOccupantList() {
@@ -58,6 +78,7 @@ export class TestRespondentSelectionComponent implements OnInit {
   }
   onSubmit() {
     this.ngRedux.dispatch({ type: ADD_GAME_SESSION });
+<<<<<<< HEAD
 
     const Payload: StartGame = {
       occ_id: this.RespondentSelectionForm.value.RespondentId,
@@ -69,12 +90,27 @@ export class TestRespondentSelectionComponent implements OnInit {
     this._gameSvc.StartGame(Payload).subscribe({
       next: (response: any) => {
         if (response) {
+=======
+    const Payload: StartGame = {
+      occ_id: this.RespondentSelectionForm.value.RespondentId,
+      game_type: GameType.Literacy,
+    };
+    
+    this._gameSvc.StartGame(Payload).subscribe({
+      next: (response: any) => {
+        if (response) {
+          
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
           this.ngRedux.dispatch({
             type: ADD_GAME_SESSION_SUCCESS,
             payload: response,
           });
+<<<<<<< HEAD
           // this._router.navigate(['/literacy/levels/lettering']);
           this.routeToGame(Payload.game_type);
+=======
+          this._router.navigate(['/literacy/levels/lettering']);
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
           this.closeDialog();
         }
       },
@@ -89,6 +125,7 @@ export class TestRespondentSelectionComponent implements OnInit {
       },
     });
   }
+<<<<<<< HEAD
 
   routeToGame(GT: string) {
     switch (GT) {
@@ -102,6 +139,8 @@ export class TestRespondentSelectionComponent implements OnInit {
         break;
     }
   }
+=======
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
   closeDialog() {
     this.dialogRef.close('dialod closed!');
   }
@@ -114,7 +153,11 @@ export class TestRespondentSelectionComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
     });
   }
 }

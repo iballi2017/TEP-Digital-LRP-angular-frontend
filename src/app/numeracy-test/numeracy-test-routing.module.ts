@@ -23,6 +23,13 @@ const routes: Routes = [
         pathMatch: 'full',
         redirectTo: 'levels/number-recognition-one',
       },
+<<<<<<< HEAD
+=======
+      // {
+      //   path: 'levels/number-recognition',
+      //   component: NumberRecognitionComponent,
+      // },
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
       {
         path: 'levels/number-recognition-one',
         component: NumberRecognitionOneComponent,

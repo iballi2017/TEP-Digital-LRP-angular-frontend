@@ -1,5 +1,9 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+=======
+import { GameType } from 'src/app/models/types/game';
+>>>>>>> 50ad5a9812f952349aefdef42bd6bfbde39669c4
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameResultRatingService } from 'src/app/services/game-result-rating.service';
 import { GameService } from 'src/app/services/game.service';
