@@ -1,0 +1,66 @@
+@use "../../../../../../../../sass/_partials/mixins";
+
+#result-output-box-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-gap: 10px;
+    // display: flex;
+    // flex-wrap: wrap;
+    // li {
+    //     flex-basis: calc(100% / 7);
+    //     padding: 0.3em;
+    // }
+    .result-box {
+        width: 100%;
+        // min-width: 7.5rem;
+        max-height: 1.3rem;
+        // padding: 1.2em;
+        padding-top: 1.2em;
+        padding-bottom: 1.2em;
+        background: #fbff45;
+        border: 3px solid #4a3d96;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        //
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+        // margin: 0.5em;
+    }
+
+    @include mixins.minmq(768px) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        grid-gap: 10px;
+        .result-box {
+            width: 100%;
+            // min-width: 7.5rem;
+            max-height: 2rem;
+            padding: 1.6em;
+            border: 7px solid #4a3d96;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.keyboard {
+    max-width: calc(970px + 2em);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 1em;
+    padding-left: 1em;
+    .key-item {
+        margin-right: 0.15em;
+        margin-left: 0.15em;
+        margin-bottom: 0.3em;
+    }
+}

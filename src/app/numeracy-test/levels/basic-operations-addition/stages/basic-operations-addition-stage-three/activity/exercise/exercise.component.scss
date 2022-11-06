@@ -1,0 +1,103 @@
+@use "../../../../../../../../sass/_partials/mixins";
+
+.canvas-wrapper #word-result-screen-type-1 {
+    max-width: 100%;
+}
+
+aside {
+    &.note {
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 33px;
+        color: #000000;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        margin-bottom: 1.5em;
+    }
+}
+
+#ball-counters {
+    max-width: 730px;
+    margin: 0 auto;
+}
+
+.ball-counter-list {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    li {
+        margin-right: 1em;
+        margin-bottom: 0.3em;
+    }
+}
+
+.ball-counter {
+    width: 56.14px;
+    height: 56.14px;
+    border-radius: 50%;
+    &.blue-ball {
+        background: #009cf3;
+    }
+    &.black-ball {
+        background: #000000;
+    }
+}
+
+.word-keyboard {
+    max-width: 500px;
+    margin: 1.2em auto;
+    .key {
+        // width: 7.3rem;
+        // height: 5.6rem;
+        width: 100%;
+        background-color: #ffffff;
+        border: 7px solid #73cf48;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.8rem;
+        line-height: 49px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000000;
+        border-radius: 0;
+
+        &.right-answer {
+            &:focus {
+                background: #73cf48;
+                border: 7px solid #73cf48;
+                color: #ffffff;
+            }
+        }
+        &.wrong-answer {
+            &:focus {
+                background: #ffffff;
+                border: 7px solid #d93333;
+            }
+        }
+
+        @include mixins.maxmq(768px) {
+            font-size: 0.75rem;
+        }
+    }
+}
+.canvas-wrapper #word-result-screen-type-1 > .inner .word-result-board {
+    max-width: 100%;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    height: auto;
+}
+
+// #result-number-list {
+//     li {
+//         &::after {
+//             content: "+";
+//         }
+//     }
+// }

@@ -1,0 +1,84 @@
+<!-- <p>exercise-two works!</p> -->
+
+<div class="text-white">{{answerNumber?.isWellPlaced}}</div>
+<div id="basic-operations">
+    <div class="canvas-wrapper">
+
+        <!-- <ng-container *ngIf="(isLoading$ | async)">
+        <small class="text-white">Loading...</small>
+    </ng-container> -->
+        <!-- <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
+        <p>{{successMessage}}<br />
+            {{isFinishedMessage}}
+        </p>
+    </div> -->
+
+        <div id="word-result-screen-type-1">
+            <div class="inner">
+                <div class="word-result-board">
+                    <!-- {{resultLetterWords | json}} -->
+                    <!-- <ul id="result-number-list" class="list-style-none mb-0 pl-0">
+                    <li *ngFor="let item of resultNumbers.numbers">
+                        <span [ngClass]="{'d-none': item?.isWellPlaced != true}">{{item?.name}}</span>
+                    </li>
+                </ul> -->
+                    <div id="result-number">
+                        <div id="exercise-container">
+                            <!-- <ul class="list-style-none pl-0 mb-0"> -->
+                            <ul class="question-content">
+                                <li *ngFor="let item of questionResultNumbers">
+                                    <div class="list-inner">
+                                        <div *ngFor="let number of item?.uiNumbers">{{number}}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="answer-content">
+                                <li>
+                                    <div class="list-inner" [ngClass]="{'d-none': !answerNumber?.isWellPlaced}">
+                                        <div *ngFor="let answerNumber of answerNumber?.uiNumbers">
+                                            <span>{{answerNumber}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <ul id="result-number-list" class="list-style-none mb-0 pl-0">
+                            <li class="question-item text-center" *ngFor="let item of uiExercise">
+                                <div class="wrap">
+                                    <div class="num-wrap">
+                                        <span>{{item?.figure}}</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="blue-triangle-wrap" *ngFor="let item of item?.blueTriangleList">
+                                            <img src="../../../../../../../../assets/images/blue-traiangle.svg" alt=""
+                                                class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul id="answer-item" class="list-style-none pl-0 mb-0">
+                            <li class="text-center">
+                                <div class="number-dash">
+                                    <div class="num-wrap">
+                                        <span *ngIf="answerNumber?.isWellPlaced">{{answerNumber?.figure}}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="title">{{pageTitle}}</h1>
+
+        <ul class="list-style-none pl-0 word-keyboard row no-gutters">
+            <li class="col-4 p-1 p-lg-2" *ngFor="let item of actionWords">
+                <button class="btn key rounded-0" (click)="onSelect(item)"
+                    [ngClass]="{'wrong-answer': item?.isWrongNumber, 'right-answer':item?.isCorrectNumber}">{{item?.figure}}</button>
+            </li>
+        </ul>
+
+        <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+    </div>
+</div>

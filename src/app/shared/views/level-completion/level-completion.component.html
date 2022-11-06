@@ -1,0 +1,33 @@
+<!-- <p>level-completion works!</p> -->
+<!-- 
+<div id="stage-completion-page">
+    <div class="inner-wrapper star-pattern-bg">
+        <div class="page-content container-fluid">
+            <h1 class="page-title">{{pageTitle}}</h1>
+            <h2 class="page-tagline">LEVEL: {{levelTitle}}, Stage: {{stageNumber}}</h2>
+            <div class="featured-image">
+                <img src="{{pageFeaturedImage}}" alt="Page featured image" class="img-fluid">
+            </div>
+            <div class="btn-wrapper">
+                <app-button [btnTitle]="btnTitle" [btnClasses]="btnClasses"
+                    (onClickEvent)="onContinueToNextStage(gameLevel)"></app-button>
+                <app-button [btnTitle]="btnTitle2" [btnClasses]="btnClasses2" (onClickEvent)="onEndAssessment(gameLevel)"></app-button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div id="level-completion-page">
+    <div class="inner-wrapper">
+        <div class="page-content container-fluid">
+            <h1 class="featured-image text-center">
+                <img src="{{pageFeaturedImage}}" alt="Page featured image" class="img-fluid">
+            </h1>
+            <h2 class="page-tagline">{{pageTitle | titlecase}}</h2>
+            <div class="btn-wrapper">
+                <app-button [btnTitle]="btnTitle" [btnClasses]="btnClasses"></app-button>
+                <app-button [btnTitle]="btnTitle2" [btnClasses]="btnClasses2"></app-button>
+            </div>
+        </div>
+    </div>
+</div>

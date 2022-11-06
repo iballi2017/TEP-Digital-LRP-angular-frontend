@@ -1,0 +1,18 @@
+<!-- <p>exercise works!</p> -->
+<div class="canvas-wrapper">
+    <h1 class="title">{{title}}</h1>
+    <div id="lettering-input-keyboard">
+        <ul class="keyboard list-style-none pl-0">
+            <li class="key-item" *ngFor="let item of alphabets">
+                <input type="checkbox" id="{{item?.name}}" hidden [(ngModel)]="item.isChecked"
+                    [ngModelOptions]="{standalone: true}" (change)="onSelected(item)">
+                <label for="{{item?.name}}">
+                    <span class="fake-box"
+                        [ngClass]="{'right-answer': item.isChecked && item?.type == vowel,'wrong-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>
+                    <span class="linen"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+</div>

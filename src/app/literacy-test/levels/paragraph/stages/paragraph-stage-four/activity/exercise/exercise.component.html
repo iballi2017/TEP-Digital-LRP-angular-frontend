@@ -1,0 +1,38 @@
+<!-- <p>exercise works!</p> -->
+<div class="canvas-wrapper">
+
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+    
+    <div id="word-result-screen-type-1">
+        <div class="inner">
+            <ul class="group-word-result-boards list-style-none mb-0 pl-0">
+                <li *ngFor="let item of resultList">
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li *ngFor="let item of item?.word" [ngClass]="{'hint': item?.isHint == true}">
+                            <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+
+    <div id="output-screen">
+        <div class="inner">
+            <div class="obj" *ngFor="let item of resultList[exerciseNumber]?.word" [ngClass]="{'border-0': item?.isHint == true,'bg-none': item?.isHint == true}">
+                <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <ul class="list-style-none pl-0 word-keyboard">
+        <li class="" *ngFor="let item of actionWords">
+            <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
+        </li>
+    </ul>
+
+    
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+</div>

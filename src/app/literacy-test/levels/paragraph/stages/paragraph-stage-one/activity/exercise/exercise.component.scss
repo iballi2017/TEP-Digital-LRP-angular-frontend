@@ -1,0 +1,15 @@
+#result-screen {
+    max-width: 900px;
+    margin: 0 auto;
+    #result-board {
+        background: #fbff45;
+        border: 7px solid #4a3d96;
+        width: 100%;
+        padding: 1.3em;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        // flex-direction: column;
+        justify-content: center;
+    }
+}

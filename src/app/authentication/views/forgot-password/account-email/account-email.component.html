@@ -1,0 +1,35 @@
+<!-- <p>account-email works!</p> -->
+<div id="forgot-password-content">
+    <div class="card account-verification-card">
+        <div class="card-header">
+            <div class="brand-title-image">
+                <img src="../../../../../assets/images/TEP-school-custom-title-image.png" alt="" class="img-fluid">
+            </div>
+        </div>
+        <div class="card-body">
+            <ng-container *ngIf="sendRegisteredEmailResponse$ | async">
+                <div class="alert alert-info text-center">
+                    <small>{{sendRegisteredEmailResponse$ | async}}</small>
+                </div>
+            </ng-container>
+            <div *ngIf="!(sendRegisteredEmailResponse$ | async)">
+                <!-- <p>Please enter the verification code sent to you email address</p> -->
+                <p>Type in the registered email address</p>
+                <!-- {{VerifyEmailForm.valid}} -->
+                <form [formGroup]="VerifyEmailForm" (ngSubmit)="onSubmit()">
+                    <ng-container *ngIf="error$ | async">
+                        <div class="alert alert-danger text-center">
+                            <small>{{error$ | async}}</small>
+                        </div>
+                    </ng-container>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="Email" id="Email" formControlName="Email"
+                            required>
+                    </div>
+                    <app-button [btnTitle]="btnTitle" [btnClasses]="btnClasses"
+                        [disabled]="!VerifyEmailForm.valid || (isLoading$ | async)"></app-button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

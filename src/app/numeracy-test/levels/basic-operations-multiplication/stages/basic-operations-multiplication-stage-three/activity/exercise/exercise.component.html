@@ -1,0 +1,38 @@
+<!-- <p>exercise works!</p> -->
+
+
+<div id="basic-operations">
+    <div class="canvas-wrapper">
+
+        <!-- <ng-container *ngIf="(isLoading$ | async)">
+        <small class="text-white">Loading...</small>
+    </ng-container> -->
+        <!-- <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
+        <p>{{successMessage}}<br />
+            {{isFinishedMessage}}
+        </p>
+    </div> -->
+
+        <div id="word-result-screen-type-1">
+            <div class="inner">
+                <div class="word-result-board">
+                    <div id="result-number">
+                        <p class="question-statement">{{questionStatement}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="title">{{pageTitle}}</h1>
+        <ul class="list-style-none pl-0 word-keyboard row no-gutters">
+            <li class="col-4 p-1 p-lg-2" *ngFor="let item of actionWords">
+                <!-- <button class="btn key rounded-0" (click)="onSelect(item)"
+                    [ngClass]="{'wrong-answer': item?.isWrongNumber, 'right-answer':item?.isCorrectNumber}">{{item?.figure}}{{item?.unit}}</button> -->
+                    <button class="btn key rounded-0" (click)="onSelect(item)"
+                        [ngClass]="{'wrong-answer': item?.isWrongNumber, 'right-answer':item?.isCorrectNumber}">{{item?.figure}}</button>
+            </li>
+        </ul>
+
+        <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+    </div>
+</div>

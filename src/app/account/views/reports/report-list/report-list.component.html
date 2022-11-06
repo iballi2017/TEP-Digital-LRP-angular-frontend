@@ -1,0 +1,126 @@
+<!-- <p>report-list works!</p> -->
+<div id="account-page" class="details-card-2">
+    <div class="title-wrapper">
+        <h2 class="title text-uppercase">Report</h2>
+    </div>
+
+    <div class="body-wrapper">
+        <div class="item-card">
+            <div class="item-card-header">
+                <!-- <h3 class="heading">LIST OF OCCUPANT</h3> -->
+                <div class="inner">
+                    <div>
+                        <!-- <input type="text" class="" placeholder="Search By name or PROGRAM"> -->
+
+                        <!-- <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search By name or PROGRAM"
+                                aria-label="Search By name or PROGRAM" aria-describedby="button-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    id="button-addon2">Button</button>
+                            </div>
+                        </div> -->
+
+                        <div id="search-input-wrapper" class="order-2 order-md-1">
+                            <div id="search-input" class="form-inline flex-nowrap my-2 my-lg-0">
+                                <button id="search-btn" class="btn" type="submit">
+                                    <!-- <img src="../../../../../assets/images/icons/search-lens-icon.svg" alt="search icon" class="img-fluid"> -->
+                                    <img src="../../../../../assets/images/icons/search-lens-icon.svg"
+                                        alt="search icon">
+                                </button>
+                                <input class="form-control mr-sm-2 w-100" type="search"
+                                    placeholder="Search By name or PROGRAM" aria-label="Search By name or PROGRAM">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="filter-dropdown">
+                        <!-- {{form | json}} -->
+                        <form #FilterForm="ngForm">
+                            <div class="custom-drop">
+                                <select name="Filter" id="" class="form-control" (change)="sortReportListBy(FilterForm)"
+                                    [(ngModel)]="SortItem">
+                                    <!-- <option value="" selected="selected">FILTER</option> -->
+                                    <option [value]="item" *ngFor="let item of filterDropdownList">{{item}}</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="item-card-body">
+                <div class="text-center" *ngIf="(isLoading$ | async)">
+                    <app-pure-css-loader></app-pure-css-loader>
+                </div>
+                <ng-template #noItem>
+                    <div class="alert alert-info text-center">No report</div>
+                </ng-template>
+                <div *ngIf="!(isLoading$ | async)">
+                    <div class="table-responsive" *ngIf="reports?.length; else noItem">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">S/N</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">AGE</th>
+                                    <th scope="col">GENDER</th>
+                                    <th scope="col">PROGRAM</th>
+                                    <th scope="col">OVERALL SCORE</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of reportsList$ | async; let i = index">
+                                    <th scope="row">
+                                        {{i + 1}}
+                                    </th>
+                                    <td>
+                                        <div class="name mb-3">{{item?.fullname}}</div>
+                                        <div class="status">
+                                            <label>Status:</label>
+                                            <div class="value">{{item?.status}}</div>
+                                        </div>
+                                    </td>
+                                    <td>{{item?.age}}</td>
+                                    <td>{{item?.gender}}</td>
+                                    <td>{{item?.program}}</td>
+                                    <td>{{item?.overallScore}}</td>
+                                    <td class="text-right">
+                                        <div class="actions-btn">
+                                            <!-- <app-table-column-action-buttons (remove)="onRemoveReport(item)"
+                                                (edit)="onViewRespondentDetails(item)" [item]="item"></app-table-column-action-buttons> -->
+                                            <app-table-column-action-buttons (remove)="onRemoveReport(item?.sessionId)"
+                                                (edit)="onViewReportDetails(item?.sessionId)"
+                                                [primaryBtnTitle]="primaryBtnTitle" [dangerBtnTitle]="dangerBtnTitle"
+                                                [primaryBtnTitle]="primaryBtnTitle"></app-table-column-action-buttons>
+                                            <!--  -->
+                                            <!-- <button class="btn btn-sm edit-btn primary-btn text-bold" (click)="onViewReportDetails(item)">View</button>
+                                            <button class="btn btn-sm delete-btn danger-btn" (click)="onRemoveReport(item?.id)">Delete</button> -->
+
+                                            <!-- 
+                                        <div class="d-none d-lg-block">
+                                            <button class="btn btn-sm edit-btn primary-btn text-bold"
+                                                (click)="onViewRespondentDetails(item)">Edit</button>
+                                            <button class="btn btn-sm delete-btn danger-btn"
+                                                (click)="onRemove(item)">Delete</button>
+                                        </div>
+                                        <div class="d-block d-lg-none d-flex">
+                                            <button class="btn btn-sm px-1 text-bold primary-text"
+                                                (click)="onViewRespondentDetails(item)">
+                                                <i class="fas fa-pen"></i>
+                                            </button>
+                                            <button class="btn btn-sm px-1 text-bold danger-text"
+                                                (click)="onRemove(item)">
+                                                <i class="fas fa-trash"></i></button>
+                                        </div> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

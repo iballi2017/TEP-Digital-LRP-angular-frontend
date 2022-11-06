@@ -1,0 +1,150 @@
+@use "../../sass/_abstracts/colors";
+@use "../../sass/_partials/mixins";
+.btn {
+    border: none;
+    border-radius: 10px !important;
+    @include mixins.transition(all 300ms ease-in-out);
+    &:focus {
+        // border: none !important;
+        outline: 0 !important;
+        box-shadow: none !important;
+    }
+}
+
+.primary-btn,
+.danger-btn {
+    font-family: "Open Sans" !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    // font-size: 20px !important;
+    line-height: 27px !important;
+    text-transform: capitalize !important;
+    color: #ffffff !important;
+}
+
+.primary-btn {
+    background-color: colors.$primaryColor !important;
+    color: #ffffff !important;
+    &:hover {
+        color: #ffffff !important;
+        background-color: colors.$primaryColorDark !important;
+    }
+}
+
+.danger-btn {
+    background-color: colors.$dangerColor !important;
+    color: #ffffff !important;
+    &:hover {
+        color: #ffffff !important;
+        background-color: colors.$dangerColorDark !important;
+    }
+}
+
+.primary-bordered-btn {
+    background-color: #ffffff !important;
+    color: colors.$primaryColor !important;
+    border: 1px solid colors.$primaryColor !important ;
+    &:hover {
+        background-color: #fafef8 !important;
+        color: colors.$primaryColor !important;
+    }
+}
+
+.form-btn {
+    height: 45px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    padding-right: 1.3em !important;
+    padding-left: 1.3em !important;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    &::before {
+        content: "";
+        display: block;
+        height: 10px;
+        width: 10px;
+        background-image: url(../../assets/images/icons/arrow-left-black-icon.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+.mark-control {
+    display: flex;
+    align-items: center;
+    .btn {
+        // width: 100%;
+        // max-width: 218px;
+        border-radius: 10px;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 600;
+        color: #ffffff;
+        display: block;
+        line-height: 27px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        text-transform: capitalize;
+        margin-right: 7px;
+        &:last-child {
+            margin-right: 0;
+        }
+
+        @include mixins.minmq(768px) {
+            width: 218px;
+            height: 65px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+    }
+    #wrong-btn {
+        background: #f30000;
+    }
+    #correct-btn {
+        background: #73cf48;
+    }
+}
+
+#side-menu-toggler {
+    color: #ffffff;
+    font-size: 1.3rem;
+}
+
+#replay-voice-btn {
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+    &::before {
+        content: "";
+        display: block;
+        // height: 70px;
+        // width: 70px;
+        height: 4rem;
+        width: 4rem;
+        background-image: url(../../assets/images/icons/replay-icon.svg);
+        background-size: cover;
+        // background-size: auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 7px;
+    }
+    @include mixins.maxmq(500px) {
+        &::before {
+            // height: 40px;
+            // width: 40px;
+            height: 2rem;
+            width: 2rem;
+        }
+    }
+}
+

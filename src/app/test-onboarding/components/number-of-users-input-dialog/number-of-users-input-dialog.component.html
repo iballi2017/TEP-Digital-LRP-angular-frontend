@@ -1,0 +1,30 @@
+<!-- <p>number-of-users-input-dialog works!</p> -->
+
+<div id="candidate-selection-count-page">
+
+    <div class="inner container-fluid">
+        <div class="card">
+            <div class="card-header text-center px-4 py-3">
+                SELECT THE NUMBER OF USERS/CHILDREN TO TAKE THE TEST/ACCESSMENT
+            </div>
+            <div class="card-body">
+                <form [formGroup]="NumberOfUsersForm" (ngSubmit)="onSubmit()">
+                    <div id="count-control" class="btn-group">
+                        <!-- <input type="number" id="count" [(ngModel)]="count" formControlName="NumberOfUsers"> -->
+                        <input type="number" id="count" [(ngModel)]="count" name=" NumberOfUsers" [ngModelOptions]="{standalone: true}">
+
+                        <!-- name="PhoneNumber" [(ngModel)]="PhoneNumber" [ngModelOptions]="{standalone: true}" -->
+                        <div id="controller">
+                            <button type="button" class="btn arrow-up-btn" (click)="onIncreament()"></button>
+                            <button type="submit" class="btn arrow-down-btn" (click)="onDecreament()"></button>
+                        </div>
+                    </div>
+                    <div id="action-btn">
+                        <button type="submit" class="btn btn-block">Continue</button>
+                        <button type="button" class="btn btn-block" (click)="closeDialog()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
