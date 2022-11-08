@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameStage } from 'src/app/models/types/game-stage';
@@ -9,6 +9,7 @@ import { GameStage } from 'src/app/models/types/game-stage';
   styleUrls: ['./level-loader.component.scss'],
 })
 export class LevelLoaderComponent implements OnInit, AfterViewChecked {
+  @Input() gameType!: string;
   levelTitle!: any;
   stageNumber!: number;
   constructor(private _router: Router, private _route: ActivatedRoute) {}
@@ -29,29 +30,27 @@ export class LevelLoaderComponent implements OnInit, AfterViewChecked {
     this._route.paramMap.subscribe({
       next: (params) => {
         if (params) {
-          
           // let x: any = params.get('levelTitle');
           let x: any = params.get('game-level');
           this.levelTitle = x?.toLowerCase();
           let stageNumber: any = params.get('stageNumber');
           this.stageNumber = parseInt(stageNumber);
+          let gameType = params.get('gameType');
           setTimeout(() => {
-            // alert("loaded!!!")
-            if (
-              this.levelTitle == GameLevel.LETTER &&
-              this.stageNumber == GameStage.THREE
-            ) {
-              this._router.navigate([
-                '/literacy/word/stage-1',
-              ]);
-            } else {
-              this._router.navigate([
-                // /literacy/lettering/stage-2/lettering-splash
-                `/literacy/${this.levelTitle}/stage-${
-                  this.stageNumber + 1
-                }`,
-              ]);
-            }
+            // if (
+            //   this.levelTitle == GameLevel.LETTER &&
+            //   this.stageNumber == GameStage.THREE
+            // ) {
+            //   this._router.navigate(['/literacy/word/stage-1']);
+            // } else {
+            //   this._router.navigate([
+            //     // /literacy/lettering/stage-2/lettering-splash
+            //     `/${gameType}/${this.levelTitle}/stage-${this.stageNumber + 1}`,
+            //   ]);
+            // }
+            this._router.navigate([
+              `/${gameType}/${this.levelTitle}/stage-${this.stageNumber + 1}/${this.gameType}`,
+            ]);
           }, 3000);
         }
       },

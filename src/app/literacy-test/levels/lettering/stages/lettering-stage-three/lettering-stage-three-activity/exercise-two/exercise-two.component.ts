@@ -212,12 +212,13 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
               this.successMessage = '';
               this.selectedAlphabets = [];
               this.onReset();
+              // this._router.navigate([
+              //   '/literacy/stage-completion',
+              //   this.stageNumber,
+              // ]);
               this._router.navigate([
-                '/literacy/stage-completion',
-                this.stageNumber,
-              ]);
-              this._router.navigate([
-                `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                `/${GameType.LITERACY}/level-completion/${this.gameLevel}`
+                // `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
               ]);
             }, 3000);
           }

@@ -210,7 +210,8 @@ export class ExerciseComponent implements OnInit {
             this.successMessage = '';
             this.onReset();
             this._router.navigate([
-              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              `/${GameType.LITERACY}/level-completion/${this.gameLevel}`
+              // `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
             ]);
           }, 3000);
         }

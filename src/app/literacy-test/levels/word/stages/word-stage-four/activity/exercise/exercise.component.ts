@@ -121,7 +121,6 @@ export class ExerciseComponent implements OnInit {
     let complete = List.filter((done: any) => done?.isWellPlaced == true);
 
     
-    console.log('this.exerciseNumber: ', this.exerciseNumber);
     if (complete.length == List?.length) {
       ResultItem.isDone = true;
       
@@ -172,7 +171,8 @@ export class ExerciseComponent implements OnInit {
             // alert('completed!!!');
             this.onReset();
             this._router.navigate([
-              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              `/${GameType.LITERACY}/level-completion/${this.gameLevel}`
+              // `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
             ]);
           }, 3000);
         }

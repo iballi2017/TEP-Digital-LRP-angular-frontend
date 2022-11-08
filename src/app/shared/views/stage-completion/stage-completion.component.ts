@@ -60,7 +60,6 @@ export class StageCompletionComponent implements OnInit {
   onGetGameSessionId() {
     this.gameSession$.subscribe({
       next: (data: any) => {
-        
         this.gameSessionId = data?.session_id;
       },
     });
@@ -76,48 +75,53 @@ export class StageCompletionComponent implements OnInit {
       this._router.navigate(['/']);
     }
     setTimeout(() => {
-      if (
-        this.levelTitle === GameLevel.LETTER &&
-        this.stageNumber == GameStage.THREE
-      ) {
-        this.levelTitle = GameLevel.WORD;
-        this.stageNumber = 0;
-        this._router.navigate([
-          `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
-        ]);
-      } else if (
-        this.levelTitle === GameLevel.WORD &&
-        this.stageNumber == GameStage.FOUR
-      ) {
-        this.levelTitle = GameLevel.PARAGRAPH;
-        this.stageNumber = 0;
-        this._router.navigate([
-          `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
-        ]);
-      } else if (
-        this.levelTitle === GameLevel.PARAGRAPH &&
-        this.stageNumber == GameStage.FOUR
-      ) {
-        this.levelTitle = GameLevel.STORY;
-        this.stageNumber = 0;
-        this._router.navigate([
-          `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
-        ]);
-      }  else if (
-        this.levelTitle === GameLevel.STORY &&
-        this.stageNumber == GameStage.ONE
-      ) {
-        this.levelTitle = GameLevel.STORY;
-        this.stageNumber = 0;
-        this._router.navigate([
-          `/literacy/levels/lettering`,
-        ]);
-      } else {
-        // this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
-        this._router.navigate([
-          `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
-        ]);
-      }
+      // if (
+      //   this.levelTitle === GameLevel.LETTER &&
+      //   this.stageNumber == GameStage.THREE
+      // ) {
+      //   this.levelTitle = GameLevel.WORD;
+      //   this.stageNumber = 0;
+      //   this._router.navigate([
+      //     `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
+      //   ]);
+      // } else if (
+      //   this.levelTitle === GameLevel.WORD &&
+      //   this.stageNumber == GameStage.FOUR
+      // ) {
+      //   this.levelTitle = GameLevel.PARAGRAPH;
+      //   this.stageNumber = 0;
+      //   this._router.navigate([
+      //     `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
+      //   ]);
+      // } else if (
+      //   this.levelTitle === GameLevel.PARAGRAPH &&
+      //   this.stageNumber == GameStage.FOUR
+      // ) {
+      //   this.levelTitle = GameLevel.STORY;
+      //   this.stageNumber = 0;
+      //   this._router.navigate([
+      //     `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`,
+      //   ]);
+      // }  else if (
+      //   this.levelTitle === GameLevel.STORY &&
+      //   this.stageNumber == GameStage.ONE
+      // ) {
+      //   this.levelTitle = GameLevel.STORY;
+      //   this.stageNumber = 0;
+      //   this._router.navigate([
+      //     // `/literacy/levels/lettering`,
+      //     `/${this.gameType}/levels/`,
+      //   ]);
+      // }
+      // else {
+      //   // this._router.navigate([`/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}`]);
+      //   this._router.navigate([
+      //     `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}/${this.gameType}`,
+      //   ]);
+      // }
+      this._router.navigate([
+        `/shared/new-task-loading/${this.levelTitle}/${this.stageNumber}/${this.gameType}`,
+      ]);
     }, 3000);
   }
 
@@ -125,14 +129,15 @@ export class StageCompletionComponent implements OnInit {
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
     }
-    this._router.navigate([`/literacy/levels/lettering`]);
+    // this._router.navigate([`/literacy/levels/lettering`]);
+    this._router.navigate([`/${this.gameType}/levels`]);
   }
 
   // SubmitStageResult(GameStageResult: GameStageResult, NextPage: string) {
   //   this._gameSvc.SubmitGameStageResult(GameStageResult).subscribe({
   //     next: (response: any) => {
   //       if (response) {
-  //         
+  //
   //         setTimeout(() => {
   //           this._router.navigate([NextPage]);
   //         }, 3000);
