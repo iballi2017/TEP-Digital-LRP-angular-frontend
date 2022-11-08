@@ -31,6 +31,11 @@ const routes: Routes = [
     // component: LetteringLevelCompletionComponent,
     component: LiteracyLevelCompletionComponent,
   },
+  {
+    path: 'game-type-completion/:game-level',
+    // component: LetteringLevelCompletionComponent,
+    component: LiteracyLevelCompletionComponent,
+  },
 ];
 
 @NgModule({

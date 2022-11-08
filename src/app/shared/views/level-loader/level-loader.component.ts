@@ -49,7 +49,7 @@ export class LevelLoaderComponent implements OnInit, AfterViewChecked {
             //   ]);
             // }
             this._router.navigate([
-              `/${gameType}/${this.levelTitle}/stage-${this.stageNumber + 1}/${this.gameType}`,
+              `/${gameType}/${this.levelTitle}/stage-${this.stageNumber + 1}`,
             ]);
           }, 3000);
         }
