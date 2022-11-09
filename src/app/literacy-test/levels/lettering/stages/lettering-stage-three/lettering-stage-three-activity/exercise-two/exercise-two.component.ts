@@ -39,8 +39,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   exerciseAlphabets: any[] = [];
   resultFourLetterWords: any[] = [];
 
-  audioFile =
-    '../../../../../../../../assets/audio/mixkit-audience-light-applause-354.mp3';
   stageOneResult: any;
   gameSessionId: any;
   stageNumber: number = 3;
@@ -236,12 +234,6 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
     }
   }
 
-  onPlayApplause() {
-    let audio = new Audio();
-    audio.src = this.audioFile;
-    audio.load();
-    audio.play();
-  }
 
   openSnackBar(data: any) {
     this._snackBar.openFromComponent(SnackbarComponent, {
