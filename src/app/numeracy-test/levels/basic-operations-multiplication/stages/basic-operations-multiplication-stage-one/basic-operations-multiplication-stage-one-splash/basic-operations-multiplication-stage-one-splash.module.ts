@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BasicOperationsMultiplicationStageOneSplashRoutingModule } from './basic-operations-multiplication-stage-one-splash-routing.module';
 import { BasicOperationsMultiplicationStageOneSplashComponent } from './basic-operations-multiplication-stage-one-splash.component';
 import { BasicOperationsMultiplicationStageOneInstructionalVideoComponent } from './basic-operations-multiplication-stage-one-instructional-video/basic-operations-multiplication-stage-one-instructional-video.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { BasicOperationsMultiplicationStageOneInstructionalVideoComponent } from
   ],
   imports: [
     CommonModule,
-    BasicOperationsMultiplicationStageOneSplashRoutingModule
+    BasicOperationsMultiplicationStageOneSplashRoutingModule,
+    SharedModule
   ]
 })
 export class BasicOperationsMultiplicationStageOneSplashModule { }

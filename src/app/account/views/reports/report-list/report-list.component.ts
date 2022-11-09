@@ -54,8 +54,6 @@ export class ReportListComponent implements OnInit {
       },
     });
     this.Subscriptions.push(subscription);
-
-    this._reportSvc.LoadReports();
   }
   onViewReportDetails(item: any) {
     this._router.navigate([`account/reports/details/${item}`]);
@@ -71,7 +69,7 @@ export class ReportListComponent implements OnInit {
       maxWidth: '500px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // 
+      //
       if (result) {
         this.onDeleteOccupant(item);
       }
@@ -83,16 +81,17 @@ export class ReportListComponent implements OnInit {
     const _sessionId: SessionId = {
       session_id: sessionId,
     };
-    
+
     this._reportSvc.RemoveReport(_sessionId).subscribe({
       next: (response: any) => {
-        
-        this.ngRedux.dispatch({
-          type: REMOVE_REPORT_SUCCESS,
-          payload: {
-            sessionId: sessionId,
-          },
-        });
+        if (response) {
+          this.ngRedux.dispatch({
+            type: REMOVE_REPORT_SUCCESS,
+            payload: {
+              sessionId: sessionId,
+            },
+          });
+        }
       },
       error: (err: any) => {
         console.warn('Error: ', err);
@@ -106,7 +105,7 @@ export class ReportListComponent implements OnInit {
 
   onEditReport() {}
   FilterForm!: any;
-  sortReportListBy(FilterForm:any) {
+  sortReportListBy(FilterForm: any) {
     let SortItem = FilterForm.value.Filter;
     switch (SortItem) {
       case FilterDropdown.ASCENDING:
@@ -123,7 +122,6 @@ export class ReportListComponent implements OnInit {
 
       case FilterDropdown.AGE:
         this.reports.sort((a: any, b: any) => {
-          
           let x = parseInt(a['age']);
           let y = parseInt(b['age']);
           return x > y ? 1 : -1;
@@ -152,7 +150,6 @@ export class ReportListComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

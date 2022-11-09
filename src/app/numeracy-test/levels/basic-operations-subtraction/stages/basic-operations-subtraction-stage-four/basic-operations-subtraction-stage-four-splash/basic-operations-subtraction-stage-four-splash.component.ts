@@ -6,6 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./basic-operations-subtraction-stage-four-splash.component.scss']
 })
 export class BasicOperationsSubtractionStageFourSplashComponent implements OnInit {
+  menuList = [
+    {
+      title: 'LITERACY',
+    },
+    {
+      title: 'LETTERING',
+    },
+    {
+      title: 'STAGE 1',
+    }
+  ];
 
   constructor() { }
 

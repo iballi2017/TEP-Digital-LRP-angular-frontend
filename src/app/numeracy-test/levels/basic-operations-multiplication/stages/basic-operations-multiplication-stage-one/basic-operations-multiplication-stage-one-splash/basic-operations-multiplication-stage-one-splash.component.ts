@@ -6,7 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./basic-operations-multiplication-stage-one-splash.component.scss']
 })
 export class BasicOperationsMultiplicationStageOneSplashComponent implements OnInit {
-
+  menuList = [
+    {
+      title: 'LITERACY',
+    },
+    {
+      title: 'LETTERING',
+    },
+    {
+      title: 'STAGE 1',
+    }
+  ];
   constructor() { }
 
   ngOnInit(): void {

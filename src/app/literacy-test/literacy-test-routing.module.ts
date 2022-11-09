@@ -6,6 +6,7 @@ import { ParagraphComponent } from './levels/paragraph/paragraph.component';
 import { StoryComponent } from './levels/story/story.component';
 import { WordComponent } from './levels/word/word.component';
 import { LiteracyLevelCompletionComponent } from './literacy-level-completion/literacy-level-completion.component';
+import { LiteracyProgramCompletionComponent } from './literacy-program-completion/literacy-program-completion.component';
 import { LiteracyStageCompletionComponent } from './literacy-stage-completion/literacy-stage-completion.component';
 import { LiteracyTestComponent } from './literacy-test.component';
 
@@ -33,8 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'game-type-completion/:game-level',
-    // component: LetteringLevelCompletionComponent,
-    component: LiteracyLevelCompletionComponent,
+    component: LiteracyProgramCompletionComponent,
   },
 ];
 

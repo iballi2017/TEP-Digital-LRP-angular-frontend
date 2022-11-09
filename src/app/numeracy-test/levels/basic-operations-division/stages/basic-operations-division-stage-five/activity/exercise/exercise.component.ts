@@ -190,8 +190,12 @@ export class ExerciseComponent implements OnInit {
               this.successMessage = '';
               this.onReset();
               // alert('completed!!!');
+              // this._router.navigate([
+              //   `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              // ]);
+
               this._router.navigate([
-                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                `/${GameType.NUMERACY}/game-type-completion/${this.gameLevel}`,
               ]);
             }, 3000);
           }

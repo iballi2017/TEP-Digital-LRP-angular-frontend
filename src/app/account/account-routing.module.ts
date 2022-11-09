@@ -17,7 +17,8 @@ const routes: Routes = [
     path: '',
     component: AccountComponent,
     children: [
-      { path: '', component: MyInformationComponent },
+      // { path: '', component: MyInformationComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'personal-information' },
       { path: 'personal-information', component: MyInformationComponent },
       {
         path: 'update-personal-details/:userId',

@@ -3,13 +3,23 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-basic-operations-subtraction-stage-one-splash',
   templateUrl: './basic-operations-subtraction-stage-one-splash.component.html',
-  styleUrls: ['./basic-operations-subtraction-stage-one-splash.component.scss']
+  styleUrls: ['./basic-operations-subtraction-stage-one-splash.component.scss'],
 })
-export class BasicOperationsSubtractionStageOneSplashComponent implements OnInit {
+export class BasicOperationsSubtractionStageOneSplashComponent
+  implements OnInit
+{
+  menuList = [
+    {
+      title: 'LITERACY',
+    },
+    {
+      title: 'LETTERING',
+    },
+    {
+      title: 'STAGE 1',
+    },
+  ];
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

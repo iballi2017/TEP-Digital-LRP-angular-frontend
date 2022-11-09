@@ -42,7 +42,7 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap((event: any) => {
         if (event.type === HttpEventType.Response) {
-          console.warn('EventBody: ', event.body);
+          // console.warn('EventBody: ', event.body);
         }
       }),
       catchError((err) => {

@@ -10,6 +10,7 @@ import { NumberRecognitionTwoComponent } from './levels/number-recognition-two/n
 import { NumberRecognitionComponent } from './levels/number-recognition/number-recognition.component';
 import { PlaceValueComponent } from './levels/place-value/place-value.component';
 import { NumeracyLevelCompletionComponent } from './numeracy-level-completion/numeracy-level-completion.component';
+import { NumeracyProgramCompletionComponent } from './numeracy-program-completion/numeracy-program-completion.component';
 import { NumeracyStageCompletionComponent } from './numeracy-stage-completion/numeracy-stage-completion.component';
 import { NumeracyTestComponent } from './numeracy-test.component';
 // numeracy/number-recognition-one/stage-1
@@ -63,6 +64,10 @@ const routes: Routes = [
     path: 'level-completion/:game-level',
     // component: LetteringLevelCompletionComponent,
     component: NumeracyLevelCompletionComponent,
+  },
+  {
+    path: 'game-type-completion/:game-level',
+    component: NumeracyProgramCompletionComponent,
   },
 ];
 

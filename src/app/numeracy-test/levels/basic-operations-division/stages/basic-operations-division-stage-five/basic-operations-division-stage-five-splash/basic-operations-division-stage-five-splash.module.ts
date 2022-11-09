@@ -4,17 +4,18 @@ import { CommonModule } from '@angular/common';
 import { BasicOperationsDivisionStageFiveSplashRoutingModule } from './basic-operations-division-stage-five-splash-routing.module';
 import { BasicOperationsDivisionStageFiveSplashComponent } from './basic-operations-division-stage-five-splash.component';
 import { BasicOperationsDivisionStageFiveInstructionalVideoComponent } from './basic-operations-division-stage-five-instructional-video/basic-operations-division-stage-five-instructional-video.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 // import { BasicOperationsDivisionStageFiveInstructionalVideoComponent } from './basic-operations-division-stage-five-instructional-video/basic-operations-division-stage-five-instructional-video.component';
-
 
 @NgModule({
   declarations: [
     BasicOperationsDivisionStageFiveSplashComponent,
-    BasicOperationsDivisionStageFiveInstructionalVideoComponent
+    BasicOperationsDivisionStageFiveInstructionalVideoComponent,
   ],
   imports: [
     CommonModule,
-    BasicOperationsDivisionStageFiveSplashRoutingModule
-  ]
+    BasicOperationsDivisionStageFiveSplashRoutingModule,
+    SharedModule,
+  ],
 })
-export class BasicOperationsDivisionStageFiveSplashModule { }
+export class BasicOperationsDivisionStageFiveSplashModule {}

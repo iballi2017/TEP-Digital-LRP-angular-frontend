@@ -22,51 +22,13 @@ export class ReportService implements OnDestroy {
   GetUserGameResultUrl = baseUrl + '/fetch-user-game-result';
   DeleteUserGameResultUrl = baseUrl + '/delete-game-result';
   GetUserGameResultDetailsUrl = baseUrl + '/fetch-game-result-details';
-  // AddOccupantUrl = baseUrl + '/add-new-occupant';
-  // FetchOccupantUrl = baseUrl + '/fetch-occupant-by-id';
-  // RemoveOccupantUrl = baseUrl + '/delete-occupant';
-  // UpdateOccupantAccountUrl = baseUrl + '/update-occupant-account';
-  testUrl = 'http://localhost:3100/reports';
-
-  // fetch-user-game-resultUrl =
+  
   Subscriptions: Subscription[] = [];
 
   constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) {}
 
-  GetReports(): Observable<any> {
-    return this._http.get<any>(this.testUrl).pipe(catchError(handleError));
-  }
+ 
 
-  LoadReports() {
-    this.ngRedux.dispatch({ type: FETCH_REPORTS_LIST });
-    this._http
-      .get(this.testUrl)
-      .pipe(
-        map((response: any) => {
-          const x: [] = response;
-          return x;
-        })
-      )
-      .subscribe({
-        next: (response: any) => {
-          
-          this.ngRedux.dispatch({
-            type: FETCH_REPORTS_LIST_SUCCESS,
-            payload: response,
-          });
-        },
-        error: (err: any) => {
-          this.ngRedux.dispatch({
-            type: FETCH_REPORTS_LIST_ERROR,
-            payload: err,
-          });
-        },
-      });
-  }
-
-  // LoadUserGameResult(): Observable<GameReport> {
-  //   return this._http.get<GameReport>(this.GetUserGameResultUrl);
-  // }
 
   LoadUserGameResult() {
     this.ngRedux.dispatch({ type: FETCH_REPORTS_LIST });

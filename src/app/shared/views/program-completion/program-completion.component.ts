@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { select } from '@angular-redux/store';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
 
 @Component({
   selector: 'app-program-completion',
   templateUrl: './program-completion.component.html',
-  styleUrls: ['./program-completion.component.scss']
+  styleUrls: ['./program-completion.component.scss'],
 })
 export class ProgramCompletionComponent implements OnInit {
-  gameType = '';
-  levelTitle = '';
-  stageNumber!: number;
-  // @select((s) => s.game.gameSession) gameSession$: any;
-  // @Input() gameType!: string;
-  // @Input() levelTitle!: string;
-  // @Input() stageNumber!: number;
+  // gameType = '';
+  // levelTitle = '';
+  // stageNumber!: number;
+  @select((s) => s.game.gameSession) gameSession$: any;
+  @Input() gameType!: string;
+  @Input() levelTitle!: string;
+  @Input() stageNumber!: number;
   pageTitle = 'YOU HAVE COMPLETEd tHIS program';
   pageFeaturedImage =
     '../../../../../assets/images/program-completion-page-bg.png';
@@ -37,31 +39,20 @@ export class ProgramCompletionComponent implements OnInit {
   ngOnInit(): void {}
 
   onContinueToNextStage($event: any) {
-    if (!this.gameSessionId || !this.gameResult) {
-      this._router.navigate(['/']);
-    }
+    console.log('this.gameSessionId: ', this.gameSessionId);
+    console.log('this.gameResult: ', this.gameResult);
+    console.log('this.gameType: ', this.gameType);
     setTimeout(() => {
-      switch (this.levelTitle) {
-        case GameLevel.LETTER:
-          this._router.navigate([
-            `/shared/new-task-loading/${GameLevel.WORD}/${this.stageNumber}`,
-          ]);
+      switch (this.gameType) {
+        case GameType.LITERACY:
+          this._router.navigate([`/literacy/levels/lettering`]);
           break;
-        case GameLevel.WORD:
-          this._router.navigate([
-            `/shared/new-task-loading/${GameLevel.PARAGRAPH}/${this.stageNumber}`,
-          ]);
-          break;
-        case GameLevel.PARAGRAPH:
-          this._router.navigate([
-            `/shared/new-task-loading/${GameLevel.STORY}/${this.stageNumber}`,
-          ]);
+        case GameType.NUMERACY:
+          this._router.navigate([`/numeracy/levels/number-recognition-one`]);
           break;
 
         default:
-          this._router.navigate([
-            `/shared/new-task-loading/${GameLevel.LETTER}/${this.stageNumber}`,
-          ]);
+          this._router.navigate([`/`]);
           break;
       }
     }, 3000);
@@ -73,5 +64,4 @@ export class ProgramCompletionComponent implements OnInit {
     }
     this._router.navigate([`/literacy/levels/lettering`]);
   }
-
 }
