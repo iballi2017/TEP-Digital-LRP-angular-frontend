@@ -14,6 +14,7 @@ export interface GameReport {
   program: string;
   status: string;
   overallScore: string;
+  scorePercent: string;
   key?: string;
 }
 

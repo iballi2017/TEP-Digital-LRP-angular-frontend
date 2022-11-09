@@ -50,6 +50,7 @@ export class ReportListComponent implements OnInit {
   onGetReportList() {
     let subscription = this.reportsList$.subscribe({
       next: (response: any) => {
+        console.log('response: ', response);
         this.reports = response;
       },
     });

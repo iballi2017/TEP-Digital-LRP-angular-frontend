@@ -60,8 +60,7 @@ export class ExerciseComponent implements OnInit {
 
   onGetGameSessionId() {
     this.gameSession$.subscribe({
-      next: (data: any) => {
-        
+      next: (data: any) => {        
         this.gameSessionId = data?.session_id;
       },
     });

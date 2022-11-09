@@ -65,7 +65,8 @@
                                     <th scope="col">AGE</th>
                                     <th scope="col">GENDER</th>
                                     <th scope="col">PROGRAM</th>
-                                    <th scope="col">OVERALL SCORE</th>
+                                    <th scope="col">SCORE</th>
+                                    <th scope="col">PERCENTAGE</th>                                    
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -85,6 +86,7 @@
                                     <td>{{item?.gender}}</td>
                                     <td>{{item?.program}}</td>
                                     <td>{{item?.overallScore}}</td>
+                                    <td>{{item?.scorePercent}}</td>
                                     <td class="text-right">
                                         <div class="actions-btn">
                                             <!-- <app-table-column-action-buttons (remove)="onRemoveReport(item)"

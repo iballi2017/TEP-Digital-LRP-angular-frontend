@@ -116,13 +116,14 @@ select.form-control {
     }
 }
 table {
+    font-size: 12px;
     thead {
         th {
             font-family: "Open Sans";
             font-style: normal;
             font-weight: 600;
             // font-size: 20px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             // line-height: 27px;
             text-transform: uppercase;
             color: #1e1e1e;
@@ -146,7 +147,7 @@ table {
             font-style: normal;
             font-weight: 600;
             // font-size: 20px;
-            font-size: 1rem;
+            font-size: .8rem;
             // line-height: 27px;
             text-transform: capitalize;
             color: #1e1e1e;

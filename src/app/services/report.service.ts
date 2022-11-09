@@ -22,13 +22,10 @@ export class ReportService implements OnDestroy {
   GetUserGameResultUrl = baseUrl + '/fetch-user-game-result';
   DeleteUserGameResultUrl = baseUrl + '/delete-game-result';
   GetUserGameResultDetailsUrl = baseUrl + '/fetch-game-result-details';
-  
+
   Subscriptions: Subscription[] = [];
 
   constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) {}
-
- 
-
 
   LoadUserGameResult() {
     this.ngRedux.dispatch({ type: FETCH_REPORTS_LIST });
@@ -36,10 +33,20 @@ export class ReportService implements OnDestroy {
       .get<GameReport>(this.GetUserGameResultUrl)
       .pipe(
         map((result: any) => {
+          console.log('result: ', result);
           let reports: any[] = result?.data;
           let reportList: GameReport[] = [];
           if (result) {
             // return result;
+
+            // gms_type: 'Literacy';
+            // occ_age: '9';
+            // occ_gender: 'Male';
+            // occ_name: 'Taye Taiwo';
+            // score_percent: '0.00%';
+            // session_id: 'e075b69c-f539-44128f5b';
+            // status: 'Incomplete';
+            // total_score: 0;
 
             for (let key in reports) {
               let report: GameReport = {
@@ -49,7 +56,8 @@ export class ReportService implements OnDestroy {
                 gender: reports[key].occ_gender,
                 program: reports[key].gms_type,
                 status: reports[key].status,
-                overallScore: reports[key].total_percent,
+                overallScore: reports[key].total_score,
+                scorePercent: reports[key].score_percent
               };
               reportList.push({ ...report, key: key });
             }
@@ -60,6 +68,7 @@ export class ReportService implements OnDestroy {
       )
       .subscribe({
         next: (response: any) => {
+          console.log('response: ', response);
           if (response) {
             this.ngRedux.dispatch({
               type: FETCH_REPORTS_LIST_SUCCESS,
@@ -92,7 +101,6 @@ export class ReportService implements OnDestroy {
       .subscribe({
         next: (resultDetails: any) => {
           if (resultDetails) {
-            
             this.ngRedux.dispatch({
               type: FETCH_GAME_RESULT_DETAILS_SUCCESS,
               payload: resultDetails?.data,
@@ -113,14 +121,13 @@ export class ReportService implements OnDestroy {
   }
 
   RemoveReport(sessionId: SessionId) {
-    
     // return this._http.delete(`${this.testUrl}/${reportId}`);
-    return this._http.post(`${this.DeleteUserGameResultUrl}`, sessionId)
-    .pipe(catchError(handleError));
+    return this._http
+      .post(`${this.DeleteUserGameResultUrl}`, sessionId)
+      .pipe(catchError(handleError));
   }
 
   ngOnDestroy(): void {
-    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();
