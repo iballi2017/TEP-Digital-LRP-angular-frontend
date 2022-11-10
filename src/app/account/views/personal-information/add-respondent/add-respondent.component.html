@@ -6,6 +6,9 @@
                 <img src="../../../../../assets/images/icons/times.png" alt="" class="img-fluid">
             </button>
         </div>
+        <ng-container *ngIf="error$ | async">
+            <small class="text-danger text-center d-block">{{errorMsg}}</small>
+        </ng-container>
         <form [formGroup]="AddRespondentForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="FullName">Full Name</label>

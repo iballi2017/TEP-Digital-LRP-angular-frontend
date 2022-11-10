@@ -22,6 +22,7 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
 import { TokenInterceptor } from './helpers/token.interceptor';
 import { AuthGuard } from './services/guards/auth.guard';
 import { GameScreenLoaderComponent } from './shared/components/game-screen-loader/game-screen-loader.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { GameScreenLoaderComponent } from './shared/components/game-screen-loade
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    {provide : LocationStrategy , useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],
 })

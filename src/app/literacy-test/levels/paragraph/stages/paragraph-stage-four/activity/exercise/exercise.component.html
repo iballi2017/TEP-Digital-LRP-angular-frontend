@@ -9,7 +9,7 @@
                 <li *ngFor="let item of resultList">
                     <ul class="list-style-none mb-0 pl-0">
                         <li *ngFor="let item of item?.word" [ngClass]="{'hint': item?.isHint == true}">
-                            <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
+                            <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.ui}}</span>
                         </li>
                     </ul>
                 </li>

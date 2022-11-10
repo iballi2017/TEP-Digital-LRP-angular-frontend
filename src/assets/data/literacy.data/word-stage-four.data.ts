@@ -65,6 +65,31 @@ export const actionwords = [
     name: 'to',
     isWellPlaced: null,
   },
+  {
+    name: 'lives',
+    isWellPlaced: null,
+  },
+  // addons 
+  {
+    name: 'stream',
+    isWellPlaced: null,
+  },
+  {
+    name: 'be',
+    isWellPlaced: null,
+  },
+  {
+    name: 'likes',
+    isWellPlaced: null,
+  },
+  {
+    name: 'so',
+    isWellPlaced: null,
+  },
+  {
+    name: 'life',
+    isWellPlaced: null,
+  },
 ];
 
 export const results = [
@@ -73,18 +98,22 @@ export const results = [
     word: [
       {
         name: 'this',
+        ui: 'This',
         isWellPlaced: null,
       },
       {
         name: 'is',
+        ui: 'is',
         isWellPlaced: null,
       },
       {
         name: 'my',
+        ui: 'my',
         isWellPlaced: null,
       },
       {
         name: 'fish',
+        ui: 'fish',
         isWellPlaced: true,
         isHint: true,
       },
@@ -95,23 +124,28 @@ export const results = [
     word: [
       {
         name: 'my',
+        ui: 'My',
         isWellPlaced: null,
       },
       {
         name: 'fish',
+        ui: 'fish',
         isWellPlaced: true,
         isHint: true,
       },
       {
-        name: 'live',
+        name: 'lives',
+        ui: 'lives',
         isWellPlaced: null,
       },
       {
         name: 'in',
+        ui: 'in',
         isWellPlaced: null,
       },
       {
         name: 'water',
+        ui: 'water',
         isWellPlaced: null,
       },
     ],
@@ -121,18 +155,22 @@ export const results = [
     word: [
       {
         name: 'i',
+        ui: 'I',
         isWellPlaced: null,
       },
       {
         name: 'love',
+        ui: 'love',
         isWellPlaced: null,
       },
       {
         name: 'my',
+        ui: 'my',
         isWellPlaced: null,
       },
       {
         name: 'fish',
+        ui: 'fish',
         isWellPlaced: true,
         isHint: true,
       },
@@ -143,18 +181,22 @@ export const results = [
     word: [
       {
         name: 'i',
+        ui: 'I',
         isWellPlaced: null,
       },
       {
         name: 'have',
+        ui: 'have',
         isWellPlaced: null,
       },
       {
         name: 'a',
+        ui: 'a',
         isWellPlaced: null,
       },
       {
         name: 'fish',
+        ui: 'fish',
         isWellPlaced: true,
         isHint: true,
       },
@@ -165,22 +207,27 @@ export const results = [
     word: [
       {
         name: 'i',
+        ui: 'I',
         isWellPlaced: null,
       },
       {
         name: 'have',
+        ui: 'have',
         isWellPlaced: null,
       },
       {
         name: 'a',
+        ui: 'a',
         isWellPlaced: null,
       },
       {
         name: 'big',
+        ui: 'big',
         isWellPlaced: null,
       },
       {
         name: 'fish',
+        ui: 'fish',
         isWellPlaced: true,
         isHint: true,
       },
@@ -191,19 +238,23 @@ export const results = [
     word: [
       {
         name: 'my',
+        ui: 'My',
         isWellPlaced: null,
       },
       {
         name: 'fish',
+        ui: 'fish',
         isWellPlaced: true,
         isHint: true,
       },
       {
-        name: 'like',
+        name: 'likes',
+        ui: 'likes',
         isWellPlaced: null,
       },
       {
         name: 'worms',
+        ui: 'worms',
         isWellPlaced: null,
       },
     ],
@@ -213,27 +264,33 @@ export const results = [
     word: [
       {
         name: 'my',
+        ui: 'My',
         isWellPlaced: null,
       },
       {
         name: 'fish',
+        ui: 'fish',
         isWellPlaced: true,
         isHint: true,
       },
       {
-        name: 'like',
+        name: 'likes',
+        ui: 'likes',
         isWellPlaced: null,
       },
       {
         name: 'to',
+        ui: 'to',
         isWellPlaced: null,
       },
       {
         name: 'eat',
+        ui: 'eat',
         isWellPlaced: null,
       },
       {
         name: 'worms',
+        ui: 'worms',
         isWellPlaced: null,
       },
     ],
@@ -243,22 +300,27 @@ export const results = [
     word: [
       {
         name: 'i',
+        ui: 'I',
         isWellPlaced: null,
       },
       {
         name: 'like',
+        ui: 'like',
         isWellPlaced: null,
       },
       {
         name: 'to',
+        ui: 'to',
         isWellPlaced: null,
       },
       {
         name: 'eat',
+        ui: 'eat',
         isWellPlaced: null,
       },
       {
         name: 'fish',
+        ui: 'fish',
         isWellPlaced: true,
         isHint: true,
       },

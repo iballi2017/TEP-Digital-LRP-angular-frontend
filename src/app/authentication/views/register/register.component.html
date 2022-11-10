@@ -14,12 +14,11 @@
             </ng-template>
             <div class="form-wrapper" *ngIf="!isRegistered; else registeredSuccessfully">
                 <div class="form-card mb-4">
-
                     <ng-container>
-                        <div class="text-center" *ngIf="(RegisteredUser | async)">
+                        <div class="text-center" *ngIf="(RegisteredUser$ | async)">
                             <h5 class="text-uppercase title">Success</h5>
                             <small class="text-info">
-                                <div>{{RegisteredUser | async}}</div>
+                                <div>{{RegisteredUser$ | async}}</div>
                                 <div>
                                     <a [routerLink]="['/auth/login']">
                                         <strong>LOGIN</strong>
@@ -28,15 +27,15 @@
                             </small>
                         </div>
                     </ng-container>
-                    <div *ngIf="!(RegisteredUser | async)">
+                    <div *ngIf="!(RegisteredUser$ | async)">
                         <div class="text-center">
                             <h5 class="text-uppercase title">Sign Up</h5>
                             <div>
-                                <!-- <div>{{isLoading | async}}</div> -->
-                                <small class="text-info" *ngIf="(isLoading | async)">Loading...</small>
+                                <!-- <div>{{isLoading$ | async}}</div> -->
+                                <small class="text-info" *ngIf="(isLoading$ | async)">Loading...</small>
                             </div>
                             <ng-container>
-                                <small class="text-danger text-center" *ngIf="(error | async)">{{error | async}}</small>
+                                <small class="text-danger text-center" *ngIf="(error$ | async)">{{errorMsg}}</small>
                             </ng-container>
                         </div>
                         <form [formGroup]="RegisterUserForm" (ngSubmit)="onSubmit()">
@@ -124,17 +123,17 @@
                                 <!-- </div> -->
                             </div>
                             <button class="btn btn-block text-uppercase form-btn"
-                                [ngClass]="{'primary-btn': RegisterUserForm.valid && !(isLoading | async)}"
-                                [disabled]="RegisterUserForm.invalid || (isLoading | async)">
-                                <span *ngIf="!(isLoading | async)">{{submitBtnLabel}}</span>
-                                <span *ngIf="(isLoading | async)">Sending...</span>
+                                [ngClass]="{'primary-btn': RegisterUserForm.valid && !(isLoading$ | async)}"
+                                [disabled]="RegisterUserForm.invalid || (isLoading$ | async)">
+                                <span *ngIf="!(isLoading$ | async)">{{submitBtnLabel}}</span>
+                                <span *ngIf="(isLoading$ | async)">Sending...</span>
                             </button>
 
                         </form>
                     </div>
                 </div>
 
-                <div class="text-center text-bold text-white" *ngIf="!(RegisteredUser | async)">
+                <div class="text-center text-bold text-white" *ngIf="!(RegisteredUser$ | async)">
                     Already have an account <a [routerLink]="['/auth/login']" class="text-link">LOGIN</a>
                 </div>
             </div>

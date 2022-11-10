@@ -85,14 +85,17 @@ export const titleResults = [
     word: [
       {
         name: 'the',
+        ui: 'The',
         isWellPlaced: null,
       },
       {
         name: 'boy',
+        ui: 'boy',
         isWellPlaced: null,
       },
       {
         name: 'Abba',
+        ui: 'Abba',
         isWellPlaced: null,
       },
     ],
@@ -105,18 +108,22 @@ export const storyResults = [
     word: [
       {
         name: 'Abba',
+        ui: 'Abba',
         isWellPlaced: null,
       },
       {
         name: 'is',
+        ui: 'is',
         isWellPlaced: null,
       },
       {
         name: 'a',
+        ui: 'a',
         isWellPlaced: null,
       },
       {
         name: 'boy',
+        ui: 'boy, ',
         isWellPlaced: null,
       },
     ],
@@ -126,18 +133,22 @@ export const storyResults = [
     word: [
       {
         name: 'he',
+        ui: 'he',
         isWellPlaced: null,
       },
       {
         name: 'lives',
+        ui: 'lives',
         isWellPlaced: null,
       },
       {
         name: 'in',
+        ui: 'in',
         isWellPlaced: null,
       },
       {
         name: 'Yola',
+        ui: 'Yola. ',
         isWellPlaced: null,
       },
     ],
@@ -147,22 +158,27 @@ export const storyResults = [
     word: [
       {
         name: 'he',
+        ui: 'He',
         isWellPlaced: null,
       },
       {
         name: 'lives',
+        ui: 'lives',
         isWellPlaced: null,
       },
       {
         name: 'with',
+        ui: 'with',
         isWellPlaced: null,
       },
       {
         name: 'his',
+        ui: 'his',
         isWellPlaced: null,
       },
       {
         name: 'uncle',
+        ui: 'uncle. ',
         isWellPlaced: null,
       },
     ],
@@ -172,22 +188,27 @@ export const storyResults = [
     word: [
       {
         name: 'he',
+        ui: 'He',
         isWellPlaced: null,
       },
       {
         name: 'has',
+        ui: 'has',
         isWellPlaced: null,
       },
       {
         name: 'a',
+        ui: 'a',
         isWellPlaced: null,
       },
       {
         name: 'black',
+        ui: 'black',
         isWellPlaced: null,
       },
       {
         name: 'ball',
+        ui: 'ball. ',
         isWellPlaced: null,
       },
     ],
@@ -198,38 +219,47 @@ export const storyResults = [
     word: [
       {
         name: 'Abba',
+        ui: 'Abba',
         isWellPlaced: null,
       },
       {
         name: 'and',
+        ui: 'and',
         isWellPlaced: null,
       },
       {
         name: 'his',
+        ui: 'his',
         isWellPlaced: null,
       },
       {
         name: 'uncle',
+        ui: 'uncle',
         isWellPlaced: null,
       },
       {
         name: 'play',
+        ui: 'play',
         isWellPlaced: null,
       },
       {
         name: 'the',
+        ui: 'the',
         isWellPlaced: null,
       },
       {
         name: 'ball',
+        ui: 'ball',
         isWellPlaced: null,
       },
       {
         name: 'all',
+        ui: 'all',
         isWellPlaced: null,
       },
       {
         name: 'day',
+        ui: 'day.',
         isWellPlaced: null,
       },
     ],

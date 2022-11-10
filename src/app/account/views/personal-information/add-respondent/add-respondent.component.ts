@@ -18,8 +18,10 @@ import {
   styleUrls: ['./add-respondent.component.scss'],
 })
 export class AddRespondentComponent implements OnInit, OnDestroy {
-  @select((s) => s.occupantsList.isLoading) isLoading$:any;
-  submitBtnLabel = "Add Respondent";
+  @select((s) => s.occupantsList.isLoading) isLoading$: any;
+  @select((s) => s.occupantsList.error) error$: any;
+  errorMsg!: string;
+  submitBtnLabel = 'Add Respondent';
   nigerianStateList!: string[];
   num: number = 7;
   agesList: number[] = [];
@@ -38,16 +40,15 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
     this.buildForm();
     let x: number = this.num;
     this.createNumberArray(x);
+    this.onErrorMsg();
   }
 
-  
   createNumberArray(d: number) {
     while (d < 12) {
       this.agesList.push(d);
       d++;
     }
   }
-
 
   buildForm() {
     this.AddRespondentForm = this._fb.group({
@@ -70,7 +71,7 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
       occ_gender: this.AddRespondentForm.value.Gender,
     };
     this.ngRedux.dispatch({ type: ADD_OCCUPANT });
-    let subscription =   this._occupantSvc.AddOccupant(Payload).subscribe({
+    let subscription = this._occupantSvc.AddOccupant(Payload).subscribe({
       next: (response: any) => {
         if (response) {
           this.ngRedux.dispatch({
@@ -82,8 +83,12 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
         }
       },
       error: (err: any) => {
-        console.warn('Error: ', err);
-        this.ngRedux.dispatch({ type: ADD_OCCUPANT_ERROR, payload: err });
+        console.warn('Error: ', err?.error?.message);
+        this.ngRedux.dispatch({
+          type: ADD_OCCUPANT_ERROR,
+          payload: err?.error?.message,
+        });
+        this.onErrorMsg();
       },
     });
     this.Subscriptions.push(subscription);
@@ -93,6 +98,18 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
     this.dialogRef.close('Form closed!');
   }
 
+  onErrorMsg() {
+    this.error$.subscribe({
+      next: (errorMsg: any) => {
+        if (errorMsg) {
+          this.errorMsg = errorMsg;
+          setTimeout(() => {
+            this.errorMsg = '';
+          }, 4000);
+        }
+      },
+    });
+  }
 
   ngOnDestroy(): void {
     this.Subscriptions.forEach((x) => {

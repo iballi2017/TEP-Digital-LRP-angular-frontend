@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit {
     if (this.LoginUserForm.valid) {
       this.ngRedux.dispatch({ type: ADD_LOGINUSER });
       this._authSvc.LoginUser(Payload).subscribe({
-        next: (response: any) => {
-          
+        next: (response: any) => {          
           if(response){
             // setTimeout(() => {
               this.ngRedux.dispatch({
@@ -58,7 +57,6 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (err: any) => {
-          console.warn('Error: ', err);
           this.ngRedux.dispatch({
             type: ADD_LOGINUSER_FAILURE,
             payload: err?.error?.message,

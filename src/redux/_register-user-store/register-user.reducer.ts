@@ -39,8 +39,7 @@ export function RegisterUserReducer(
       return tassign(state, {
         isLoading: true,
       });
-    case ADD_REGISTER_USER_SUCCESS:
-      
+    case ADD_REGISTER_USER_SUCCESS:      
       var newRegisterUser = action.payload;
       return tassign(state, {
         RegisteredUser: newRegisterUser,

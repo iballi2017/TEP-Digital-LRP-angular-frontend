@@ -81,7 +81,7 @@ const AddOccupantSuccess = (state: LRP_OccupantState, action: any) => {
 
 const AddOccupantFailure = (state: LRP_OccupantState, action: any) => {
   return tassign(state, {
-    error: action.error,
+    error: action.payload,
     isLoading: false,
   });
 };

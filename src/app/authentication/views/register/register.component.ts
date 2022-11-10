@@ -18,10 +18,11 @@ import {
 export class RegisterComponent implements OnInit {
   submitBtnLabel: string = 'Register';
   RegisterUserForm!: FormGroup;
-  @select((s) => s.RegisterUser.isLoading) isLoading: any;
-  @select((s) => s.RegisterUser.RegisteredUser?.message) RegisteredUser: any;
-  @select((s) => s.RegisterUser.error) error: any;
+  @select((s) => s.RegisterUser.isLoading) isLoading$: any;
+  @select((s) => s.RegisterUser.RegisteredUser?.message) RegisteredUser$: any;
+  @select((s) => s.RegisterUser.error) error$: any;
   isRegistered!: boolean;
+  errorMsg: any;
   constructor(
     private _fb: FormBuilder,
     private _authSvc: AuthenticationService,
@@ -30,6 +31,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.onErrorMsg();
   }
 
   buildForm() {
@@ -57,12 +59,11 @@ export class RegisterComponent implements OnInit {
     //   usr_gender: this.RegisterUserForm.value.FullName,
     //   // usr_password: this.RegisterUserForm.value.FullName,
     // };
-    
+
     if (this.RegisterUserForm.valid) {
       this.ngRedux.dispatch({ type: ADD_REGISTER_USER });
       this._authSvc.RegisterUser(Payload).subscribe({
         next: (response: any) => {
-          
           if (response) {
             setTimeout(() => {
               this.ngRedux.dispatch({
@@ -79,13 +80,26 @@ export class RegisterComponent implements OnInit {
           }
         },
         error: (err: any) => {
-          console.warn('Error: ', err);
           this.ngRedux.dispatch({
             type: ADD_REGISTER_USER_FAILURE,
-            payload: err.error?.message,
+            payload: err?.error?.error.message,
           });
+          this.onErrorMsg();
         },
       });
     }
+  }
+
+  onErrorMsg() {
+    this.error$.subscribe({
+      next: (errorMsg: any) => {
+        if (errorMsg) {
+          this.errorMsg = errorMsg;
+          setTimeout(() => {
+            this.errorMsg = null;
+          }, 4000);
+        }
+      },
+    });
   }
 }

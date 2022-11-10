@@ -10,7 +10,7 @@
                 <li *ngFor="let item of resultList">
                     <ul class="list-style-none mb-0 pl-0">
                         <li *ngFor="let item of item?.word" [ngClass]="{'hint': item?.isHint == true}">
-                            <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
+                            <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.ui}}</span>
                             <!-- <span class="d-none">{{item?.name}}{{item?.isWellPlaced}}</span> -->
                         </li>
                         <!-- <li>
@@ -119,7 +119,7 @@
     </ul> -->
 
 
-    <ul class="list-style-none pl-0 word-keyboard">
+    <ul class="list-style-none pl-0 word-keyboard py-2">
         <li class="" *ngFor="let item of actionWords">
             <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
         </li>

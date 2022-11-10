@@ -38,7 +38,7 @@ export class AccountEmailComponent implements OnInit {
     this.isLoading$.subscribe((load: boolean) => {
       if (load) {
         this.btnTitle = 'Loading...';
-      }else{
+      } else {
         this.btnTitle = 'Send';
       }
     });
@@ -58,10 +58,10 @@ export class AccountEmailComponent implements OnInit {
     this._forgotPasswordSvc.SendRegisteredEmail(Payload).subscribe({
       next: (response: any) => {
         if (response) {
-          
+          console.log('response: ', response);
           this.ngRedux.dispatch({
             type: SEND_REGISTERED_EMAIL_SUCCESS,
-            payload: response.msg,
+            payload: response.message,
           });
           this.VerifyEmailForm.reset();
         }
@@ -71,7 +71,7 @@ export class AccountEmailComponent implements OnInit {
           console.error('Error: ', err);
           this.ngRedux.dispatch({
             type: SEND_REGISTERED_EMAIL_ERROR,
-            payload: err.error.msg,
+            payload: err?.error?.error?.message,
           });
         }
       },
