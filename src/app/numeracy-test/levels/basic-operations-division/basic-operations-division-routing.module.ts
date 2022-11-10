@@ -98,9 +98,7 @@ const routes: Routes = [
         path: '',
         loadChildren: () =>
           import(
-            // './stages/basic-operations-division-stage-four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
-            // './stages/basic-operations-division-stage-four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
-            './stages/basic-operations-division-stage-Four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
+            './stages/basic-operations-division-stage-four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
           ).then((m) => m.BasicOperationsDivisionStageFourSplashModule),
       },
       {
