@@ -1,32 +1,12 @@
-import {
-  INITIAL_FORGOTPASSWORD_STATE,
-  LRP_ForgotPasswordState,
-} from './_forgot-password.store/forgot-password.store';
-import { INITIAL_GAME_STATE, LRP_GameState } from './_game.store/game.store';
-import {
-  INITIAL_LOGINUSER_STATE,
-  LRP_LoginUserState,
-} from './_login-user-store/login-user.store';
-import {
-  INITIAL_OCCUPANT_STATE,
-  LRP_OccupantState,
-} from './_occupant.store/occupant.store';
-import {
-  INITIAL_REGISTERUSER_STATE,
-  LRP_RegisterUserState,
-} from './_register-user-store/register-user.store';
-import {
-  INITIAL_REPORT_STATE,
-  LRP_ReportState,
-} from './_report.store/report.store';
-import {
-  INITIAL_SPEECH_TO_TEXT_STATE,
-  LRP_SpeechToTextState,
-} from './_speechToText.store/speechToText.store';
-import {
-  INITIAL_USER_DETAILS_STATE,
-  LRP_UserDetailsState,
-} from './_userDetails.store/user-details.store';
+import { INITIAL_FORGOTPASSWORD_STATE, LRP_ForgotPasswordState } from "./_forgot-password.store/forgot-password.store";
+import { INITIAL_GAME_STATE, LRP_GameState } from "./_game.store/game.store";
+import { INITIAL_LOGINUSER_STATE, LRP_LoginUserState } from "./_login-user-store/login-user.store";
+import { INITIAL_OCCUPANT_STATE, LRP_OccupantState } from "./_occupant.store/occupant.store";
+import { INITIAL_REGISTERUSER_STATE, LRP_RegisterUserState } from "./_register-user-store/register-user.store";
+import { INITIAL_REPORT_STATE, LRP_ReportState } from "./_report.store/report.store";
+import { INITIAL_SPEECH_TO_TEXT_STATE, LRP_SpeechToTextState } from "./_speechToText.store/speechToText.store";
+import { INITIAL_USER_DETAILS_STATE, LRP_UserDetailsState } from "./_userDetails.store/user-details.store";
+
 
 export interface IAppState {
   LoginUser: LRP_LoginUserState;
