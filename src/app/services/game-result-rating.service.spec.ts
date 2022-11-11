@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GameResultRatingService } from './game-result-rating.service';
+import { GameLevelResultAndRatingService } from './game-level-result-and-rating.service';
 
-describe('GameResultRatingService', () => {
-  let service: GameResultRatingService;
+describe('GameLevelResultAndRatingService', () => {
+  let service: GameLevelResultAndRatingService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GameResultRatingService);
+    service = TestBed.inject(GameLevelResultAndRatingService);
   });
 
   it('should be created', () => {

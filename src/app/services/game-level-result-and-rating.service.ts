@@ -5,7 +5,7 @@ import { baseUrl } from '../config/api';
 @Injectable({
   providedIn: 'root',
 })
-export class GameResultRatingService {
+export class GameLevelResultAndRatingService {
   GetUserGameResultUrl = baseUrl + '/fetch-user-game-result-by-session-id';
 
   constructor(private _http: HttpClient) {}

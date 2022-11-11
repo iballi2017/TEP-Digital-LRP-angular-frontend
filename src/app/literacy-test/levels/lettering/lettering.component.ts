@@ -1,7 +1,7 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
 import { GameLevel } from 'src/app/models/types/game-level';
-import { GameResultRatingService } from 'src/app/services/game-result-rating.service';
+import { GameLevelResultAndRatingService } from 'src/app/services/game-level-result-and-rating.service';
 import { GameService } from 'src/app/services/game.service';
 import { LevelGameResultService } from 'src/app/services/level-game-result.service';
 
@@ -41,7 +41,7 @@ export class LetteringComponent implements OnInit {
   // url='/literacy/lettering/';
   // url = `${GameType.Literacy}/${GameLevel.LETTER}`
   constructor(
-    private _gameResultRatingSvc: GameResultRatingService,
+    private _gameLevelResultAndRatingSvc: GameLevelResultAndRatingService,
     private _gameSvc: GameService,
     private _levelGameResultSvc: LevelGameResultService
   ) {}

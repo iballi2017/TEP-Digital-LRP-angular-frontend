@@ -1,6 +1,6 @@
 import { select } from '@angular-redux/store';
 import { Component, OnInit } from '@angular/core';
-import { GameResultRatingService } from 'src/app/services/game-result-rating.service';
+import { GameLevelResultAndRatingService } from 'src/app/services/game-level-result-and-rating.service';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class NumberRecognitionTwoComponent implements OnInit {
   // url='/literacy/lettering/';
   // url = `${GameType.Literacy}/${GameLevel.LETTER}`
   constructor(
-    private _gameResultRatingSvc: GameResultRatingService,
+    private _gameResultRatingSvc: GameLevelResultAndRatingService,
     private _gameSvc: GameService
   ) {}
 
