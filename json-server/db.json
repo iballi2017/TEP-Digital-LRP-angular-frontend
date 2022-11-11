@@ -1,0 +1,43 @@
+{
+  "LoginUser": {
+    "usr_email": "test3@test3.com",
+    "usr_password": "test3"
+  },
+  "RegisterUser": {
+    "usr_fullname": "Alli Ibrahim Abayomi",
+    "usr_email": "test3@test3.com",
+    "usr_party": "Parent/Guardian",
+    "usr_gender": "femail",
+    "usr_password": "test3"
+  },
+  "LiteringStages": [
+    {
+      "id": 1,
+      "title": "Stage 1",
+      "label": "1",
+      "starRating": 0,
+      "isStarted": false
+    },
+    {
+      "id": 2,
+      "title": "Stage 2",
+      "label": "2",
+      "starRating": 0,
+      "isStarted": false
+    },
+    {
+      "id": 3,
+      "title": "Stage 3",
+      "label": "3",
+      "starRating": 0,
+      "isStarted": false
+    },
+    {
+      "id": 4,
+      "title": "Stage 4",
+      "label": "4",
+      "starRating": 0,
+      "isStarted": false
+    }
+  ]
+}
