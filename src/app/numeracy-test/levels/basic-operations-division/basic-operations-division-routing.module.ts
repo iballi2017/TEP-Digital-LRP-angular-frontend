@@ -21,7 +21,8 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsDivisionStageOneSplashModule),
       },
       {
-        path: 'basic-operations-division-splash',loadChildren: () =>
+        path: 'basic-operations-division-splash',
+        loadChildren: () =>
           import(
             './stages/basic-operations-division-stage-one/basic-operations-division-stage-one-splash/basic-operations-division-stage-one-splash.module'
           ).then((m) => m.BasicOperationsDivisionStageOneSplashModule),
