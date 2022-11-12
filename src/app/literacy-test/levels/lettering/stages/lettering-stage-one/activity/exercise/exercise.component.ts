@@ -121,7 +121,7 @@ export class ExerciseComponent implements OnInit {
       answer: '1',
       data: [...this.selectedAlphabets],
     };
-    
+    console.log("Payload: ", Payload)
 
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._gameSvc.SubmitLetteringStageOneResult(Payload).subscribe({

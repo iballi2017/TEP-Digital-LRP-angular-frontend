@@ -135,6 +135,7 @@ export class LevelCompletionComponent implements OnInit {
     if (!this.gameSessionId || !this.gameResult) {
       this._router.navigate(['/']);
     }
-    this._router.navigate([`/literacy/levels/lettering`]);
+    // this._router.navigate([`/literacy/levels/lettering`]);
+    this._router.navigate([`/${this.gameType}/levels/${this.gameLevel.levelTitle}`]);
   }
 }
