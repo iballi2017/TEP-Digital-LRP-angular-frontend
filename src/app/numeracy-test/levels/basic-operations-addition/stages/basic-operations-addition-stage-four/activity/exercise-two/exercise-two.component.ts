@@ -8,12 +8,13 @@ import {
 import { Router } from '@angular/router';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
+import { GameType } from 'src/app/models/types/game-type';
 import { BasicOperationsAdditionStageFourService } from 'src/app/services/basic-operations/addition/basic-operations-addition-stage-four.service';
 import { BasicOperationsAdditionStageTwoService } from 'src/app/services/basic-operations/addition/basic-operations-addition-stage-two.service';
 import { GameService } from 'src/app/services/game.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { IAppState } from 'src/redux/store';
-import { SUBMIT_GAME_STAGE_RESULT } from 'src/redux/_game.store/game.actions';
+import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise-two',
@@ -48,7 +49,7 @@ export class ExerciseTwoComponent implements OnInit {
     private _router: Router,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getActionNumbers();
@@ -153,37 +154,38 @@ export class ExerciseTwoComponent implements OnInit {
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     this._basicOperationsAdditionStageFourSvc.SubmitGameStageActivityTwoResult(
       Payload
-    );
-    // .subscribe({
-    //   next: (response: any) => {
-    //     if (response) {
-    //       console.log('response: ', response);
-    //       this.ngRedux.dispatch({
-    //         type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
-    //         payload: Payload,
-    //       });
-    //       this.openSnackBar(response?.message);
-    //       setTimeout(() => {
-    //         this.isFinishedMessage = '';
-    //         this.successMessage = '';
-    //         this.onReset();
-    //         // alert('completed!!!');
-    //         this._router.navigate([
-    //           `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
-    //         ]);
-    //       }, 3000);
-    //     }
-    //   },
-    //   error: (err: any) => {
-    //     if (err) {
-    //       console.warn('Error: ', err);
-    //       this.ngRedux.dispatch({
-    //         type: SUBMIT_GAME_STAGE_RESULT_ERROR,
-    //         payload: err?.error?.message,
-    //       });
-    //     }
-    //   },
-    // });
+    )
+      .subscribe({
+        next: (response: any) => {
+          alert("completed!!!")
+          if (response) {
+            console.log('response: ', response);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+              payload: Payload,
+            });
+            this.openSnackBar(response?.message);
+            setTimeout(() => {
+              this.isFinishedMessage = '';
+              this.successMessage = '';
+              this.onReset();
+            alert("completed!!!")
+              this._router.navigate([
+                `/${GameType.NUMERACY}/level-completion/${this.gameLevel}`
+              ]);
+            }, 3000);
+          }
+        },
+        error: (err: any) => {
+          if (err) {
+            console.warn('Error: ', err);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+              payload: err?.error?.message,
+            });
+          }
+        },
+      });
   }
 
   openSnackBar(data: any) {

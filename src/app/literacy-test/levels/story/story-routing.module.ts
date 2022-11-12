@@ -18,7 +18,7 @@ const routes: Routes = [
           ).then((m) => m.StoryStageOneSplashModule),
       },
       {
-        path: 'story-stage-one-splash',
+        path: 'story-splash',
         loadChildren: () =>
           import(
             './stages/story-stage-one/story-stage-one-splash/story-stage-one-splash.module'

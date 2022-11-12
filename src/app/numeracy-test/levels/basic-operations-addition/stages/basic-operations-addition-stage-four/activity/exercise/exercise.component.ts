@@ -53,7 +53,7 @@ export class ExerciseComponent implements OnInit {
     private _router: Router,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getActionNumbers();
@@ -172,9 +172,8 @@ export class ExerciseComponent implements OnInit {
               this.isFinishedMessage = '';
               this.successMessage = '';
               this.onReset();
-              // alert('completed!!!');
               this._router.navigate([
-                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                `/${GameType.NUMERACY}/level-completion/${this.gameLevel}`
               ]);
             }, 3000);
           }

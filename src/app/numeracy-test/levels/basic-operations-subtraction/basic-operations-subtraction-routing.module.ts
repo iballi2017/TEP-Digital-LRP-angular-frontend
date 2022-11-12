@@ -20,7 +20,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsSubtractionStageOneSplashModule),
       },
       {
-        path: 'number-recognition-one-splash',
+        path: 'basic-operations-subtraction-splash',
         loadChildren: () =>
           import(
             './stages/basic-operations-subtraction-stage-one/basic-operations-subtraction-stage-one-splash/basic-operations-subtraction-stage-one-splash.module'
@@ -47,7 +47,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsSubtractionStageTwoSplashModule),
       },
       {
-        path: 'number-recognition-two-splash',
+        path: 'basic-operations-subtraction-splash',
         loadChildren: () =>
           import(
             './stages/basic-operations-subtraction-stage-two/basic-operations-subtraction-stage-two-splash/basic-operations-subtraction-stage-two-splash.module'
@@ -74,7 +74,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsSubtractionStageThreeSplashModule),
       },
       {
-        path: 'number-recognition-three-splash',
+        path: 'basic-operations-subtraction-splash',
         loadChildren: () =>
           import(
             './stages/basic-operations-subtraction-stage-three/basic-operations-subtraction-stage-three-splash/basic-operations-subtraction-stage-three-splash.module'
@@ -101,7 +101,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsSubtractionStageFourSplashModule),
       },
       {
-        path: 'number-recognition-one-splash',
+        path: 'basic-operations-subtraction-splash',
         loadChildren: () =>
           import(
             './stages/basic-operations-subtraction-stage-four/basic-operations-subtraction-stage-four-splash/basic-operations-subtraction-stage-four-splash.module'

@@ -18,7 +18,7 @@ export class BasicOperationsAdditionStageFourService {
   SubmitBasicOperationsAddGameStage_4_Url =
     baseUrl + '/submit-basic-operations-add-stage-4';
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
   GetActionNumbers() {
     let numbersList = [...actionNumbers];
@@ -46,9 +46,10 @@ export class BasicOperationsAdditionStageFourService {
   }
 
   SubmitGameStageActivityTwoResult(_GameStageResult: ExerciseAnswer) {
-    console.log('Activity 2 data: ', _GameStageResult);
-    // return this._http
-    //   .post(`${this.SubmitBasicOperationsAddGameStage_4_Url}`, _GameStageResult)
-    //   .pipe(catchError(handleError));
+    // console.log('Activity 2 data: ', _GameStageResult);
+            alert("completed!!!")
+    return this._http
+      .post(`${this.SubmitBasicOperationsAddGameStage_4_Url}`, _GameStageResult)
+      .pipe(catchError(handleError));
   }
 }

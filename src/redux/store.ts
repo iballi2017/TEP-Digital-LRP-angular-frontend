@@ -1,4 +1,5 @@
 import { INITIAL_FORGOTPASSWORD_STATE, LRP_ForgotPasswordState } from "./_forgot-password.store/forgot-password.store";
+import { INITIAL_GAME_LEVEL_RESULT_AND_RATING_STATE, LRP_GameLevelResultAndRatingState } from "./_game-level-result-and-rating.store/game-level-result-and-rating.store";
 import { INITIAL_GAME_STATE, LRP_GameState } from "./_game.store/game.store";
 import { INITIAL_LOGINUSER_STATE, LRP_LoginUserState } from "./_login-user-store/login-user.store";
 import { INITIAL_OCCUPANT_STATE, LRP_OccupantState } from "./_occupant.store/occupant.store";
@@ -17,6 +18,7 @@ export interface IAppState {
   game: LRP_GameState;
   forgotPassword: LRP_ForgotPasswordState;
   SpeechTexts: LRP_SpeechToTextState;
+  gameLevelResultAndRating: LRP_GameLevelResultAndRatingState,
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -28,4 +30,5 @@ export const INITIAL_STATE: IAppState = {
   game: INITIAL_GAME_STATE,
   forgotPassword: INITIAL_FORGOTPASSWORD_STATE,
   SpeechTexts: INITIAL_SPEECH_TO_TEXT_STATE,
+  gameLevelResultAndRating: INITIAL_GAME_LEVEL_RESULT_AND_RATING_STATE,
 };

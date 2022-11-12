@@ -21,7 +21,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsDivisionStageOneSplashModule),
       },
       {
-        path: 'number-recognition-one-splash',
+        path: 'basic-operations-division-splash',
         loadChildren: () =>
           import(
             './stages/basic-operations-division-stage-one/basic-operations-division-stage-one-splash/basic-operations-division-stage-one-splash.module'
@@ -48,7 +48,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsDivisionStageTwoSplashModule),
       },
       {
-        path: 'number-recognition-one-splash',
+        path: 'basic-operations-division-splash',
         loadChildren: () =>
           import(
             './stages/basic-operations-division-stage-two/basic-operations-division-stage-two-splash/basic-operations-division-stage-two-splash.module'
@@ -75,7 +75,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsDivisionStageThreeSplashModule),
       },
       {
-        path: 'number-recognition-one-splash',
+        path: 'basic-operations-division-splash',
         loadChildren: () =>
           import(
             './stages/basic-operations-division-stage-three/basic-operations-division-stage-three-splash/basic-operations-division-stage-three-splash.module'
@@ -102,7 +102,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsDivisionStageFourSplashModule),
       },
       {
-        path: 'number-recognition-one-splash',
+        path: 'basic-operations-division-splash',
         loadChildren: () =>
           import(
             // './stages/basic-operations-division-stage-four/basic-operations-division-stage-four-splash/basic-operations-division-stage-four-splash.module'
@@ -132,7 +132,7 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsDivisionStageFiveSplashModule),
       },
       {
-        path: 'number-recognition-one-splash',
+        path: 'basic-operations-division-splash',
         loadChildren: () =>
           import(
             // './stages/basic-operations-division-stage-five/basic-operations-division-stage-five-splash/basic-operations-division-stage-five-splash.module'
