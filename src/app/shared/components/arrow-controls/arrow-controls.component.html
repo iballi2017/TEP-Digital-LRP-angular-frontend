@@ -1,0 +1,11 @@
+<!-- <p>arrow-controls works!</p> -->
+<!-- <div class="text-white">{{isCorrect}}</div> -->
+<div class="controls">
+    <div class="nav-left text-white" *ngIf="leftLink">
+        <!-- <button class="btn previous-btn"></button> -->
+        <button class="btn previous-btn" [routerLink]="[leftLink]"></button>
+    </div>
+    <div class="nav-right text-white" *ngIf="rightLink">
+        <button class="btn next-btn" [routerLink]="[rightLink]" *ngIf="isCorrect"></button>
+    </div>
+</div>

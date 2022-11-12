@@ -1,0 +1,69 @@
+<!-- <p>exercise works!</p> -->
+<!-- <p>activity-type-one works!</p> -->
+
+<div class="canvas-wrapper">
+    <!-- <div class="alert alert-info text-center" *ngIf="isFinishedMessage">{{isFinishedMessage}}</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Consonant</th>
+                <th>Vowel</th>
+                <th>Selected count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{consonants?.length}}</td>
+                <td>{{vowels?.length}}</td>
+                <td>{{this.selectedAlphabets?.length}}</td>
+            </tr>
+        </tbody>
+    </table> -->
+    <!-- {{alphabets | json}} -->
+    <!-- <div class="alert alert-success">
+        Selected: {{this.selectedAlphabets | json}}
+    </div> -->
+
+    <!-- <div class="text-white">
+        {{resultTwoLetterWords | json}}
+    </div> -->
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+    <div id="result-screen">
+        <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+        <div class="inner">
+            <!-- <ul class="list-style-none" id="result-list"> -->
+            <ul class="list-style-none pl-0 mb-0" id="result-output-box-list">
+                <li *ngFor="let item of resultTwoLetterWords">
+                    <!-- at -->
+                    <div class="result-box">
+                        <span *ngFor="let alphabet of item.word"
+                            [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="output-screen">
+        <div class="inner">
+            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">
+                {{selectedAlphabets[0]?.name}}</div>
+            <button id="operator" class="btn"></button>
+            <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name}}</div>
+        </div>
+    </div>
+    <!-- <ul class="list-style-none pl-0" id="activity-canvas">
+        <li *ngFor="let item of exerciseAlphabets">
+            <input type="checkbox" id="{{item?.id}}" hidden [(ngModel)]="item.isChecked" [checked]="item.isChecked"
+                [ngModelOptions]="{standalone: true}" (change)="onSelected(item)">
+            <label for="{{item?.id}}">
+                <span class="fake-box"
+                    [ngClass]="{'right-answer': item.isChecked && item?.type == consonant}">{{item?.name}}</span>
+            </label>
+        </li>
+    </ul> -->
+    <ul class="list-style-none pl-0 keyboard">
+        <li class="key-item" *ngFor="let item of exerciseAlphabets">
+            <button class="key rounded-0" (click)="onPush(item)">{{item?.name}}</button>
+        </li>
+    </ul>
+</div>

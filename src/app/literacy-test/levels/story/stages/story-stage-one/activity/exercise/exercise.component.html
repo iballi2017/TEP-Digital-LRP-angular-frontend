@@ -1,0 +1,67 @@
+<!-- <p>exercise works!</p> -->
+<div class="canvas-wrapper">
+
+    <!-- <div class="text-white">{{actionWords | json}}</div> -->
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+
+    <div id="story-stage-one-result-screen">
+
+        <div class="inner">
+            <h5 class="text-section-title">Title:</h5>
+            <!-- <div class="text-white">{{titleResultList | json}}</div> -->
+            <ul class="group-word-result-boards list-style-none mb-0 pl-0">
+                <!-- [ngClass]="{'d-none': item?.isWellPlaced == false}" -->
+                <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li *ngFor="let item of titleResultList[0]?.word" [ngClass]="{'hint': item?.isHint == true}">
+                            <span
+                                [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.ui}}</span>
+                            <!-- <span class="d-none">{{item?.name}}{{item?.isWellPlaced}}</span> -->
+                        </li>
+                        <!-- <li>
+                            <span>Hello</span>
+                        </li> -->
+                    </ul>
+                </li>
+            </ul>
+            <h5 class="text-section-title">Short Story:</h5>
+            <!-- <div class="text-white">{{storyResultList | json}}</div> -->
+            <ul class="group-word-result-boards list-style-none mb-0 pl-0">
+                <!-- [ngClass]="{'d-none': item?.isWellPlaced == false}" -->
+                <li *ngFor="let item of storyResultList">
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li *ngFor="let item of item?.word" [ngClass]="{'hint': item?.isHint == true}">
+                            <span
+                                [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.ui}}</span>
+                            <!-- <span class="d-none">{{item?.name}}{{item?.isWellPlaced}}</span> -->
+                        </li>
+                        <!-- <li>
+                            <span>Hello</span>
+                        </li> -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="output-screen">
+        <div class="inner">
+            <div class="obj" *ngFor="let item of storyResultList[exerciseNumber]?.word" [ngClass]="{'border-0': item?.isHint == true,'bg-none': item?.isHint == true}">
+                <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <ul class="list-style-none pl-0 word-keyboard">
+        <li class="" *ngFor="let item of actionWords">
+            <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
+        </li>
+    </ul>
+
+    
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+</div>

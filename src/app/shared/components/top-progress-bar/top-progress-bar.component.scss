@@ -1,0 +1,28 @@
+@use "../../../../sass/_partials/mixins";
+
+#progress-bar {
+    list-style: none;
+    padding-left: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr;
+    grid-gap: 5px;
+    // margin-left: 95px;
+    li {
+        // width: 340px;
+        height: 3px;
+        // left: 133px;
+        background: #ffffff;
+        border-radius: 10px;
+        &:first-child {
+            background: #f58a27;
+            border-radius: 10px;
+        }
+    }
+    @include mixins.minmq(768px) {
+        margin-left: 95px;
+        li {
+            height: 8px;
+        }
+    }
+}

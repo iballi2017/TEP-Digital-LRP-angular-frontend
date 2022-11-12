@@ -1,0 +1,42 @@
+<!-- <p>exercise works!</p> -->
+
+<div class="canvas-wrapper">
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+    <!-- <div id="result-screen" class="result-screen-type-one"> -->
+    <div class="table-responsive">
+        <div class="result-screen-type-one">
+            <div class="inner">
+                <ul class="list-style-none" id="result-list">
+                    <li *ngFor="let item of resultLetterWords">
+                        <!-- <div class="blob"> -->
+                        <div [ngClass]="{'blob': item.name != 'Classroom', 'classroom-blob': item.name == 'Classroom'}">
+                            <!-- {{item.isWellPlaced}} -->
+                            <span [ngClass]="{'d-none': !item.isWellPlaced}">{{item?.name}}</span>
+                        </div>
+                        <span class="line"></span>
+                    </li>
+                    <!-- <li>
+                        <div class="classroom-blob">Classroom</div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <aside>Select a related words to connect </aside>
+
+
+    <ul class="list-style-none pl-0 word-keyboard row no-gutters">
+        <li class="col-3 p-1 p-lg-2" *ngFor="let item of actionWords">
+            <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name}}</button>
+        </li>
+    </ul>
+
+    <!-- <ul class="list-style-none pl-0 word-keyboard">
+        <li class="" *ngFor="let item of actionWords">
+            <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name}}</button>
+        </li>
+    </ul> -->
+    
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+</div>

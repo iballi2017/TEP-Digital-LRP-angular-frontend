@@ -1,0 +1,29 @@
+<!-- <p class="text-white">lettering works!</p> -->
+<div *ngIf="!(isLoadingGameLevelResultAndRating$ | async) ; else isLoading">
+    <ul class="stage-status list-style-none pl-0">
+        <li class="cursor-pointer" *ngFor="let item of testStageStars; let i = index"
+            [routerLink]="['/literacy/lettering/', item?.title, 'lettering-splash']">
+            <div class="stage-card">
+                <p>{{i + 1}}</p>
+            </div>
+            <ul class="stage-star-rating list-style-none pl-0">
+                <li *ngFor="let stageStar of item?.starArray">
+                    <div *ngIf="stageStar?.isDone">
+                        <img src="../../../../assets/images/icons/yellow-black-bordered-star.svg" alt=""
+                            class="img-fluid">
+                    </div>
+                    <div *ngIf="!stageStar?.isDone">
+                        <img src="../../../../assets/images/icons/white-grey-bordered-star..svg" alt=""
+                            class="img-fluid">
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<ng-template #isLoading>
+    <div class="alert text-white">
+        <app-pure-css-loader></app-pure-css-loader>
+    </div>
+</ng-template>

@@ -1,0 +1,133 @@
+@use "../../../../../sass/_partials/mixins";
+
+.bg-classroom {
+    // background-image: url(../../practice-assets/images/blackboard.jpg);
+    background-image: url(../../../../../assets/images/blackboard.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#ui-template-sample-two {
+    .inner {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 100vh;
+        max-height: 730px;
+        overflow: hidden;
+        position: relative;
+        .template-content {
+            height: 100%;
+            // transform: translate(0, 190px);
+            background-color: rgb(173, 216, 230, .4);
+            text-align: center;
+            padding-top: 5em;
+            // 
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+            h1 {
+                // font-family: "Open Sans";
+                // font-style: normal;
+                // font-weight: 700;
+                // font-size: 300px;
+                font-size: 20rem;
+                line-height: 240px;
+                // // line-height: 409px;
+                // // display: flex;
+                // // align-items: center;
+                // // text-align: center;
+                // letter-spacing: -0.015em;
+                color: #ffffff;
+            }
+        }
+
+        #replay-voice-btn {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
+    .controls {
+        .nav-right,
+        .nav-left {
+            position: absolute;
+            // bottom: 46.5%;
+            bottom: 40%;
+        }
+        .nav-right {
+            right: 0;
+        }
+        .nav-left {
+            left: 0;
+        }
+    }
+
+    .mark-control {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 20px;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    @include mixins.maxmq(500px) {
+        .inner {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            height: 100vh;
+            max-height: 730px;
+            overflow: hidden;
+            position: relative;
+            .template-content {
+                // height: 100%;
+                // transform: translate(0, 190px);
+                text-align: center;
+                h1 {
+                    font-size: 10rem;
+                    // line-height: 240px;
+                    // color: #ffffff;
+                }
+            }
+
+            #replay-voice-btn {
+                // position: absolute;
+                // bottom: 0;
+                // left: 0;
+            }
+            .controls {
+                .nav-right,
+                .nav-left {
+                    bottom: 46.5%;
+                }
+                .nav-right {
+                    right: 0;
+                }
+                .nav-left {
+                    left: 0;
+                }
+
+                .next-btn::after,
+                .previous-btn::after {
+                    content: "";
+                    display: block;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    height: 40px;
+                    width: 45px;
+                }
+            }
+            .mark-control {
+                justify-content: flex-end;
+            }
+        
+        }
+    }
+}

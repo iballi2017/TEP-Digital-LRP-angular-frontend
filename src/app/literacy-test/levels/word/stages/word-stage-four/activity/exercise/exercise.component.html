@@ -1,0 +1,130 @@
+<!-- <p>exercise works!</p> -->
+
+<div class="canvas-wrapper">
+
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+    <div id="word-result-screen-type-1">
+        <div class="inner">
+            <ul class="group-word-result-boards list-style-none mb-0 pl-0">
+                <!-- [ngClass]="{'d-none': item?.isWellPlaced == false}" -->
+                <li *ngFor="let item of resultList">
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li *ngFor="let item of item?.word" [ngClass]="{'hint': item?.isHint == true}">
+                            <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.ui}}</span>
+                            <!-- <span class="d-none">{{item?.name}}{{item?.isWellPlaced}}</span> -->
+                        </li>
+                        <!-- <li>
+                            <span>Hello</span>
+                        </li> -->
+                    </ul>
+                </li>
+                <!-- <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li class="hint">fish</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li></li>
+                        <li class="hint">fish</li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li class="hint">fish</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li class="hint">fish</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li class="hint">fish</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li></li>
+                        <li class="hint">fish</li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li></li>
+                        <li class="hint">fish</li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="list-style-none mb-0 pl-0">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li class="hint">fish</li>
+                    </ul>
+                </li> -->
+                <!-- <ul class="list-style-none mb-0 pl-0">
+                    <li *ngFor="let item of selectedAlphabets"
+                        [ngClass]="{'text-capitalize ': item == selectedAlphabets[0]}">{{item?.name}}</li>
+                </ul> -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- <div id="output-screen">
+        <div class="inner">
+            <div class="obj" id="first-obj" [ngClass]="{'good': selectedAlphabets[0]?.isWellPlaced}">
+                {{selectedAlphabets[0]?.name}}</div>
+            <div class="obj" id="second-obj">{{selectedAlphabets[1]?.name}}</div>
+            <div class="obj" id="second-obj">{{selectedAlphabets[2]?.name}}</div>
+            <div class="obj" id="second-obj">{{selectedAlphabets[3]?.name}}</div>
+            <div class="hint">
+                Fish</div>
+        </div>
+    </div> -->
+
+    
+
+    <div id="output-screen">
+        <div class="inner">
+            <div class="obj" *ngFor="let item of resultList[exerciseNumber]?.word" [ngClass]="{'border-0': item?.isHint == true,'bg-none': item?.isHint == true}">
+                <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- <ul class="list-style-none pl-0 word-keyboard row no-gutters">
+        <li class="col-3 p-1 p-lg-2" *ngFor="let item of actionWords">
+            <button class="btn key rounded-0">{{item?.name}}</button>
+        </li>
+    </ul> -->
+
+
+    <ul class="list-style-none pl-0 word-keyboard py-2">
+        <li class="" *ngFor="let item of actionWords">
+            <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
+        </li>
+    </ul>
+
+    
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+</div>

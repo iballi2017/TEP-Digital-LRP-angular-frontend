@@ -1,0 +1,45 @@
+<!-- <p>test-respondent-selection works!</p> -->
+<!-- SELECT NAME OF THE CHILD TAKING THE TEST -->
+
+<div id="test-respondent-selection-dialog">
+
+    <form [formGroup]="RespondentSelectionForm" (ngSubmit)="onSubmit()">
+        <div class="card">
+            <div class="card-header text-center px-4 py-3">
+                {{title}}
+            </div>
+            <div class="card-body">
+                <div class="select-drop-wrapper">
+                    <select name="RespondentId" id="RespondentId" class="form-control" formControlName="RespondentId">
+                        <option value="" selected="selected">Select respondent</option>
+                        <!-- <option value="{{item | json}}" *ngFor="let item of (occupantsList$ | async)">
+                            {{item?.occ_name}}</option> -->
+                        <option value="{{item?.occ_id}}" *ngFor="let item of (occupantsList$ | async)">
+                            {{item?.occ_name}}</option>
+                    </select>
+                </div>
+                <div class="text-center pt-3">
+                    <button type="button" class="btn primary-bordered-btn" (click)="openAddNewRespondentDialog()">Add
+                        New</button>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div id="action-btn">
+                    <button type="submit" class="btn btn-block" [disabled]="RespondentSelectionForm.invalid">
+                        <span *ngIf="(gameIsLoading$ | async)">Loading...</span>
+                        <span *ngIf="!(gameIsLoading$ | async)">Continue</span>
+                        </button>
+                    <button type="button" class="btn btn-block" (click)="closeDialog()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!-- <span *ngIf="(isLoading$ | async)">Loading...</span>
+<span *ngIf="!(isLoading$ | async)">{{submitBtnLabel}}</span> -->
+
+<ng-template #loading>
+    <small class="text-info">Loading</small>
+</ng-template>

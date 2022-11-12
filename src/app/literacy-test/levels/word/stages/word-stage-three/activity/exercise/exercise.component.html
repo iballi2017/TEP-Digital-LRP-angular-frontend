@@ -1,0 +1,63 @@
+<!-- <p>exercise works!</p> -->
+
+<div class="canvas-wrapper">
+    <!-- <div id="result-screen-type-2">
+        <div class="inner">
+            <ul class="list-style-none" id="result-list">
+                <li *ngFor="let item of resultLetterWords">
+                    <span *ngFor="let alphabet of item.word" [ngClass]="{'d-none': !item.isDone}">{{alphabet?.name |
+                        uppercase}}</span>
+                </li>
+            </ul>
+        </div>
+    </div> -->
+
+
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+
+    <div id="word-result-screen-type-1">
+        <div class="inner">
+            <div class="word-result-board">
+                <!-- {{resultLetterWords | json}} -->
+                <ul class="list-style-none mb-0 pl-0">
+                    <li *ngFor="let item of resultLetterWords.word"
+                        [ngClass]="{'text-capitalize ': item == resultLetterWords.word[0]}">
+                        <span [ngClass]="{'d-none': item?.isWellPlaced != true}">{{item?.name}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="output-screen"> -->
+        <div id="output-screen">
+            <div class="inner">
+                <div class="prev-item d-flex align-items-center" *ngFor="let item of resultLetterWords?.word">
+                    <div class="obj">
+                        <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}
+                        </span>
+                    </div>
+                    <div id="operator" class="btn"></div>
+                </div>
+                <!-- <div class="obj" *ngFor="let item of resultLetterWords?.word" [ngClass]="{'border-0': item?.isHint == true,'bg-none': item?.isHint == true}">
+                <span [ngClass]="{'d-none': item?.isWellPlaced != true && item?.isHint != true}">{{item?.name}}</span>
+            </div> -->
+            </div>
+        </div>
+
+        <!-- <ul class="list-style-none pl-0 keyboard" id="activity-canvas">
+        <li *ngFor="let item of actionAlphabets">
+            <button class="btn key rounded-0" (click)="onPush(item)">{{item?.name | uppercase}}</button>
+        </li>
+    </ul> -->
+
+
+        <ul class="list-style-none pl-0 word-keyboard row no-gutters">
+            <li class="col-3 p-1 p-lg-2" *ngFor="let item of actionWords">
+                <button class="btn key rounded-0" (click)="onSelect(item)">{{item?.name}}</button>
+            </li>
+        </ul>
+
+
+        <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+    <!-- </div> -->

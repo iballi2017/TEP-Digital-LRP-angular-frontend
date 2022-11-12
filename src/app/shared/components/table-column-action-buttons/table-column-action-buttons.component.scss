@@ -1,0 +1,13 @@
+
+.actions-btn {
+    display: inline-flex;
+    align-items: center;
+    button {
+        // margin-right: 0.5em;
+        // padding-right: 1.3em;
+        // padding-left: 1.3em;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

@@ -1,0 +1,146 @@
+<p>exercise works!</p>
+
+<div class="canvas-wrapper">
+
+    <!-- <ng-container *ngIf="(isLoading$ | async)">
+        <small class="text-white">Loading...</small>
+    </ng-container> -->
+    <!-- <div class="alert alert-info text-center" *ngIf="isFinishedMessage">
+        <p>{{successMessage}}<br />
+            {{isFinishedMessage}}
+        </p>
+    </div> -->
+    {{resultNumbers.numbers[resultNumberIndex]?.list | json}}
+    <div id="word-result-screen-type-1">
+        <div class="inner">
+            <div class="word-result-board">
+                <div id="hint-box" class="py-3">
+                    <ul class="list-style-none d-flex align-items-center justify-content-center h-100 mb-0 pl-0">
+                        <li *ngFor="let number of resultNumbers.numbers[resultNumberIndex]?.list" class="text-white"
+                            [ngClass]="{'text-info': number?.hint}">
+                            {{number?.figure}}
+                        </li>
+                    </ul>
+                </div>
+                <div id="result-output">
+                    <ul class="list-style-none pl-0 mb-0">
+                        <li>
+                            <div class="place-value-name">
+                                Hundred
+                            </div>
+                            <div class="value-number">
+                                <!-- 6 -->
+                                <!-- {{resultNumbers.numbers[resultNumberIndex]?.list[0] | json}} -->
+                                <!-- <span
+                                    [ngClass]="{'d-none': !resultNumbers.numbers[resultNumberIndex]?.list[0]?.isWellPlaced}">
+                                    {{resultNumbers.numbers[resultNumberIndex]?.list[0]?.figure}}
+                                </span> -->
+                                <span *ngFor="let item of resultNumbers.numbers[resultNumberIndex]?.list">
+                                    <ng-container [ngSwitch]="item?.place">
+                                        <ng-container *ngSwitchCase="Hundred">
+                                            <span [ngClass]="{'d-none': !item?.isWellPlaced}">
+                                                {{item?.figure}}
+                                            </span>
+                                        </ng-container>
+                                        <ng-container *ngSwitchDefault></ng-container>
+                                    </ng-container>
+                                    <!-- {{item | json}}
+                                    {{item?.figure}} -->
+                                    <!-- {{resultNumbers.numbers[resultNumberIndex]?.list[0]?.figure}} -->
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="place-value-name">
+                                Tens
+                            </div>
+                            <div class="value-number">
+                                <!-- 3 -->
+                                <!-- <span
+                                    [ngClass]="{'d-none': !resultNumbers.numbers[resultNumberIndex]?.list[1]?.isWellPlaced}">
+                                    {{resultNumbers.numbers[resultNumberIndex]?.list[1]?.figure}}
+                                </span> -->
+                                <span *ngFor="let item of resultNumbers.numbers[resultNumberIndex]?.list">
+                                    <ng-container [ngSwitch]="item?.place">
+                                        <ng-container *ngSwitchCase="Tens">
+                                            <span [ngClass]="{'d-none': !item?.isWellPlaced}">
+                                                {{item?.figure}}
+                                            </span>
+                                        </ng-container>
+                                        <ng-container *ngSwitchDefault></ng-container>
+                                    </ng-container>
+                                    <!-- {{item | json}}
+                                    {{item?.figure}} -->
+                                    <!-- {{resultNumbers.numbers[resultNumberIndex]?.list[0]?.figure}} -->
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="place-value-name">
+                                Unit
+                            </div>
+                            <div class="value-number">
+                                <!-- 4 -->
+                                <!-- <span
+                                    [ngClass]="{'d-none': !resultNumbers.numbers[resultNumberIndex]?.list[2]?.isWellPlaced}">
+                                    {{resultNumbers.numbers[resultNumberIndex]?.list[2]?.figure}}
+                                </span> -->
+                                <span *ngFor="let item of resultNumbers.numbers[resultNumberIndex]?.list">
+                                    <ng-container [ngSwitch]="item?.place">
+                                        <ng-container *ngSwitchCase="Unit">
+                                            <!-- {{item | json}} -->
+                                            <span [ngClass]="{'d-none': !item?.isWellPlaced}">
+                                                {{item?.figure}}
+                                            </span>
+                                        </ng-container>
+                                        <ng-container *ngSwitchDefault></ng-container>
+                                    </ng-container>
+                                    <!-- {{item | json}}
+                                    {{item?.figure}} -->
+                                    <!-- {{resultNumbers.numbers[resultNumberIndex]?.list[0]?.figure}} -->
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- {{resultNumbers | json}} -->
+                <!-- <ul id="result-number-list" class="list-style-none mb-0 pl-0">
+                    <li *ngFor="let item of resultNumbers.numbers">
+                        <span>
+                            <span class="space">
+                                <span [ngClass]="{'d-none': item?.isWellPlaced != true}">{{item?.name}}</span>
+                            </span>
+                        </span>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+    </div>
+    <h1 class="title">{{pageTitle}}</h1>
+
+
+    <ul class="list-style-none pl-0 word-keyboard row no-gutters">
+        <li class="col-4 p-1 p-lg-2" *ngFor="let item of actionWords">
+            <button class="btn key rounded-0" (click)="onSelect(item)"
+                [ngClass]="{'wrong-answer': item?.isWrongNumber, 'right-answer':item?.isCorrectNumber}">{{item?.name}}</button>
+        </li>
+    </ul>
+
+
+
+
+    <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
+    <!-- keyboard list-style-none pl-0 isLoading -->
+    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+    <!-- <ul class="keyboard list-style-none pl-0 isLoading" id="activity-canvas" [ngClass]="{'isLoading': (isLoading$ | async)}">
+        <li *ngFor="let item of alphabets">
+            <input type="checkbox" id="{{item?.name}}" hidden [(ngModel)]="item.isChecked"
+                [ngModelOptions]="{standalone: true}" (change)="onSelected(item)">
+            <label for="{{item?.name}}">
+                <span class="fake-box"
+                    [ngClass]="{'right-answer': item.isChecked && item?.type == consonant,'wrong-answer': item.isChecked && item?.type == vowel}">{{item?.name}}</span>
+                <span class="linen"></span>
+            </label>
+        </li>
+    </ul> -->
+</div>
