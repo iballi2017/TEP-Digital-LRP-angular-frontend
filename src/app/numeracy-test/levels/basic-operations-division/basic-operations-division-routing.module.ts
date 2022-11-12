@@ -21,7 +21,11 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsDivisionStageOneSplashModule),
       },
       {
+<<<<<<< HEAD
         path: 'basic-operations-division-splash',
+=======
+        path: 'number-recognition-one-splash',
+>>>>>>> 655ac570a75dc7e07e85f9f11cc252fccedf1e9a
         loadChildren: () =>
           import(
             './stages/basic-operations-division-stage-one/basic-operations-division-stage-one-splash/basic-operations-division-stage-one-splash.module'
@@ -48,7 +52,11 @@ const routes: Routes = [
           ).then((m) => m.BasicOperationsDivisionStageTwoSplashModule),
       },
       {
+<<<<<<< HEAD
         path: 'basic-operations-division-splash',
+=======
+        path: 'number-recognition-one-splash',
+>>>>>>> 655ac570a75dc7e07e85f9f11cc252fccedf1e9a
         loadChildren: () =>
           import(
             './stages/basic-operations-division-stage-two/basic-operations-division-stage-two-splash/basic-operations-division-stage-two-splash.module'
@@ -154,4 +162,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class BasicOperationsDivisionRoutingModule { }
+export class BasicOperationsDivisionRoutingModule {}
