@@ -39,19 +39,19 @@ export class NumeracyTestComponent implements OnInit {
     },
     {
       name: 'Basic operations: Addition',
-      url: '/numeracy/levels/basic-operation-addition',
+      url: '/numeracy/levels/basic-operations-addition',
     },
     {
       name: 'Basic operations: Subtraction',
-      url: '/numeracy/levels/basic-operation-subtraction',
+      url: '/numeracy/levels/basic-operations-subtraction',
     },
     {
       name: 'Basic operations: Division',
-      url: '/numeracy/levels/basic-operation-division',
+      url: '/numeracy/levels/basic-operations-division',
     },
     {
       name: 'Basic operations: Multiplication',
-      url: '/numeracy/levels/basic-operation-multiplication',
+      url: '/numeracy/levels/basic-operations-multiplication',
     }
   ];
   constructor(public dialog: MatDialog) { }
