@@ -38,19 +38,19 @@ const routes: Routes = [
         component: NumberRecognitionThreeComponent,
       },
       {
-        path: 'levels/basic-operation-addition',
+        path: 'levels/basic-operations-addition',
         component: BasicOperationsAdditionComponent,
       },
       {
-        path: 'levels/basic-operation-subtraction',
+        path: 'levels/basic-operations-subtraction',
         component: BasicOperationsSubtractionComponent,
       },
       {
-        path: 'levels/basic-operation-division',
+        path: 'levels/basic-operations-division',
         component: BasicOperationsDivisionComponent,
       },
       {
-        path: 'levels/basic-operation-multiplication',
+        path: 'levels/basic-operations-multiplication',
         component: BasicOperationsMultiplicationComponent,
       },
     ],
