@@ -6,6 +6,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -42,6 +43,7 @@ export class ExerciseTwoComponent implements OnInit {
   answerNumber!: any;
   testLoopNumber: number = 0;
   itemIndex: number = 0;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _basicOperationsAdditionStageFourSvc: BasicOperationsAdditionStageFourService,
@@ -59,11 +61,12 @@ export class ExerciseTwoComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   getActionNumbers() {
@@ -152,7 +155,7 @@ export class ExerciseTwoComponent implements OnInit {
   onSubmit(Payload: any) {
     console.log('Payload: ', Payload);
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._basicOperationsAdditionStageFourSvc.SubmitGameStageActivityTwoResult(
+    let subscription = this._basicOperationsAdditionStageFourSvc.SubmitGameStageActivityTwoResult(
       Payload
     )
       .subscribe({
@@ -169,7 +172,7 @@ export class ExerciseTwoComponent implements OnInit {
               this.isFinishedMessage = '';
               this.successMessage = '';
               this.onReset();
-            alert("completed!!!")
+              alert("completed!!!")
               this._router.navigate([
                 `/${GameType.NUMERACY}/level-completion/${this.gameLevel}`
               ]);
@@ -186,6 +189,7 @@ export class ExerciseTwoComponent implements OnInit {
           }
         },
       });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -194,6 +198,15 @@ export class ExerciseTwoComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+  
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

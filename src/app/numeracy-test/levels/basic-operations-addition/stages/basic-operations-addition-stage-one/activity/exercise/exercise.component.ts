@@ -1,7 +1,8 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -16,7 +17,7 @@ import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_S
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
 })
-export class ExerciseComponent implements OnInit {
+export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
   pageTitle: string = 'Can you add the 1-digit numbers here';
@@ -37,6 +38,7 @@ export class ExerciseComponent implements OnInit {
   answerNumber!: any;
   testLoopNumber: number = 0;
   itemIndex: number = 0;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _basicOperationsAdditionSvc: BasicOperationsAdditionStageOneService,
@@ -44,7 +46,7 @@ export class ExerciseComponent implements OnInit {
     private _router: Router,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getActionNumbers();
@@ -69,11 +71,12 @@ export class ExerciseComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   getActionNumbers() {
@@ -163,7 +166,7 @@ export class ExerciseComponent implements OnInit {
   onSubmit(Payload: any) {
     console.log("Payload: ", Payload)
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._basicOperationsAdditionSvc.SubmitGameStageResult(Payload).subscribe({
+    let subscription = this._basicOperationsAdditionSvc.SubmitGameStageResult(Payload).subscribe({
       next: (response: any) => {
         if (response) {
           console.log("response: ", response)
@@ -193,6 +196,7 @@ export class ExerciseComponent implements OnInit {
         }
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -201,6 +205,15 @@ export class ExerciseComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

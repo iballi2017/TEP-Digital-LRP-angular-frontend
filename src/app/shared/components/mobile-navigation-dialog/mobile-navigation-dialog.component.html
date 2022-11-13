@@ -7,13 +7,20 @@
             <div class="title text-center mb-4">{{title}}</div>
             <ul id="navigation-items">
                 <li *ngFor="let item of navItemList">
-                    <a [routerLink]="[item?.url]" routerLinkActive="router-link-active">
+                    <a [routerLink]="[item?.url]" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact:
+                        true}">
                         {{item?.name}}
                     </a>
                 </li>
+                <!-- <li *ngFor="let item of navItemList">
+                    <a [routerLink]="[gameType +'/'+item?.url]" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact:
+                        true}">
+                        {{item?.name}}
+                    </a>
+                </li> -->
                 <li *ngIf="logout">
                     <a id="logout-trigger" class="cursor-pointer" (click)="logoutUser()">
-                      Logout
+                        Logout
                     </a>
                 </li>
             </ul>

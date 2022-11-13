@@ -6,6 +6,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -38,13 +39,14 @@ export class ExerciseComponent implements OnInit {
   isFinishedMessage!: string;
   stageNumber: number = 2;
   successMessage: any;
+  Subscriptions: Subscription[] = [];
   constructor(
     private _wordStageTwoSvc: WordStageTwoService,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar,
     private _router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onGetGameSessionId();
@@ -72,11 +74,12 @@ export class ExerciseComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   onPush(LetterItem: any) {
@@ -122,7 +125,7 @@ export class ExerciseComponent implements OnInit {
         data: complete,
       };
       this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-      this._wordStageTwoSvc.SubmitGameStageResult(Payload).subscribe({
+      let subscription = this._wordStageTwoSvc.SubmitGameStageResult(Payload).subscribe({
         next: (response: any) => {
           if (response) {
             this.ngRedux.dispatch({
@@ -151,6 +154,7 @@ export class ExerciseComponent implements OnInit {
           }
         },
       });
+      this.Subscriptions.push(subscription)
     }
   }
 
@@ -160,6 +164,15 @@ export class ExerciseComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

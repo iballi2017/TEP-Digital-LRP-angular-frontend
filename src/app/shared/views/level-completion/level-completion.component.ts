@@ -17,7 +17,7 @@ export class LevelCompletionComponent implements OnInit {
   @Input() gameType!: string;
   @Input() levelTitle!: string;
   // @Input() stageNumber!: number;
-  pageTitle = 'YOU HAVE COMPLETE tHIS LEVEL OF THE PROGRAM';
+  pageTitle!: string;
   pageFeaturedImage =
     '../../../../../assets/images/level-completion-page-bg.png';
   btnStyle = {
@@ -34,7 +34,7 @@ export class LevelCompletionComponent implements OnInit {
   gameResult!: any;
   durationInSeconds = 10;
   gameLevel: any;
-  constructor(private _router: Router, private _gameSvc: GameService) {}
+  constructor(private _router: Router, private _gameSvc: GameService) { }
 
   ngOnInit(): void {
     this.gameLevel = {
@@ -46,6 +46,7 @@ export class LevelCompletionComponent implements OnInit {
     this._gameSvc.LoadGameSession();
     this.onGetGameSessionId();
     this.onGetStageResult();
+    this.pageTitle = `YOU HAVE COMPLETE ${this.gameLevel?.levelTitle} LEVEL OF THE PROGRAM`
   }
 
   onGetGameSessionId() {

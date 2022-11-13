@@ -6,6 +6,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -45,6 +46,7 @@ export class ExerciseComponent implements OnInit {
   answerNumber!: any;
   testLoopNumber: number = 0;
   itemIndex: number = 0;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _basicOperationsAdditionStageTwoSvc: BasicOperationsAdditionStageTwoService,
@@ -52,7 +54,7 @@ export class ExerciseComponent implements OnInit {
     private _router: Router,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getActionNumbers();
@@ -62,11 +64,12 @@ export class ExerciseComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   getActionNumbers() {
@@ -152,7 +155,7 @@ export class ExerciseComponent implements OnInit {
   onSubmit(Payload: any) {
     console.log('Payload: ', Payload);
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._basicOperationsAdditionStageTwoSvc
+    let subscription = this._basicOperationsAdditionStageTwoSvc
       .SubmitGameStageResult(Payload)
       .subscribe({
         next: (response: any) => {
@@ -169,7 +172,7 @@ export class ExerciseComponent implements OnInit {
               this.onReset();
               // alert('completed!!!');
               this._router.navigate([
-                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                '/numeracy/basic-operations-addition/stage-2/activity/exercise-2'
               ]);
             }, 3000);
           }
@@ -184,6 +187,7 @@ export class ExerciseComponent implements OnInit {
           }
         },
       });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -192,6 +196,15 @@ export class ExerciseComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

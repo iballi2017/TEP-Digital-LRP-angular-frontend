@@ -69,7 +69,7 @@ export class LetteringStageOneActivityComponent implements OnInit {
   onSumbit() {
     const Payload: LetteringStageOneAnswer = {
       session_id: '8f8d98a7-6d75-4428b9ae',
-      anwser: '1',
+      answer: '1',
       data: [],
     };
 
@@ -85,6 +85,6 @@ export class LetteringStageOneActivityComponent implements OnInit {
 
 export interface LetteringStageOneAnswer {
   session_id: string;
-  anwser: string;
+  answer: string;
   data: any[];
 }

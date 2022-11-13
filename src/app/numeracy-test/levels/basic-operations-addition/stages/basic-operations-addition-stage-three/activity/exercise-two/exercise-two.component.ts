@@ -1,7 +1,8 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -17,7 +18,7 @@ import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_S
   templateUrl: './exercise-two.component.html',
   styleUrls: ['./exercise-two.component.scss'],
 })
-export class ExerciseTwoComponent implements OnInit {
+export class ExerciseTwoComponent implements OnInit, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
   pageTitle: string = 'Can you add the 2-digit numbers here';
@@ -38,6 +39,7 @@ export class ExerciseTwoComponent implements OnInit {
   answerNumber!: any;
   testLoopNumber: number = 0;
   itemIndex: number = 0;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _basicOperationsAdditionStageThreeSvc: BasicOperationsAdditionStageThreeService,
@@ -45,7 +47,7 @@ export class ExerciseTwoComponent implements OnInit {
     private _router: Router,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getActionNumbers();
@@ -55,26 +57,26 @@ export class ExerciseTwoComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
-        
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   getActionNumbers() {
     let numbersList =
       this._basicOperationsAdditionStageThreeSvc.GetTestTwoActionsNumbers();
-    
+
     this.actionWords = numbersList;
   }
   getresultNumbers() {
     let numbersList =
       this._basicOperationsAdditionStageThreeSvc.GetTestTwoResultNumbers();
     this.resultNumbers = numbersList;
-    
-    
+
+
     this.answerNumber = numbersList?.numbers[this.testLoopNumber].answer;
     this.questionResultNumbers =
       numbersList?.numbers[this.testLoopNumber]?.questionItems;
@@ -83,9 +85,9 @@ export class ExerciseTwoComponent implements OnInit {
   }
 
   trackResultHint() {
-    
+
     let x = this.resultNumbers.numbers[this.testLoopNumber];
-    
+
     if (x.answer?.isWellPlaced == true) {
       x.isDone = true;
     }
@@ -94,9 +96,9 @@ export class ExerciseTwoComponent implements OnInit {
 
   textExercise() {
     let questionItems = this.resultNumbers.numbers;
-    
+
     let done = questionItems.filter((i: any) => i.isDone == true);
-    
+
     if (done.length < questionItems.length) {
       this.testLoopNumber++;
       setTimeout(() => {
@@ -110,35 +112,30 @@ export class ExerciseTwoComponent implements OnInit {
 
   onTestValues() {
     let questionItems = this.resultNumbers.numbers;
-    
+
     let complete = questionItems.filter((done: any) => done?.isDone == true);
-
-    
-    
-    
-
     if (complete.length == questionItems?.length) {
       this.resultNumbers.isComplete = true;
-      
+
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
-        answer: '1',
+        answer: '2',
         data: [this.resultNumbers],
       };
-     
+
       this.onSubmit(Payload);
     }
   }
 
   onSelect(item: any) {
     let result = this.resultNumbers?.numbers[this.testLoopNumber];
-    
-    
+
+
     if (item.figure == result.answer.figure) {
       item.isCorrectNumber = true;
       result.answer.isWellPlaced = true;
       this.trackResultHint();
-      
+
     } else {
       item.isWrongNumber = true;
       // 
@@ -154,45 +151,42 @@ export class ExerciseTwoComponent implements OnInit {
     this.uiExercise = [];
     this.getresultNumbers();
   }
-
-
-
-  
   onSubmit(Payload: any) {
     console.log('Payload: ', Payload);
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._basicOperationsAdditionStageThreeSvc
-      .SubmitGameStageActivityTwoResult(Payload)
-      // .subscribe({
-      //   next: (response: any) => {
-      //     if (response) {
-      //       console.log('response: ', response);
-      //       this.ngRedux.dispatch({
-      //         type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
-      //         payload: Payload,
-      //       });
-      //       this.openSnackBar(response?.message);
-      //       setTimeout(() => {
-      //         this.isFinishedMessage = '';
-      //         this.successMessage = '';
-      //         this.onReset();
-      //         // alert('completed!!!');
-      //         this._router.navigate([
-      //           `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
-      //         ]);
-      //       }, 3000);
-      //     }
-      //   },
-      //   error: (err: any) => {
-      //     if (err) {
-      //       console.warn('Error: ', err);
-      //       this.ngRedux.dispatch({
-      //         type: SUBMIT_GAME_STAGE_RESULT_ERROR,
-      //         payload: err?.error?.message,
-      //       });
-      //     }
-      //   },
-      // });
+    let subscription = this._basicOperationsAdditionStageThreeSvc
+      .SubmitGameStageResult(Payload)
+      .subscribe({
+        next: (response: any) => {
+          if (response) {
+            console.log('response: ', response);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+              payload: Payload,
+            });
+            this.openSnackBar(response?.message);
+            setTimeout(() => {
+              this.isFinishedMessage = '';
+              this.successMessage = '';
+              this.onReset();
+              // alert('completed!!!');
+              this._router.navigate([
+                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              ]);
+            }, 3000);
+          }
+        },
+        error: (err: any) => {
+          if (err) {
+            console.warn('Error: ', err);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+              payload: err?.error?.message,
+            });
+          }
+        },
+      });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -201,6 +195,14 @@ export class ExerciseTwoComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

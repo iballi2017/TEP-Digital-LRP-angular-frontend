@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { GameType } from '../models/types/game-type';
 import { MobileNavigationDialogComponent } from '../shared/components/mobile-navigation-dialog/mobile-navigation-dialog.component';
 
 @Component({
@@ -22,35 +23,35 @@ export class NumeracyTestComponent implements OnInit {
     // },
     {
       name: 'Number recognition 1',
-      url: 'levels/number-recognition-one',
+      url: '/numeracy/levels/number-recognition-one',
     },
     {
       name: 'Number recognition 2',
-      url: 'levels/number-recognition-two',
+      url: '/numeracy/levels/number-recognition-two',
     },
     {
       name: 'Place value',
-      url: 'levels/place-value',
+      url: '/numeracy/levels/place-value',
     },
     {
       name: 'Number recognition 3',
-      url: 'levels/number-recognition-three',
+      url: '/numeracy/levels/number-recognition-three',
     },
     {
       name: 'Basic operations: Addition',
-      url: 'levels/basic-operation-addition',
+      url: '/numeracy/levels/basic-operation-addition',
     },
     {
       name: 'Basic operations: Subtraction',
-      url: 'levels/basic-operation-subtraction',
+      url: '/numeracy/levels/basic-operation-subtraction',
     },
     {
       name: 'Basic operations: Division',
-      url: 'levels/basic-operation-division',
+      url: '/numeracy/levels/basic-operation-division',
     },
     {
       name: 'Basic operations: Multiplication',
-      url: 'levels/basic-operation-multiplication',
+      url: '/numeracy/levels/basic-operation-multiplication',
     }
   ];
   constructor(public dialog: MatDialog) { }
