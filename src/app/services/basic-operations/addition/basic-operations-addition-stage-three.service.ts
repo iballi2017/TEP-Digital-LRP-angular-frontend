@@ -6,9 +6,7 @@ import { handleError } from 'src/app/helpers/errorHandler';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import {
   actionNumbers,
-  resultNumbers,
-  testTwoActionNumbers,
-  testTwoResultNumbers,
+  resultNumbers
 } from 'src/assets/data/numeracy.data/basic-operations-addition-stage-3.data';
 
 @Injectable({
@@ -29,27 +27,9 @@ export class BasicOperationsAdditionStageThreeService {
     return numbersList;
   }
 
-  GetTestTwoActionsNumbers() {
-    let numbersList = [...testTwoActionNumbers];
-    return numbersList;
-  }
-
-  GetTestTwoResultNumbers() {
-    let numbersList = { ...testTwoResultNumbers };
-    return numbersList;
-  }
-
   SubmitGameStageResult(_GameStageResult: ExerciseAnswer) {
     return this._http
       .post(`${this.SubmitBasicOperationsAddGameStage_3_Url}`, _GameStageResult)
       .pipe(catchError(handleError));
-  }
-
-  SubmitGameStageActivityTwoResult(_GameStageResult: ExerciseAnswer) {
-    console.log('Activity 2 data: ', _GameStageResult);
-    return;
-    // return this._http
-    //   .post(`${this.SubmitBasicOperationsAddGameStage_3_Url}`, _GameStageResult)
-    //   .pipe(catchError(handleError));
   }
 }

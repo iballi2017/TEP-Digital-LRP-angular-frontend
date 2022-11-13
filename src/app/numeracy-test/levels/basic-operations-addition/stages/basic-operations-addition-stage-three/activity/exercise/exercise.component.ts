@@ -144,7 +144,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
 
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
-        answer: '1',
+        answer: '2',
         data: [this.resultNumbers],
       };
 
@@ -194,7 +194,6 @@ export class ExerciseComponent implements OnInit, OnDestroy {
               this.isFinishedMessage = '';
               this.successMessage = '';
               this.onReset();
-              // alert('completed!!!');
               this._router.navigate([
                 `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
               ]);

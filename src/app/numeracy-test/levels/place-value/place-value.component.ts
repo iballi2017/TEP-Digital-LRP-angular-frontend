@@ -60,6 +60,7 @@ export class PlaceValueComponent implements OnInit, OnDestroy {
   modifyStageArray() {
     let x = new ModifyStageArrayData(this.gameLevelResultAndRating)
     this.testStageStars = x.modifyStageArray();
+    console.log(" this.testStageStars : ", this.testStageStars)
   }
 
   ngOnDestroy(): void {

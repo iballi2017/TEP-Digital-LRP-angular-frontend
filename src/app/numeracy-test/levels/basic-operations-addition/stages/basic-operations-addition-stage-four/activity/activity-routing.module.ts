@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivityComponent } from './activity.component';
-import { ExerciseTwoComponent } from './exercise-two/exercise-two.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 
 const routes: Routes = [
@@ -11,7 +10,6 @@ const routes: Routes = [
     children: [
       { path: '', component: ExerciseComponent },
       { path: 'exercise', component: ExerciseComponent },
-      { path: 'exercise-2', component: ExerciseTwoComponent },
     ],
   },];
 

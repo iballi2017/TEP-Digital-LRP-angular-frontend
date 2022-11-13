@@ -152,7 +152,13 @@ export class ExerciseComponent implements OnInit {
     this.getresultNumbers();
   }
 
-  onSubmit(Payload: any) {
+
+  onSubmitSimpleExercise(answer: string, isRoute: boolean) {
+    const Payload: ExerciseAnswer = {
+      session_id: this.gameSessionId,
+      answer: answer,
+      data: [this.resultNumbers],
+    };
     console.log('Payload: ', Payload);
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     let subscription = this._basicOperationsAdditionStageTwoSvc
@@ -165,16 +171,18 @@ export class ExerciseComponent implements OnInit {
               type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
               payload: Payload,
             });
-            this.openSnackBar(response?.message);
-            setTimeout(() => {
-              this.isFinishedMessage = '';
-              this.successMessage = '';
-              this.onReset();
-              // alert('completed!!!');
-              this._router.navigate([
-                '/numeracy/basic-operations-addition/stage-2/activity/exercise-2'
-              ]);
-            }, 3000);
+            if (isRoute) {
+              this.openSnackBar(response?.message);
+              setTimeout(() => {
+                this.isFinishedMessage = '';
+                this.successMessage = '';
+                this.onReset();
+                // alert('completed!!!');
+                this._router.navigate([
+                  '/numeracy/basic-operations-addition/stage-2/activity/exercise-2'
+                ]);
+              }, 3000);
+            }
           }
         },
         error: (err: any) => {
@@ -188,6 +196,11 @@ export class ExerciseComponent implements OnInit {
         },
       });
     this.Subscriptions.push(subscription)
+  }
+
+
+  onSubmit(Payload: any) {
+    this.onSubmitSimpleExercise('1', true);
   }
 
   openSnackBar(data: any) {
