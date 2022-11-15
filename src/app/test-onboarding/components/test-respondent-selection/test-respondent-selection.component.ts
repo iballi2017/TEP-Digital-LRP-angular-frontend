@@ -64,7 +64,7 @@ export class TestRespondentSelectionComponent implements OnInit {
       // game_type: GameType.Literacy,
       game_type: this.data?.QuestionCategory?.QuestionCategory,
     };
-    console.log("Payload: ", Payload)
+    // console.log("Payload: ", Payload)
 
     this._gameSvc.StartGame(Payload).subscribe({
       next: (response: any) => {
@@ -74,7 +74,7 @@ export class TestRespondentSelectionComponent implements OnInit {
             payload: response,
           });
           // this._router.navigate(['/literacy/levels/lettering']);
-          this.routeToGame(Payload.game_type);
+          this.routeToGame(Payload.game_type.toLowerCase());
           this.closeDialog();
         }
       },
@@ -92,16 +92,17 @@ export class TestRespondentSelectionComponent implements OnInit {
 
   routeToGame(GT: string) {
     switch (GT) {
-      case GameType.LITERACY:
+      case GameType.LITERACY.toLowerCase():
         this._router.navigate(['/literacy/levels/lettering']);
         break;
-      case GameType.NUMERACY:
+      case GameType.NUMERACY.toLowerCase():
         this._router.navigate(['/numeracy/levels/number-recognition-one']);
         break;
       default:
         break;
     }
   }
+
   closeDialog() {
     this.dialogRef.close('dialod closed!');
   }
