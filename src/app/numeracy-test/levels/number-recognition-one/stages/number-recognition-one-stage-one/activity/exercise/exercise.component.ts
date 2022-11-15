@@ -1,11 +1,12 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -20,7 +21,7 @@ import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_S
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
 })
-export class ExerciseComponent implements OnInit {
+export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
   pageTitle: string = 'Can you identify the 1-digit numbers here';
@@ -34,13 +35,16 @@ export class ExerciseComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   gameLevel = GameLevel.NUMBER_RECOGNITION_ONE;
   durationInSeconds = 10;
+  Subscriptions: Subscription[] = [];
+
+
   constructor(
     private _numberRecognitionOneSvc: NumberRecognitionOneService,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
     private _router: Router,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getActionNumbers();
@@ -50,11 +54,12 @@ export class ExerciseComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   getActionNumbers() {
@@ -122,7 +127,7 @@ export class ExerciseComponent implements OnInit {
 
   onSubmit(Payload: any) {
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._numberRecognitionOneSvc.SubmitGameStageResult(Payload).subscribe({
+    let subscription = this._numberRecognitionOneSvc.SubmitGameStageResult(Payload).subscribe({
       next: (response: any) => {
         if (response) {
           this.ngRedux.dispatch({
@@ -134,9 +139,8 @@ export class ExerciseComponent implements OnInit {
             this.isFinishedMessage = '';
             this.successMessage = '';
             this.onReset();
-            // alert('completed!!!');
             this._router.navigate([
-              `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              `/${GameType.NUMERACY}/level-completion/${this.gameLevel}`
             ]);
           }, 3000);
         }
@@ -151,6 +155,7 @@ export class ExerciseComponent implements OnInit {
         }
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -159,6 +164,15 @@ export class ExerciseComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

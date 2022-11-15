@@ -1,11 +1,12 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -24,7 +25,7 @@ import {
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
 })
-export class ExerciseComponent implements OnInit {
+export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
   actionWords: any[] = [];
@@ -38,13 +39,14 @@ export class ExerciseComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 10;
   gameLevel = GameLevel.PARAGRAPH;
+  Subscriptions: Subscription[] = [];
   constructor(
     private _paragraphStageFourSvc: ParagraphStageFourService,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
     private _router: Router,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onGetGameSessionId();
@@ -54,11 +56,12 @@ export class ExerciseComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   onGetActionWords() {
@@ -70,7 +73,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSelect(WordItem: any) {
-    
+
     let resultItem = this.resultList[this.exerciseNumber];
     let list = this.resultList[this.exerciseNumber]?.word;
     let objIndex = list.findIndex(
@@ -109,7 +112,7 @@ export class ExerciseComponent implements OnInit {
     list.forEach((item: any) => {
       item.isDone = false;
       let x = item.word.filter((i: any) => i.isHint != true);
-      
+
       x.forEach((element: any) => {
         element.isWellPlaced = false;
       });
@@ -118,12 +121,12 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSubmit(Result: ExerciseAnswer) {
-    
+
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._paragraphStageFourSvc.SubmitGameStageResult(Result).subscribe({
+    let subscription = this._paragraphStageFourSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
-          
+
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Result,
@@ -150,6 +153,7 @@ export class ExerciseComponent implements OnInit {
         }
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -158,6 +162,16 @@ export class ExerciseComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
@@ -12,6 +13,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -30,7 +32,7 @@ import {
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
 })
-export class ExerciseComponent implements OnInit, OnChanges {
+export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   @select((s) => s.SpeechTexts.speechTexts) speechTexts$: any;
   @select((s) => s.SpeechTexts.isLoading) speechTextsIsLoading$: any;
   @select((s) => s.game.gameSession) gameSession$: any;
@@ -48,6 +50,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 10;
   gameLevel = GameLevel.PARAGRAPH;
+  Subscriptions: Subscription[] = [];
   constructor(
     public _paragraphStageOneSvc: ParagraphStageOneService,
     private _router: Router,
@@ -83,12 +86,13 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
-        
+
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   GetExerciseTexts() {
@@ -98,7 +102,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
     this.speechTexts$.subscribe({
       next: (response: any) => {
         if (response) {
-          
+
           let speechText = response.replace(/\s/g, '');
           let resultTexts = this.resultTexts.replace(/\s/g, '');
           console.warn(
@@ -129,7 +133,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
             this.clearService();
           }
           //Log object to console again.
-          
+
         }
       },
       error: (err: any) => {
@@ -141,10 +145,10 @@ export class ExerciseComponent implements OnInit, OnChanges {
   onTestValues(List: any) {
     let complete = List.filter((done: any) => done?.isDone == true);
 
-    
+
 
     if (complete.length == List?.length) {
-      
+
       this.stopService();
       // alert('completed!!!');
       // this.textPosition += 1;
@@ -156,7 +160,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
         answer: '4',
         data: List,
       };
-     
+
       this.onSubmit(Payload);
     }
   }
@@ -173,12 +177,12 @@ export class ExerciseComponent implements OnInit, OnChanges {
   }
 
   onSubmit(Result: ExerciseAnswer) {
-    
+
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._paragraphStageOneSvc.SubmitGameStageResult(Result).subscribe({
+    let subscription = this._paragraphStageOneSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
-          
+
           this.openSnackBar(response?.message);
           setTimeout(() => {
             this.isFinishedMessage = '';
@@ -204,6 +208,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
         }
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -212,6 +217,14 @@ export class ExerciseComponent implements OnInit, OnChanges {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

@@ -2,6 +2,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import {
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
@@ -11,6 +12,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -29,7 +31,7 @@ import {
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
 })
-export class ExerciseComponent implements OnInit {
+export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.SpeechTexts.speechTexts) speechTexts$: any;
   @select((s) => s.SpeechTexts.isLoading) speechTextsIsLoading$: any;
   @select((s) => s.game.gameSession) gameSession$: any;
@@ -47,6 +49,7 @@ export class ExerciseComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 10;
   gameLevel = GameLevel.PARAGRAPH;
+  Subscriptions: Subscription[] = [];
   constructor(
     public _paragraphStageTwoSvc: ParagraphStageTwoService,
     private cdr: ChangeDetectorRef,
@@ -76,11 +79,12 @@ export class ExerciseComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
-      next: (data: any) => {        
+    let subscription = this.gameSession$.subscribe({
+      next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   GetExerciseTexts() {
@@ -116,7 +120,7 @@ export class ExerciseComponent implements OnInit {
             this.clearService();
           }
           //Log object to console again.
-          
+
         }
       },
       error: (err: any) => {
@@ -128,7 +132,7 @@ export class ExerciseComponent implements OnInit {
   onTestValues(List: any) {
     let complete = List.filter((done: any) => done?.isDone == true);
 
-    
+
 
     if (complete.length == List?.length) {
       // 
@@ -144,7 +148,7 @@ export class ExerciseComponent implements OnInit {
         answer: '4',
         data: List,
       };
-     
+
       this.onSubmit(Payload);
     }
   }
@@ -162,12 +166,12 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSubmit(Result: ExerciseAnswer) {
-    
+
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._paragraphStageTwoSvc.SubmitGameStageResult(Result).subscribe({
+    let subscription = this._paragraphStageTwoSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
-          
+
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Result,
@@ -193,6 +197,7 @@ export class ExerciseComponent implements OnInit {
         }
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -201,6 +206,14 @@ export class ExerciseComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

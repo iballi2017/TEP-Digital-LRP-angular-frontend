@@ -25,13 +25,14 @@ export class MobileNavigationDialogComponent implements OnInit, OnDestroy {
     private _authSvc: AuthenticationService,
     private _router: Router,
     public dialogRef: MatDialogRef<MobileNavigationDialogComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.title = this.data.navData.title;
     this.navItemList = this.data.navData.navItemList;
     this.logout = this.data.navData.logout;
     this.onCheckRouteEvents();
+    console.log("navData: ", this.data.navData)
   }
 
   onCheckRouteEvents() {
@@ -73,7 +74,7 @@ export class MobileNavigationDialogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // 
-    
+
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

@@ -1,6 +1,7 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Alphabet, AlphabetType } from 'src/app/models/types/alphabet';
 import { LrpLetteringActivityService } from 'src/app/practice/lrp-activity/services/lrp-lettering-activity.service';
 import { GameService } from 'src/app/services/game.service';
@@ -16,7 +17,7 @@ import {
   templateUrl: './exercise-one.component.html',
   styleUrls: ['./exercise-one.component.scss'],
 })
-export class ExerciseOneComponent implements OnInit, DoCheck {
+export class ExerciseOneComponent implements OnInit, DoCheck, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
   alphabets!: Alphabet[];
@@ -27,13 +28,14 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
   exerciseAlphabets: any;
   resultTwoLetterWords: any[] = [];
   gameSessionId: any;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _gameSvc: GameService,
     private _stageThreeActivitySvc: StageThreeActivityExerciseOneService,
     private _router: Router,
     private ngRedux: NgRedux<IAppState>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onGetGameSessionId();
@@ -48,11 +50,12 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   onTestValues() {
@@ -79,9 +82,9 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
       }
       if (
         this.resultTwoLetterWords[i].word[0]?.name ==
-          this.selectedAlphabets[0]?.name &&
+        this.selectedAlphabets[0]?.name &&
         this.resultTwoLetterWords[i].word[1]?.name ==
-          this.selectedAlphabets[1]?.name
+        this.selectedAlphabets[1]?.name
       ) {
         this.resultTwoLetterWords[i].isDone = true;
         this.selectedAlphabets = [];
@@ -162,7 +165,7 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
     this.ngRedux.dispatch({ type: ADD_LETTERING_STAGE_THREE_EXERCISE_ONE });
     const Payload: any = {
       // session_id: this.gameSessionId,
-      // anwser: '1',
+      // answer: '1',
       data: complete,
     };
 
@@ -180,11 +183,21 @@ export class ExerciseOneComponent implements OnInit, DoCheck {
       '/literacy/lettering/stage-3/interlude-b',
     ]);
   }
+
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
+    });
+  }
 }
 
 export interface LetteringStageThreeExerciseAnswer {
   session_id: string;
-  anwser: string;
+  answer: string;
   data: any[];
 }
 

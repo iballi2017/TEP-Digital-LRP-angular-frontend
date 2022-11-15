@@ -1,11 +1,12 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Alphabet, AlphabetType } from 'src/app/models/types/alphabet';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -24,7 +25,7 @@ import {
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
 })
-export class ExerciseComponent implements OnInit {
+export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
   alphabets!: Alphabet[];
@@ -40,13 +41,14 @@ export class ExerciseComponent implements OnInit {
   durationInSeconds = 10;
   stageNumber: number = 2;
   gameLevel = GameLevel.LETTER;
+  Subscriptions: Subscription[]=[];
   constructor(
     private _stageTwoActivitySvc: StageTwoActivityService,
     private _router: Router,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onGetAlphabet();
@@ -57,7 +59,7 @@ export class ExerciseComponent implements OnInit {
   onGetGameSessionId() {
     this.gameSession$.subscribe({
       next: (data: any) => {
-        
+
         this.gameSessionId = data?.session_id;
       },
     });
@@ -97,13 +99,13 @@ export class ExerciseComponent implements OnInit {
     }
 
     if (this.consonants.length > this.consonantCount) {
-      
+
       this.onSubmit();
     }
   }
 
   onReset() {
-    
+
     let list = [...this.alphabets];
     list.forEach((item: any) => {
       item.isChecked = false;
@@ -114,20 +116,20 @@ export class ExerciseComponent implements OnInit {
   onSubmit() {
     const Payload: LetteringStageTwoAnswer = {
       session_id: this.gameSessionId,
-      anwser: '1',
+      answer: '1',
       data: this.selectedAlphabets,
     };
-    
+
 
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._gameSvc.SubmitLetteringStageTwoResult(Payload).subscribe({
+    let subscription = this._gameSvc.SubmitLetteringStageTwoResult(Payload).subscribe({
       next: (response: any) => {
         if (response) {
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Payload,
           });
-          
+
           this.successMessage = response?.message;
           this.isFinishedMessage =
             'You have completed this level with ' +
@@ -162,6 +164,7 @@ export class ExerciseComponent implements OnInit {
         }
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
@@ -174,10 +177,20 @@ export class ExerciseComponent implements OnInit {
       data: data,
     });
   }
+
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
+    });
+  }
 }
 
 export interface LetteringStageTwoAnswer {
   session_id: string;
-  anwser: string;
+  answer: string;
   data: any[];
 }

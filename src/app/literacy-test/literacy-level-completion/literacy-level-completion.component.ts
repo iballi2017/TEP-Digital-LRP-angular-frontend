@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GameType } from 'src/app/models/types/game-type';
 
 @Component({
   selector: 'app-literacy-level-completion',
@@ -9,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 export class LiteracyLevelCompletionComponent implements OnInit {
   levelTitle!: string;
   gameLevel: any;
-  constructor(private _route: ActivatedRoute) {}
+  gameType = GameType.LITERACY;
+  constructor(private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getParams();
