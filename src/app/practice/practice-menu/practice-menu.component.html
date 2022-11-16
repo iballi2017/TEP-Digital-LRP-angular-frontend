@@ -1,0 +1,12 @@
+<!-- <p>practice-menu works!</p> -->
+<div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-6 col-sm-4 col-md-3" *ngFor="let item of menuList">
+            <div class="card display-card" [routerLink]="[item?.url]" routerLinkActive="router-link-active" >
+                <div class="card-body">
+                    {{item?.title}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
