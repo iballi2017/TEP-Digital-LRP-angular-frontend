@@ -2,6 +2,7 @@
 export const exerciseTexts = [
   {
     text: 'my name is Joy I am 10 years old I am in class three my best colours are blue and pink',
+    text2: 'my name is Joy I am ten years old I am in class three my best colours are blue and pink',
     uiText:
       'My name is Joy. I am ten years old. I am in class 3. My best colors are blue and pink.',
     isDone: false,
@@ -14,6 +15,7 @@ export const exerciseTexts = [
   // },
   {
     text: 'I love my blue tea cup',
+    text2: 'I love my blue teacup',
     uiText: 'I love my blue tea cup.',
     isDone: false,
   },

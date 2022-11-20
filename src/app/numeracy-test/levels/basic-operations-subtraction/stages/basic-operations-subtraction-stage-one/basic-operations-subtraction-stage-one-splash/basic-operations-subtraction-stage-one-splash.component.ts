@@ -13,7 +13,7 @@ export class BasicOperationsSubtractionStageOneSplashComponent
       title: 'LITERACY',
     },
     {
-      title: 'LETTERING',
+      title: 'LETTER',
     },
     {
       title: 'STAGE 1',

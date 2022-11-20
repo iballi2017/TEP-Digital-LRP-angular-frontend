@@ -11,7 +11,7 @@ export class BasicOperationsSubtractionStageFourSplashComponent implements OnIni
       title: 'LITERACY',
     },
     {
-      title: 'LETTERING',
+      title: 'LETTER',
     },
     {
       title: 'STAGE 1',

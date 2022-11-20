@@ -12,7 +12,7 @@ export class LetteringStageTwoActivityComponent implements OnInit {
       title: 'LITERACY',
     },
     {
-      title: 'LETTERING',
+      title: 'LETTER',
     },
     {
       title: 'STAGE 2',
