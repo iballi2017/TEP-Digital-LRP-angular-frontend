@@ -97,9 +97,13 @@ export class ExerciseComponent implements OnInit, OnDestroy {
 
   trackResultHint() {
     let x = this.resultNumbers.numbers[this.testLoopNumber];
-
     if (x.answer?.isWellPlaced == true) {
       x.isDone = true;
+      const exerciseLength = this.resultNumbers.numbers;
+      let e = exerciseLength.filter((i: any) => i.isDone == true);
+      if (e.length == 1) {
+        this.onSubmitSimpleExercise('1', false);
+      }
     }
     this.textExercise();
   }
@@ -119,6 +123,47 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     }
 
     this.onTestValues();
+  }
+
+
+  onSubmitSimpleExercise(answer: string, isRoute: boolean) {
+    const Payload: ExerciseAnswer = {
+      session_id: this.gameSessionId,
+      answer: answer,
+      data: [this.resultNumbers],
+    };
+    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
+    let subscription = this._basicOperationsAdditionSvc.SubmitGameStageResult(Payload).subscribe({
+      next: (response: any) => {
+        if (response) {
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+            payload: Payload,
+          });
+          if (isRoute) {
+            this.openSnackBar(response?.message);
+            setTimeout(() => {
+              this.isFinishedMessage = '';
+              this.successMessage = '';
+              this.onReset();
+              this._router.navigate([
+                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              ]);
+            }, 3000);
+          }
+        }
+      },
+      error: (err: any) => {
+        if (err) {
+          console.warn('Error: ', err);
+          this.ngRedux.dispatch({
+            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+            payload: err?.error?.message,
+          });
+        }
+      },
+    });
+    this.Subscriptions.push(subscription)
   }
 
   onTestValues() {
@@ -164,39 +209,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(Payload: any) {
-    console.log("Payload: ", Payload)
-    this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    let subscription = this._basicOperationsAdditionSvc.SubmitGameStageResult(Payload).subscribe({
-      next: (response: any) => {
-        if (response) {
-          console.log("response: ", response)
-          this.ngRedux.dispatch({
-            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
-            payload: Payload,
-          });
-          this.openSnackBar(response?.message);
-          setTimeout(() => {
-            this.isFinishedMessage = '';
-            this.successMessage = '';
-            this.onReset();
-            // alert('completed!!!');
-            this._router.navigate([
-              `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
-            ]);
-          }, 3000);
-        }
-      },
-      error: (err: any) => {
-        if (err) {
-          console.warn('Error: ', err);
-          this.ngRedux.dispatch({
-            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
-            payload: err?.error?.message,
-          });
-        }
-      },
-    });
-    this.Subscriptions.push(subscription)
+    this.onSubmitSimpleExercise('2', true);
   }
 
   openSnackBar(data: any) {

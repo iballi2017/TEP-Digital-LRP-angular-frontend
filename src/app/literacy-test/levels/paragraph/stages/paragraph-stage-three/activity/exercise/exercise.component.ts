@@ -78,23 +78,32 @@ export class ExerciseComponent implements OnInit, OnDestroy {
 
   GetExerciseTexts() {
     this.resultTextList = this._paragraphStageThreeSvc.GetExerciseTexts();
+    console.log("this.resultTextList: ", this.resultTextList)
   }
   onTestTexts() {
     this.speechTexts$.subscribe({
       next: (response: any) => {
         if (response) {
+          console.log("response: ", response)
 
           let speechText = response.replace(/\s/g, '');
           let objIndex = this.resultTextList.findIndex(
             (obj: any) => obj.text.replace(/\s/g, '') == speechText
           );
+          let objIndex2 = this.resultTextList.findIndex(
+            (obj: any) => obj.text2.replace(/\s/g, '') == speechText
+          );
           //Log object to Console.
 
-          //Update object's name property.
           if (this.resultTextList[objIndex]) {
             this.resultTextList[objIndex].isDone = true;
             this.textPosition += 1;
-
+            this.onTestValues(this.resultTextList);
+            this.clearService();
+          }
+          if (this.resultTextList[objIndex2]) {
+            this.resultTextList[objIndex2].isDone = true;
+            this.textPosition += 1;
             this.onTestValues(this.resultTextList);
             this.clearService();
           }

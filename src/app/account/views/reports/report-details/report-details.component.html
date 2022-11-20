@@ -155,7 +155,7 @@
             </div>
             <div class="actions-btn-wrapper">
                 <app-table-column-action-buttons (remove)="onRemoveReport(reportDetails?.session_id)"
-                    (edit)="onViewReportDetails(reportDetails?.sessionId)" [primaryBtnTitle]="primaryBtnTitle"
+                    (edit)="onContinueReportGame(reportDetails?.session_id, reportDetails?.gms_type)" [primaryBtnTitle]="primaryBtnTitle"
                     [primaryBtnClasses]="primaryBtnClasses" [dangerBtnClasses]="dangerBtnClasses" [dangerBtnTitle]="dangerBtnTitle" [primaryBtnStyle]="primaryBtnStyle" [dangerBtnStyle]="dangerBtnStyle">
                 </app-table-column-action-buttons>
                 <!-- <div class="d-none d-lg-block">

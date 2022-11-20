@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-refresh-game-button',
@@ -7,11 +7,27 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class RefreshGameButtonComponent implements OnInit {
   @Output() onRefreshGame = new EventEmitter();
-  constructor() {}
+  @Input('audioFile') audioFile!: string;
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   refreshGame() {
     this.onRefreshGame.emit('game refreshed!!!');
+    this.playSound();
+  }
+
+
+  ngAfterViewInit() {
+    this.playSound();
+  }
+
+  playSound() {
+    if (this.audioFile) {
+      let audio: any = new Audio();
+      audio.src = this.audioFile;
+      audio?.load();
+      audio?.play();
+    }
   }
 }

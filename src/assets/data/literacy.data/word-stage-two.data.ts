@@ -39,7 +39,7 @@ export const resultWords= [
   {
     name: 'Chair',
   },
-  {
-    name: 'Classroom',
-  }
+  // {
+  //   name: 'Classroom',
+  // }
 ]

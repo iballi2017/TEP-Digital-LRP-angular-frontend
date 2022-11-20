@@ -46,6 +46,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   stageNumber: number = 1;
   gameLevel = GameLevel.LETTER;
   Subscriptions: Subscription[] = [];
+  audioFile = '../../../../../../../../assets/audio-files/WhatsApp Audio 2022-11-17 at 7.15.10 AM.mpeg'
   constructor(
     private _stageOneActivitySvc: StageOneActivityService,
     private _router: Router,

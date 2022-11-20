@@ -31,7 +31,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   testLoopNumber: number = 0;
   itemIndex: number = 0;
   // 
-  stageNumber: number = 4;
+  stageNumber: number = 1;
   isFinishedMessage!: string;
   successMessage: any;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
@@ -107,6 +107,11 @@ export class ExerciseComponent implements OnInit, OnDestroy {
 
     if (x.answer?.isWellPlaced == true) {
       x.isDone = true;
+      const exerciseLength = this.resultNumbers.numbers;
+      let e = exerciseLength.filter((i: any) => i.isDone == true);
+      if (e.length == 1) {
+        this.onSubmitSimpleExercise('1', false);
+      }
     }
     this.textExercise();
   }
@@ -134,14 +139,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     let complete = questionItems.filter((done: any) => done?.isDone == true);
     if (complete.length == questionItems?.length) {
       this.resultNumbers.isComplete = true;
-
-      const Payload: ExerciseAnswer = {
-        session_id: this.gameSessionId,
-        answer: '1',
-        data: [this.resultNumbers],
-      };
-
-      this.onSubmit(Payload);
+      this.onSubmit();
     }
   }
 
@@ -172,8 +170,12 @@ export class ExerciseComponent implements OnInit, OnDestroy {
 
 
 
-  onSubmit(Payload: any) {
-    console.log('Payload: ', Payload);
+  onSubmitSimpleExercise(answer: string, isRoute: boolean) {
+    const Payload: ExerciseAnswer = {
+      session_id: this.gameSessionId,
+      answer: answer,
+      data: [this.resultNumbers],
+    };
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
     let subscription = this._basicOperationsSubtractionStageOneSvc
       .SubmitGameStageResult(Payload)
@@ -185,16 +187,17 @@ export class ExerciseComponent implements OnInit, OnDestroy {
               type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
               payload: Payload,
             });
-            this.openSnackBar(response?.message);
-            setTimeout(() => {
-              this.isFinishedMessage = '';
-              this.successMessage = '';
-              this.onReset();
-              // alert('completed!!!');
-              this._router.navigate([
-                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
-              ]);
-            }, 3000);
+            if (isRoute) {
+              this.openSnackBar(response?.message);
+              setTimeout(() => {
+                this.isFinishedMessage = '';
+                this.successMessage = '';
+                this.onReset();
+                this._router.navigate([
+                  `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                ]);
+              }, 3000);
+            }
           }
         },
         error: (err: any) => {
@@ -208,6 +211,10 @@ export class ExerciseComponent implements OnInit, OnDestroy {
         },
       });
     this.Subscriptions.push(subscription)
+  }
+
+  onSubmit() {
+    this.onSubmitSimpleExercise('2', true);
   }
 
   openSnackBar(data: any) {

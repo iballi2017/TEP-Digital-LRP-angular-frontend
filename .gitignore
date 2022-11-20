@@ -3,6 +3,8 @@
 # compiled output
 /dist
 dist.zip
+dist-v1.zip
+src/assets/audio-files/
 /tmp
 /out-tsc
 # Only exists if Bazel was run
