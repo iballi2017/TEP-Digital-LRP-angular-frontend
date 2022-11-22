@@ -176,7 +176,8 @@ export class ExerciseComponent implements OnInit, OnDestroy {
                 this.successMessage = '';
                 this.onReset();
                 this._router.navigate([
-                  `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                  // `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                  `/${GameType.NUMERACY}/level-completion/${this.gameLevel}`
                 ]);
               }, 3000);
             }

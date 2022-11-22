@@ -173,7 +173,8 @@ export class ExerciseTwoComponent implements OnInit, OnDestroy {
               // alert('completed!!!');
               this._router.navigate([
                 // '/numeracy/basic-operations-addition/stage-2/activity/exercise-2';
-                `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                // `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+                `/${GameType.LITERACY}/level-completion/${this.gameLevel}`
               ]);
             }, 3000);
           }

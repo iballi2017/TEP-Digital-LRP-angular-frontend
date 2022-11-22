@@ -28,6 +28,8 @@ import {
 export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
+  // title = 'Identify more than six(6) consonant letters among the alphabets';
+  title = 'Identify six(6) consonant letters among the alphabets';
   alphabets!: Alphabet[];
   vowel = AlphabetType.VOWEL;
   consonant = AlphabetType.CONSONANT;
@@ -42,6 +44,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   stageNumber: number = 2;
   gameLevel = GameLevel.LETTER;
   Subscriptions: Subscription[]=[];
+  audioFile = 'https://mainlandcode.com/lrpaudios/numeracy/Letter-stage-2.mp3'
   constructor(
     private _stageTwoActivitySvc: StageTwoActivityService,
     private _router: Router,
