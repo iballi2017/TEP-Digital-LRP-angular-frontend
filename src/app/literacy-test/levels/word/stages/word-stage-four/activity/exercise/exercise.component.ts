@@ -37,6 +37,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   Subscriptions: Subscription[] = [];
+  audioFile = 'https://mainlandcode.com/lrpaudios/literacy/Word-stage-4.mp3';
 
   constructor(
     private _wordStageFourService: WordStageFourService,

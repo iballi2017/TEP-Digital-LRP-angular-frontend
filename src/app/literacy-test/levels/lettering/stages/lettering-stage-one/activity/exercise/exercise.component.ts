@@ -32,7 +32,7 @@ import {
 export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
-  title = 'Identify vowel letters among the alphabets';
+  title = 'Identify the vowel letters among the alphabets';
   alphabets!: Alphabet[];
   vowel = AlphabetType.VOWEL;
   consonant = AlphabetType.CONSONANT;
@@ -46,14 +46,14 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   stageNumber: number = 1;
   gameLevel = GameLevel.LETTER;
   Subscriptions: Subscription[] = [];
-  audioFile = '../../../../../../../../assets/audio-files/WhatsApp Audio 2022-11-17 at 7.15.10 AM.mpeg'
+  audioFile = 'https://mainlandcode.com/lrpaudios/literacy/Letter-stage-1.mp3';
   constructor(
     private _stageOneActivitySvc: StageOneActivityService,
     private _router: Router,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.onGetAlphabet();
@@ -67,7 +67,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
         this.gameSessionId = data?.session_id;
       },
     });
-    this.Subscriptions.push(subscription)
+    this.Subscriptions.push(subscription);
   }
 
   onGetAlphabet() {
@@ -104,7 +104,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
       this.selectedAlphabets.push(AlphabetItem);
     } else {
       for (let item of this.selectedAlphabets) {
-        // 
+        //
         if (item?.name == Alphabet?.name) {
           itemExists = true;
         }
@@ -125,48 +125,50 @@ export class ExerciseComponent implements OnInit, OnDestroy {
       answer: '1',
       data: [...this.selectedAlphabets],
     };
-    console.log("Payload: ", Payload)
+    console.log('Payload: ', Payload);
 
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    let subscription = this._gameSvc.SubmitLetteringStageOneResult(Payload).subscribe({
-      next: (response: any) => {
-        if (response) {
-          this.ngRedux.dispatch({
-            type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
-            payload: Payload,
-          });
+    let subscription = this._gameSvc
+      .SubmitLetteringStageOneResult(Payload)
+      .subscribe({
+        next: (response: any) => {
+          if (response) {
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+              payload: Payload,
+            });
 
-          this.successMessage = response?.message;
-          this.isFinishedMessage =
-            'You have completed this level with ' +
-            this.consonants?.length +
-            ' wrong answers!';
-          this.openSnackBar(response?.message);
+            this.successMessage = response?.message;
+            this.isFinishedMessage =
+              'You have completed this level with ' +
+              this.consonants?.length +
+              ' wrong answers!';
+            this.openSnackBar(response?.message);
 
-          setTimeout(() => {
-            this.isFinishedMessage = '';
-            this.successMessage = '';
-            this.vowels = [];
-            this.selectedAlphabets = [];
-            this.consonants = [];
-            this.onReset();
-            this._router.navigate([
-              `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
-            ]);
-          }, 3000);
-        }
-      },
-      error: (err: any) => {
-        if (err) {
-          console.error('Error: ', err);
-          this.ngRedux.dispatch({
-            type: SUBMIT_GAME_STAGE_RESULT_ERROR,
-            payload: err,
-          });
-        }
-      },
-    });
-    this.Subscriptions.push(subscription)
+            setTimeout(() => {
+              this.isFinishedMessage = '';
+              this.successMessage = '';
+              this.vowels = [];
+              this.selectedAlphabets = [];
+              this.consonants = [];
+              this.onReset();
+              this._router.navigate([
+                `/${GameType.LITERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
+              ]);
+            }, 3000);
+          }
+        },
+        error: (err: any) => {
+          if (err) {
+            console.error('Error: ', err);
+            this.ngRedux.dispatch({
+              type: SUBMIT_GAME_STAGE_RESULT_ERROR,
+              payload: err,
+            });
+          }
+        },
+      });
+    this.Subscriptions.push(subscription);
   }
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
@@ -179,9 +181,6 @@ export class ExerciseComponent implements OnInit, OnDestroy {
       data: data,
     });
   }
-
-
-
 
   ngOnDestroy(): void {
     this.Subscriptions.forEach((x) => {

@@ -43,6 +43,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   actionWords: any[] = [];
   newList: any[] = [];
   Subscriptions: Subscription[] = [];
+  audioFile = 'https://mainlandcode.com/lrpaudios/literacy/Word-stage-3.mp3';
   constructor(
     private _wordStageThreeService: WordStageThreeService,
     private _gameSvc: GameService,

@@ -40,6 +40,7 @@ export class ExerciseComponent implements OnInit {
   stageNumber: number = 2;
   successMessage: any;
   Subscriptions: Subscription[] = [];
+  audioFile = 'https://mainlandcode.com/lrpaudios/literacy/Word-stage-2.mp3';
   constructor(
     private _wordStageTwoSvc: WordStageTwoService,
     private _gameSvc: GameService,

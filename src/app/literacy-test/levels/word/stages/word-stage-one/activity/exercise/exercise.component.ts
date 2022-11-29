@@ -36,6 +36,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   stageNumber: number = 1;
   gameLevel = GameLevel.WORD;
   Subscriptions: Subscription[] = [];
+  audioFile = 'https://mainlandcode.com/lrpaudios/literacy/Word-stage-1.mp3';
   constructor(
     private _wordStageOneService: WordStageOneService,
     private _gameSvc: GameService,
