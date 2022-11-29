@@ -1,6 +1,10 @@
 import { NgRedux, select } from '@angular-redux/store';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
@@ -10,7 +14,11 @@ import { BasicOperationsDivisionStageTwoService } from 'src/app/services/basic-o
 import { GameService } from 'src/app/services/game.service';
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { IAppState } from 'src/redux/store';
-import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_STAGE_RESULT_SUCCESS } from 'src/redux/_game.store/game.actions';
+import {
+  SUBMIT_GAME_STAGE_RESULT,
+  SUBMIT_GAME_STAGE_RESULT_ERROR,
+  SUBMIT_GAME_STAGE_RESULT_SUCCESS,
+} from 'src/redux/_game.store/game.actions';
 
 @Component({
   selector: 'app-exercise',
@@ -45,7 +53,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     private _router: Router,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getActionNumbers();
@@ -57,7 +65,6 @@ export class ExerciseComponent implements OnInit, OnDestroy {
 
   modifyStageArray() {
     this.questionResultNumbers.forEach((stage: any) => {
-
       let blueTriangleList: any[] = [];
       for (let i = 0; i < stage.figure; i++) {
         blueTriangleList.push({ isDone: true });
@@ -68,39 +75,36 @@ export class ExerciseComponent implements OnInit, OnDestroy {
       let x: any = { ...stage, blueTriangleList: blueTriangleList };
       this.uiExercise.push(x);
     });
-
   }
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
     let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
-
         this.gameSessionId = data?.session_id;
       },
     });
-    this.Subscriptions.push(subscription)
+    this.Subscriptions.push(subscription);
   }
 
   getActionNumbers() {
-    let numbersList = this._basicOperationsDivisionStageTwoSvc.GetActionNumbers();
+    let numbersList =
+      this._basicOperationsDivisionStageTwoSvc.GetActionNumbers();
 
     this.actionWords = numbersList;
   }
   getresultNumbers() {
     // this.resultNumbers = numbersList;
-    let numbersList = this._basicOperationsDivisionStageTwoSvc.GetResultNumbers();
+    let numbersList =
+      this._basicOperationsDivisionStageTwoSvc.GetResultNumbers();
     this.resultNumbers = numbersList;
 
-
-    this.answerNumber =
-      numbersList?.numbers[this.testLoopNumber].answer;
+    this.answerNumber = numbersList?.numbers[this.testLoopNumber].answer;
     this.questionResultNumbers =
       numbersList?.numbers[this.testLoopNumber]?.questionItems;
   }
 
   trackResultHint() {
-
     let x = this.resultNumbers.numbers[this.testLoopNumber];
 
     if (x.answer?.isWellPlaced == true) {
@@ -141,19 +145,18 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   }
 
   onSelect(item: any) {
-    // 
+    //
     let result = this.resultNumbers?.numbers[this.testLoopNumber];
-    // 
+    //
     if (item.figure == result.answer.figure) {
       item.isCorrectNumber = true;
       result.answer.isWellPlaced = true;
       this.trackResultHint();
-    }
-    else {
+    } else {
       item.isWrongNumber = true;
-      // 
+      //
     }
-    // 
+    //
   }
 
   onReset() {
@@ -166,7 +169,6 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     this.getresultNumbers();
     this.modifyStageArray();
   }
-
 
   onSubmitSimpleExercise(answer: string, isRoute: boolean) {
     const Payload: ExerciseAnswer = {
@@ -193,7 +195,8 @@ export class ExerciseComponent implements OnInit, OnDestroy {
                 this.onReset();
                 this._router.navigate([
                   // `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
-                  `/${GameType.NUMERACY}/level-completion/${this.gameLevel}`
+                  // `/${GameType.NUMERACY}/level-completion/${this.gameLevel}`
+                  `/${GameType.NUMERACY}/game-type-completion/${this.gameLevel}`,
                 ]);
               }, 3000);
             }
@@ -209,7 +212,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
           }
         },
       });
-    this.Subscriptions.push(subscription)
+    this.Subscriptions.push(subscription);
   }
 
   onSubmit() {
@@ -224,7 +227,6 @@ export class ExerciseComponent implements OnInit, OnDestroy {
       data: data,
     });
   }
-
 
   ngOnDestroy(): void {
     this.Subscriptions.forEach((x) => {
