@@ -13,7 +13,7 @@ export class LetteringStageThreeActivityComponent implements OnInit {
       title: 'LITERACY',
     },
     {
-      title: 'LETTERING',
+      title: 'LETTER',
     },
     {
       title: 'STAGE 3',

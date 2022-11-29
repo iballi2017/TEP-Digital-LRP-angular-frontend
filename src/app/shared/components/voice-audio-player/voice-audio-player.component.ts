@@ -12,7 +12,7 @@ export class VoiceAudioPlayerComponent implements OnInit {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    // this.playSound();
+    this.playSound();
   }
 
   playSound() {

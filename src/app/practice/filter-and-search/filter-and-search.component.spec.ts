@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExerciseTwoComponent } from './exercise-two.component';
+import { FilterAndSearchComponent } from './filter-and-search.component';
 
-describe('ExerciseTwoComponent', () => {
-  let component: ExerciseTwoComponent;
-  let fixture: ComponentFixture<ExerciseTwoComponent>;
+describe('FilterAndSearchComponent', () => {
+  let component: FilterAndSearchComponent;
+  let fixture: ComponentFixture<FilterAndSearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExerciseTwoComponent ]
+      declarations: [ FilterAndSearchComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExerciseTwoComponent);
+    fixture = TestBed.createComponent(FilterAndSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

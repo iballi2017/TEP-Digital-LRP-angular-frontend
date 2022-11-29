@@ -1,2 +1,15 @@
-<p>number-recognition-one-stage-two-instructional-video works!</p>
-<button class="btn btn-primary" [routerLink]="['/numeracy/number-recognition-two/stage-1/activity']">Continue</button>
+<!-- <p>number-recognition-one-stage-two-instructional-video works!</p> -->
+<div id="instructional-video-screen">
+    <div class="video-wrapper container-fluid">
+        <video style="width: 100%" controls>
+            <source src="https://mainlandcode.com/lrpvideos/numeracy/LEVEL_Number_recognition_2_digit.mp4"
+                type="video/mp4">
+            <source src="mov_bbb.ogg" type="video/ogg">
+            Your browser does not support HTML video.
+        </video>
+    </div>
+    <div class="text-center btn-wrapper d-none">
+        <button class="btn btn-block instructional-video-continue-btn"
+            [routerLink]="['/numeracy/number-recognition-two/stage-1/activity']">Continue</button>
+    </div>
+</div>

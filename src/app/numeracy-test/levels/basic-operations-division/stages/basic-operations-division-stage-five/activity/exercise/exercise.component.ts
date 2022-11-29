@@ -6,6 +6,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -44,6 +45,7 @@ export class ExerciseComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   gameLevel = GameLevel.BASIC_OPERATIONS_DIVISION;
   durationInSeconds = 10;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _basicOperationsDivisionStageFiveSvc: BasicOperationsDivisionStageFiveService,
@@ -51,7 +53,7 @@ export class ExerciseComponent implements OnInit {
     private _router: Router,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getActionNumbers();
@@ -77,11 +79,12 @@ export class ExerciseComponent implements OnInit {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   getActionNumbers() {
@@ -106,6 +109,11 @@ export class ExerciseComponent implements OnInit {
 
     if (x.answer?.isWellPlaced == true) {
       x.isDone = true;
+      const exerciseLength = this.resultNumbers.numbers;
+      let e = exerciseLength.filter((i: any) => i.isDone == true);
+      if (e.length == 1) {
+        this.onSubmitSimpleExercise('1', false);
+      }
     }
     this.textExercise();
   }
@@ -134,14 +142,7 @@ export class ExerciseComponent implements OnInit {
 
     if (complete.length == questionItems?.length) {
       this.resultNumbers.isComplete = true;
-
-      const Payload: ExerciseAnswer = {
-        session_id: this.gameSessionId,
-        answer: '1',
-        data: [this.resultNumbers],
-      };
-
-      this.onSubmit(Payload);
+      this.onSubmit();
     }
   }
 
@@ -171,10 +172,15 @@ export class ExerciseComponent implements OnInit {
     this.modifyStageArray();
   }
 
-  onSubmit(Payload: any) {
-    console.log('Payload: ', Payload);
+
+  onSubmitSimpleExercise(answer: string, isRoute: boolean) {
+    const Payload: ExerciseAnswer = {
+      session_id: this.gameSessionId,
+      answer: answer,
+      data: [this.resultNumbers],
+    };
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._basicOperationsDivisionStageFiveSvc
+    let subscription = this._basicOperationsDivisionStageFiveSvc
       .SubmitGameStageResult(Payload)
       .subscribe({
         next: (response: any) => {
@@ -184,20 +190,17 @@ export class ExerciseComponent implements OnInit {
               type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
               payload: Payload,
             });
-            this.openSnackBar(response?.message);
-            setTimeout(() => {
-              this.isFinishedMessage = '';
-              this.successMessage = '';
-              this.onReset();
-              // alert('completed!!!');
-              // this._router.navigate([
-              //   `/${GameType.NUMERACY}/stage-completion/${this.gameLevel}/${this.stageNumber}`,
-              // ]);
-
-              this._router.navigate([
-                `/${GameType.NUMERACY}/game-type-completion/${this.gameLevel}`,
-              ]);
-            }, 3000);
+            if (isRoute) {
+              this.openSnackBar(response?.message);
+              setTimeout(() => {
+                this.isFinishedMessage = '';
+                this.successMessage = '';
+                this.onReset();
+                this._router.navigate([
+                  `/${GameType.NUMERACY}/game-type-completion/${this.gameLevel}`,
+                ]);
+              }, 3000);
+            }
           }
         },
         error: (err: any) => {
@@ -210,7 +213,13 @@ export class ExerciseComponent implements OnInit {
           }
         },
       });
+    this.Subscriptions.push(subscription)
   }
+
+  onSubmit() {
+    this.onSubmitSimpleExercise('2', true);
+  }
+
 
   openSnackBar(data: any) {
     this._snackBar.openFromComponent(SnackbarComponent, {
@@ -218,6 +227,14 @@ export class ExerciseComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

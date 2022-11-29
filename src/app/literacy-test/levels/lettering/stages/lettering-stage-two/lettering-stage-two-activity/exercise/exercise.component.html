@@ -26,7 +26,7 @@
     Selected: {{this.selectedAlphabets | json}}
 </div> -->
 <div class="canvas-wrapper">
-    <h1 class="title">Identify more than six(6) consonant letters among the alphabets</h1>
+    <h1 class="title">{{title}}</h1>
 
     <!-- <ng-container *ngIf="(isLoading$ | async)">
         <small class="text-white">Loading...</small>
@@ -38,7 +38,7 @@
     </div> -->
     <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
     <!-- keyboard list-style-none pl-0 isLoading -->
-    <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
+    <app-refresh-game-button (onRefreshGame)="onReset()" [audioFile]="audioFile"></app-refresh-game-button>
     <div id="lettering-input-keyboard">
         <ul class="keyboard list-style-none pl-0 isLoading" [ngClass]="{'isLoading': (isLoading$ | async)}">
             <li class="key-item" *ngFor="let item of alphabets">

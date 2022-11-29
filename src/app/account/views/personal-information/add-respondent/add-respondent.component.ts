@@ -27,13 +27,14 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
   agesList: number[] = [];
   AddRespondentForm!: FormGroup;
   Subscriptions: Subscription[] = [];
+  responseMessage: any;
   constructor(
     private _locationSvc: LocationService,
     private _fb: FormBuilder,
     private _occupantSvc: OccupantService,
     private ngRedux: NgRedux<IAppState>,
     public dialogRef: MatDialogRef<AddRespondentComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onGetNigerianStates();
@@ -74,12 +75,17 @@ export class AddRespondentComponent implements OnInit, OnDestroy {
     let subscription = this._occupantSvc.AddOccupant(Payload).subscribe({
       next: (response: any) => {
         if (response) {
+          console.log("response: ", response)
+          console.warn("response: ", response)
+          this.responseMessage = response?.message;
           this.ngRedux.dispatch({
             type: ADD_OCCUPANT_SUCCESS,
             payload: response,
           });
           this._occupantSvc.LoadOccupants();
-          this.closeDialog();
+          setTimeout(() => {
+            this.closeDialog();
+          }, 3000);
         }
       },
       error: (err: any) => {

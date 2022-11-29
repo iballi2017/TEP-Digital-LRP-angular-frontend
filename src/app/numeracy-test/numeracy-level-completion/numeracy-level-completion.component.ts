@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GameType } from 'src/app/models/types/game-type';
 
 @Component({
   selector: 'app-numeracy-level-completion',
@@ -9,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class NumeracyLevelCompletionComponent implements OnInit {
   levelTitle!: string;
   gameLevel: any;
+  gameType = GameType.NUMERACY;
   constructor(private _route: ActivatedRoute) {}
 
   ngOnInit(): void {

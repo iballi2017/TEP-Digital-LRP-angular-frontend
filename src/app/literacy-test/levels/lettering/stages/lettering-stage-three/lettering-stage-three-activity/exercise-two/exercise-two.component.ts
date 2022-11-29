@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, DoCheck, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Alphabet, AlphabetType } from 'src/app/models/types/alphabet';
 import { StageThreeActivityExerciseTwoService } from 'src/app/services/stage-three-activity-exercise-two.service';
@@ -20,13 +20,14 @@ import {
 import { SnackbarComponent } from 'src/app/shared/components/snackbar/snackbar.component';
 import { GameType } from 'src/app/models/types/game-type';
 import { GameLevel } from 'src/app/models/types/game-level';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-exercise-two',
   templateUrl: './exercise-two.component.html',
   styleUrls: ['./exercise-two.component.scss'],
 })
-export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
+export class ExerciseTwoComponent implements OnInit, AfterContentChecked, OnDestroy {
   @select((s) => s.game.letteringStageThreeExerciseOne)
   letteringStageThreeExerciseOne$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
@@ -47,6 +48,7 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 10;
   gameLevel = GameLevel.LETTER;
+  Subscriptions: Subscription[] = [];
 
   constructor(
     private _gameSvc: GameService,
@@ -56,7 +58,7 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
     private _stageThreeActivitySvc: StageThreeActivityExerciseOneService,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.GetResultFourLetterWords();
@@ -71,21 +73,23 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
 
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
         //
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   GetStageThreeExerciseOneResult() {
     this._stageThreeActivityExerciseOneSvc.LoadStageThreeExerciseOneResult();
-    this.letteringStageThreeExerciseOne$.subscribe({
+    let subscription = this.letteringStageThreeExerciseOne$.subscribe({
       next: (stageOneResult: any) => {
         this.stageOneResult = stageOneResult;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   GetResultFourLetterWords() {
@@ -164,9 +168,9 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
       }
       if (
         this.resultFourLetterWords[i].word[0]?.name ==
-          this.selectedAlphabets[0]?.name &&
+        this.selectedAlphabets[0]?.name &&
         this.resultFourLetterWords[i].word[1]?.name ==
-          this.selectedAlphabets[1]?.name
+        this.selectedAlphabets[1]?.name
       ) {
         this.resultFourLetterWords[i].isDone = true;
         this.selectedAlphabets = [];
@@ -184,7 +188,7 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
     if (complete.length == 3) {
       const Payload: LetteringStageThreeExerciseAnswer = {
         session_id: this.gameSessionId,
-        anwser: '2',
+        answer: '2',
         data: complete,
       };
       //
@@ -193,7 +197,7 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
         data: Payload.data.concat(this.stageOneResult.data),
       };
       this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-      this._gameSvc.SubmitLetteringStageThreeResult(x).subscribe({
+      let subscription = this._gameSvc.SubmitLetteringStageThreeResult(x).subscribe({
         next: (response: any) => {
           if (response) {
             this.ngRedux.dispatch({
@@ -231,6 +235,7 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
           }
         },
       });
+      this.Subscriptions.push(subscription)
     }
   }
 
@@ -241,6 +246,16 @@ export class ExerciseTwoComponent implements OnInit, AfterContentChecked {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

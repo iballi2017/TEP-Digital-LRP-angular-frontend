@@ -1,11 +1,12 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Alphabet, AlphabetType } from 'src/app/models/types/alphabet';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -28,7 +29,7 @@ import {
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
 })
-export class ExerciseComponent implements OnInit {
+export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
   title = 'Identify vowel letters among the alphabets';
@@ -44,13 +45,15 @@ export class ExerciseComponent implements OnInit {
   durationInSeconds = 10;
   stageNumber: number = 1;
   gameLevel = GameLevel.LETTER;
+  Subscriptions: Subscription[] = [];
+  audioFile = '../../../../../../../../assets/audio-files/WhatsApp Audio 2022-11-17 at 7.15.10 AM.mpeg'
   constructor(
     private _stageOneActivitySvc: StageOneActivityService,
     private _router: Router,
     private _gameSvc: GameService,
     private ngRedux: NgRedux<IAppState>,
     private _snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onGetAlphabet();
@@ -59,11 +62,12 @@ export class ExerciseComponent implements OnInit {
   }
 
   onGetGameSessionId() {
-    this.gameSession$.subscribe({
-      next: (data: any) => {        
+    let subscription = this.gameSession$.subscribe({
+      next: (data: any) => {
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   onGetAlphabet() {
@@ -121,20 +125,18 @@ export class ExerciseComponent implements OnInit {
       answer: '1',
       data: [...this.selectedAlphabets],
     };
-    
+    console.log("Payload: ", Payload)
 
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._gameSvc.SubmitLetteringStageOneResult(Payload).subscribe({
+    let subscription = this._gameSvc.SubmitLetteringStageOneResult(Payload).subscribe({
       next: (response: any) => {
         if (response) {
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Payload,
           });
-          
-          this.successMessage = response?.message;
 
-          
+          this.successMessage = response?.message;
           this.isFinishedMessage =
             'You have completed this level with ' +
             this.consonants?.length +
@@ -164,6 +166,7 @@ export class ExerciseComponent implements OnInit {
         }
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
@@ -176,10 +179,21 @@ export class ExerciseComponent implements OnInit {
       data: data,
     });
   }
+
+
+
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
+    });
+  }
 }
 
 // export interface LetteringStageOneAnswer {
 //   session_id: string;
-//   anwser: string;
+//   answer: string;
 //   result: any[];
 // }

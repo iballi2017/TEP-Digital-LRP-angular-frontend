@@ -2,11 +2,13 @@ import { NgRedux, select } from '@angular-redux/store';
 import {
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExerciseAnswer } from 'src/app/models/types/exercise-answer';
 import { GameLevel } from 'src/app/models/types/game-level';
 import { GameType } from 'src/app/models/types/game-type';
@@ -22,7 +24,7 @@ import { SUBMIT_GAME_STAGE_RESULT, SUBMIT_GAME_STAGE_RESULT_ERROR, SUBMIT_GAME_S
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
 })
-export class ExerciseComponent implements OnInit {
+export class ExerciseComponent implements OnInit, OnDestroy {
   @select((s) => s.SpeechTexts.speechTexts) speechTexts$: any;
   @select((s) => s.SpeechTexts.isLoading) speechTextsIsLoading$: any;
   @select((s) => s.game.gameSession) gameSession$: any;
@@ -40,6 +42,7 @@ export class ExerciseComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 10;
   gameLevel = GameLevel.PARAGRAPH;
+  Subscriptions: Subscription[] = [];
   constructor(
     public _paragraphStageThreeSvc: ParagraphStageThreeService,
     private cdr: ChangeDetectorRef,
@@ -64,38 +67,48 @@ export class ExerciseComponent implements OnInit {
   }
   onGetGameSessionId() {
     this._gameSvc.LoadGameSession();
-    this.gameSession$.subscribe({
+    let subscription = this.gameSession$.subscribe({
       next: (data: any) => {
-        
+
         this.gameSessionId = data?.session_id;
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   GetExerciseTexts() {
     this.resultTextList = this._paragraphStageThreeSvc.GetExerciseTexts();
+    console.log("this.resultTextList: ", this.resultTextList)
   }
   onTestTexts() {
     this.speechTexts$.subscribe({
       next: (response: any) => {
         if (response) {
-          
+          console.log("response: ", response)
+
           let speechText = response.replace(/\s/g, '');
           let objIndex = this.resultTextList.findIndex(
             (obj: any) => obj.text.replace(/\s/g, '') == speechText
           );
+          let objIndex2 = this.resultTextList.findIndex(
+            (obj: any) => obj.text2.replace(/\s/g, '') == speechText
+          );
           //Log object to Console.
-          
-          //Update object's name property.
+
           if (this.resultTextList[objIndex]) {
             this.resultTextList[objIndex].isDone = true;
             this.textPosition += 1;
-            
+            this.onTestValues(this.resultTextList);
+            this.clearService();
+          }
+          if (this.resultTextList[objIndex2]) {
+            this.resultTextList[objIndex2].isDone = true;
+            this.textPosition += 1;
             this.onTestValues(this.resultTextList);
             this.clearService();
           }
           //Log object to console again.
-          
+
         }
       },
       error: (err: any) => {
@@ -107,10 +120,10 @@ export class ExerciseComponent implements OnInit {
   onTestValues(List: any) {
     let complete = List.filter((done: any) => done?.isDone == true);
 
-    
+
 
     if (complete.length == List?.length) {
-      
+
       this.clearService();
       this.stopService();
       // alert('completed!!!');
@@ -123,7 +136,7 @@ export class ExerciseComponent implements OnInit {
         answer: '4',
         data: List,
       };
-     
+
       this.onSubmit(Payload)
     }
   }
@@ -144,12 +157,12 @@ export class ExerciseComponent implements OnInit {
   }
 
   onSubmit(Result: ExerciseAnswer) {
-    
+
     this.ngRedux.dispatch({ type: SUBMIT_GAME_STAGE_RESULT });
-    this._paragraphStageThreeSvc.SubmitGameStageResult(Result).subscribe({
+    let subscription = this._paragraphStageThreeSvc.SubmitGameStageResult(Result).subscribe({
       next: (response: any) => {
         if (response) {
-          
+
           this.ngRedux.dispatch({
             type: SUBMIT_GAME_STAGE_RESULT_SUCCESS,
             payload: Result,
@@ -175,6 +188,7 @@ export class ExerciseComponent implements OnInit {
         }
       },
     });
+    this.Subscriptions.push(subscription)
   }
 
   openSnackBar(data: any) {
@@ -183,6 +197,14 @@ export class ExerciseComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: data,
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.Subscriptions.forEach((x) => {
+      if (!x.closed) {
+        x.unsubscribe();
+      }
     });
   }
 }

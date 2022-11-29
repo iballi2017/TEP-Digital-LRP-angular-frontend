@@ -1,9 +1,8 @@
 <!-- <p class="text-white">lettering works!</p> -->
-<!-- <div class="text-white">Lettering</div> -->
-<ul class="stage-status list-style-none pl-0">
-    <li class="cursor-pointer" *ngFor="let item of testStageStars; let i = index"
-        [routerLink]="['/literacy/lettering/', item?.title, 'lettering-splash']">
-        <!-- <div> -->
+<div *ngIf="!(isLoadingGameLevelResultAndRating$ | async) ; else isLoading">
+    <ul class="stage-status list-style-none pl-0">
+        <li class="cursor-pointer" *ngFor="let item of testStageStars; let i = index"
+            [routerLink]="['/literacy/lettering/', item?.title, 'lettering-splash']">
             <div class="stage-card">
                 <p>{{i + 1}}</p>
             </div>
@@ -19,11 +18,15 @@
                     </div>
                 </li>
             </ul>
-        <!-- </div> -->
-    </li>
-</ul>
+        </li>
+    </ul>
+</div>
 
-
+<ng-template #isLoading>
+    <div class="alert text-white">
+        <app-pure-css-loader></app-pure-css-loader>
+    </div>
+</ng-template>
 
 <!-- <span *ngFor="let s of stageStar?.starArray" class="text-white">
     <span *ngIf="s?.isDone">

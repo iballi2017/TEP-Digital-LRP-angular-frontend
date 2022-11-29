@@ -12,28 +12,16 @@ import { IdentityService } from './services/identity.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterContentInit {
+export class AppComponent implements OnInit {
   @select((s) => s.game.gameSession) gameSession$: any;
   @select((s) => s.game.isLoading) isLoading$: any;
-  isSubmittingData!: boolean;
+  isSubmittingData!: any;
   title = 'tep-digital-lrp';
   constructor(
     private _identitySvc: IdentityService,
     private ngRedux: NgRedux<IAppState>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    // this.onGetUserDetails();
-    this.isLoading$.subscribe((l: any) => {
-      if (l) {
-        this.isSubmittingData = l;
-      }
-    });
-  }
-
-  ngAfterContentInit(): void {
-  }
-  onGetUserDetails() {
-    // this._identitySvc.getUserById();
   }
 }

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { ForgotPasswordReducer } from './_forgot-password.store/forgot-password.reducer';
+import { GameLevelResultAndRatingReducer } from './_game-level-result-and-rating.store/game-level-result-and-rating.reducer';
 import { GameReducer } from './_game.store/game.reducer';
 import { LoginUserReducer } from './_login-user-store/login-user.reducer';
 import { OccupantReducer } from './_occupant.store/occupant.reducer';
@@ -17,4 +18,5 @@ export const rootReducer = combineReducers({
   game: GameReducer,
   forgotPassword: ForgotPasswordReducer,
   SpeechTexts: SpeechToTextReducer,
+  gameLevelResultAndRating: GameLevelResultAndRatingReducer
 });

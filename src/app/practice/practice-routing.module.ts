@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FilterAndSearchComponent } from './filter-and-search/filter-and-search.component';
+import { PracticeMenuComponent } from './practice-menu/practice-menu.component';
 import { PracticeComponent } from './practice.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { SpeechSynthesisUtteranceComponent } from './speech-synthesis-utterance/speech-synthesis-utterance.component';
@@ -11,7 +13,7 @@ const routes: Routes = [
     path: '',
     component: PracticeComponent,
     children: [
-      { path: '', component: SpeechSynthesisUtteranceComponent },
+      { path: '', component: PracticeMenuComponent },
       {
         path: 'speech-synthesis',
         component: SpeechSynthesisUtteranceComponent,
@@ -20,16 +22,22 @@ const routes: Routes = [
       {
         path: 'ui-templates',
         loadChildren: () =>
-          import('./ui-templates/ui-templates.module').then((s) => s.UiTemplatesModule),
+          import('./ui-templates/ui-templates.module').then(
+            (s) => s.UiTemplatesModule
+          ),
       },
       {
         path: 'lrp-activity',
         loadChildren: () =>
-          import('./lrp-activity/lrp-activity.module').then((s) => s.LrpActivityModule),
-      },{
+          import('./lrp-activity/lrp-activity.module').then(
+            (s) => s.LrpActivityModule
+          ),
+      },
+      {
         path: 'speech-to-text',
         component: SpeechToTextComponent,
       },
+      { path: 'search-filter', component: FilterAndSearchComponent },
     ],
   },
 ];

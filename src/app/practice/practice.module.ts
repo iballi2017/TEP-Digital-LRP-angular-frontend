@@ -8,9 +8,19 @@ import { SpeechSynthesisUtteranceComponent } from './speech-synthesis-utterance/
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 import { LrpActivityComponent } from './lrp-activity/lrp-activity.component';
+import { PracticeMenuComponent } from './practice-menu/practice-menu.component';
+import { FilterAndSearchComponent } from './filter-and-search/filter-and-search.component';
 
 @NgModule({
-  declarations: [PracticeComponent, SpeechSynthesisUtteranceComponent, ProgressBarComponent, MainNavigationComponent, LrpActivityComponent],
+  declarations: [
+    PracticeComponent,
+    SpeechSynthesisUtteranceComponent,
+    ProgressBarComponent,
+    MainNavigationComponent,
+    LrpActivityComponent,
+    PracticeMenuComponent,
+    FilterAndSearchComponent,
+  ],
   imports: [
     CommonModule,
     PracticeRoutingModule,
