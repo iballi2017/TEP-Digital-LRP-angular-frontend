@@ -8,9 +8,9 @@
     <ng-container *ngIf="(isLoading$ | async)">
         <small class="text-white">Loading...</small>
     </ng-container>
-    <div class="alert alert-info text-center" *ngIf="successMessage">
+    <!-- <div class="alert alert-info text-center" *ngIf="successMessage">
         <p>{{successMessage}} </p>
-    </div>
+    </div> -->
     <!-- <button class="btn btn-lg btn-danger" (click)="onReset()">Reset</button> -->
         <app-refresh-game-button (onRefreshGame)="onReset()"></app-refresh-game-button>
     <div id="result-screen">
