@@ -98,6 +98,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   GetExerciseTexts() {
     this.resultTextList = this._paragraphStageOneSvc.GetExerciseTexts();
   }
+  
   onTestTexts() {
     this.speechTexts$.subscribe({
       next: (response: any) => {

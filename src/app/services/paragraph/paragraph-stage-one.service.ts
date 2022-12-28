@@ -80,6 +80,7 @@ export class ParagraphStageOneService {
     let x = new SpeechToText(this.ngRedux, this.text, this.tempWords);
     
     x.wordConcat();
+    return x;
     // this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
     // this.text = this.text + ' ' + this.tempWords + ' ';
     // this.tempWords = '';

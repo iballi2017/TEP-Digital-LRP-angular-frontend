@@ -93,8 +93,7 @@ export class RespondentListComponent implements OnInit, OnDestroy {
     this.Subscriptions.push(subscription);
   }
 
-  ngOnDestroy(): void {
-    
+  ngOnDestroy(): void {    
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {
         x.unsubscribe();

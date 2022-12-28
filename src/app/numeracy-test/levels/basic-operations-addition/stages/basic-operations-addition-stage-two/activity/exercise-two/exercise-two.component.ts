@@ -120,7 +120,7 @@ export class ExerciseTwoComponent implements OnInit, OnDestroy {
 
       const Payload: ExerciseAnswer = {
         session_id: this.gameSessionId,
-        answer: '2',
+        answer: '1',
         data: [this.resultNumbers],
       };
 

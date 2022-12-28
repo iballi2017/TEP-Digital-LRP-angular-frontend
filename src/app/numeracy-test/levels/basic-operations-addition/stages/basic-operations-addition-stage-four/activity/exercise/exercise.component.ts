@@ -157,7 +157,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   onSubmitSimpleExercise(answer: string, isRoute: boolean) {
     const Payload: ExerciseAnswer = {
       session_id: this.gameSessionId,
-      answer: answer,
+      answer: '2',
       data: [this.resultNumbers],
     };
 

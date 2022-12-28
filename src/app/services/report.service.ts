@@ -22,10 +22,12 @@ export class ReportService implements OnDestroy {
   GetUserGameResultUrl = baseUrl + '/fetch-user-game-result';
   DeleteUserGameResultUrl = baseUrl + '/delete-game-result';
   GetUserGameResultDetailsUrl = baseUrl + '/fetch-game-result-details';
+  // GetUserfetchNumeracyGameResultDetailsUrl = baseUrl + '/fetch-numeracy-game-result-details';
+  // GetUserfetchNumeracyGameResultDetailsUrl = baseUrl + '/fetch-user-numeracy-game-result-by-session-id'
 
   Subscriptions: Subscription[] = [];
 
-  constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) {}
+  constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) { }
 
   LoadUserGameResult() {
     this.ngRedux.dispatch({ type: FETCH_REPORTS_LIST });
@@ -92,6 +94,7 @@ export class ReportService implements OnDestroy {
     this.ngRedux.dispatch({ type: FETCH_GAME_RESULT_DETAILS });
     let subscription = this._http
       .get(`${this.GetUserGameResultDetailsUrl}/${sessionId}`)
+      // .get(`${this.GetUserfetchNumeracyGameResultDetailsUrl}/${sessionId}`)
       .pipe(
         map((response: any) => {
           return response;

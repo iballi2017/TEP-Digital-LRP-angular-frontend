@@ -71,10 +71,14 @@ export class MyInformationComponent implements OnInit, OnDestroy {
   }
 
   onEditPersonalDetails(userData: any) {
+    console.group(userData[0])
+    let user = userData[0]
     this._router.navigate([
-      `/account/update-personal-details/${userData?.usr_id}`,
+      `/account/update-personal-details/${user?.usr_id}`,
     ]);
   }
+
+
   ngOnDestroy(): void {
     this.Subscriptions.forEach((x) => {
       if (!x.closed) {

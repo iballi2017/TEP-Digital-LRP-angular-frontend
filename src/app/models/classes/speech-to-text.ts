@@ -17,6 +17,7 @@ export class SpeechToText {
     
     this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
     this.text = this.text + ' ' + this.tempWords + ' ';
+    console.warn("this.tempWords: ", this.tempWords)
     this.tempWords = '';
 
     this.ngRedux.dispatch({

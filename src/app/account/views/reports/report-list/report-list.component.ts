@@ -40,7 +40,7 @@ export class ReportListComponent implements OnInit {
     private ngRedux: NgRedux<IAppState>,
     private _router: Router,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onGetReportList();
@@ -104,7 +104,7 @@ export class ReportListComponent implements OnInit {
     });
   }
 
-  onEditReport() {}
+  onEditReport() { }
   FilterForm!: any;
   sortReportListBy(FilterForm: any) {
     let SortItem = FilterForm.value.Filter;
