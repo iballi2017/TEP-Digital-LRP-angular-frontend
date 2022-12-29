@@ -9,27 +9,30 @@ export class SpeechToTextService {
   isStoppedSpeechRecog = false;
   public text = '';
   tempWords: any;
-  constructor() {}
+  constructor() { }
 
   init() {
     this.recognition.interimResults = true;
     this.recognition.lang = 'en-US';
 
-    this.recognition.addEventListener('result', (e:any) => {
+    this.recognition.addEventListener('result', (e: any) => {
       const transcript = Array.from(e.results)
         .map((result: any) => result[0])
         .map((result: any) => result.transcript)
         .join('');
+      console.log("transcript: ", transcript);
       this.tempWords = transcript;
     });
   }
   start() {
     this.isStoppedSpeechRecog = false;
-    this.recognition.start();
+    this.recognition.start();    
+    console.log("Speech recognition started");
     this.recognition.addEventListener('end', (condition: any) => {
       if (this.isStoppedSpeechRecog) {
         this.recognition.stop();
-        
+        console.log("End speech recognition")
+
       } else {
         this.wordConcat();
         this.recognition.start();
@@ -41,7 +44,7 @@ export class SpeechToTextService {
     this.isStoppedSpeechRecog = true;
     this.wordConcat();
     this.recognition.stop();
-    
+    console.log("End speech recognition")
   }
 
   wordConcat() {

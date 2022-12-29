@@ -59,7 +59,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     private _gameSvc: GameService,
     private _snackBar: MatSnackBar
   ) {
-    this._paragraphStageOneSvc?.init();
+    this._paragraphStageOneSvc.init();
     this.speechText = this._paragraphStageOneSvc.text;
   }
 

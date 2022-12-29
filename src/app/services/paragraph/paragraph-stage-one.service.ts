@@ -23,12 +23,13 @@ export class ParagraphStageOneService {
   recognition = new webkitSpeechRecognition();
   isStoppedSpeechRecog = false;
   public text = '';
-  tempWords: any;
+  tempWords!: string;
   VoiceText: any;
 
-  constructor(private ngRedux: NgRedux<IAppState>, private _http: HttpClient) {}
+  constructor(private ngRedux: NgRedux<IAppState>, private _http: HttpClient) { }
 
   init() {
+    console.log("init()")
     this.recognition.interimResults = true;
     this.recognition.lang = 'en-US';
 
@@ -44,6 +45,7 @@ export class ParagraphStageOneService {
   }
 
   GetVoiceText() {
+    console.log("this.VoiceText: ", this.VoiceText)
     return this.VoiceText;
   }
 
@@ -53,7 +55,7 @@ export class ParagraphStageOneService {
     this.recognition.addEventListener('end', (condition: any) => {
       if (this.isStoppedSpeechRecog) {
         this.recognition.stop();
-        
+
       } else {
         this.wordConcat();
         this.recognition.start();
@@ -63,9 +65,9 @@ export class ParagraphStageOneService {
 
   stop() {
     this.isStoppedSpeechRecog = true;
-    this.wordConcat();
+    // this.wordConcat();
     this.recognition.stop();
-    
+
   }
 
   clear() {
@@ -77,10 +79,12 @@ export class ParagraphStageOneService {
   }
 
   wordConcat() {
+    console.warn("this.text: ", this.text)
+    console.warn("this.tempWords: ", this.tempWords)
     let x = new SpeechToText(this.ngRedux, this.text, this.tempWords);
-    
     x.wordConcat();
-    return x;
+
+
     // this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
     // this.text = this.text + ' ' + this.tempWords + ' ';
     // this.tempWords = '';

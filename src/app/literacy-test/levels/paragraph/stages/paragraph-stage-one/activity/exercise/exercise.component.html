@@ -12,7 +12,8 @@
         </div>
         <!-- </div> -->
     </div>
-    <h5 class="text-danger text-bold text-center">{{speechTexts$ | async}}</h5>
+    <p class="text-white">{{speechTexts$ | async | json}}</p>
+    <h5 class="text-danger text-bold text-center" *ngIf="speechTexts$ | async">{{speechTexts$ | async}}</h5>
     <!-- <p class="text-white text-bold text-center">{{_paragraphStageOneSvc.text}}</p> -->
 
 

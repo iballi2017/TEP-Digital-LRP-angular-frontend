@@ -11,23 +11,25 @@ export class SpeechToText {
     this.tempWords = tempWords;
     this.text = text;
     this.ngRedux = ngRedux;
+    console.warn("this.tempWords***: ", this.tempWords)
+    console.warn("this.text***: ", this.text)
   }
 
   wordConcat() {
-    
+
     this.ngRedux.dispatch({ type: ADD_SPEECH_TO_TEXT });
     this.text = this.text + ' ' + this.tempWords + ' ';
-    console.warn("this.tempWords: ", this.tempWords)
+    if (this.tempWords) {
+      this.ngRedux.dispatch({
+        type: ADD_SPEECH_TO_TEXT_SUCCESS,
+        payload: this.text.trim(),
+      });
+    }
     this.tempWords = '';
-
-    this.ngRedux.dispatch({
-      type: ADD_SPEECH_TO_TEXT_SUCCESS,
-      payload: this.text.trim(),
-    });
   }
 
-  clear(){
-    
+  clear() {
+
     this.text = '';
     this.ngRedux.dispatch({
       type: ADD_SPEECH_TO_TEXT_SUCCESS,
