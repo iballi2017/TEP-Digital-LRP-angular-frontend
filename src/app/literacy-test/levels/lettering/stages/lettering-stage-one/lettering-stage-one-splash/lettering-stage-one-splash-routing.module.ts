@@ -14,10 +14,11 @@ const routes: Routes = [
         component: LetteringStageOneInstructionalVideoComponent,
       },
     ],
-  },];
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class LetteringStageOneSplashRoutingModule { }
+export class LetteringStageOneSplashRoutingModule {}

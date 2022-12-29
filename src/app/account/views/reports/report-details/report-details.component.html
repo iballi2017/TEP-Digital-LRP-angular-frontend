@@ -147,8 +147,8 @@
                         <ng-template #noScore>
                             0
                         </ng-template>
-                        <ng-container *ngIf="reportDetails?.total_percent; else noScore">
-                            {{reportDetails?.total_percent}}
+                        <ng-container *ngIf="reportDetails?.score_percent; else noScore">
+                            {{reportDetails?.score_percent}}
                         </ng-container>
                     </div>
                 </div>
